@@ -12,51 +12,44 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name='ResetPassword'
-        component={ResetPasswordScreen}
-        options={{
-          title: false,
-          headerShown: false
-        }}
-      />
-
-      <Stack.Screen
         name='SignIn'
         component={SignIn}
         options={{
           title: false,
-          headerShown: false
+          headerShown: false,
         }}
-
-
+      />
       <Stack.Screen
-        name='Contracts'
-        component={Contracts}
-        options={{ title: 'Contracts' }}
+        name='ForgotPassword'
+        component={ForgotPassword}
+        options={{
+          title: false,
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name='SignUp'
         component={SignUp}
         options={{
           title: false,
-          headerShown: false
+          headerShown: false,
         }}
       />
 
       <Stack.Screen
-        name='ForgotPassword'
-        component={ForgotPassword}
+        name='ResetPassword'
+        component={ResetPasswordScreen}
         options={{
           title: false,
-          headerShown: false
+          headerShown: false,
         }}
       />
-
       <Stack.Screen
         name='Contracts'
         component={Contracts}
         options={{ title: 'Contracts' }}
       />
+
       <Stack.Screen
         name='FreelancerBase'
         component={FreelancerBase}
