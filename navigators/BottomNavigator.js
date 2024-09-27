@@ -1,16 +1,31 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AlertIcon from 'react-native-vector-icons/Fontisto';
+import SearchIcon from 'react-native-vector-icons/Feather';
+import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Entypo';
+
+
 
 import Jobs from '../screens/freelancer/Jobs';
 import Proposals from '../screens/freelancer/Proposals';
+import theme from '../theme';
+import Alert from '../screens/common/Alert';
+import Messages from '../screens/common/Messages';
+import Contracts from '../screens/freelancer/Contracts';
+
 const Tab = createBottomTabNavigator();
 
 export default function BottomNavigator() {
   return (
     <Tab.Navigator
       initialRouteName='Info'
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor:theme.colors.secondaryDark,
+        },
+        tabBarActiveTintColor: theme.colors.primaryBright, 
+        tabBarInactiveTintColor: theme.colors.ternaryLight, 
       }}
     >
       <Tab.Screen
@@ -19,7 +34,7 @@ export default function BottomNavigator() {
         options={{
           tabBarLabel: 'Jobs',
           tabBarIcon: ({ color, size }) => (
-            <Icon name='aircraft-take-off' color={color} size={size} />
+            <SearchIcon name='search' color={color} size={size} />
           ),
         }}
       />
@@ -30,7 +45,37 @@ export default function BottomNavigator() {
         options={{
           tabBarLabel: 'Proposals',
           tabBarIcon: ({ color, size }) => (
-            <Icon name='aircraft-take-off' color={color} size={size} />
+            <EditIcon name='file-document-edit-outline' color={color} size={size} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name='Contract'
+        component={Contracts}
+        options={{
+          tabBarLabel: 'Contracts',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcon name='assignment' color={color} size={size} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name='Messages'
+        component={Messages}
+        options={{
+          tabBarLabel: 'Proposals',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcon name='chat' color={color} size={size} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name='Alert'
+        component={Alert}
+        options={{
+          tabBarLabel: 'Alerts',
+          tabBarIcon: ({ color, size }) => (
+            <AlertIcon name='bell' color={color} size={size} />
           ),
         }}
       />
