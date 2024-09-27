@@ -1,10 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import DrawerNavigator from '../../navigators/DrawerNavigator';
 const Contracts = () => {
   return (
     <View style={styles.container}>
-      <DrawerNavigator />
+      <Text>Contracts</Text>
     </View>
   );
 };

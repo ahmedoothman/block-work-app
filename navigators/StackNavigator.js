@@ -12,16 +12,15 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name='Contracts'
-        component={Contracts}
-        options={{ title: 'Contracts' }}
-      />
-      <Stack.Screen
         name='FreelancerBase'
         component={FreelancerBase}
         options={{ headerShown: false }}
       />
-
+      <Stack.Screen
+        name='Contracts'
+        component={Contracts}
+        options={{ title: 'Contracts' }}
+      />
       <Stack.Screen
         name='SignUp'
         component={SignUp}
