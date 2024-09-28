@@ -7,9 +7,9 @@ import signInStyle from '../../styles/Screens/SignIn_Style';
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
-import { loginService } from '../../services/authService';
+import { loginService } from '../../services/userService';
 import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/authSlice';
+import { authActions } from '../../store/auth-slice';
 const SignIn = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
