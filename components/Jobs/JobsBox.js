@@ -4,24 +4,24 @@ import {
   StyleSheet,
   Text,
   View,
-} from "react-native";
-import React from "react";
-import theme from "../../theme";
-import Icon from "react-native-vector-icons/Entypo";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+} from 'react-native';
+import React from 'react';
+import theme from '../../theme';
+import Icon from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 const data = {
-  skillsRequired: ["HTML", "CSS", "JavaScript"],
+  skillsRequired: ['HTML', 'CSS', 'JavaScript'],
   isActive: true,
-  _id: "66efeab99658f051ec26c270",
+  _id: '66efeab99658f051ec26c270',
   client: null,
-  title: "Frontend Developer Needed",
+  title: 'Frontend Developer Needed',
   description:
-    "This is the project that we were speaking about that.I’m going to go ahead and just...",
+    'This is the project that we were speaking about that.I’m going to go ahead and just...',
   budget: 1500,
-  category: "Web Development",
-  createdAt: "2024-09-22T10:00:25.699Z",
+  category: 'Web Development',
+  createdAt: '2024-09-22T10:00:25.699Z',
   __v: 0,
   proposalCount: 15,
 };
@@ -33,12 +33,12 @@ const formatTimeAgo = (dateString) => {
 
   if (hoursDiff < 1) {
     const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    return minutesDiff === 1 ? "1 minute ago" : `${minutesDiff} minutes ago`;
+    return minutesDiff === 1 ? '1 minute ago' : `${minutesDiff} minutes ago`;
   } else if (hoursDiff < 24) {
-    return hoursDiff === 1 ? "1 hour ago" : `${hoursDiff} hours ago`;
+    return hoursDiff === 1 ? '1 hour ago' : `${hoursDiff} hours ago`;
   } else {
     const daysDiff = Math.floor(hoursDiff / 24);
-    return daysDiff === 1 ? "1 day ago" : `${daysDiff} days ago`;
+    return daysDiff === 1 ? '1 day ago' : `${daysDiff} days ago`;
   }
 };
 const postingTimeOfJob = formatTimeAgo(data.createdAt);
@@ -48,10 +48,10 @@ export default function JobsBox() {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      style={{ backgroundColor: "black" }}
+      style={styles.container}
       activeOpacity={0.4}
       onPress={() =>
-        navigation.navigate("JobsDetails", {
+        navigation.navigate('JobsDetails', {
           jobDetails: data,
           postingTimeOfJob: postingTimeOfJob,
         })
@@ -65,7 +65,7 @@ export default function JobsBox() {
             Fixed-price -Entry level-Est.budget: ${data.budget}
           </Text>
           <Text style={styles.titleDescribtionText}>
-            {data.description} <Text style={styles.moreText}>{"\n"}more</Text>
+            {data.description} <Text style={styles.moreText}>{'\n'}more</Text>
           </Text>
           {/* Skills Box*/}
           <View style={styles.skillsBox}>
@@ -78,7 +78,7 @@ export default function JobsBox() {
             <Text style={styles.skillsItem}>CSS</Text>
             <Text style={styles.skillsItem}>JavaScript</Text> */}
             <Icon
-              name="chevron-thin-right"
+              name='chevron-thin-right'
               size={20}
               color={theme.colors.primaryBright}
               style={styles.arrowRigthIcon}
@@ -89,12 +89,12 @@ export default function JobsBox() {
             {/*Payment Box*/}
             <View style={styles.PaymentBox}>
               <AntDesign
-                name="checkcircle"
+                name='checkcircle'
                 size={17}
                 color={theme.colors.ternaryDark}
               />
               <Text style={{ color: theme.colors.ternaryDark }}>
-                Payment Verified{" "}
+                Payment Verified{' '}
               </Text>
             </View>
             {/*Stars Box*/}
@@ -102,7 +102,7 @@ export default function JobsBox() {
               {Array.from({ length: 5 }).map((_, index) => (
                 <AntDesign
                   key={index}
-                  name="star"
+                  name='star'
                   size={17}
                   color={theme.colors.warning}
                 />
@@ -115,12 +115,12 @@ export default function JobsBox() {
             {/*Location Box*/}
             <View style={styles.PaymentBox}>
               <AntDesign
-                name="enviromento"
+                name='enviromento'
                 size={19}
                 color={theme.colors.ternaryDark}
               />
               <Text style={{ color: theme.colors.ternaryDark }}>
-                United States{" "}
+                United States{' '}
               </Text>
             </View>
             {/*proposals Box*/}
@@ -137,12 +137,17 @@ export default function JobsBox() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    paddingHorizontal: 20,
+    backgroundColor: 'black',
+  },
   jobBox: {
     width: 310,
-    height: 273,
+    height: 290,
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: 8,
-    // marginTop: 5,
     marginHorizontal: 25,
     paddingHorizontal: 18,
     paddingVertical: 15,
@@ -154,15 +159,15 @@ const styles = StyleSheet.create({
   },
   titleDescribtionText: {
     marginBottom: 7,
-    color: "white",
+    color: 'white',
   },
   moreText: {
     color: theme.colors.primaryBright,
   },
   skillsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
-    position: "relative",
+    position: 'relative',
   },
   skillsItem: {
     marginTop: 4,
@@ -173,26 +178,26 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   arrowRigthIcon: {
-    position: "absolute",
+    position: 'absolute',
     right: 61,
     top: 9,
   },
   paymentStarsBox: {
     marginTop: 23,
     color: theme.colors.ternaryDark,
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 20,
   },
   PaymentBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 8,
   },
   StarsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   LocationProposalsBox: {
     marginTop: 20,
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 39,
   },
 });

@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import theme from "../../theme";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import AppButton from "../../components/btns/AppButton";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import theme from '../../theme';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import AppButton from '../../components/btns/AppButton';
+import { useNavigation } from '@react-navigation/native';
 
 const JobsDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
@@ -16,36 +16,36 @@ const JobsDetails = ({ route }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={{ backgroundColor: "black", height: "100%" }}>
+    <View style={styles.container}>
       <View style={styles.jobDetailsBox}>
         {/*firstSection*/}
         <View style={styles.borderSection}>
-          <Text style={{ color: "white" }}>{title}</Text>
+          <Text style={{ color: 'white' }}>{title}</Text>
           <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
           <View style={styles.PaymentBox}>
             <AntDesign
-              name="enviromento"
+              name='enviromento'
               size={19}
               color={theme.colors.ternaryDark}
             />
             <Text style={{ color: theme.colors.ternaryDark, marginBottom: 12 }}>
-              Worldwide{" "}
+              Worldwide{' '}
             </Text>
           </View>
         </View>
         {/*Second Section*/}
         <View style={styles.borderSection}>
-          <Text style={{ color: "white", marginVertical: 20 }}>
+          <Text style={{ color: 'white', marginVertical: 20 }}>
             {description}
           </Text>
         </View>
         {/*Third Section*/}
         <View style={styles.thirdSection}>
-          <View style={{ flexDirection: "row", gap: 6 }}>
+          <View style={{ flexDirection: 'row', gap: 6 }}>
             {/* <AntDesign name="tagso" size={24} color={theme.colors.ternaryDark} /> */}
-            <EvilIcons name="tag" size={29} color={theme.colors.ternaryDark} />
+            <EvilIcons name='tag' size={29} color={theme.colors.ternaryDark} />
             <Text style={{ color: theme.colors.white }}>
-              ${budget} {"\n"}
+              ${budget} {'\n'}
               <Text style={{ color: theme.colors.ternaryDark }}>
                 Fixed-price
               </Text>
@@ -53,29 +53,29 @@ const JobsDetails = ({ route }) => {
           </View>
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: 'row',
               gap: 10,
               marginTop: 15,
               marginBottom: 20,
             }}
           >
             <AntDesign
-              name="bulb1"
+              name='bulb1'
               size={20}
               color={theme.colors.ternaryDark}
             />
             <Text style={{ color: theme.colors.white }}>
-              Entry level{"\n"}
+              Entry level{'\n'}
               <Text style={{ color: theme.colors.ternaryDark }}>
                 Experience level
-              </Text>{" "}
+              </Text>{' '}
             </Text>
           </View>
         </View>
         {/*Forth Section*/}
         <View style={styles.borderSection}>
-          <Text style={{ color: "white", marginTop: 20, marginBottom: 20 }}>
-            Project Type:{" "}
+          <Text style={{ color: 'white', marginTop: 20, marginBottom: 20 }}>
+            Project Type:{' '}
             <Text style={{ color: theme.colors.ternaryDark }}>
               One-time project
             </Text>
@@ -85,7 +85,7 @@ const JobsDetails = ({ route }) => {
         <View style={styles.borderSection}>
           <Text
             style={{
-              color: "white",
+              color: 'white',
               marginTop: 20,
               marginBottom: 14,
               fontSize: 16,
@@ -107,9 +107,9 @@ const JobsDetails = ({ route }) => {
         {/*Sixth Section*/}
         <View style={styles.lastSection}>
           <Text style={{ color: theme.colors.ternaryDark }}>Proposals:</Text>
-          <View style={{ flexDirection: "row", gap: 7 }}>
+          <View style={{ flexDirection: 'row', gap: 7 }}>
             <AntDesign
-              name="questioncircleo"
+              name='questioncircleo'
               size={17}
               color={theme.colors.primaryBright}
             />
@@ -121,8 +121,8 @@ const JobsDetails = ({ route }) => {
         {/*Apply Now Button*/}
         <View style={styles.ApplyBtnView}>
           <AppButton
-            buttonTitle={"Apply Now"}
-            onPress={() => navigation.navigate("ProposalsForm")}
+            buttonTitle={'Apply Now'}
+            onPress={() => navigation.navigate('ProposalsForm')}
           />
         </View>
       </View>
@@ -133,16 +133,22 @@ const JobsDetails = ({ route }) => {
 export default JobsDetails;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    paddingHorizontal: 20,
+    backgroundColor: 'black',
+  },
   jobDetailsBox: {
     width: 320,
-    height: 600,
+    height: 400,
     backgroundColor: theme.colors.secondaryGray,
-    borderRadius: 8,
-    marginTop: 30,
+    borderRadius: theme.borderRadius,
+    marginTop: 10,
     marginHorizontal: 20,
     paddingHorizontal: 18,
     paddingVertical: 15,
-    position: "relative",
+    flex: 1,
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
@@ -152,7 +158,7 @@ const styles = StyleSheet.create({
   },
 
   PaymentBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 8,
   },
   borderSection: {
@@ -161,7 +167,7 @@ const styles = StyleSheet.create({
     // marginTop:10
   },
   skillsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
     marginBottom: 20,
   },
@@ -174,17 +180,14 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   lastSection: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderBottomColor: theme.colors.secondaryBright,
     // borderBottomWidth: 1,
     marginTop: 20,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   ApplyBtnView: {
-    position: "absolute",
-    bottom: 20,
-    left: 50,
-    alignItems: "center",
+    alignItems: 'center',
   },
   thirdSection: {
     borderBottomColor: theme.colors.secondaryBright,
