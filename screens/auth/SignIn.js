@@ -1,15 +1,16 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import theme from '../../theme';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import signInStyle from '../../styles/Screens/SignIn_Style';
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
+
 import { loginService } from '../../services/userService';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
+
 const SignIn = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -44,9 +45,16 @@ const SignIn = () => {
 
   return (
     <SafeAreaView
-      style={[signInStyle.container, { backgroundColor: '#121114' }]}
+
+      style={[
+        styles.container, { backgroundColor: theme.colors.secondaryDark }
+      ]}
     >
-      <View style={[signInStyle.content]}>
+
+      <View style={[
+        styles.content,
+      ]}>
+
         {/* //' Logo Container */}
         <Logo />
 
@@ -70,11 +78,34 @@ const SignIn = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate('ForgotPassword')} // Navigate to SignUp component
         >
-          <Text style={signInStyle.forget}>Forget Password ?</Text>
+          <Text style={styles.forget}>
+            Forget Password ?
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20
+  },
+  content: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "50%",
+  },
+  forget: {
+    color: theme.colors.white,
+    fontSize: 14,
+    fontWeight: "regular",
+  },
+})
 export default SignIn;

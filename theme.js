@@ -15,6 +15,8 @@ const theme = {
     danger: '#9b1136',
     success: '#1a7b64',
     white: '#FFFFFF',
+    inputBg: "#393939",
+    colorTextBlue: "#1354C0"
   },
   fonts: {
     regular: 'Roboto',

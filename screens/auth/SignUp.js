@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
-import SignUpStyle from '../../styles/Screens/SignUp_Style';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputField from '../../components/inputs/auth/InputField';
 import { RadioButton } from 'react-native-paper';
 import AppButton from '../../components/btns/AppButton';
+import theme from '../../theme';
+
 const SignUp = () => {
 
 
@@ -46,7 +47,7 @@ const SignUp = () => {
   return (
     <SafeAreaView
       style={[
-        SignUpStyle.container, { backgroundColor: "#121114" }
+        styles.container, { backgroundColor: theme.colors.secondaryDark }
       ]}
     >
 
@@ -68,7 +69,7 @@ const SignUp = () => {
         <InputField
           onChange={(value) => setUserInfo(prev => ({ ...prev, nationalID: value }))}
           value={userInfo.nationalID}
-          placeholder="national ID"
+          placeholder="National ID"
           isPassword={false}
         />
         {/* //' Email */}
@@ -82,7 +83,7 @@ const SignUp = () => {
         <InputField
           onChange={(value) => setUserInfo(prev => ({ ...prev, password: value }))}
           value={userInfo.password}
-          placeholder="password"
+          placeholder="Password"
           isPassword={true}
         />
 
@@ -97,17 +98,16 @@ const SignUp = () => {
         <InputField
           onChange={(value) => setUserInfo(prev => ({ ...prev, country: value }))}
           value={userInfo.country}
-          placeholder="country"
+          placeholder="Country"
           isPassword={false}
         />
         {/* //' phone */}
         <InputField
           onChange={(value) => setUserInfo(prev => ({ ...prev, phone: value }))}
           value={userInfo.phone}
-          placeholder="phone"
+          placeholder="Phone"
           isPassword={false}
         />
-
         {/* //' personelPhoto */}
         <InputField
           onChange={(value) => setUserInfo(prev => ({ ...prev, personelPhoto: value }))}
@@ -135,25 +135,25 @@ const SignUp = () => {
 
 
         {/* //' Role Radio Buttons */}
-        <View style={SignUpStyle.radioGroup}>
+        <View style={styles.radioGroup}>
           <RadioButton
-            value="freelancer"
+            value="Freelancer"
             onPress={(value) => {
               console.log("userInfo.role", userInfo.role);
               setUserInfo((prev) => { return { ...prev, role: "freelancer" } })
             }}
             status={userInfo.role === 'freelancer' ? 'checked' : 'unchecked'}
           />
-          <Text style={[SignUpStyle.radioLabel, { color: "#FFFFFF" }]}>Freelancer</Text>
+          <Text style={[styles.radioLabel, { color: theme.colors.white }]}>Freelancer</Text>
           <RadioButton
-            value="client"
+            value="Client"
             onPress={(value) => setUserInfo(prev => ({ ...prev, role: "client" }))}
             status={userInfo.role === 'client' ? 'checked' : 'unchecked'}
           />
-          <Text style={[SignUpStyle.radioLabel, { color: "#FFFFFF" }]}>Client</Text>
+          <Text style={[styles.radioLabel, { color: theme.colors.white }]}>Client</Text>
         </View>
 
-        <View style={[SignUpStyle.centerBtn]}>
+        <View style={[styles.centerBtn]}>
           <AppButton onPress={() => handleSignUp()} buttonTitle={"Create Account"} />
         </View>
 
@@ -164,4 +164,25 @@ const SignUp = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  radioGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  radioLabel: {
+    fontSize: 16,
+    marginRight: 20,
+  },
+  centerBtn: {
+    margin: "auto"
+  }
+})
 export default SignUp;

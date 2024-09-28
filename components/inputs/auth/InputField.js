@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { View, TextInput } from 'react-native';
-import inputstyle from '../../../styles/components/inputs/inputField';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, TextInput, StyleSheet } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import theme from '../../../theme';
+
+
 const InputField = (props) => {
   const { value, placeholder, isPassword, onChange, isUpload } = props;
   const [text, setText] = useState('');
 
   return (
-    <View style={inputstyle.inputContaienr}>
+    <View style={styles.inputContaienr}>
       <TextInput
         placeholder={placeholder}
         value={value}
@@ -17,26 +18,52 @@ const InputField = (props) => {
         autoCapitalize='none'
         autoCorrect={false}
         style={[
-          inputstyle.input,
-          { backgroundColor: '#393939', color: '#fff', paddingRight: 40 },
-        ]} // Add padding to the right
-        placeholderTextColor='#9E9E9E'
+          styles.input,
+          {
+            backgroundColor: theme.colors.inputBg,
+            color: theme.colors.white,
+            paddingRight: 40
+          }]}
+        placeholderTextColor={theme.colors.ternaryDark}
       />
-      {/* Icon positioned at the end of the TextInput */}
-      {isUpload && (
+      {isUpload &&
         <MaterialIcons
-          name={'file-upload'} // Change icon based on isPassword
+          name={"file-upload"}
           size={30}
-          color='#9E9E9E'
-          style={inputstyle.icon}
+          color={theme.colors.ternaryDark}
+          style={styles.icon}
           onPress={() => {
-            // Add functionality for icon press if needed
-            // For example, toggle password visibility
           }}
         />
       )}
     </View>
   );
 };
+const styles = StyleSheet.create({
+  inputContaienr: {
+    width: "100%",
+    marginVertical: 10,
+    // backgroundColor: "red",
+    padding: 5,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  input: {
+    borderRadius: 15,
+    borderTopStartRadius: 15,
+    borderTopEndRadius: 15,
 
+    width: "100%",
+    overflow: 'hidden',
+    paddingVertical: 11,
+    paddingHorizontal: 10,
+  },
+  icon: {
+    position: 'absolute',
+    right: 10,
+    top: "50%",
+    transform: [{ translateY: -12 }],
+    zIndex: 1,
+  },
+})
 export default InputField;
