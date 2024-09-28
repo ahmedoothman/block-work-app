@@ -13,12 +13,13 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator>
-      
-      <Stack.Screen
 
-        name='ForgotPassword'
-        component={ForgotPassword}
+    // ' change the 'initialRouteName' to runder the screen you want
+    <Stack.Navigator initialRouteName='SignIn'>
+      <Stack.Screen
+        name='SignIn'
+        component={SignIn}
+
         options={{
           title: false,
           headerShown: false
@@ -26,8 +27,8 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ResetPassword'
-        component={ResetPasswordScreen}
+        name='ForgotPassword'
+        component={ForgotPassword}
         options={{
           title: false,
           headerShown: false
@@ -41,8 +42,8 @@ const StackNavigator = () => {
      
        
       <Stack.Screen
-        name='SignIn'
-        component={SignIn}
+        name='ResetPassword'
+        component={ResetPasswordScreen}
         options={{
           title: false,
           headerShown: false,
@@ -57,6 +58,8 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
+
+
 
       <Stack.Screen
         name='SignUp'

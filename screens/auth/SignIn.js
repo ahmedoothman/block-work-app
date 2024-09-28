@@ -8,34 +8,61 @@ import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 
 import { loginService } from '../../services/userService';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/auth-slice';
+import { Snackbar } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions, authReducer } from '../../store/auth-slice';
 
 const SignIn = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+
   //'  Main States
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  //->--------------------------handel Loading
+  // const [laoding, setLaoding] = useState(false);
+  const authLoading = useSelector((state) => state.auth.authLoading)
+  //->--------------------------
+
+
+  // ! SnackBar------------------- ------------------- -------------------
+  const [visible, setVisible] = useState(false);
+  const onDismissSnackBar = () => setVisible(false);//'Hide Snackbar 
+  // ! ------------------- ------------------- -------------------
+
+
   //' SignIn Function
   const handleSignIn = async () => {
-    setLoading(true);
-    const response = await loginService({ email, password });
-    if (response.status === 'success') {
-      // response.data contains the user data , set store
-      dispatch(authActions.login(response.data));
-      // navigate to freelancer base
-    } else {
-      // show error message
-      setError(true);
-      setErrorMessage(response.message);
+
+    dispatch(authActions.handelLoading(true))
+
+    try {
+      const data = { email, password }
+      const response = await loginService(data)
+      if (response.status == "success") {
+        console.log("response success ", response.data);
+        dispatch(authActions.handelLoading(false))
+      } else {
+        console.log("response error message   ", response.message);
+        dispatch(authActions.handelLoading(false))
+        setError(true)
+        setErrorMessage(response.message)
+        setVisible(true)  //'make Snackbar Visible
+      }
+    } catch (error) {
+      console.log("Fetching Error ", error);
+      setLaoding(false)
+      setError(true)
+      setErrorMessage(response.message)
+      setVisible(true)
     }
-    setLoading(false);
-    clearInputs();
-  };
+
+    dispatch(authActions.handelLoading(false))
+    clearInputs()
+  }
+
 
   //' clear InputFields
   function clearInputs() {
@@ -43,7 +70,9 @@ const SignIn = () => {
     setPassword('');
   }
 
+
   return (
+
     <SafeAreaView
 
       style={[
@@ -73,7 +102,9 @@ const SignIn = () => {
         />
 
         {/* //' Login Btn */}
-        <AppButton onPress={() => handleSignIn()} buttonTitle={'login'} />
+
+        <AppButton onPress={handleSignIn} buttonTitle={"login"} loading={authLoading} />
+
 
         <TouchableOpacity
           onPress={() => navigation.navigate('ForgotPassword')} // Navigate to SignUp component
@@ -83,6 +114,26 @@ const SignIn = () => {
           </Text>
         </TouchableOpacity>
       </View>
+
+
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: 'Undo',
+          onPress: () => {
+            setVisible(false)
+          },
+          labelStyle: { color: 'black' }
+        }}
+        style={
+          { backgroundColor: "red", borderRadius: theme.borderRadius }
+        }
+      >
+        {/* <Text style={{ fontSize: 13, color: theme.colors.white }}>{errorMessage}</Text> */}
+        {errorMessage}
+      </Snackbar>
+
     </SafeAreaView>
   );
 };

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // sign up
 export const signUpService = async (data) => {
+ 
   try {
     const response = await axios.post(`${API_URL}/api/users/signup`, data);
     return { status: 'success', data: response.data.message };
@@ -12,13 +13,15 @@ export const signUpService = async (data) => {
       return {
         status: 'error',
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + 'Please check your internet connection',
       };
     } else {
       return {
         status: 'error',
         statusCode: error.response.statusCode,
         message: error.response.data.message,
+        // statusCode: error.response?.status || 'Unknown Error',
+        // message: error.response?.data?.message || 'An unknown error occurred',
       };
     }
   }
@@ -42,6 +45,8 @@ export const loginService = async (data) => {
         status: 'error',
         statusCode: error.response.statusCode,
         message: error.response.data.message,
+        // statusCode: error.response?.status || 'Unknown Error',
+        // message: error.response?.data.message || 'An unknown error occurred',
       };
     }
   }

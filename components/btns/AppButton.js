@@ -1,15 +1,21 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import theme from '../../theme';
-
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+// <ActivityIndicator animating={true} color={MD2Colors.red800} /> :
 const AppButton = (props) => {
-    const { buttonTitle, onPress } = props;
+    const { buttonTitle, onPress, loading } = props;
     return (
         <TouchableOpacity style={styles.button} onPress={onPress}>
-            <Text style={styles.buttonText}>{buttonTitle}</Text>
+            {loading ?
+                <ActivityIndicator animating={true} color={theme.colors.white} /> :
+                <Text style={styles.buttonText}>{buttonTitle}</Text>
+            }
         </TouchableOpacity>
     );
 };
+
+
 const styles = StyleSheet.create({
     button: {
         marginTop: 20,
