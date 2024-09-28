@@ -9,11 +9,13 @@ const InputField = (props) => {
   const [text, setText] = useState('');
 
   return (
+
     <View style={[styles.inputContaienr, styles.input]}>
       {isUpload ?
         <TouchableOpacity
           onPress={onChange}
           style={[styles.uploadButton, {
+
             backgroundColor: theme.colors.inputBg,
             color: theme.colors.white,
           }]}
@@ -53,7 +55,9 @@ const InputField = (props) => {
           style={styles.icon}
           onPress={() => {
           }}
+
         />} */}
+
     </View>
   );
 };
@@ -71,12 +75,14 @@ const styles = StyleSheet.create({
     borderTopEndRadius: theme.borderRadius,
     width: "100%",
     overflow: 'hidden',
+
     paddingVertical: 11,
     paddingHorizontal: 10,
 
   }, uploadButton: {
     width: "100%",
     overflow: 'hidden',
+
     paddingVertical: 11,
     paddingHorizontal: 10,
     borderRadius: theme.borderRadius,

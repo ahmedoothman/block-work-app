@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
+
 import { loginService } from '../../services/userService';
 import { Snackbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,16 +63,18 @@ const SignIn = () => {
     clearInputs()
   }
 
+
   //' clear InputFields
   function clearInputs() {
-    setEmail("")
-    setPassword("")
+    setEmail('');
+    setPassword('');
   }
 
 
   return (
 
     <SafeAreaView
+
       style={[
         styles.container, { backgroundColor: theme.colors.secondaryDark }
       ]}
@@ -88,19 +91,20 @@ const SignIn = () => {
         <InputField
           onChange={(value) => setEmail(value)}
           value={email}
-          placeholder="Email"
+          placeholder='Email'
         />
         {/* //' Password */}
         <InputField
           onChange={(value) => setPassword(value)}
           value={password}
-          placeholder="Password"
+          placeholder='Password'
           isPassword={true}
         />
 
-
         {/* //' Login Btn */}
+
         <AppButton onPress={handleSignIn} buttonTitle={"login"} loading={authLoading} />
+
 
         <TouchableOpacity
           onPress={() => navigation.navigate('ForgotPassword')} // Navigate to SignUp component
@@ -110,6 +114,7 @@ const SignIn = () => {
           </Text>
         </TouchableOpacity>
       </View>
+
 
       <Snackbar
         visible={visible}
