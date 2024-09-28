@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../../components/Public/logo';
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
-import ResetPasswordStyle from '../../styles/Screens/ResetPassword_Style';
+import theme from '../../theme';
 
 
 const ResetPassword = () => {
@@ -13,19 +13,19 @@ const ResetPassword = () => {
 
 
   //'  Main States
-  const [email, setEmail] = useState("");
+  const [otp, setOTP] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   //' SignIn Function
   function handleSubmit() {
-    console.log("email ", email, " : ", " password  ", password, " : ", " passwordConfirm ", passwordConfirm);
+    console.log("otp ", otp, " : ", " password  ", password, " : ", " passwordConfirm ", passwordConfirm);
     clearInputs()
   }
 
   //' clear InputFields
   function clearInputs() {
-    setEmail("")
+    setOTP("")
     setPassword("")
     setPasswordConfirm("")
   }
@@ -33,12 +33,12 @@ const ResetPassword = () => {
   return (
     <SafeAreaView
       style={[
-        ResetPasswordStyle.container, { backgroundColor: "#121114" }
+        styles.container, { backgroundColor: theme.colors.secondaryDark }
       ]}
     >
 
       <View style={[
-        ResetPasswordStyle.content,
+        styles.content,
       ]}>
 
         {/* //' Logo Container */}
@@ -46,9 +46,9 @@ const ResetPassword = () => {
 
         {/* //' Email */}
         <InputField
-          onChange={(value) => setEmail(value)}
-          value={email}
-          placeholder="Email"
+          onChange={(value) => setOTP(value)}
+          value={otp}
+          placeholder="OTP"
         />
         {/* //' password */}
         <InputField
@@ -73,5 +73,19 @@ const ResetPassword = () => {
     </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20
+  },
+  content: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "50%",
+  },
+});
 export default ResetPassword;

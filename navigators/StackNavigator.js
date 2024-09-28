@@ -12,6 +12,15 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+        name='ForgotPassword'
+        component={ForgotPassword}
+        options={{
+          title: false,
+          headerShown: false
+        }}
+      />
+
+      <Stack.Screen
         name='ResetPassword'
         component={ResetPasswordScreen}
         options={{
@@ -27,13 +36,8 @@ const StackNavigator = () => {
           title: false,
           headerShown: false
         }}
-
-
-      <Stack.Screen
-        name='Contracts'
-        component={Contracts}
-        options={{ title: 'Contracts' }}
       />
+
       <Stack.Screen
         name='SignUp'
         component={SignUp}
@@ -44,12 +48,9 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ForgotPassword'
-        component={ForgotPassword}
-        options={{
-          title: false,
-          headerShown: false
-        }}
+        name='FreelancerBase'
+        component={FreelancerBase}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen
@@ -57,11 +58,7 @@ const StackNavigator = () => {
         component={Contracts}
         options={{ title: 'Contracts' }}
       />
-      <Stack.Screen
-        name='FreelancerBase'
-        component={FreelancerBase}
-        options={{ headerShown: false }}
-      />
+
     </Stack.Navigator>
   );
 };
