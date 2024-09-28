@@ -44,6 +44,7 @@ export const getAllProposalsService = async (jobId) => {
 /* 
 role : freelancer
 */
+// noran
 export const getFreelancerProposalsService = async () => {
   let token = await getToken();
   try {
@@ -75,6 +76,7 @@ export const getFreelancerProposalsService = async () => {
 /* 
 role : freelancer
 */
+// fatma
 export const submitProposalService = async (jobId, data) => {
   let token = await getToken();
   try {

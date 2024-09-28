@@ -13,6 +13,7 @@ const PATH = 'api/jobPosts';
   )();
 })();
 
+// fatma
 export const getAllJobsService = async () => {
   let token = await getToken();
   try {

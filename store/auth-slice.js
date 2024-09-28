@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-const initialState = { authLoading: false, };
+const initialState = { user: null };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    handelLoading(state, action) {
-      state.authLoading = action.payload;
-    },
     login(state, action) {
       state.user = action.payload;
     },

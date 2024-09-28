@@ -9,81 +9,45 @@ import { useNavigation } from '@react-navigation/native';
 
 import { loginService } from '../../services/userService';
 import { Snackbar } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
-import { authActions, authReducer } from '../../store/auth-slice';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth-slice';
 
 const SignIn = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   //'  Main States
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  //->--------------------------handel Loading
-  // const [laoding, setLaoding] = useState(false);
-  const authLoading = useSelector((state) => state.auth.authLoading)
-  //->--------------------------
-
-
-  // ! SnackBar------------------- ------------------- -------------------
-  const [visible, setVisible] = useState(false);
-  const onDismissSnackBar = () => setVisible(false);//'Hide Snackbar 
-  // ! ------------------- ------------------- -------------------
-
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   //' SignIn Function
   const handleSignIn = async () => {
-
-    dispatch(authActions.handelLoading(true))
-
-    try {
-      const data = { email, password }
-      const response = await loginService(data)
-      if (response.status == "success") {
-        console.log("response success ", response.data);
-        dispatch(authActions.handelLoading(false))
-      } else {
-        console.log("response error message   ", response.message);
-        dispatch(authActions.handelLoading(false))
-        setError(true)
-        setErrorMessage(response.message)
-        setVisible(true)  //'make Snackbar Visible
-      }
-    } catch (error) {
-      console.log("Fetching Error ", error);
-      setLaoding(false)
-      setError(true)
-      setErrorMessage(response.message)
-      setVisible(true)
+    const data = { email, password };
+    setLoading(true);
+    const response = await loginService(data);
+    if (response.status == 'success') {
+      dispatch(authActions.login(response.data));
+      // navigate to job screen
+      navigation.navigate('FreelancerBase');
+    } else {
+      setError(true);
+      setErrorMessage(response.message);
     }
+    setLoading(false);
+  };
 
-    dispatch(authActions.handelLoading(false))
-    clearInputs()
-  }
-
-
-  //' clear InputFields
-  function clearInputs() {
-    setEmail('');
-    setPassword('');
-  }
-
-
+  const onDismissSnackBar = () => setError(false);
   return (
-
     <SafeAreaView
-
       style={[
-        styles.container, { backgroundColor: theme.colors.secondaryDark }
+        styles.container,
+        { backgroundColor: theme.colors.secondaryDark },
       ]}
     >
-
-      <View style={[
-        styles.content,
-      ]}>
-
+      <View style={[styles.content]}>
         {/* //' Logo Container */}
         <Logo />
 
@@ -103,60 +67,53 @@ const SignIn = () => {
 
         {/* //' Login Btn */}
 
-        <AppButton onPress={handleSignIn} buttonTitle={"login"} loading={authLoading} />
+        <AppButton
+          onPress={handleSignIn}
+          buttonTitle={'login'}
+          loading={loading}
+        />
 
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ForgotPassword')} // Navigate to SignUp component
-        >
-          <Text style={styles.forget}>
-            Forget Password ?
-          </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text style={styles.forget}>Forget Password ?</Text>
         </TouchableOpacity>
       </View>
 
-
       <Snackbar
-        visible={visible}
+        visible={error}
         onDismiss={onDismissSnackBar}
         action={{
           label: 'Undo',
           onPress: () => {
-            setVisible(false)
+            setVisible(false);
           },
-          labelStyle: { color: 'black' }
+          labelStyle: { color: 'black' },
         }}
-        style={
-          { backgroundColor: "red", borderRadius: theme.borderRadius }
-        }
+        style={{ backgroundColor: 'red', borderRadius: theme.borderRadius }}
       >
-        {/* <Text style={{ fontSize: 13, color: theme.colors.white }}>{errorMessage}</Text> */}
         {errorMessage}
       </Snackbar>
-
     </SafeAreaView>
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   content: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "50%",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '50%',
   },
   forget: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
   },
-})
+});
 export default SignIn;

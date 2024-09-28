@@ -7,8 +7,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { View, Image } from 'react-native';
 
-
-
 import Jobs from '../screens/freelancer/Jobs';
 import Proposals from '../screens/freelancer/Proposals';
 import theme from '../theme';
@@ -21,13 +19,13 @@ const Tab = createBottomTabNavigator();
 export default function BottomNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName='Info'
+      initialRouteName='Jobs'
       screenOptions={{
         tabBarStyle: {
-          backgroundColor:theme.colors.secondaryDark,
+          backgroundColor: theme.colors.secondaryDark,
         },
-        tabBarActiveTintColor: theme.colors.primaryBright, 
-        tabBarInactiveTintColor: theme.colors.ternaryLight, 
+        tabBarActiveTintColor: theme.colors.primaryBright,
+        tabBarInactiveTintColor: theme.colors.ternaryLight,
       }}
     >
       <Tab.Screen
@@ -38,24 +36,31 @@ export default function BottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <SearchIcon name='search' color={color} size={size} />
           ),
-          headerStyle:{backgroundColor:"black"},
-          headerTintColor:"white",
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
           headerLeft: () => (
             <View style={{ marginLeft: 10 }}>
               <Image
-                source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
-                style={{ width: 40, height: 40, borderRadius: 20 ,backgroundColor:"white" }} 
+                source={{
+                  uri: 'https://randomuser.me/api/portraits/men/1.jpg',
+                }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  backgroundColor: 'white',
+                }}
               />
             </View>
           ),
-            headerRight: () => (
-              <MaterialCommunityIcons
-                name='dots-vertical'
-                size={24}
-                color='white'
-                style={{ marginRight: 15 }}
-              />
-           ),
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 15 }}
+            />
+          ),
         }}
       />
 
@@ -65,11 +70,15 @@ export default function BottomNavigator() {
         options={{
           tabBarLabel: 'Proposals',
           tabBarIcon: ({ color, size }) => (
-            <EditIcon name='file-document-edit-outline' color={color} size={size} />
+            <EditIcon
+              name='file-document-edit-outline'
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
-       <Tab.Screen
+      <Tab.Screen
         name='Contract'
         component={Contracts}
         options={{
@@ -79,7 +88,7 @@ export default function BottomNavigator() {
           ),
         }}
       />
-       <Tab.Screen
+      <Tab.Screen
         name='Messages'
         component={Messages}
         options={{
@@ -89,7 +98,7 @@ export default function BottomNavigator() {
           ),
         }}
       />
-       <Tab.Screen
+      <Tab.Screen
         name='Alert'
         component={Alert}
         options={{
