@@ -15,7 +15,7 @@ const InputField = (props) => {
         value={value}
         onChangeText={onChange}
         secureTextEntry={isPassword ?? false}
-        autoCapitalize="none"
+        autoCapitalize='none'
         autoCorrect={false}
         style={[
           styles.input,
@@ -34,7 +34,8 @@ const InputField = (props) => {
           style={styles.icon}
           onPress={() => {
           }}
-        />}
+        />
+      )}
     </View>
   );
 };
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
 
     width: "100%",
     overflow: 'hidden',
-
     paddingVertical: 11,
     paddingHorizontal: 10,
   },

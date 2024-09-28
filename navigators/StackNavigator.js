@@ -11,7 +11,9 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
+      
       <Stack.Screen
+
         name='ForgotPassword'
         component={ForgotPassword}
         options={{
@@ -28,13 +30,28 @@ const StackNavigator = () => {
           headerShown: false
         }}
       />
-
+      <Stack.Screen
+        name='Contracts'
+        component={Contracts}
+        options={{ title: 'Contracts' }}
+      />
+     
+       
       <Stack.Screen
         name='SignIn'
         component={SignIn}
         options={{
           title: false,
-          headerShown: false
+          headerShown: false,
+        }}
+
+      />
+      <Stack.Screen
+        name='ForgotPassword'
+        component={ForgotPassword}
+        options={{
+          title: false,
+          headerShown: false,
         }}
       />
 
@@ -43,15 +60,18 @@ const StackNavigator = () => {
         component={SignUp}
         options={{
           title: false,
-          headerShown: false
+          headerShown: false,
         }}
       />
 
       <Stack.Screen
+
         name='FreelancerBase'
         component={FreelancerBase}
         options={{ headerShown: false }}
       />
+     
+     
 
       <Stack.Screen
         name='Contracts'
