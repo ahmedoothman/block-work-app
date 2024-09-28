@@ -4,6 +4,8 @@ import SearchIcon from 'react-native-vector-icons/Feather';
 import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Image } from 'react-native';
 
 
 
@@ -36,6 +38,24 @@ export default function BottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <SearchIcon name='search' color={color} size={size} />
           ),
+          headerStyle:{backgroundColor:"black"},
+          headerTintColor:"white",
+          headerLeft: () => (
+            <View style={{ marginLeft: 10 }}>
+              <Image
+                source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
+                style={{ width: 40, height: 40, borderRadius: 20 ,backgroundColor:"white" }} 
+              />
+            </View>
+          ),
+            headerRight: () => (
+              <MaterialCommunityIcons
+                name='dots-vertical'
+                size={24}
+                color='white'
+                style={{ marginRight: 15 }}
+              />
+           ),
         }}
       />
 
