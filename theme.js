@@ -17,10 +17,16 @@ const theme = {
     inputBg: "#393939",
     colorTextBlue: "#1354C0"
   },
-  fonts: {
-    regular: 'Roboto',
-    medium: 'Roboto_medium',
-  },
+  /**  
+   // ' -----> if we using Fonts this error will shown 
+   //! { Error: Variant labelLarge was not provided properly.Valid variants are regular, medium.}
+ */
+  // fonts: {
+  //   regular: 'Roboto',
+  //   medium: 'Roboto_medium',
+  // },
+
+
   borderRadius: 10,
 };
 
