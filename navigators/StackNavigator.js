@@ -13,9 +13,22 @@ const StackNavigator = () => {
     <Stack.Navigator>
       
       <Stack.Screen
-        name='FreelancerBase'
-        component={FreelancerBase}
-        options={{ headerShown: false }}
+
+        name='ForgotPassword'
+        component={ForgotPassword}
+        options={{
+          title: false,
+          headerShown: false
+        }}
+      />
+
+      <Stack.Screen
+        name='ResetPassword'
+        component={ResetPasswordScreen}
+        options={{
+          title: false,
+          headerShown: false
+        }}
       />
       <Stack.Screen
         name='Contracts'
@@ -31,6 +44,7 @@ const StackNavigator = () => {
           title: false,
           headerShown: false,
         }}
+
       />
       <Stack.Screen
         name='ForgotPassword'
@@ -40,6 +54,7 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
+
       <Stack.Screen
         name='SignUp'
         component={SignUp}
@@ -50,15 +65,19 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ResetPassword'
-        component={ResetPasswordScreen}
-        options={{
-          title: false,
-          headerShown: false,
-        }}
+
+        name='FreelancerBase'
+        component={FreelancerBase}
+        options={{ headerShown: false }}
       />
      
      
+
+      <Stack.Screen
+        name='Contracts'
+        component={Contracts}
+        options={{ title: 'Contracts' }}
+      />
 
     </Stack.Navigator>
   );

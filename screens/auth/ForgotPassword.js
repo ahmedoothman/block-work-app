@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputField from '../../components/inputs/auth/InputField';
 import { useNavigation } from '@react-navigation/native';
-import ForgetStyle from '../../styles/Screens/Forget_Style';
 import Logo from '../../components/Public/logo';
 import AppButton from '../../components/btns/AppButton';
+import theme from '../../theme';
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -28,12 +28,12 @@ const ForgotPassword = () => {
   return (
     <SafeAreaView
       style={[
-        ForgetStyle.container, { backgroundColor: "#121114" }
+        styles.container, { backgroundColor: theme.colors.secondaryDark }
       ]}
     >
 
       <View style={[
-        ForgetStyle.content,
+        styles.content,
       ]}>
 
         {/* //' Logo Container */}
@@ -55,5 +55,19 @@ const ForgotPassword = () => {
     </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 20
+  },
+  content: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "50%",
+  },
+});
 export default ForgotPassword;

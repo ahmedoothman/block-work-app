@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import theme from '../../theme';
 
 const AppButton = (props) => {
     const { buttonTitle, onPress } = props;
@@ -14,14 +15,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         paddingVertical: 10,
         width: 210,
-        backgroundColor: "#1354C0",
-        borderRadius: 10,
+        backgroundColor: theme.colors.colorTextBlue,
+        borderRadius: theme.borderRadius,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 20,
     },
     buttonText: {
-        color: "#FFFFFF",
+        color: theme.colors.white,
         fontSize: 14,
         fontWeight: "bold",
     },
