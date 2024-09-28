@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-const ProposalsDetails = () => {
+const ProposalsForm = () => {
   return (
     <View>
-      <Text>ProposalsDetails</Text>
+      <Text>ProposalsForm</Text>
     </View>
   );
 };
 
-export default ProposalsDetails;
+export default ProposalsForm;

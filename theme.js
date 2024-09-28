@@ -7,6 +7,7 @@ const theme = {
     primaryDark: '#1A4489',
     primaryBright: '#0096FF',
     secondaryDark: '#121114',
+    secondaryGray:"#282728",
     secondaryBright: '#49454F',
     ternaryDark: '#9E9E9E',
     ternaryLight: '#EFEFEF',
