@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Dimensions,
 } from 'react-native';
 import React from 'react';
 import theme from '../../theme';
@@ -11,20 +12,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 
-const data = {
-  skillsRequired: ['HTML', 'CSS', 'JavaScript'],
-  isActive: true,
-  _id: '66efeab99658f051ec26c270',
-  client: null,
-  title: 'Frontend Developer Needed',
-  description:
-    'This is the project that we were speaking about that.I’m going to go ahead and just...',
-  budget: 1500,
-  category: 'Web Development',
-  createdAt: '2024-09-22T10:00:25.699Z',
-  __v: 0,
-  proposalCount: 15,
-};
+const { width } = Dimensions.get('window'); // Get screen width for responsiveness
+
 const formatTimeAgo = (dateString) => {
   const now = new Date();
   const createdAt = new Date(dateString);
@@ -41,94 +30,83 @@ const formatTimeAgo = (dateString) => {
     return daysDiff === 1 ? '1 day ago' : `${daysDiff} days ago`;
   }
 };
-const postingTimeOfJob = formatTimeAgo(data.createdAt);
-// console.log("eeeeeeeeeee",postingTimeOfJob);
 
-export default function JobsBox() {
+export default function JobsBox({ jobData }) {
+  const postingTimeOfJob = formatTimeAgo(jobData.createdAt);
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       style={styles.container}
-      activeOpacity={0.4}
+      activeOpacity={0.7}
       onPress={() =>
         navigation.navigate('JobsDetails', {
-          jobDetails: data,
+          jobDetails: jobData,
           postingTimeOfJob: postingTimeOfJob,
         })
       }
     >
-      <View style={{ marginTop: 25 }}>
-        <View style={styles.jobBox}>
-          <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
-          <Text style={styles.titleDescribtionText}>{data.title}</Text>
-          <Text style={styles.timePriceText}>
-            Fixed-price -Entry level-Est.budget: ${data.budget}
-          </Text>
-          <Text style={styles.titleDescribtionText}>
-            {data.description} <Text style={styles.moreText}>{'\n'}more</Text>
-          </Text>
-          {/* Skills Box*/}
-          <View style={styles.skillsBox}>
-            {data.skillsRequired.map((skill, i) => (
-              <Text key={i} style={styles.skillsItem}>
-                {skill}
-              </Text>
-            ))}
-            {/* <Text style={styles.skillsItem}>HTML</Text>
-            <Text style={styles.skillsItem}>CSS</Text>
-            <Text style={styles.skillsItem}>JavaScript</Text> */}
-            <Icon
-              name='chevron-thin-right'
-              size={20}
-              color={theme.colors.primaryBright}
-              style={styles.arrowRigthIcon}
-            />
-          </View>
-          {/*payment and Stars Box*/}
-          <View style={styles.paymentStarsBox}>
-            {/*Payment Box*/}
-            <View style={styles.PaymentBox}>
-              <AntDesign
-                name='checkcircle'
-                size={17}
-                color={theme.colors.ternaryDark}
-              />
-              <Text style={{ color: theme.colors.ternaryDark }}>
-                Payment Verified{' '}
-              </Text>
-            </View>
-            {/*Stars Box*/}
-            <View style={styles.StarsBox}>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <AntDesign
-                  key={index}
-                  name='star'
-                  size={17}
-                  color={theme.colors.warning}
-                />
-              ))}
-            </View>
-          </View>
+      <View style={styles.jobBox}>
+        <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
+        <Text style={styles.titleDescriptionText}>{jobData.title}</Text>
+        <Text style={styles.timePriceText}>
+          Fixed-price - Entry level - Est. budget: ${jobData.budget}
+        </Text>
+        <Text style={styles.descriptionText}>
+          {jobData.description} <Text style={styles.moreText}>{'\n'}more</Text>
+        </Text>
 
-          {/*Location and proposals Box*/}
-          <View style={styles.LocationProposalsBox}>
-            {/*Location Box*/}
-            <View style={styles.PaymentBox}>
+        {/* Skills Box */}
+        <View style={styles.skillsBox}>
+          {jobData.skillsRequired.map((skill, i) => (
+            <Text key={i} style={styles.skillsItem}>
+              {skill}
+            </Text>
+          ))}
+          <Icon
+            name='chevron-thin-right'
+            size={20}
+            color={theme.colors.primaryBright}
+            style={styles.arrowRightIcon}
+          />
+        </View>
+
+        {/* Payment and Stars Box */}
+        <View style={styles.paymentStarsBox}>
+          <View style={styles.paymentBox}>
+            <AntDesign
+              name='checkcircle'
+              size={17}
+              color={theme.colors.ternaryDark}
+            />
+            <Text style={styles.paymentText}>Payment Verified</Text>
+          </View>
+          <View style={styles.starsBox}>
+            {Array.from({ length: 5 }).map((_, index) => (
               <AntDesign
-                name='enviromento'
-                size={19}
-                color={theme.colors.ternaryDark}
+                key={index}
+                name='star'
+                size={17}
+                color={theme.colors.warning}
               />
-              <Text style={{ color: theme.colors.ternaryDark }}>
-                United States{' '}
-              </Text>
-            </View>
-            {/*proposals Box*/}
-            <View style={styles.StarsBox}>
-              <Text style={{ color: theme.colors.ternaryDark }}>
-                Proposals: {data.proposalCount}
-              </Text>
-            </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Location and Proposals Box */}
+        <View style={styles.locationProposalsBox}>
+          <View style={styles.locationBox}>
+            <AntDesign
+              name='enviromento'
+              size={19}
+              color={theme.colors.ternaryDark}
+            />
+            <Text style={styles.locationText}>{jobData.client.country}</Text>
+          </View>
+          <View style={styles.proposalsBox}>
+            <Text style={styles.proposalsText}>
+              Proposals: {jobData.proposalCount}
+            </Text>
           </View>
         </View>
       </View>
@@ -139,65 +117,90 @@ export default function JobsBox() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    paddingHorizontal: 20,
     backgroundColor: 'black',
+    paddingHorizontal: 10,
   },
   jobBox: {
-    width: 310,
-    height: 290,
+    width: width * 0.8,
     backgroundColor: theme.colors.secondaryGray,
-    borderRadius: 8,
-    marginHorizontal: 25,
-    paddingHorizontal: 18,
-    paddingVertical: 15,
+    borderRadius: 10,
+    marginVertical: 15,
+    padding: 15,
+    alignSelf: 'center',
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
     fontSize: 14,
-    marginBottom: 7,
+    marginBottom: 5,
   },
-  titleDescribtionText: {
-    marginBottom: 7,
+  titleDescriptionText: {
     color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  descriptionText: {
+    color: 'white',
+    marginBottom: 10,
   },
   moreText: {
     color: theme.colors.primaryBright,
   },
   skillsBox: {
     flexDirection: 'row',
-    gap: 10,
-    position: 'relative',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 15,
   },
   skillsItem: {
-    marginTop: 4,
     backgroundColor: theme.colors.secondaryBright,
-    paddingHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    marginRight: 8,
+    marginBottom: 8,
     color: theme.colors.ternaryDark,
   },
-  arrowRigthIcon: {
+  arrowRightIcon: {
     position: 'absolute',
-    right: 61,
-    top: 9,
+    right: 10,
+    top: '50%',
   },
   paymentStarsBox: {
-    marginTop: 23,
-    color: theme.colors.ternaryDark,
     flexDirection: 'row',
-    gap: 20,
-  },
-  PaymentBox: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  StarsBox: {
-    flexDirection: 'row',
-  },
-  LocationProposalsBox: {
+    justifyContent: 'space-between',
     marginTop: 20,
+  },
+  paymentBox: {
     flexDirection: 'row',
-    gap: 39,
+    alignItems: 'center',
+  },
+  paymentText: {
+    color: theme.colors.ternaryDark,
+    marginLeft: 5,
+  },
+  starsBox: {
+    flexDirection: 'row',
+  },
+  locationProposalsBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  locationBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  locationText: {
+    color: theme.colors.ternaryDark,
+    marginLeft: 5,
+  },
+  proposalsBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  proposalsText: {
+    color: theme.colors.ternaryDark,
   },
 });

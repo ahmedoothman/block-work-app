@@ -80,14 +80,19 @@ const JobsDetails = ({ route }) => {
               size={17}
               color={theme.colors.primaryBright}
             />
-            <Text style={styles.proposalsCount}>{proposalCount} to 50</Text>
+            <Text style={styles.proposalsCount}>{proposalCount}</Text>
           </View>
         </View>
-        {/* Apply Now Button */}
-        <View style={styles.applyBtnView}>
+        {/*Apply Now Button in Job Details Page */}
+        <View style={styles.ApplyBtnView}>
           <AppButton
             buttonTitle={'Apply Now'}
-            onPress={() => navigation.navigate('ProposalsForm')}
+            onPress={() =>
+              navigation.navigate('ProposalsForm', {
+                jobData: jobDetails,
+                postingTimeOfJob: postingTimeOfJob,
+              })
+            }
           />
         </View>
       </View>
@@ -99,6 +104,7 @@ export default JobsDetails;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 16,
     backgroundColor: 'black',
@@ -107,6 +113,7 @@ const styles = StyleSheet.create({
   jobDetailsBox: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,
+    flex: 1,
     padding: 16,
   },
   title: {

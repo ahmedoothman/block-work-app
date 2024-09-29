@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Profile from '../screens/freelancer/Profile';
+import Profile from '../screens/common/Profile';
 import Balance from '../screens/freelancer/Balance';
 import Settings from '../screens/freelancer/Settings';
 import DrawerContent from './DrawerContent';

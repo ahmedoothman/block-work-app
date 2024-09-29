@@ -1,32 +1,33 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import React, { useEffect, useState } from "react";
-import theme from "../../theme";
-import Logo from "../../components/Public/logo";
-import { SafeAreaView } from "react-native-safe-area-context";
-import InputField from "../../components/inputs/auth/InputField";
-import { ActivityIndicator } from "react-native-paper";
-import AppButton from "../../components/btns/AppButton";
-import { useNavigation } from "@react-navigation/native";
 
-import { loginService, getMeService } from "../../services/userService";
-import { Snackbar } from "react-native-paper";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store/auth-slice";
-import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import theme from '../../theme';
+import Logo from '../../components/Public/logo';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import InputField from '../../components/inputs/auth/InputField';
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import AppButton from '../../components/btns/AppButton';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { loginService, getMeService } from '../../services/userService';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth-slice';
+
 
 const SignIn = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  //'  Main States
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  // Main States
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [isCheckingToken, setIsCheckingToken] = useState(true);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const checkToken = async () => {
       const response = await getMeService();
       if (response.status === "success") {
@@ -42,9 +43,9 @@ const SignIn = () => {
     };
 
     checkToken();
-  }, []);
+  });
 
-  //' SignIn Function
+  // SignIn Function
   const handleSignIn = async () => {
     const data = { email, password };
     setLoading(true);
@@ -69,6 +70,7 @@ const SignIn = () => {
       </View>
     );
   }
+
   return (
     <SafeAreaView
       style={[
@@ -76,16 +78,16 @@ const SignIn = () => {
         { backgroundColor: theme.colors.secondaryDark },
       ]}>
       <View style={[styles.content]}>
-        {/* //' Logo Container */}
+        {/* Logo Container */}
         <Logo />
 
-        {/* //' Email */}
+        {/* Email */}
         <InputField
           onChange={(value) => setEmail(value)}
           value={email}
           placeholder="Email"
         />
-        {/* //' Password */}
+        {/* Password */}
         <InputField
           onChange={(value) => setPassword(value)}
           value={password}
@@ -93,17 +95,26 @@ const SignIn = () => {
           isPassword={true}
         />
 
-        {/* //' Login Btn */}
-
+        {/* Login Btn */}
         <AppButton
           onPress={handleSignIn}
           buttonTitle={"login"}
           loading={loading}
         />
 
-        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-          <Text style={styles.forget}>Forget Password ?</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text style={styles.forget}>Forgot Password?</Text>
+
         </TouchableOpacity>
+
+        {/* Sign Up Link */}
+        <View style={styles.signUpContainer}>
+          <Text style={styles.noAccountText}>Don't have an account? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.signUpText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <CustomeSnackBar
@@ -137,11 +148,26 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
     fontSize: 14,
     fontWeight: "regular",
+
   },
   spinnerContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  signUpContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  noAccountText: {
+    color: theme.colors.white,
+    fontSize: 14,
+  },
+  signUpText: {
+    color: theme.colors.primaryBright,
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });
 export default SignIn;
