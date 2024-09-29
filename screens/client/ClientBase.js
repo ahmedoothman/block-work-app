@@ -1,12 +1,11 @@
 import { View, StyleSheet } from 'react-native';
 import React from 'react';
 
-import FreelancerBottomNavigator from '../../navigators/FreelancerBottomNavigator';
+import ClientBottomNavigator from '../../navigators/ClientBottomNavigator';
 const FreelancerBase = () => {
   return (
     <View style={styles.container}>
-      {/* <DrawerNavigator /> */}
-      <FreelancerBottomNavigator />
+      <ClientBottomNavigator />
     </View>
   );
 };

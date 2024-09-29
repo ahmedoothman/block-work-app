@@ -6,6 +6,7 @@ import SignUp from '../screens/auth/SignUp';
 import ForgotPassword from '../screens/auth/ForgotPassword';
 import ResetPasswordScreen from '../screens/auth/ResetPasword';
 import FreelancerBase from '../screens/freelancer/FreelancerBase';
+import ClientBase from '../screens/client/ClientBase';
 import Contracts from '../screens/freelancer/Contracts';
 import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
@@ -13,24 +14,18 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    // ' change the 'initialRouteName' to runder the screen you want
 
-   
-    <Stack.Navigator initialRouteName='FreelancerBase'>
-       <Stack.Screen
-    name='FreelancerBase'
-    component={FreelancerBase}
-    options={{ headerShown: false }}
-  />
+    <Stack.Navigator initialRouteName='SignIn'>
+      <Stack.Screen
 
-      {/* <Stack.Screen
         name='SignIn'
         component={SignIn}
         options={{
           title: false,
           headerShown: false,
         }}
-      /> */}
+
+      />
 
       <Stack.Screen
         name='ForgotPassword'
@@ -69,6 +64,11 @@ const StackNavigator = () => {
         component={FreelancerBase}
         options={{ headerShown: false }}
       /> */}
+      <Stack.Screen
+        name='ClientBase'
+        component={ClientBase}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name='JobsDetails'
         component={JobsDetails}

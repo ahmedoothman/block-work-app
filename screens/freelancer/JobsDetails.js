@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React from 'react';
 import theme from '../../theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -8,114 +8,79 @@ import { useNavigation } from '@react-navigation/native';
 
 const JobsDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
-  // console.log(jobDetails);
-  // console.log("AAAAAAAAAA",postingTimeOfJob)
   const { title, description, budget, skillsRequired, proposalCount } =
     jobDetails;
 
   const navigation = useNavigation();
   
   return (
-    <View  style={styles.container} >
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.jobDetailsBox}>
-        {/*firstSection*/}
+        {/* First Section */}
         <View style={styles.borderSection}>
-          <Text style={{ color: 'white' }}>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
           <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
-          <View style={styles.PaymentBox}>
+          <View style={styles.paymentBox}>
             <AntDesign
               name='enviromento'
               size={19}
               color={theme.colors.ternaryDark}
             />
-            <Text style={{ color: theme.colors.ternaryDark, marginBottom: 12 }}>
-              Worldwide{' '}
-            </Text>
+            <Text style={styles.locationText}>Worldwide</Text>
           </View>
         </View>
-        {/*Second Section*/}
+        {/* Second Section */}
         <View style={styles.borderSection}>
-          <Text style={{ color: 'white', marginVertical: 20 }}>
-            {description}
-          </Text>
+          <Text style={styles.descriptionText}>{description}</Text>
         </View>
-        {/*Third Section*/}
+        {/* Third Section */}
         <View style={styles.thirdSection}>
-          <View style={{ flexDirection: 'row', gap: 6 }}>
-            {/* <AntDesign name="tagso" size={24} color={theme.colors.ternaryDark} /> */}
+          <View style={styles.infoRow}>
             <EvilIcons name='tag' size={29} color={theme.colors.ternaryDark} />
-            <Text style={{ color: theme.colors.white }}>
+            <Text style={styles.budgetText}>
               ${budget} {'\n'}
-              <Text style={{ color: theme.colors.ternaryDark }}>
-                Fixed-price
-              </Text>
+              <Text style={styles.subText}>Fixed-price</Text>
             </Text>
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              gap: 10,
-              marginTop: 15,
-              marginBottom: 20,
-            }}
-          >
+          <View style={styles.infoRow}>
             <AntDesign
               name='bulb1'
               size={20}
               color={theme.colors.ternaryDark}
             />
-            <Text style={{ color: theme.colors.white }}>
+            <Text style={styles.budgetText}>
               Entry level{'\n'}
-              <Text style={{ color: theme.colors.ternaryDark }}>
-                Experience level
-              </Text>{' '}
+              <Text style={styles.subText}>Experience level</Text>
             </Text>
           </View>
         </View>
-        {/*Forth Section*/}
+        {/* Fourth Section */}
         <View style={styles.borderSection}>
-          <Text style={{ color: 'white', marginTop: 20, marginBottom: 20 }}>
-            Project Type:{' '}
-            <Text style={{ color: theme.colors.ternaryDark }}>
-              One-time project
-            </Text>
+          <Text style={styles.projectTypeText}>
+            Project Type: <Text style={styles.subText}>One-time project</Text>
           </Text>
         </View>
-        {/*Fifth Section*/}
+        {/* Fifth Section */}
         <View style={styles.borderSection}>
-          <Text
-            style={{
-              color: 'white',
-              marginTop: 20,
-              marginBottom: 14,
-              fontSize: 16,
-            }}
-          >
-            Skills and Expertise
-          </Text>
+          <Text style={styles.sectionTitle}>Skills and Expertise</Text>
           <View style={styles.skillsBox}>
             {skillsRequired.map((skill, i) => (
               <Text key={i} style={styles.skillsItem}>
                 {skill}
               </Text>
             ))}
-            {/* <Text style={styles.skillsItem}>HTML</Text>
-            <Text style={styles.skillsItem}>CSS</Text>
-            <Text style={styles.skillsItem}>JavaScript</Text> */}
           </View>
         </View>
-        {/*Sixth Section*/}
+        {/* Sixth Section */}
         <View style={styles.lastSection}>
-          <Text style={{ color: theme.colors.ternaryDark }}>Proposals:</Text>
-          <View style={{ flexDirection: 'row', gap: 7 }}>
+          <Text style={styles.subText}>Proposals:</Text>
+          <View style={styles.proposalsRow}>
             <AntDesign
               name='questioncircleo'
               size={17}
               color={theme.colors.primaryBright}
             />
-            <Text style={{ color: theme.colors.ternaryDark, marginBottom: 20 }}>
-              {proposalCount} to 50
-            </Text>
+            <Text style={styles.proposalsCount}>{proposalCount} to 50</Text>
           </View>
         </View>
         {/*Apply Now Button in Job Details Page */}
@@ -131,7 +96,7 @@ const JobsDetails = ({ route }) => {
          
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -140,65 +105,96 @@ export default JobsDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: theme.colors.secondaryDark,
-    // paddingHorizontal: 20,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
     backgroundColor: 'black',
-    
+    height: '100%',
   },
   jobDetailsBox: {
-    width: 320,
-    height: 400,
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,
-    marginTop: 10,
-    marginBottom:20,
-    marginHorizontal: 20,
-    paddingHorizontal: 18,
-    paddingVertical: 15,
     flex: 1,
+    padding: 16,
+  },
+  title: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
     fontSize: 14,
-    marginBottom: 7,
-    marginTop: 5,
+    marginVertical: 5,
   },
-
-  PaymentBox: {
+  paymentBox: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    marginVertical: 8,
   },
-  borderSection: {
-    borderBottomColor: theme.colors.secondaryBright,
+  locationText: {
+    color: theme.colors.ternaryDark,
+    marginLeft: 5,
+  },
+  descriptionText: {
+    color: 'white',
+    marginVertical: 15,
+  },
+  thirdSection: {
     borderBottomWidth: 1,
-    // marginTop:10
+    borderBottomColor: theme.colors.secondaryBright,
+    marginVertical: 20,
+    paddingBottom: 10,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  budgetText: {
+    color: theme.colors.white,
+    marginLeft: 8,
+  },
+  subText: {
+    color: theme.colors.ternaryDark,
+  },
+  projectTypeText: {
+    color: 'white',
+    marginVertical: 15,
+  },
+  sectionTitle: {
+    color: 'white',
+    fontSize: 16,
+    marginVertical: 10,
   },
   skillsBox: {
     flexDirection: 'row',
-    gap: 10,
+    flexWrap: 'wrap',
+    gap: 8,
     marginBottom: 20,
   },
   skillsItem: {
-    // marginTop: 4,
     backgroundColor: theme.colors.secondaryBright,
     paddingHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 10,
+    paddingVertical: 5,
+    borderRadius: 8,
     color: theme.colors.ternaryDark,
   },
   lastSection: {
     flexDirection: 'row',
-    borderBottomColor: theme.colors.secondaryBright,
-    // borderBottomWidth: 1,
-    marginTop: 20,
     justifyContent: 'space-between',
+    marginVertical: 15,
   },
-  ApplyBtnView: {
+  proposalsRow: {
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  thirdSection: {
-    borderBottomColor: theme.colors.secondaryBright,
-    borderBottomWidth: 1,
+  proposalsCount: {
+    color: theme.colors.ternaryDark,
+    marginLeft: 5,
+  },
+  applyBtnView: {
+    alignItems: 'center',
     marginTop: 20,
   },
 });

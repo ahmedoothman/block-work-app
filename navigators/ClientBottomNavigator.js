@@ -15,7 +15,7 @@ import Contracts from '../screens/freelancer/Contracts';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomNavigator() {
+export default function ClientBottomNavigator() {
   return (
     <Tab.Navigator
       initialRouteName='Jobs'

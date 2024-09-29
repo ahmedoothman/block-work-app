@@ -1,3 +1,4 @@
+
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import theme from "../../theme";
