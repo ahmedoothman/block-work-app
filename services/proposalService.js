@@ -3,14 +3,6 @@ import { getToken, saveToken } from '../storage/tokenStorage';
 import axios from 'axios';
 
 const PATH = 'api/proposals';
-// will be removed
-(async () => {
-  (
-    await saveToken(
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZjZmNDcwNGUyNDhkNzI0MDdjZjU2MSIsImlhdCI6MTcyNzUxNTMwOSwiZXhwIjoxNzM1MjkxMzA5fQ.NSlFRXZjGku8v6LDvpy3cIBRMgtga1jzlbr-u3v64fw'
-    )
-  )();
-})();
 
 /* 
 role : client

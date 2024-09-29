@@ -6,6 +6,7 @@ import SignUp from '../screens/auth/SignUp';
 import ForgotPassword from '../screens/auth/ForgotPassword';
 import ResetPasswordScreen from '../screens/auth/ResetPasword';
 import FreelancerBase from '../screens/freelancer/FreelancerBase';
+import ClientBase from '../screens/client/ClientBase';
 import Contracts from '../screens/freelancer/Contracts';
 import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
@@ -59,6 +60,11 @@ const StackNavigator = () => {
       <Stack.Screen
         name='FreelancerBase'
         component={FreelancerBase}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='ClientBase'
+        component={ClientBase}
         options={{ headerShown: false }}
       />
       <Stack.Screen

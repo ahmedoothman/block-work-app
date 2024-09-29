@@ -8,8 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const JobsDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
-  // console.log(jobDetails);
-  // console.log("AAAAAAAAAA",postingTimeOfJob)
   const { title, description, budget, skillsRequired, proposalCount } =
     jobDetails;
 

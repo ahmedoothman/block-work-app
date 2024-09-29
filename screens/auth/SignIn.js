@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import theme from '../../theme';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,7 +7,7 @@ import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 
-import { loginService } from '../../services/userService';
+import { loginService, getMeService } from '../../services/userService';
 import { Snackbar } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
@@ -22,6 +22,23 @@ const SignIn = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const response = await getMeService();
+      if (response.status === 'success') {
+        dispatchRedux(authActions.login(response.data));
+        if (response.data.role === 'client') {
+          navigation.navigate('ClientBase');
+        } else {
+          navigation.navigate('FreelancerBase');
+        }
+      }
+      setIsCheckingToken(false);
+    };
+
+    checkToken();
+  }, []);
 
   //' SignIn Function
   const handleSignIn = async () => {
