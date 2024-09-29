@@ -1,12 +1,12 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import theme from '../../theme';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputField from '../../components/inputs/auth/InputField';
 import { ActivityIndicator } from 'react-native-paper';
 import AppButton from '../../components/btns/AppButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { loginService, getMeService } from '../../services/userService';
 import { Snackbar } from 'react-native-paper';
@@ -25,7 +25,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [isCheckingToken, setIsCheckingToken] = useState(true);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const checkToken = async () => {
       const response = await getMeService();
       if (response.status === 'success') {
@@ -41,7 +41,7 @@ const SignIn = () => {
     };
 
     checkToken();
-  }, []);
+  });
 
   //' SignIn Function
   const handleSignIn = async () => {

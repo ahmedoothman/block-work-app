@@ -1,15 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AlertIcon from 'react-native-vector-icons/Fontisto';
+import SettingsIcon from 'react-native-vector-icons/Ionicons';
 import SearchIcon from 'react-native-vector-icons/Feather';
 import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, Image } from 'react-native';
 
 import Jobs from '../screens/freelancer/Jobs';
 import Proposals from '../screens/freelancer/Proposals';
 import theme from '../theme';
-import Alert from '../screens/common/Alert';
+import Settings from '../screens/common/Settings';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/freelancer/Contracts';
 import screenOptionsWithHeader from './screenOptionsWithHeader';
@@ -81,12 +79,12 @@ export default function FreelancerBottomNavigator() {
       />
 
       <Tab.Screen
-        name='Alert'
-        component={Alert}
+        name='Settings'
+        component={Settings}
         options={{
-          tabBarLabel: 'Alerts',
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
-            <AlertIcon name='bell' color={color} size={size} />
+            <SettingsIcon name='settings' color={color} size={size} />
           ),
           ...screenOptionsWithHeader('Alerts'),
         }}
