@@ -10,6 +10,9 @@ import ClientBase from '../screens/client/ClientBase';
 import Contracts from '../screens/freelancer/Contracts';
 import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
+import Proposals from '../screens/freelancer/Proposals';
+import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
+
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -40,6 +43,11 @@ const StackNavigator = () => {
         component={Contracts}
         options={{ title: 'Contracts' }}
       />
+        {/* <Stack.Screen
+        name='Proposals'
+        component={Proposals}
+        options={{ title: 'Proposals' }}
+      /> */}
 
       <Stack.Screen
         name='ResetPassword'
@@ -59,11 +67,11 @@ const StackNavigator = () => {
         }}
       />
 
-      {/* <Stack.Screen
+      <Stack.Screen
         name='FreelancerBase'
         component={FreelancerBase}
         options={{ headerShown: false }}
-      /> */}
+      />
       <Stack.Screen
         name='ClientBase'
         component={ClientBase}
@@ -86,6 +94,25 @@ const StackNavigator = () => {
           ),
         }}
       />
+
+      <Stack.Screen
+        name='ProposalsDetails'
+        component={ProposalsDetails}
+        options={{
+          title: 'Proposal Details',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
       <Stack.Screen
         name='ProposalsForm'
         component={ProposalsForm}
