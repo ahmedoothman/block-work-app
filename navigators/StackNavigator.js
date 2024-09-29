@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,9 +18,9 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName='SignIn'>
+    <Stack.Navigator initialRouteName="ForgotPassword">
       <Stack.Screen
-        name='SignIn'
+        name="SignIn"
         component={SignIn}
         options={{
           title: false,
@@ -28,7 +29,7 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ForgotPassword'
+        name="ForgotPassword"
         component={ForgotPassword}
         options={{
           title: false,
@@ -36,7 +37,9 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
+
         name='ResetPassword'
+
         component={ResetPasswordScreen}
         options={{
           title: false,
@@ -45,7 +48,7 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='SignUp'
+        name="SignUp"
         component={SignUp}
         options={{
           title: false,
@@ -53,12 +56,12 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name='FreelancerBase'
+        name="FreelancerBase"
         component={FreelancerBase}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='ClientBase'
+        name="ClientBase"
         component={ClientBase}
         options={{ headerShown: false }}
       />
@@ -82,34 +85,34 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='JobsDetails'
+        name="JobsDetails"
         component={JobsDetails}
         options={{
-          title: 'Job Details',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Job Details",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name='ProposalsForm'
+        name="ProposalsForm"
         component={ProposalsForm}
         options={{
-          title: 'Submit Proposal',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Submit Proposal",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),

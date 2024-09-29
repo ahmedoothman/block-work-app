@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -27,17 +28,16 @@ const SignUp = () => {
 
   const onDismissSnackBar = () => setError(false);
 
+
   return (
     <SafeAreaView
       style={[
         styles.container,
         { backgroundColor: theme.colors.secondaryDark },
-      ]}
-    >
+      ]}>
       <KeyboardAwareScrollView
-        style={{ width: '100%' }}
-        showsVerticalScrollIndicator={false}
-      >
+        style={{ width: "100%" }}
+        showsVerticalScrollIndicator={false}>
         <Logo />
 
         {/* Name */}
@@ -45,27 +45,32 @@ const SignUp = () => {
           onChange={(value) => handleInputChange('name', value)}
           value={userInfo.name}
           placeholder='Name'
+
         />
 
         {/* National ID */}
         <InputField
           onChange={(value) => handleInputChange('nationalID', value)}
           value={userInfo.nationalID}
+
           placeholder='National ID'
+
         />
 
         {/* Email */}
         <InputField
           onChange={(value) => handleInputChange('email', value)}
           value={userInfo.email}
+
           placeholder='Email'
+
         />
 
         {/* Password */}
         <InputField
           onChange={(value) => handleInputChange('password', value)}
           value={userInfo.password}
-          placeholder='Password'
+          placeholder="Password"
           isPassword={true}
         />
 
@@ -73,7 +78,7 @@ const SignUp = () => {
         <InputField
           onChange={(value) => handleInputChange('passwordConfirm', value)}
           value={userInfo.passwordConfirm}
-          placeholder='Password Confirm'
+          placeholder="Password Confirm"
           isPassword={true}
         />
 
@@ -81,54 +86,62 @@ const SignUp = () => {
         <InputField
           onChange={(value) => handleInputChange('country', value)}
           value={userInfo.country}
+
           placeholder='Country'
+
         />
 
         {/* Phone */}
         <InputField
           onChange={(value) => handleInputChange('phone', value)}
           value={userInfo.phone}
+
           placeholder='Phone'
+
         />
 
         {/* Personal Photo */}
         <InputField
-          onChange={() => pickImage('personelPhoto')}
+          onChange={() => pickImage("personelPhoto")}
           value={userInfo.personelPhoto?.uri}
-          placeholder='Upload Photo'
+          placeholder="Upload Photo"
           isUpload={true}
         />
 
         {/* Front ID Photo */}
         <InputField
-          onChange={() => pickImage('frontIdPhoto')}
+          onChange={() => pickImage("frontIdPhoto")}
           value={userInfo.frontIdPhoto?.uri}
-          placeholder='Front ID Photo'
+          placeholder="Front ID Photo"
           isUpload={true}
         />
 
         {/* Back ID Photo */}
         <InputField
-          onChange={() => pickImage('backIdPhoto')}
+          onChange={() => pickImage("backIdPhoto")}
           value={userInfo.backIdPhoto?.uri}
-          placeholder='Back ID Photo'
+          placeholder="Back ID Photo"
           isUpload={true}
         />
 
         {/* Role Radio Buttons */}
         <View style={styles.radioGroup}>
           <RadioButton
+
             value='Freelancer'
             onPress={() => handleInputChange('role', 'freelancer')}
             status={userInfo.role === 'freelancer' ? 'checked' : 'unchecked'}
+
           />
           <Text style={[styles.radioLabel, { color: theme.colors.white }]}>
             Freelancer
           </Text>
           <RadioButton
+
             value='Client'
             onPress={() => handleInputChange('role', 'client')}
             status={userInfo.role === 'client' ? 'checked' : 'unchecked'}
+
           />
           <Text style={[styles.radioLabel, { color: theme.colors.white }]}>
             Client
@@ -137,8 +150,10 @@ const SignUp = () => {
 
         <View style={styles.centerBtn}>
           <AppButton
+
             onPress={handleSignUp}
             buttonTitle='Create Account'
+
             loading={loading}
           />
         </View>
@@ -166,20 +181,17 @@ const SignUp = () => {
         </View>
       </KeyboardAwareScrollView>
 
-      <Snackbar
+
+      <CustomeSnackBar
         visible={error}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: 'Undo',
-          onPress: () => {
-            setError(false);
-          },
-          labelStyle: { color: 'black' },
-        }}
-        style={{ backgroundColor: '#B31312', borderRadius: theme.borderRadius }}
-      >
-        {errorMessage}
-      </Snackbar>
+        alertMessage={errorMessage}
+        onDismissSnackBar={onDismissSnackBar}
+        undoText="Undo"
+        undoColor="black"
+        bgColor="red"
+        messageColor={theme.colors.white}
+      />
+
     </SafeAreaView>
   );
 };
@@ -187,14 +199,14 @@ const SignUp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
   radioGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
   },
   radioLabel: {
@@ -202,7 +214,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   centerBtn: {
-    margin: 'auto',
+    margin: "auto",
   },
 });
 

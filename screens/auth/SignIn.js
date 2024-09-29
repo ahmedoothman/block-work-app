@@ -1,3 +1,4 @@
+
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import theme from '../../theme';
@@ -11,28 +12,31 @@ import { loginService, getMeService } from '../../services/userService';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 
+
 const SignIn = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+
   // Main States
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [isCheckingToken, setIsCheckingToken] = useState(true);
 
   useFocusEffect(() => {
     const checkToken = async () => {
       const response = await getMeService();
-      if (response.status === 'success') {
+      if (response.status === "success") {
         dispatch(authActions.login(response.data));
 
-        if (response.data.role === 'client') {
-          navigation.navigate('ClientBase');
+        if (response.data.role === "client") {
+          navigation.navigate("ClientBase");
         } else {
-          navigation.navigate('FreelancerBase');
+          navigation.navigate("FreelancerBase");
         }
       }
       setIsCheckingToken(false);
@@ -46,10 +50,10 @@ const SignIn = () => {
     const data = { email, password };
     setLoading(true);
     const response = await loginService(data);
-    if (response.status == 'success') {
+    if (response.status == "success") {
       dispatch(authActions.login(response.data));
       // navigate to job screen
-      navigation.navigate('FreelancerBase');
+      navigation.navigate("FreelancerBase");
     } else {
       setError(true);
       setErrorMessage(response.message);
@@ -62,7 +66,7 @@ const SignIn = () => {
   if (isCheckingToken) {
     return (
       <View style={styles.spinnerContainer}>
-        <ActivityIndicator size='large' color={theme.colors.primary} />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
@@ -72,8 +76,7 @@ const SignIn = () => {
       style={[
         styles.container,
         { backgroundColor: theme.colors.secondaryDark },
-      ]}
-    >
+      ]}>
       <View style={[styles.content]}>
         {/* Logo Container */}
         <Logo />
@@ -82,25 +85,27 @@ const SignIn = () => {
         <InputField
           onChange={(value) => setEmail(value)}
           value={email}
-          placeholder='Email'
+          placeholder="Email"
         />
         {/* Password */}
         <InputField
           onChange={(value) => setPassword(value)}
           value={password}
-          placeholder='Password'
+          placeholder="Password"
           isPassword={true}
         />
 
         {/* Login Btn */}
         <AppButton
           onPress={handleSignIn}
-          buttonTitle={'login'}
+          buttonTitle={"login"}
           loading={loading}
         />
 
+
         <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
           <Text style={styles.forget}>Forgot Password?</Text>
+
         </TouchableOpacity>
 
         {/* Sign Up Link */}
@@ -112,21 +117,15 @@ const SignIn = () => {
         </View>
       </View>
 
-      {/* Error Snackbar */}
-      <Snackbar
+      <CustomeSnackBar
         visible={error}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: 'Undo',
-          onPress: () => {
-            setVisible(false);
-          },
-          labelStyle: { color: 'black' },
-        }}
-        style={{ backgroundColor: '#B31312', borderRadius: theme.borderRadius }}
-      >
-        {errorMessage}
-      </Snackbar>
+        alertMessage={errorMessage}
+        onDismissSnackBar={onDismissSnackBar}
+        undoText="undo"
+        undoColor="black"
+        bgColor="red"
+        messageColor="#fff"
+      />
     </SafeAreaView>
   );
 };
@@ -134,26 +133,27 @@ const SignIn = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 20,
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '50%',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "50%",
   },
   forget: {
     color: theme.colors.white,
     fontSize: 14,
-    marginTop: 10,
+    fontWeight: "regular",
+
   },
   spinnerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   signUpContainer: {
     flexDirection: 'row',
