@@ -10,6 +10,7 @@ import ClientBase from '../screens/client/ClientBase';
 import Contracts from '../screens/freelancer/Contracts';
 import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
+import Alert from '../screens/common/Alert';
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -97,6 +98,15 @@ const StackNavigator = () => {
               style={{ marginRight: 10 }}
             />
           ),
+        }}
+      />
+      <Stack.Screen
+        name='Alert'
+        component={Alert}
+        options={{
+          title: 'Alert',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
         }}
       />
     </Stack.Navigator>

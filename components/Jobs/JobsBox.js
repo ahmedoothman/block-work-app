@@ -101,7 +101,7 @@ export default function JobsBox({ jobData }) {
               size={19}
               color={theme.colors.ternaryDark}
             />
-            <Text style={styles.locationText}>{jobData.country}</Text>
+            <Text style={styles.locationText}>{jobData.client.country}</Text>
           </View>
           <View style={styles.proposalsBox}>
             <Text style={styles.proposalsText}>

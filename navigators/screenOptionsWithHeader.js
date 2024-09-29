@@ -1,23 +1,28 @@
 import { TouchableOpacity, View, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-const screenOptionsWithHeader = (title, navigation) => {
+import { useNavigation } from '@react-navigation/native';
+const screenOptionsWithHeader = (title) => {
+  const navigation = useNavigation();
   return {
     headerStyle: { backgroundColor: 'black' },
     headerTintColor: 'white',
     headerTitle: title,
     headerLeft: () => (
-      <View style={{ marginLeft: 10 }}>
-        <Image
-          source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: 20,
-            backgroundColor: 'white',
-          }}
-        />
-      </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Profile')} // Navigate to Alert screen
+      >
+        <View style={{ marginLeft: 10 }}>
+          <Image
+            source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 20,
+              backgroundColor: 'white',
+            }}
+          />
+        </View>
+      </TouchableOpacity>
     ),
     headerRight: () => (
       <TouchableOpacity

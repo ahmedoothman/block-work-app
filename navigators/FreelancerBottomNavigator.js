@@ -10,6 +10,8 @@ import theme from '../theme';
 import Settings from '../screens/common/Settings';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/freelancer/Contracts';
+import Profile from '../screens/common/Profile';
+
 import screenOptionsWithHeader from './screenOptionsWithHeader';
 
 const Tab = createBottomTabNavigator();
@@ -86,7 +88,20 @@ export default function FreelancerBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <SettingsIcon name='settings' color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Alerts'),
+          ...screenOptionsWithHeader('Settings'),
+        }}
+      />
+      {/* implement profile but hide it */}
+      <Tab.Screen
+        name='Profile'
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcon name='account-circle' color={color} size={size} />
+          ),
+          tabBarButton: () => null, // Hide the Profile tab
+          ...screenOptionsWithHeader('Profile'),
         }}
       />
     </Tab.Navigator>
