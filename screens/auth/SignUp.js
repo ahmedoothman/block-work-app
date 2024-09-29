@@ -1,6 +1,12 @@
-
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,190 +14,354 @@ import InputField from '../../components/inputs/auth/InputField';
 import { RadioButton } from 'react-native-paper';
 import AppButton from '../../components/btns/AppButton';
 import theme from '../../theme';
+import { signUpService } from '../../services/userService';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { authActions } from '../../store/auth-slice';
 import { Snackbar } from 'react-native-paper';
-import useSignUp from '../../hooks/useSignUp'; // Import your custom hook
+import * as ImagePicker from 'expo-image-picker';
 
 const SignUp = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const {
-    userInfo,
-    handleInputChange,
-    handleSignUp,
-    error,
-    errorMessage,
-    setError,
-    loading,
-    pickImage, // Use the pickImage function from the custom hook
-  } = useSignUp();
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    nationalID: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+    country: '',
+    phone: '',
+    personelPhoto: null,
+    frontIdPhoto: null,
+    backIdPhoto: null,
+    role: '',
+  });
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onDismissSnackBar = () => setError(false);
 
+  //' >-------------------------->SignIn Function
+  const handleSignUp = async () => {
+    setLoading(true);
+    if (!validateInputs()) {
+      return;
+    }
+
+    const formData = new FormData();
+    for (const key in userInfo) {
+      if (userInfo[key]) {
+        if (
+          key === 'personelPhoto' ||
+          key === 'frontIdPhoto' ||
+          key === 'backIdPhoto'
+        ) {
+          if (userInfo[key]) {
+            formData.append(key, {
+              uri: userInfo[key].assets[0].uri,
+              name: userInfo[key].assets[0].fileName,
+              // type: userInfo[key].assets[0].type'image/jpeg',
+              type: userInfo[key].assets[0].mimeType, //' -> image/jpeg'
+            });
+          }
+        } else {
+          formData.append(key, userInfo[key]);
+        }
+      }
+    }
+
+    const response = await signUpService(formData._parts);
+
+    if (response.status == 'success') {
+      console.log('response success ', response.data);
+    } else {
+      console.log(
+        'response error message   ',
+        response.status,
+        ' > ',
+        response.message
+      );
+      setError(true);
+      setErrorMessage(response.message);
+    }
+
+    setLoading(false);
+    //- ---------------------> 4-cleare InputFields
+    clearInputs();
+  };
+
+  //' Validate Inputs
+  const validateInputs = () => {
+    const {
+      name,
+      nationalID,
+      email,
+      password,
+      passwordConfirm,
+      country,
+      phone,
+      role,
+    } = userInfo;
+    // Clear previous error messages
+    setError(false);
+    setErrorMessage('');
+
+    // Name validation
+    if (!name || name.length < 4) {
+      setError(true);
+      setErrorMessage('Name must be at least 4 characters long.');
+      return false;
+    }
+
+    // National ID validation
+    if (!nationalID || !/^\d{15}$/.test(nationalID)) {
+      setError(true);
+      setErrorMessage(
+        'National ID must be exactly 15 digits long and contain only numbers.'
+      );
+      return false;
+    }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+      setError(true);
+      setErrorMessage('Please enter a valid email address.');
+      return false;
+    }
+
+    // Password validation
+    if (!password || password.length < 6 || password.length > 10) {
+      setError(true);
+      setErrorMessage('Password must be between 6 and 10 characters long.');
+      return false;
+    }
+
+    // Password confirmation validation
+    if (password !== passwordConfirm) {
+      setError(true);
+      setErrorMessage('Password and Password Confirmation must match.');
+      return false;
+    }
+
+    // Country validation
+    const countryPattern = /^[A-Za-z]+$/;
+    if (!country || !countryPattern.test(country)) {
+      setError(true);
+      setErrorMessage('Country must contain only letters.');
+      return false;
+    }
+
+    // Phone validation
+    const phonePattern = /^(02)?01[0125][0-9]{8}$/;
+    if (!phone || !phonePattern.test(phone)) {
+      setError(true);
+      setErrorMessage(
+        'Phone number must be exactly 11 digits, starting with 02, 011, 012, 010, or 015.'
+      );
+      return false;
+    }
+
+    // Role validation
+    if (!role) {
+      setError(true);
+      setErrorMessage(
+        "Please choose either 'Freelancer' or 'Client' as your role."
+      );
+      return false;
+    }
+
+    return true;
+  };
+
+  //' Pick Image Function
+  const pickImage = async (field) => {
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    //' set the value {image name} to it's property in th object { ie. prepersonelPhoto: null}
+    if (!result.cancelled) {
+      setUserInfo((prev) => ({ ...prev, [field]: result }));
+      console.log('-> ', userInfo[field].assets[0].uri);
+      console.log('-> ', userInfo[field].assets[0].fileName);
+      console.log('-> ', userInfo[field].assets[0].mimeType);
+    }
+  };
+
+  function clearInputs() {
+    const clearedInputs = {};
+    const keys = Object.keys(userInfo);
+    for (let i = 0; i < keys.length; i++) {
+      clearedInputs[keys[i]] = '';
+    }
+    setUserInfo(clearedInputs);
+  }
 
   return (
     <SafeAreaView
       style={[
         styles.container,
         { backgroundColor: theme.colors.secondaryDark },
-      ]}>
+      ]}
+    >
       <KeyboardAwareScrollView
-        style={{ width: "100%" }}
-        showsVerticalScrollIndicator={false}>
+        style={{ width: '100%' }}
+        showsVerticalScrollIndicator={false}
+      >
         <Logo />
 
-        {/* Name */}
+        {/* //' name */}
         <InputField
-          onChange={(value) => handleInputChange('name', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, name: value }))
+          }
           value={userInfo.name}
           placeholder='Name'
-
+          isPassword={false}
         />
-
-        {/* National ID */}
+        {/* //' national ID */}
         <InputField
-          onChange={(value) => handleInputChange('nationalID', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, nationalID: value }))
+          }
           value={userInfo.nationalID}
-
           placeholder='National ID'
-
+          isPassword={false}
         />
-
-        {/* Email */}
+        {/* //' Email */}
         <InputField
-          onChange={(value) => handleInputChange('email', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, email: value }))
+          }
           value={userInfo.email}
-
           placeholder='Email'
-
+          isPassword={false}
         />
-
-        {/* Password */}
+        {/* //' password */}
         <InputField
-          onChange={(value) => handleInputChange('password', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, password: value }))
+          }
           value={userInfo.password}
-          placeholder="Password"
+          placeholder='Password'
           isPassword={true}
         />
 
-        {/* Password Confirmation */}
+        {/* //' password Confirm */}
         <InputField
-          onChange={(value) => handleInputChange('passwordConfirm', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, passwordConfirm: value }))
+          }
           value={userInfo.passwordConfirm}
-          placeholder="Password Confirm"
+          placeholder='Password Confirm'
           isPassword={true}
         />
-
-        {/* Country */}
+        {/* //' country */}
         <InputField
-          onChange={(value) => handleInputChange('country', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, country: value }))
+          }
           value={userInfo.country}
-
           placeholder='Country'
-
+          isPassword={false}
         />
-
-        {/* Phone */}
+        {/* //' phone */}
         <InputField
-          onChange={(value) => handleInputChange('phone', value)}
+          onChange={(value) =>
+            setUserInfo((prev) => ({ ...prev, phone: value }))
+          }
           value={userInfo.phone}
-
           placeholder='Phone'
-
+          isPassword={false}
         />
+        {/* //' personelPhoto */}
 
-        {/* Personal Photo */}
         <InputField
-          onChange={() => pickImage("personelPhoto")}
+          onChange={() => pickImage('personelPhoto')}
           value={userInfo.personelPhoto?.uri}
-          placeholder="Upload Photo"
+          placeholder='Upload Photo'
           isUpload={true}
         />
 
-        {/* Front ID Photo */}
+        {/* //' frontIdPhoto */}
         <InputField
-          onChange={() => pickImage("frontIdPhoto")}
+          onChange={() => pickImage('frontIdPhoto')}
           value={userInfo.frontIdPhoto?.uri}
-          placeholder="Front ID Photo"
+          placeholder='Front ID Photo'
           isUpload={true}
         />
 
-        {/* Back ID Photo */}
+        {/* //' backIdPhoto */}
         <InputField
-          onChange={() => pickImage("backIdPhoto")}
+          onChange={() => pickImage('backIdPhoto')}
           value={userInfo.backIdPhoto?.uri}
-          placeholder="Back ID Photo"
+          placeholder='Back ID Photo'
           isUpload={true}
         />
 
-        {/* Role Radio Buttons */}
+        {/* //' Role Radio Buttons */}
         <View style={styles.radioGroup}>
           <RadioButton
-
             value='Freelancer'
-            onPress={() => handleInputChange('role', 'freelancer')}
+            onPress={(value) => {
+              console.log('userInfo.role', userInfo.role);
+              setUserInfo((prev) => {
+                return { ...prev, role: 'freelancer' };
+              });
+            }}
             status={userInfo.role === 'freelancer' ? 'checked' : 'unchecked'}
-
           />
           <Text style={[styles.radioLabel, { color: theme.colors.white }]}>
             Freelancer
           </Text>
           <RadioButton
-
             value='Client'
-            onPress={() => handleInputChange('role', 'client')}
+            onPress={(value) =>
+              setUserInfo((prev) => ({ ...prev, role: 'client' }))
+            }
             status={userInfo.role === 'client' ? 'checked' : 'unchecked'}
-
           />
           <Text style={[styles.radioLabel, { color: theme.colors.white }]}>
             Client
           </Text>
         </View>
 
-        <View style={styles.centerBtn}>
+        <View style={[styles.centerBtn]}>
           <AppButton
-
-            onPress={handleSignUp}
-            buttonTitle='Create Account'
-
+            onPress={() => handleSignUp()}
+            buttonTitle={'Create Account'}
             loading={loading}
           />
         </View>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            textAlign: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text style={{ color: theme.colors.white }}>
-            Already have an account?{' '}
-          </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('SignIn')}
-            style={{
-              color: theme.colors.primaryBright,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Text style={{ color: theme.colors.primaryBright }}>Sign In</Text>
+        <View style={styles.signInTextContainer}>
+          <Text style={styles.signInPrompt}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.signInText}>Sign In</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
-
-
-      <CustomeSnackBar
+      <Snackbar
         visible={error}
-        alertMessage={errorMessage}
-        onDismissSnackBar={onDismissSnackBar}
-        undoText="Undo"
-        undoColor="black"
-        bgColor="red"
-        messageColor={theme.colors.white}
-      />
-
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: 'Undo',
+          onPress: () => {
+            setError(false);
+          },
+          labelStyle: { color: 'black' },
+        }}
+        style={{ backgroundColor: '#B31312', borderRadius: theme.borderRadius }}
+      >
+        {/* <Text style={{ fontSize: 13, color: theme.colors.white }}>{errorMessage}</Text> */}
+        {errorMessage}
+      </Snackbar>
     </SafeAreaView>
   );
 };
@@ -199,14 +369,14 @@ const SignUp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
   },
   radioGroup: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 20,
   },
   radioLabel: {
@@ -214,8 +384,23 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   centerBtn: {
-    margin: "auto",
+    margin: 'auto',
+  },
+  signInTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  signInPrompt: {
+    fontSize: 16,
+    color: theme.colors.white,
+  },
+  signInText: {
+    fontSize: 16,
+    color: theme.colors.primaryBright,
+    fontWeight: 'bold',
+    marginLeft: 5,
+    textDecorationLine: 'underline',
   },
 });
-
 export default SignUp;
