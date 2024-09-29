@@ -12,7 +12,7 @@ const JobsDetails = ({ route }) => {
     jobDetails;
 
   const navigation = useNavigation();
-
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.jobDetailsBox}>
@@ -83,12 +83,17 @@ const JobsDetails = ({ route }) => {
             <Text style={styles.proposalsCount}>{proposalCount} to 50</Text>
           </View>
         </View>
-        {/* Apply Now Button */}
-        <View style={styles.applyBtnView}>
+        {/*Apply Now Button in Job Details Page */}
+        <View style={styles.ApplyBtnView}>
           <AppButton
             buttonTitle={'Apply Now'}
-            onPress={() => navigation.navigate('ProposalsForm')}
+            onPress={() => navigation.navigate('ProposalsForm',
+              {
+                jobData:jobDetails,
+                postingTimeOfJob: postingTimeOfJob,
+              })}
           />
+         
         </View>
       </View>
     </ScrollView>
@@ -99,6 +104,7 @@ export default JobsDetails;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 16,
     backgroundColor: 'black',
@@ -107,12 +113,14 @@ const styles = StyleSheet.create({
   jobDetailsBox: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,
+    flex: 1,
     padding: 16,
   },
   title: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
