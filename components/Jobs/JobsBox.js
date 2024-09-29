@@ -11,20 +11,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 
-const data = {
-  skillsRequired: ['HTML', 'CSS', 'JavaScript'],
-  isActive: true,
-  _id: '66efeab99658f051ec26c270',
-  client: null,
-  title: 'Frontend Developer Needed',
-  description:
-    'This is the project that we were speaking about that.I’m going to go ahead and just...',
-  budget: 1500,
-  category: 'Web Development',
-  createdAt: '2024-09-22T10:00:25.699Z',
-  __v: 0,
-  proposalCount: 15,
-};
+
 const formatTimeAgo = (dateString) => {
   const now = new Date();
   const createdAt = new Date(dateString);
@@ -41,10 +28,13 @@ const formatTimeAgo = (dateString) => {
     return daysDiff === 1 ? '1 day ago' : `${daysDiff} days ago`;
   }
 };
-const postingTimeOfJob = formatTimeAgo(data.createdAt);
+
 // console.log("eeeeeeeeeee",postingTimeOfJob);
 
-export default function JobsBox() {
+export default function JobsBox({jobData}) {
+
+  const postingTimeOfJob = formatTimeAgo(jobData.createdAt);
+  
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -52,7 +42,7 @@ export default function JobsBox() {
       activeOpacity={0.4}
       onPress={() =>
         navigation.navigate('JobsDetails', {
-          jobDetails: data,
+          jobDetails: jobData,
           postingTimeOfJob: postingTimeOfJob,
         })
       }
@@ -60,16 +50,16 @@ export default function JobsBox() {
       <View style={{ marginTop: 25 }}>
         <View style={styles.jobBox}>
           <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
-          <Text style={styles.titleDescribtionText}>{data.title}</Text>
+          <Text style={styles.titleDescribtionText}>{jobData.title}</Text>
           <Text style={styles.timePriceText}>
-            Fixed-price -Entry level-Est.budget: ${data.budget}
+            Fixed-price -Entry level-Est.budget: ${jobData.budget}
           </Text>
           <Text style={styles.titleDescribtionText}>
-            {data.description} <Text style={styles.moreText}>{'\n'}more</Text>
+            {jobData.description} <Text style={styles.moreText}>{'\n'}more</Text>
           </Text>
           {/* Skills Box*/}
           <View style={styles.skillsBox}>
-            {data.skillsRequired.map((skill, i) => (
+            {jobData.skillsRequired.map((skill, i) => (
               <Text key={i} style={styles.skillsItem}>
                 {skill}
               </Text>
@@ -126,7 +116,7 @@ export default function JobsBox() {
             {/*proposals Box*/}
             <View style={styles.StarsBox}>
               <Text style={{ color: theme.colors.ternaryDark }}>
-                Proposals: {data.proposalCount}
+                Proposals: {jobData.proposalCount}
               </Text>
             </View>
           </View>
@@ -139,8 +129,8 @@ export default function JobsBox() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    paddingHorizontal: 20,
+    // backgroundColor: theme.colors.secondaryDark,
+    // paddingHorizontal: 20,
     backgroundColor: 'black',
   },
   jobBox: {
@@ -179,7 +169,7 @@ const styles = StyleSheet.create({
   },
   arrowRigthIcon: {
     position: 'absolute',
-    right: 61,
+    right: 115,
     top: 9,
   },
   paymentStarsBox: {

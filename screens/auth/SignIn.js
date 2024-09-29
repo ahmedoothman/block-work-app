@@ -88,7 +88,7 @@ const SignIn = () => {
           },
           labelStyle: { color: 'black' },
         }}
-        style={{ backgroundColor: 'red', borderRadius: theme.borderRadius }}
+        style={{ backgroundColor: '#B31312', borderRadius: theme.borderRadius }}
       >
         {errorMessage}
       </Snackbar>

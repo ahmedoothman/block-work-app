@@ -14,9 +14,9 @@ const JobsDetails = ({ route }) => {
     jobDetails;
 
   const navigation = useNavigation();
-
+  
   return (
-    <View style={styles.container}>
+    <View  style={styles.container} >
       <View style={styles.jobDetailsBox}>
         {/*firstSection*/}
         <View style={styles.borderSection}>
@@ -118,12 +118,17 @@ const JobsDetails = ({ route }) => {
             </Text>
           </View>
         </View>
-        {/*Apply Now Button*/}
+        {/*Apply Now Button in Job Details Page */}
         <View style={styles.ApplyBtnView}>
           <AppButton
             buttonTitle={'Apply Now'}
-            onPress={() => navigation.navigate('ProposalsForm')}
+            onPress={() => navigation.navigate('ProposalsForm',
+              {
+                jobData:jobDetails,
+                postingTimeOfJob: postingTimeOfJob,
+              })}
           />
+         
         </View>
       </View>
     </View>
@@ -135,9 +140,10 @@ export default JobsDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    paddingHorizontal: 20,
+    // backgroundColor: theme.colors.secondaryDark,
+    // paddingHorizontal: 20,
     backgroundColor: 'black',
+    
   },
   jobDetailsBox: {
     width: 320,
@@ -145,6 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,
     marginTop: 10,
+    marginBottom:20,
     marginHorizontal: 20,
     paddingHorizontal: 18,
     paddingVertical: 15,
