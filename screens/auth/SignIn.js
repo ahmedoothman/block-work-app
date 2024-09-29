@@ -4,6 +4,7 @@ import theme from '../../theme';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InputField from '../../components/inputs/auth/InputField';
+import { ActivityIndicator } from 'react-native-paper';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 
@@ -22,12 +23,14 @@ const SignIn = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isCheckingToken, setIsCheckingToken] = useState(true);
 
   useEffect(() => {
     const checkToken = async () => {
       const response = await getMeService();
       if (response.status === 'success') {
-        dispatchRedux(authActions.login(response.data));
+        dispatch(authActions.login(response.data));
+
         if (response.data.role === 'client') {
           navigation.navigate('ClientBase');
         } else {
@@ -57,6 +60,14 @@ const SignIn = () => {
   };
 
   const onDismissSnackBar = () => setError(false);
+
+  if (isCheckingToken) {
+    return (
+      <View style={styles.spinnerContainer}>
+        <ActivityIndicator size='large' color={theme.colors.primary} />
+      </View>
+    );
+  }
   return (
     <SafeAreaView
       style={[
@@ -131,6 +142,11 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
     fontSize: 14,
     fontWeight: 'regular',
+  },
+  spinnerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 export default SignIn;

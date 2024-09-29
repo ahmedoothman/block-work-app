@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    // ' change the 'initialRouteName' to runder the screen you want
     <Stack.Navigator initialRouteName='SignIn'>
       <Stack.Screen
         name='SignIn'
@@ -24,7 +23,6 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
-
       <Stack.Screen
         name='ForgotPassword'
         component={ForgotPassword}

@@ -12,6 +12,7 @@ import theme from '../theme';
 import Alert from '../screens/common/Alert';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/freelancer/Contracts';
+import screenOptionsWithHeader from './screenOptionsWithHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,31 +36,7 @@ export default function FreelancerBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <SearchIcon name='search' color={color} size={size} />
           ),
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <Image
-                source={{
-                  uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  backgroundColor: 'white',
-                }}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name='dots-vertical'
-              size={24}
-              color='white'
-              style={{ marginRight: 15 }}
-            />
-          ),
+          ...screenOptionsWithHeader('Jobs'),
         }}
       />
 
@@ -75,28 +52,34 @@ export default function FreelancerBottomNavigator() {
               size={size}
             />
           ),
+          ...screenOptionsWithHeader('Proposals'),
         }}
       />
+
       <Tab.Screen
-        name='Contract'
+        name='Contracts'
         component={Contracts}
         options={{
           tabBarLabel: 'Contracts',
           tabBarIcon: ({ color, size }) => (
             <MaterialIcon name='assignment' color={color} size={size} />
           ),
+          ...screenOptionsWithHeader('Contracts'),
         }}
       />
+
       <Tab.Screen
         name='Messages'
         component={Messages}
         options={{
-          tabBarLabel: 'Proposals',
+          tabBarLabel: 'Messages',
           tabBarIcon: ({ color, size }) => (
             <MaterialIcon name='chat' color={color} size={size} />
           ),
+          ...screenOptionsWithHeader('Messages'),
         }}
       />
+
       <Tab.Screen
         name='Alert'
         component={Alert}
@@ -105,6 +88,7 @@ export default function FreelancerBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <AlertIcon name='bell' color={color} size={size} />
           ),
+          ...screenOptionsWithHeader('Alerts'),
         }}
       />
     </Tab.Navigator>
