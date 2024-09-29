@@ -1,38 +1,39 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Logo from '../../components/Public/logo';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import InputField from '../../components/inputs/auth/InputField';
-import { RadioButton } from 'react-native-paper';
-import AppButton from '../../components/btns/AppButton';
-import theme from '../../theme';
-import { signUpService } from '../../services/userService';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { authActions } from '../../store/auth-slice';
-import { Snackbar } from 'react-native-paper';
-import * as ImagePicker from 'expo-image-picker';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import Logo from "../../components/Public/logo";
+import { SafeAreaView } from "react-native-safe-area-context";
+import InputField from "../../components/inputs/auth/InputField";
+import { RadioButton } from "react-native-paper";
+import AppButton from "../../components/btns/AppButton";
+import theme from "../../theme";
+import { signUpService } from "../../services/userService";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { authActions } from "../../store/auth-slice";
+import { Snackbar } from "react-native-paper";
+import * as ImagePicker from "expo-image-picker";
+import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
 
 const SignUp = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const [userInfo, setUserInfo] = useState({
-    name: '',
-    nationalID: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    country: '',
-    phone: '',
+    name: "",
+    nationalID: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    country: "",
+    phone: "",
     personelPhoto: null,
     frontIdPhoto: null,
     backIdPhoto: null,
-    role: '',
+    role: "",
   });
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onDismissSnackBar = () => setError(false);
@@ -48,9 +49,9 @@ const SignUp = () => {
     for (const key in userInfo) {
       if (userInfo[key]) {
         if (
-          key === 'personelPhoto' ||
-          key === 'frontIdPhoto' ||
-          key === 'backIdPhoto'
+          key === "personelPhoto" ||
+          key === "frontIdPhoto" ||
+          key === "backIdPhoto"
         ) {
           if (userInfo[key]) {
             formData.append(key, {
@@ -68,13 +69,13 @@ const SignUp = () => {
 
     const response = await signUpService(formData._parts);
 
-    if (response.status == 'success') {
-      console.log('response success ', response.data);
+    if (response.status == "success") {
+      console.log("response success ", response.data);
     } else {
       console.log(
-        'response error message   ',
+        "response error message   ",
         response.status,
-        ' > ',
+        " > ",
         response.message
       );
       setError(true);
@@ -100,12 +101,13 @@ const SignUp = () => {
     } = userInfo;
     // Clear previous error messages
     setError(false);
-    setErrorMessage('');
+    setErrorMessage("");
 
     // Name validation
     if (!name || name.length < 4) {
       setError(true);
-      setErrorMessage('Name must be at least 4 characters long.');
+      setErrorMessage("Name must be at least 4 characters long.");
+      setLoading(false);
       return false;
     }
 
@@ -113,8 +115,9 @@ const SignUp = () => {
     if (!nationalID || !/^\d{15}$/.test(nationalID)) {
       setError(true);
       setErrorMessage(
-        'National ID must be exactly 15 digits long and contain only numbers.'
+        "National ID must be exactly 15 digits long and contain only numbers."
       );
+      setLoading(false);
       return false;
     }
 
@@ -122,21 +125,24 @@ const SignUp = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailPattern.test(email)) {
       setError(true);
-      setErrorMessage('Please enter a valid email address.');
+      setErrorMessage("Please enter a valid email address.");
+      setLoading(false);
       return false;
     }
 
     // Password validation
     if (!password || password.length < 6 || password.length > 10) {
       setError(true);
-      setErrorMessage('Password must be between 6 and 10 characters long.');
+      setErrorMessage("Password must be between 6 and 10 characters long.");
+      setLoading(false);
       return false;
     }
 
     // Password confirmation validation
     if (password !== passwordConfirm) {
       setError(true);
-      setErrorMessage('Password and Password Confirmation must match.');
+      setErrorMessage("Password and Password Confirmation must match.");
+      setLoading(false);
       return false;
     }
 
@@ -144,7 +150,8 @@ const SignUp = () => {
     const countryPattern = /^[A-Za-z]+$/;
     if (!country || !countryPattern.test(country)) {
       setError(true);
-      setErrorMessage('Country must contain only letters.');
+      setErrorMessage("Country must contain only letters.");
+      setLoading(false);
       return false;
     }
 
@@ -153,8 +160,9 @@ const SignUp = () => {
     if (!phone || !phonePattern.test(phone)) {
       setError(true);
       setErrorMessage(
-        'Phone number must be exactly 11 digits, starting with 02, 011, 012, 010, or 015.'
+        "Phone number must be exactly 11 digits, starting with 02, 011, 012, 010, or 015."
       );
+      setLoading(false);
       return false;
     }
 
@@ -164,6 +172,7 @@ const SignUp = () => {
       setErrorMessage(
         "Please choose either 'Freelancer' or 'Client' as your role."
       );
+      setLoading(false);
       return false;
     }
 
@@ -182,9 +191,9 @@ const SignUp = () => {
     //' set the value {image name} to it's property in th object { ie. prepersonelPhoto: null}
     if (!result.cancelled) {
       setUserInfo((prev) => ({ ...prev, [field]: result }));
-      console.log('-> ', userInfo[field].assets[0].uri);
-      console.log('-> ', userInfo[field].assets[0].fileName);
-      console.log('-> ', userInfo[field].assets[0].mimeType);
+      console.log("-> ", userInfo[field].assets[0].uri);
+      console.log("-> ", userInfo[field].assets[0].fileName);
+      console.log("-> ", userInfo[field].assets[0].mimeType);
     }
   };
 
@@ -192,7 +201,7 @@ const SignUp = () => {
     const clearedInputs = {};
     const keys = Object.keys(userInfo);
     for (let i = 0; i < keys.length; i++) {
-      clearedInputs[keys[i]] = '';
+      clearedInputs[keys[i]] = "";
     }
     setUserInfo(clearedInputs);
   }
@@ -202,12 +211,10 @@ const SignUp = () => {
       style={[
         styles.container,
         { backgroundColor: theme.colors.secondaryDark },
-      ]}
-    >
+      ]}>
       <KeyboardAwareScrollView
-        style={{ width: '100%' }}
-        showsVerticalScrollIndicator={false}
-      >
+        style={{ width: "100%" }}
+        showsVerticalScrollIndicator={false}>
         <Logo />
 
         {/* //' name */}
@@ -216,7 +223,7 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, name: value }))
           }
           value={userInfo.name}
-          placeholder='Name'
+          placeholder="Name"
           isPassword={false}
         />
         {/* //' national ID */}
@@ -225,7 +232,7 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, nationalID: value }))
           }
           value={userInfo.nationalID}
-          placeholder='National ID'
+          placeholder="National ID"
           isPassword={false}
         />
         {/* //' Email */}
@@ -234,7 +241,7 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, email: value }))
           }
           value={userInfo.email}
-          placeholder='Email'
+          placeholder="Email"
           isPassword={false}
         />
         {/* //' password */}
@@ -243,7 +250,7 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, password: value }))
           }
           value={userInfo.password}
-          placeholder='Password'
+          placeholder="Password"
           isPassword={true}
         />
 
@@ -253,7 +260,7 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, passwordConfirm: value }))
           }
           value={userInfo.passwordConfirm}
-          placeholder='Password Confirm'
+          placeholder="Password Confirm"
           isPassword={true}
         />
         {/* //' country */}
@@ -262,7 +269,7 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, country: value }))
           }
           value={userInfo.country}
-          placeholder='Country'
+          placeholder="Country"
           isPassword={false}
         />
         {/* //' phone */}
@@ -271,55 +278,55 @@ const SignUp = () => {
             setUserInfo((prev) => ({ ...prev, phone: value }))
           }
           value={userInfo.phone}
-          placeholder='Phone'
+          placeholder="Phone"
           isPassword={false}
         />
         {/* //' personelPhoto */}
 
         <InputField
-          onChange={() => pickImage('personelPhoto')}
+          onChange={() => pickImage("personelPhoto")}
           value={userInfo.personelPhoto?.uri}
-          placeholder='Upload Photo'
+          placeholder="Upload Photo"
           isUpload={true}
         />
 
         {/* //' frontIdPhoto */}
         <InputField
-          onChange={() => pickImage('frontIdPhoto')}
+          onChange={() => pickImage("frontIdPhoto")}
           value={userInfo.frontIdPhoto?.uri}
-          placeholder='Front ID Photo'
+          placeholder="Front ID Photo"
           isUpload={true}
         />
 
         {/* //' backIdPhoto */}
         <InputField
-          onChange={() => pickImage('backIdPhoto')}
+          onChange={() => pickImage("backIdPhoto")}
           value={userInfo.backIdPhoto?.uri}
-          placeholder='Back ID Photo'
+          placeholder="Back ID Photo"
           isUpload={true}
         />
 
         {/* //' Role Radio Buttons */}
         <View style={styles.radioGroup}>
           <RadioButton
-            value='Freelancer'
+            value="Freelancer"
             onPress={(value) => {
-              console.log('userInfo.role', userInfo.role);
+              console.log("userInfo.role", userInfo.role);
               setUserInfo((prev) => {
-                return { ...prev, role: 'freelancer' };
+                return { ...prev, role: "freelancer" };
               });
             }}
-            status={userInfo.role === 'freelancer' ? 'checked' : 'unchecked'}
+            status={userInfo.role === "freelancer" ? "checked" : "unchecked"}
           />
           <Text style={[styles.radioLabel, { color: theme.colors.white }]}>
             Freelancer
           </Text>
           <RadioButton
-            value='Client'
+            value="Client"
             onPress={(value) =>
-              setUserInfo((prev) => ({ ...prev, role: 'client' }))
+              setUserInfo((prev) => ({ ...prev, role: "client" }))
             }
-            status={userInfo.role === 'client' ? 'checked' : 'unchecked'}
+            status={userInfo.role === "client" ? "checked" : "unchecked"}
           />
           <Text style={[styles.radioLabel, { color: theme.colors.white }]}>
             Client
@@ -329,26 +336,21 @@ const SignUp = () => {
         <View style={[styles.centerBtn]}>
           <AppButton
             onPress={() => handleSignUp()}
-            buttonTitle={'Create Account'}
+            buttonTitle={"Create Account"}
             loading={loading}
           />
         </View>
       </KeyboardAwareScrollView>
-      <Snackbar
+
+      <CustomeSnackBar
         visible={error}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: 'Undo',
-          onPress: () => {
-            setError(false);
-          },
-          labelStyle: { color: 'black' },
-        }}
-        style={{ backgroundColor: 'red', borderRadius: theme.borderRadius }}
-      >
-        {/* <Text style={{ fontSize: 13, color: theme.colors.white }}>{errorMessage}</Text> */}
-        {errorMessage}
-      </Snackbar>
+        alertMessage={errorMessage}
+        onDismissSnackBar={onDismissSnackBar}
+        undoText="Undo"
+        undoColor="black"
+        bgColor="red"
+        messageColor={theme.colors.white}
+      />
     </SafeAreaView>
   );
 };
@@ -356,14 +358,14 @@ const SignUp = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
   radioGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
   },
   radioLabel: {
@@ -371,7 +373,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   centerBtn: {
-    margin: 'auto',
+    margin: "auto",
   },
 });
 export default SignUp;
