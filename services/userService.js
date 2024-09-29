@@ -5,10 +5,13 @@ import axios from 'axios';
 // sign up
 export const signUpService = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/api/users/signup`, data);
+    const response = await axios.post(`${API_URL}/api/users/signup`, data, {
+      'Content-Type': 'multipart/form-data',
+    });
     return { status: 'success', data: response.data.message };
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {
+      console.log('error', error);
       return {
         status: 'error',
         statusCode: error.code,

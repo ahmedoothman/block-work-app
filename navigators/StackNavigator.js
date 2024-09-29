@@ -11,6 +11,8 @@ import Contracts from '../screens/freelancer/Contracts';
 import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
 import Alert from '../screens/common/Alert';
+import ChatScreen from '../screens/common/ChatScreen';
+
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -33,12 +35,6 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name='Contracts'
-        component={Contracts}
-        options={{ title: 'Contracts' }}
-      />
-
       <Stack.Screen
         name='ResetPassword'
         component={ResetPasswordScreen}
@@ -66,6 +62,25 @@ const StackNavigator = () => {
         component={ClientBase}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name='ChatScreen'
+        component={ChatScreen}
+        options={{
+          title: 'Chats',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
       <Stack.Screen
         name='JobsDetails'
         component={JobsDetails}
