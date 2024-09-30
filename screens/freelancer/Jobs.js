@@ -1,18 +1,18 @@
-import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import theme from '../../theme';
-import JobsSearchBar from '../../components/Jobs/JobsSearchBar';
-import JobsBox from '../../components/Jobs/JobsBox';
-import { getAllJobsService } from '../../services/jobService';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
-import { useFocusEffect } from '@react-navigation/native';
-const { height } = Dimensions.get('window');
+import { View, Text, ScrollView, StyleSheet, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import theme from "../../theme";
+import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
+import JobsBox from "../../components/Jobs/JobsBox";
+import { getAllJobsService } from "../../services/jobService";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
+const { height } = Dimensions.get("window");
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
 
   const onDismissSnackBar = () => setVisible(false);
@@ -21,7 +21,7 @@ const Jobs = () => {
     const fetchJobs = async () => {
       setIsLoading(true);
       const response = await getAllJobsService();
-      if (response.status === 'success') {
+      if (response.status === "success") {
         setJobs(response.data);
       } else {
         setError(true);
@@ -37,6 +37,7 @@ const Jobs = () => {
   return (
     <View style={styles.container}>
       <JobsSearchBar />
+
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {isLoading ? (
           <View style={styles.loadingIndicator}>
@@ -54,8 +55,7 @@ const Jobs = () => {
       <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
-        style={styles.snackbarStyle}
-      >
+        style={styles.snackbarStyle}>
         {errorMessage}
       </Snackbar>
     </View>
@@ -67,7 +67,7 @@ export default Jobs;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: "black",
     padding: 10,
   },
   scrollContainer: {
@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
   },
   loadingIndicator: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     height: height * 0.6, // More dynamic height
   },
   snackbarStyle: {
-    backgroundColor: '#B31312',
+    backgroundColor: "#B31312",
     borderRadius: theme.borderRadius,
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
     left: 10,
     right: 10,
