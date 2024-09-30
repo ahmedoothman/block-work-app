@@ -1,39 +1,61 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import ProposalBox from '../../components/proposals/ProposalBox';
 import theme from '../../theme';
-
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import { getFreelancerProposalsService } from '../../services/proposalService';
+const { height } = Dimensions.get('window');
 const Proposals = () => {
-  var obj={
-    status: "submitted",
-    _id: "66f889e3f3d43d1de8fd497e",
-    jobPost: {
-        _id: "66efebf039b30b4a54569601",
-        title: "Frontend Developer Needed"
-    },
-    freelancer: "66f8837ef3d43d1de8fd4976",
-    coverLetter: "I am an experienced developer",
-    proposedAmount: 1200,
-    duration: 2,
-    createdAt: "2024-09-28T22:57:39.595Z",
-    __v:0,
-  }
+  const [proposals,setProposals]=useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [count, setcount] = useState(0);
+
+
+  const onDismissSnackBar = () => setVisible(false);
+
+  useEffect(()=>{
+    const fetchProposals=async()=>{
+      const response= await getFreelancerProposalsService();
+      if(response.status==='success'){
+        setProposals(response.data)
+        setcount(proposals.length);
+      }else{
+        setError(true);
+        setErrorMessage(response.message);
+        setVisible(true);
+        setProposals([])
+      }
+      setIsLoading(false);
+    };
+    fetchProposals();
+  });
+
+
   return (
     <View style={styles.container}>
+      <View style={styles.counter}><Text style={styles.text} >Proposals({count})</Text></View>
       <ScrollView style={styles.scrollContainer}>
-      <View style={styles.counter}><Text style={styles.text} >Proposals(13)</Text></View>
-      
-      <ProposalBox  PropsalData={obj}/>
-      <ProposalBox PropsalData={obj}/>
-      <ProposalBox PropsalData={obj}/>
-      <ProposalBox PropsalData={obj}/> 
-      <ProposalBox PropsalData={obj}/>
-      <ProposalBox PropsalData={obj}/>
-      <ProposalBox PropsalData={obj}/>
-      <ProposalBox PropsalData={obj}/>
-
-
+        {isLoading?(
+           <View style={styles.loadingIndicator}>
+           <ActivityIndicator
+             animating={true}
+             color={theme.colors.primaryBright}
+             size={50}
+           />
+         </View>
+        ):(proposals.map((proposal)=> <ProposalBox key={proposal._id}  PropsalData={proposal}/>)
+        )}
       </ScrollView>
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        style={styles.snackbarStyle}
+      >
+        {errorMessage}
+      </Snackbar>
      
     </View>
   );
@@ -60,5 +82,19 @@ const styles=StyleSheet.create({
   text:{
     color:theme.colors.ternaryDark,
     textAlign:"center"
-  }
+  },
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height * 0.6, // More dynamic height
+  },
+  snackbarStyle: {
+    backgroundColor: '#B31312',
+    borderRadius: theme.borderRadius,
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
 });
