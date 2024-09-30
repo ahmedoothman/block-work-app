@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  Touchable,
+  TouchableOpacity,
+} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Logo from '../../components/Public/logo';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -333,6 +340,12 @@ const SignUp = () => {
             loading={loading}
           />
         </View>
+        <View style={styles.signInTextContainer}>
+          <Text style={styles.signInPrompt}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.signInText}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAwareScrollView>
       <Snackbar
         visible={error}
@@ -372,6 +385,22 @@ const styles = StyleSheet.create({
   },
   centerBtn: {
     margin: 'auto',
+  },
+  signInTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
+  },
+  signInPrompt: {
+    fontSize: 16,
+    color: theme.colors.white,
+  },
+  signInText: {
+    fontSize: 16,
+    color: theme.colors.primaryBright,
+    fontWeight: 'bold',
+    marginLeft: 5,
+    textDecorationLine: 'underline',
   },
 });
 export default SignUp;

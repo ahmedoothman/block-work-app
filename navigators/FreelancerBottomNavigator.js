@@ -1,94 +1,106 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AlertIcon from 'react-native-vector-icons/Fontisto';
-import SearchIcon from 'react-native-vector-icons/Feather';
-import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, Image } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import SettingsIcon from "react-native-vector-icons/Ionicons";
+import SearchIcon from "react-native-vector-icons/Feather";
+import EditIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
-import Jobs from '../screens/freelancer/Jobs';
-import Proposals from '../screens/freelancer/Proposals';
-import theme from '../theme';
-import Alert from '../screens/common/Alert';
-import Messages from '../screens/common/Messages';
-import Contracts from '../screens/freelancer/Contracts';
-import screenOptionsWithHeader from './screenOptionsWithHeader';
+import Jobs from "../screens/freelancer/Jobs";
+import Proposals from "../screens/freelancer/Proposals";
+import theme from "../theme";
+import Settings from "../screens/common/Settings";
+import Messages from "../screens/common/Messages";
+import Contracts from "../screens/freelancer/Contracts";
+import Profile from "../screens/common/Profile";
+
+import screenOptionsWithHeader from "./screenOptionsWithHeader";
 
 const Tab = createBottomTabNavigator();
 
 export default function FreelancerBottomNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName='Jobs'
+      initialRouteName="Jobs"
       screenOptions={{
         tabBarStyle: {
           backgroundColor: theme.colors.secondaryDark,
         },
         tabBarActiveTintColor: theme.colors.primaryBright,
         tabBarInactiveTintColor: theme.colors.ternaryLight,
-      }}
-    >
+      }}>
       <Tab.Screen
-        name='Jobs'
+        name="Jobs"
         component={Jobs}
         options={{
-          tabBarLabel: 'Jobs',
+          tabBarLabel: "Jobs",
           tabBarIcon: ({ color, size }) => (
-            <SearchIcon name='search' color={color} size={size} />
+            <SearchIcon name="search" color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Jobs'),
+          ...screenOptionsWithHeader("Jobs"),
         }}
       />
 
       <Tab.Screen
-        name='Proposals'
+        name="Proposals"
         component={Proposals}
         options={{
-          tabBarLabel: 'Proposals',
+          tabBarLabel: "Proposals",
           tabBarIcon: ({ color, size }) => (
             <EditIcon
-              name='file-document-edit-outline'
+              name="file-document-edit-outline"
               color={color}
               size={size}
             />
           ),
-          ...screenOptionsWithHeader('Proposals'),
+          ...screenOptionsWithHeader("Proposals"),
         }}
       />
 
       <Tab.Screen
-        name='Contracts'
+        name="Contracts"
         component={Contracts}
         options={{
-          tabBarLabel: 'Contracts',
+          tabBarLabel: "Contracts",
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcon name='assignment' color={color} size={size} />
+            <MaterialIcon name="assignment" color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Contracts'),
+          ...screenOptionsWithHeader("Contracts"),
         }}
       />
 
       <Tab.Screen
-        name='Messages'
+        name="Messages"
         component={Messages}
         options={{
-          tabBarLabel: 'Messages',
+          tabBarLabel: "Messages",
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcon name='chat' color={color} size={size} />
+            <MaterialIcon name="chat" color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Messages'),
+          ...screenOptionsWithHeader("Messages"),
         }}
       />
 
       <Tab.Screen
-        name='Alert'
-        component={Alert}
+        name="Settings"
+        component={Settings}
         options={{
-          tabBarLabel: 'Alerts',
+          tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <AlertIcon name='bell' color={color} size={size} />
+            <SettingsIcon name="settings" color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Alerts'),
+          ...screenOptionsWithHeader("Settings"),
+        }}
+      />
+      {/* implement profile but hide it */}
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcon name="account-circle" color={color} size={size} />
+          ),
+          tabBarButton: () => null, // Hide the Profile tab
+          ...screenOptionsWithHeader("Profile"),
         }}
       />
     </Tab.Navigator>

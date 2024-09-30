@@ -2,12 +2,13 @@ import { API_URL } from '../constants/global/api';
 import { getToken } from '../storage/tokenStorage';
 import axios from 'axios';
 
-const PATH = 'api/chats';
+const PATH = 'api/reviews';
 
-export const getAllChats = async () => {
+//noran
+export const getReviewsService = async (userId) => {
   let token = await getToken();
   try {
-    const response = await axios.get(`${API_URL}/${PATH}`, {
+    const response = await axios.get(`${API_URL}/${PATH}/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -29,11 +30,11 @@ export const getAllChats = async () => {
     }
   }
 };
-
-export const getChatHistory = async (userId) => {
+// not now
+export const addReviewService = async (review) => {
   let token = await getToken();
   try {
-    const response = await axios.get(`${API_URL}/${PATH}/${userId}`, {
+    const response = await axios.post(`${API_URL}/${PATH}`, review, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

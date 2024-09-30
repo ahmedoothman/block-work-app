@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,26 +13,28 @@ import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
 import Proposals from '../screens/freelancer/Proposals';
 import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
+import Alert from "../screens/common/Alert";
+import ChatScreen from "../screens/common/ChatScreen";
+import ContractDetails from "../screens/freelancer/ContractDetails";
+import theme from "../theme";
+
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-
-    <Stack.Navigator initialRouteName='SignIn'>
+    <Stack.Navigator initialRouteName="SignIn">
       <Stack.Screen
-
-        name='SignIn'
+        name="SignIn"
         component={SignIn}
         options={{
           title: false,
           headerShown: false,
         }}
-
       />
 
       <Stack.Screen
-        name='ForgotPassword'
+        name="ForgotPassword"
         component={ForgotPassword}
         options={{
           title: false,
@@ -39,18 +42,7 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name='Contracts'
-        component={Contracts}
-        options={{ title: 'Contracts' }}
-      />
-        {/* <Stack.Screen
-        name='Proposals'
-        component={Proposals}
-        options={{ title: 'Proposals' }}
-      /> */}
-
-      <Stack.Screen
-        name='ResetPassword'
+        name="ResetPassword"
         component={ResetPasswordScreen}
         options={{
           title: false,
@@ -59,41 +51,82 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='SignUp'
+        name="SignUp"
         component={SignUp}
         options={{
           title: false,
           headerShown: false,
         }}
       />
-
       <Stack.Screen
         name='FreelancerBase'
+
         component={FreelancerBase}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='ClientBase'
+        name="ClientBase"
         component={ClientBase}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
-        name='JobsDetails'
-        component={JobsDetails}
+        name="ChatScreen"
+        component={ChatScreen}
         options={{
-          title: 'Job Details',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Chats",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
         }}
       />
+
+      <Stack.Screen
+        name="JobsDetails"
+        component={JobsDetails}
+        options={{
+          title: "Job Details",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={24}
+              color="white"
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ContractDetails"
+        component={ContractDetails}
+        options={{
+          title: "Contract Details",
+          // headerStyle: { backgroundColor: theme.colors.secondaryGray },
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: theme.colors.white,
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={24}
+              color="white"
+              style={{ marginRight: 10 }}
+              onPress={() => {
+                console.log("hi");
+              }}
+            />
+          ),
+        }}
+      />
+
 
       <Stack.Screen
         name='ProposalsDetails'
@@ -114,20 +147,29 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ProposalsForm'
+        name="ProposalsForm"
         component={ProposalsForm}
         options={{
-          title: 'Submit Proposal',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Submit Proposal",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
+        }}
+      />
+      <Stack.Screen
+        name="Alert"
+        component={Alert}
+        options={{
+          title: "Alert",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
         }}
       />
     </Stack.Navigator>
