@@ -1,5 +1,5 @@
 import { API_URL } from '../constants/global/api';
-import { getToken, saveToken } from '../storage/tokenStorage';
+import { getToken } from '../storage/tokenStorage';
 import axios from 'axios';
 
 const PATH = 'api/jobPosts';
