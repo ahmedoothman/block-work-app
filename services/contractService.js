@@ -1,14 +1,44 @@
 import { API_URL } from '../constants/global/api';
-import { getToken } from '../storage/tokenStorage';
+import { getToken, saveToken } from '../storage/tokenStorage';
 import axios from 'axios';
 
-const PATH = 'api/jobPosts';
+const PATH = 'api/contracts';
 
-// fatma
-export const getAllJobsService = async () => {
+// abdo
+export const getAllFreelancerContract = async () => {
   let token = await getToken();
   try {
-    const response = await axios.get(`${API_URL}/${PATH}`, {
+    const response = await axios.get(
+      `${API_URL}/${PATH}/freelancer/my-contracts`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { status: 'success', data: response.data.data };
+  } catch (error) {
+    if (error.code === 'ERR_NETWORK') {
+      return {
+        status: 'error',
+        statusCode: error.code,
+        message: error.message + ' Please check your internet connection',
+      };
+    } else {
+      return {
+        status: 'error',
+        statusCode: error.response.statusCode,
+        message: error.response.data.message,
+      };
+    }
+  }
+};
+
+// not now
+export const getAllClientContract = async () => {
+  let token = await getToken();
+  try {
+    const response = await axios.get(`${API_URL}/${PATH}/client/my-contracts`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -31,10 +61,11 @@ export const getAllJobsService = async () => {
   }
 };
 
-export const getJobService = async (id) => {
+// not now
+export const addContractService = async (contract) => {
   let token = await getToken();
   try {
-    const response = await axios.get(`${API_URL}/${PATH}/${id}`, {
+    const response = await axios.post(`${API_URL}/${PATH}`, contract, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -57,62 +88,11 @@ export const getJobService = async (id) => {
   }
 };
 
-export const createJobService = async (data) => {
-  let token = await getToken();
-  try {
-    const response = await axios.post(`${API_URL}/${PATH}`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return { status: 'success', data: response.data.data };
-  } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
-      return {
-        status: 'error',
-        statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
-      };
-    } else {
-      return {
-        status: 'error',
-        statusCode: error.response.statusCode,
-        message: error.response.data.message,
-      };
-    }
-  }
-};
-
-export const updateJobService = async (id, data) => {
+// not now
+export const updateContractStatusService = async (id, data) => {
   let token = await getToken();
   try {
     const response = await axios.put(`${API_URL}/${PATH}/${id}`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return { status: 'success', data: response.data.data };
-  } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
-      return {
-        status: 'error',
-        statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
-      };
-    } else {
-      return {
-        status: 'error',
-        statusCode: error.response.statusCode,
-        message: error.response.data.message,
-      };
-    }
-  }
-};
-
-export const getMyJobsService = async () => {
-  let token = await getToken();
-  try {
-    const response = await axios.get(`${API_URL}/${PATH}/client/my-posts`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

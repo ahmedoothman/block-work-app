@@ -1,15 +1,22 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import theme from '../../theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
+import { calcDuration } from '../../utils';
 
 const JobsDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
-  const { title, description, budget, skillsRequired, proposalCount } =
-    jobDetails;
+  const {
+    title,
+    description,
+    budget,
+    skillsRequired,
+    proposalCount,
+    duration,
+  } = jobDetails;
 
   const navigation = useNavigation();
 
@@ -40,6 +47,17 @@ const JobsDetails = ({ route }) => {
             <Text style={styles.budgetText}>
               ${budget} {'\n'}
               <Text style={styles.subText}>Fixed-price</Text>
+            </Text>
+          </View>
+          <View style={styles.infoRow}>
+            <EvilIcons
+              name='calendar'
+              size={29}
+              color={theme.colors.ternaryDark}
+            />
+            <Text style={styles.budgetText}>
+              {calcDuration(duration)} {'\n'}
+              <Text style={styles.subText}>Duration</Text>
             </Text>
           </View>
           <View style={styles.infoRow}>

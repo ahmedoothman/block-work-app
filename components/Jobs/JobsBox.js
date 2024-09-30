@@ -5,14 +5,15 @@ import {
   Text,
   View,
   Dimensions,
-} from 'react-native';
-import React from 'react';
-import theme from '../../theme';
-import Icon from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import React from "react";
+import theme from "../../theme";
+import Icon from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get('window'); // Get screen width for responsiveness Nice
+
 
 const formatTimeAgo = (dateString) => {
   const now = new Date();
@@ -22,12 +23,12 @@ const formatTimeAgo = (dateString) => {
 
   if (hoursDiff < 1) {
     const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    return minutesDiff === 1 ? '1 minute ago' : `${minutesDiff} minutes ago`;
+    return minutesDiff === 1 ? "1 minute ago" : `${minutesDiff} minutes ago`;
   } else if (hoursDiff < 24) {
-    return hoursDiff === 1 ? '1 hour ago' : `${hoursDiff} hours ago`;
+    return hoursDiff === 1 ? "1 hour ago" : `${hoursDiff} hours ago`;
   } else {
     const daysDiff = Math.floor(hoursDiff / 24);
-    return daysDiff === 1 ? '1 day ago' : `${daysDiff} days ago`;
+    return daysDiff === 1 ? "1 day ago" : `${daysDiff} days ago`;
   }
 };
 
@@ -40,12 +41,11 @@ export default function JobsBox({ jobData }) {
       style={styles.container}
       activeOpacity={0.7}
       onPress={() =>
-        navigation.navigate('JobsDetails', {
+        navigation.navigate("JobsDetails", {
           jobDetails: jobData,
           postingTimeOfJob: postingTimeOfJob,
         })
-      }
-    >
+      }>
       <View style={styles.jobBox}>
         <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
         <Text style={styles.titleDescriptionText}>{jobData.title}</Text>
@@ -53,7 +53,7 @@ export default function JobsBox({ jobData }) {
           Fixed-price - Entry level - Est. budget: ${jobData.budget}
         </Text>
         <Text style={styles.descriptionText}>
-          {jobData.description} <Text style={styles.moreText}>{'\n'}more</Text>
+          {jobData.description} <Text style={styles.moreText}>{"\n"}more</Text>
         </Text>
 
         {/* Skills Box */}
@@ -64,7 +64,7 @@ export default function JobsBox({ jobData }) {
             </Text>
           ))}
           <Icon
-            name='chevron-thin-right'
+            name="chevron-thin-right"
             size={20}
             color={theme.colors.primaryBright}
             style={styles.arrowRightIcon}
@@ -75,7 +75,7 @@ export default function JobsBox({ jobData }) {
         <View style={styles.paymentStarsBox}>
           <View style={styles.paymentBox}>
             <AntDesign
-              name='checkcircle'
+              name="checkcircle"
               size={17}
               color={theme.colors.ternaryDark}
             />
@@ -85,7 +85,7 @@ export default function JobsBox({ jobData }) {
             {Array.from({ length: 5 }).map((_, index) => (
               <AntDesign
                 key={index}
-                name='star'
+                name="star"
                 size={17}
                 color={theme.colors.warning}
               />
@@ -97,7 +97,7 @@ export default function JobsBox({ jobData }) {
         <View style={styles.locationProposalsBox}>
           <View style={styles.locationBox}>
             <AntDesign
-              name='enviromento'
+              name="enviromento"
               size={19}
               color={theme.colors.ternaryDark}
             />
@@ -117,7 +117,7 @@ export default function JobsBox({ jobData }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: "black",
     paddingHorizontal: 10,
   },
   jobBox: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 15,
     padding: 15,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
@@ -134,22 +134,22 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   titleDescriptionText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   descriptionText: {
-    color: 'white',
+    color: "white",
     marginBottom: 10,
   },
   moreText: {
     color: theme.colors.primaryBright,
   },
   skillsBox: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
     marginTop: 10,
     marginBottom: 15,
   },
@@ -163,42 +163,42 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   arrowRightIcon: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
-    top: '50%',
+    top: "50%",
   },
   paymentStarsBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 20,
   },
   paymentBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   paymentText: {
     color: theme.colors.ternaryDark,
     marginLeft: 5,
   },
   starsBox: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   locationProposalsBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 15,
   },
   locationBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   locationText: {
     color: theme.colors.ternaryDark,
     marginLeft: 5,
   },
   proposalsBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   proposalsText: {
     color: theme.colors.ternaryDark,
