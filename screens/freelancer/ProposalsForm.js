@@ -199,9 +199,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
   },
-  inputGroup: {
-    marginBottom: 15,
-  },
+  
   label: {
     color: 'white',
     fontSize: 14,
