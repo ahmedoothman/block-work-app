@@ -7,7 +7,7 @@ const PATH = 'api/portfolio';
 export const getPortfolioService = async (userId) => {
   let token = await getToken();
   try {
-    const response = await axios.get(`${API_URL}/${PATH}/${userId}/explore`, {
+    const response = await axios.get(`${API_URL}/${PATH}/${userId}/explore/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

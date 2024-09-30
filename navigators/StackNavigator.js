@@ -11,17 +11,22 @@ import ClientBase from '../screens/client/ClientBase';
 import Contracts from '../screens/freelancer/Contracts';
 import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
-import Proposals from '../screens/freelancer/Proposals';
-import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
-import Alert from "../screens/common/Alert";
+
+import Alert from '../screens/common/Alert';
+import ChatScreen from '../screens/common/ChatScreen';
+import Portofolio from '../screens/freelancer/Portofolio';
+import CreatePortofolio from '../screens/freelancer/CreatePortofolio';
+import PortofolioItemDetails from '../screens/freelancer/PortofolioItemDetails';
 import ChatScreen from "../screens/common/ChatScreen";
 import ContractDetails from "../screens/freelancer/ContractDetails";
+import Proposals from '../screens/freelancer/Proposals';
+import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
 import theme from "../theme";
-
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
+  
   return (
     <Stack.Navigator initialRouteName="SignIn">
       <Stack.Screen
@@ -164,12 +169,67 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="Alert"
-        component={Alert}
+
+        name='Alert'
+        // component={Alert}
+        component={Portofolio}
+
         options={{
           title: "Alert",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
+        }}
+      />
+      {/*pressing on portofoilo button in profile*/}
+       <Stack.Screen
+        name='Portofolio'
+        component={Portofolio}
+        options={{
+          title: 'Portofolio',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name='CreatePortofolio'
+        component={CreatePortofolio}
+        options={{
+          title: 'Create Portofolio',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+       <Stack.Screen
+        name='PortofolioItemDetails'
+        component={PortofolioItemDetails}
+        options={{
+          title: 'Portofolio Details',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
         }}
       />
     </Stack.Navigator>

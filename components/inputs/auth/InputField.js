@@ -10,7 +10,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import theme from '../../../theme';
 
 const InputField = (props) => {
-  const { value, placeholder, isPassword, onChange, isUpload } = props;
+  const { value, placeholder, isPassword, onChange, isUpload,bgColor } = props;
   const [text, setText] = useState('');
 
   return (
@@ -21,7 +21,8 @@ const InputField = (props) => {
           style={[
             styles.uploadButton,
             {
-              backgroundColor: theme.colors.inputBg,
+              backgroundColor: bgColor||theme.colors.inputBg,
+
               color: theme.colors.white,
             },
           ]}
