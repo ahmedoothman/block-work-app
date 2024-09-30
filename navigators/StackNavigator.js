@@ -1,18 +1,23 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import SignIn from "../screens/auth/SignIn";
-import SignUp from "../screens/auth/SignUp";
-import ForgotPassword from "../screens/auth/ForgotPassword";
-import ResetPasswordScreen from "../screens/auth/ResetPasword";
-import FreelancerBase from "../screens/freelancer/FreelancerBase";
-import ClientBase from "../screens/client/ClientBase";
-import JobsDetails from "../screens/freelancer/JobsDetails";
-import ProposalsForm from "../screens/freelancer/ProposalsForm";
+
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SignIn from '../screens/auth/SignIn';
+import SignUp from '../screens/auth/SignUp';
+import ForgotPassword from '../screens/auth/ForgotPassword';
+import ResetPasswordScreen from '../screens/auth/ResetPasword';
+import FreelancerBase from '../screens/freelancer/FreelancerBase';
+import ClientBase from '../screens/client/ClientBase';
+import Contracts from '../screens/freelancer/Contracts';
+import JobsDetails from '../screens/freelancer/JobsDetails';
+import ProposalsForm from '../screens/freelancer/ProposalsForm';
+import Proposals from '../screens/freelancer/Proposals';
+import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
 import Alert from "../screens/common/Alert";
 import ChatScreen from "../screens/common/ChatScreen";
 import ContractDetails from "../screens/freelancer/ContractDetails";
 import theme from "../theme";
+
 
 const Stack = createStackNavigator();
 
@@ -54,7 +59,8 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="FreelancerBase"
+        name='FreelancerBase'
+
         component={FreelancerBase}
         options={{ headerShown: false }}
       />
@@ -116,6 +122,25 @@ const StackNavigator = () => {
               onPress={() => {
                 console.log("hi");
               }}
+            />
+          ),
+        }}
+      />
+
+
+      <Stack.Screen
+        name='ProposalsDetails'
+        component={ProposalsDetails}
+        options={{
+          title: 'Proposal Details',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
             />
           ),
         }}
