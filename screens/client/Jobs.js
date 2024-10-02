@@ -18,7 +18,6 @@ const Jobs = () => {
   const onDismissSnackBar = () => setVisible(false);
 
   useEffect(() => {
-    console.log('here');
     const fetchJobs = async () => {
       setIsLoading(true);
       const response = await getAllJobsService();

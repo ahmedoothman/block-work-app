@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,20 +6,19 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from "react-native";
-import theme from "../../theme";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon from "react-native-vector-icons/Entypo";
-import ContractBtn from "../../components/btns/ContractBtn";
-import { calcDuration } from "../../utils";
-import { useRoute } from "@react-navigation/native";
-import { useSelector } from "react-redux";
-import moment from "moment";
+} from 'react-native';
+import theme from '../../theme';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Entypo';
+import ContractBtn from '../../components/btns/ContractBtn';
+import { calcDuration } from '../../utils';
+import { useRoute } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const ContractDetails = () => {
   // const user = useSelector((state) => state.auth.user);
   const userRole = useSelector((state) => state.auth.user).role;
-
   const contract = useRoute();
   const {
     status,
@@ -69,15 +68,16 @@ const ContractDetails = () => {
           {/* //' date_dots_Container */}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(createdAt).format("D MMMM YYYY")}
+              {moment(createdAt).format('D MMMM YYYY')}
             </Text>
             {/* //'28 august 2024' */}
             <TouchableOpacity
               onPress={() => {
-                console.log("hi");
-              }}>
+                console.log('hi');
+              }}
+            >
               <MaterialCommunityIcons
-                name="dots-vertical"
+                name='dots-vertical'
                 size={24}
                 color={theme.colors.ternaryDark}
                 style={{ marginRight: 0 }}
@@ -105,7 +105,8 @@ const ContractDetails = () => {
               onLayout={(event) =>
                 setScrollViewWidth(event.nativeEvent.layout.width)
               }
-              style={styles.skillsBox}>
+              style={styles.skillsBox}
+            >
               {skillsRequired.length > 0 ? (
                 skillsRequired.map((skill, index) => {
                   return (
@@ -123,7 +124,7 @@ const ContractDetails = () => {
 
             <TouchableOpacity onPress={scrollRight}>
               <Icon
-                name="chevron-thin-right"
+                name='chevron-thin-right'
                 size={30}
                 color={theme.colors.colorTextBlue}
                 style={styles.arrowRightIcon}
@@ -142,7 +143,7 @@ const ContractDetails = () => {
                   source={{
                     uri: clientUserPhotoUrl,
                   }}
-                  style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 />
               </View>
               <Text style={styles.userName}>{clientName}</Text>
@@ -158,10 +159,11 @@ const ContractDetails = () => {
                     uri: freelancerUserPhotoUrl,
                   }}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: '100%',
+                    height: '100%',
                     borderRadius: 20,
-                  }}></Image>
+                  }}
+                ></Image>
               </View>
               <Text style={styles.userName}>{freelancerName}</Text>
             </View>
@@ -181,11 +183,11 @@ const ContractDetails = () => {
 
           {/* //'  Status  */}
 
-          {userRole == "freelancer" ? (
+          {userRole == 'freelancer' ? (
             <>
               {/* //' Client_Status */}
               <Text style={styles.Client_Status}>
-                Client Status: {status == 1 ? "closed" : "not closed yet"}
+                Client Status: {status == 1 ? 'closed' : 'not closed yet'}
               </Text>
             </>
           ) : (
@@ -196,12 +198,12 @@ const ContractDetails = () => {
                   borderColor={theme.colors.primaryDark}
                   textSize={14}
                   textColor={theme.colors.white}
-                  fontWeight={"regular"}
+                  fontWeight={'regular'}
                   paddingHorizontal={5}
                   paddingVertical={0}
-                  mode={"contained"}
+                  mode={'contained'}
                   onPress={() => {}}
-                  clickText={"close contract"}
+                  clickText={'close contract'}
                 />
               </View>
             </>
@@ -227,10 +229,10 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius,
   },
   date_dots_Container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginVertical: 10,
   },
   dateText: {
@@ -241,7 +243,7 @@ const styles = StyleSheet.create({
   },
   contractTitle: {
     fontSize: 17,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     padding: 5,
     marginVertical: 10,
   },
@@ -249,22 +251,22 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
     marginVertical: 10,
     fontSize: 11,
-    fontWeight: "regular",
+    fontWeight: 'regular',
   },
   contractDescription: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     marginVertical: 10,
   },
   skillsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10,
     marginBottom: 22,
   },
   skillsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   skillsItem: {
     backgroundColor: theme.colors.secondaryBright,
@@ -280,14 +282,14 @@ const styles = StyleSheet.create({
   roleTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   userContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     gap: 15,
     marginLeft: 10,
   },
@@ -301,34 +303,34 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20, // Half of the width/height to make it circular
-    overflow: "hidden",
-    alignItems: "center", // Center content horizontally
-    justifyContent: "center", // Center content vertically
-    display: "flex", // Ensure flexbox is applied
+    overflow: 'hidden',
+    alignItems: 'center', // Center content horizontally
+    justifyContent: 'center', // Center content vertically
+    display: 'flex', // Ensure flexbox is applied
   },
   userName: {
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   price_duration_Contaienr: {
     marginVertical: 10,
-    width: "95%",
+    width: '95%',
   },
   d_flex_Row: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   d_flex_Column: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   },
   mainTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   price: {
@@ -342,10 +344,10 @@ const styles = StyleSheet.create({
   },
   Client_Status: {
     fontSize: 12,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.ternaryDark,
     marginVertical: 20,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });
 export default ContractDetails;
