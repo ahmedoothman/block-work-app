@@ -5,35 +5,31 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
-} from "react-native";
-import React from "react";
-const { width } = Dimensions.get("window");
-import theme from "../../theme";
-import CustomInputField from "../../components/btns/CustomInputField";
-import { useState } from "react";
-import { changePasswordService } from "../../services/userService";
-import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
-import { useNavigation } from "@react-navigation/native";
-import { ActivityIndicator } from "react-native-paper";
-
+} from 'react-native';
+import React from 'react';
+const { width } = Dimensions.get('window');
+import theme from '../../theme';
+import CustomInputField from '../../components/btns/CustomInputField';
+import { useState } from 'react';
+import { changePasswordService } from '../../services/userService';
+import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
+import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native-paper';
+import useLogout from '../../hooks/useLogout';
 const PasswordSettings = () => {
+  const logoutHandler = useLogout();
   const navigation = useNavigation();
 
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [alert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const onDismissSnackBar = () => setAlert(false);
-
-  console.log("Current Password is", currentPassword);
-  console.log("New Password is ", newPassword);
-  console.log("Confirm Password is ", confirmPassword);
-
   async function handleSubmitPasswordSettings() {
     setLoading(true);
     if (!handleInputsValidation()) {
@@ -45,12 +41,12 @@ const PasswordSettings = () => {
       confirmPassword
     );
     setAlert(true);
-    if (response.status == "success") {
+    if (response.status == 'success') {
       setIsSuccess(true);
-      setAlertMessage("Password has been reset successfully");
+      setAlertMessage('Password has been reset successfully');
       setTimeout(() => {
-        navigation.navigate("Menu");
-      }, 1000);
+        logoutHandler();
+      }, 2000);
     } else {
       setIsSuccess(false);
       setAlertMessage(response.message);
@@ -60,14 +56,14 @@ const PasswordSettings = () => {
   }
 
   function handleResetForm() {
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirmPassword('');
   }
 
   function handleInputsValidation() {
     setAlert(false);
-    setAlertMessage("");
+    setAlertMessage('');
 
     if (
       !currentPassword ||
@@ -75,14 +71,14 @@ const PasswordSettings = () => {
       currentPassword.length > 10
     ) {
       setAlert(true);
-      setAlertMessage("Password must be at least 8 characters long.");
+      setAlertMessage('Password must be at least 8 characters long.');
       setLoading(false);
       return false;
     }
 
     if (newPassword !== confirmPassword) {
       setAlert(true);
-      setAlertMessage("New Password and Confirmation Password  must match.");
+      setAlertMessage('New Password and Confirmation Password  must match.');
       setLoading(false);
       return false;
     }
@@ -94,21 +90,21 @@ const PasswordSettings = () => {
     <View style={styles.container}>
       <View style={styles.ChangePasswordForm}>
         <CustomInputField
-          label="Current Password"
+          label='Current Password'
           value={currentPassword}
           setValue={setCurrentPassword}
           secureTextEntry
         />
 
         <CustomInputField
-          label="New Password"
+          label='New Password'
           value={newPassword}
           setValue={setNewPassword}
           secureTextEntry
         />
 
         <CustomInputField
-          label="Password Confirm"
+          label='Password Confirm'
           value={confirmPassword}
           setValue={setConfirmPassword}
           secureTextEntry
@@ -135,10 +131,10 @@ const PasswordSettings = () => {
         visible={alert}
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
-        undoText="Undo"
-        undoColor="black"
-        bgColor={isSuccess ? "#388E3C" : "#B31312"}
-        messageColor="#fff"
+        undoText='Undo'
+        undoColor='black'
+        bgColor={isSuccess ? '#388E3C' : '#B31312'}
+        messageColor='#fff'
       />
     </View>
   );
@@ -149,25 +145,25 @@ export default PasswordSettings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     padding: 10,
   },
   ChangePasswordForm: {
     width: width * 0.8,
     // backgroundColor: theme.colors.secondaryGray,
-    backgroundColor: "black",
+    backgroundColor: 'black',
     borderRadius: 10,
     marginVertical: 25,
     padding: 15,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 
   buttonView: {
     marginTop: 20,
   },
   buttonText: {
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
+    fontWeight: 'bold',
     fontSize: 15,
   },
   button: {
@@ -175,9 +171,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
     width: width * 0.45,
   },
 });

@@ -48,8 +48,9 @@ const SignIn = () => {
     setLoading(true);
     const response = await loginService(data);
     if (response.status == 'success') {
+      console.log('role', response.data.role);
       dispatch(authActions.login(response.data));
-      if (response.data === 'freelancer') {
+      if (response.data.role === 'freelancer') {
         navigation.navigate('FreelancerBase');
       } else {
         navigation.navigate('ClientBase');

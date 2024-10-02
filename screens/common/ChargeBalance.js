@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import theme from "../../theme";
-import InputField from "../../components/inputs/auth/InputField";
-import AppButton from "../../components/btns/AppButton";
-import { useNavigation } from "@react-navigation/native";
-const value = "hello";
+import React, { useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import theme from '../../theme';
+import InputField from '../../components/inputs/auth/InputField';
+import AppButton from '../../components/btns/AppButton';
+import { useNavigation } from '@react-navigation/native';
+const value = 'hello';
 const ChargeBalance = () => {
   const navigation = useNavigation();
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState('');
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.inputFieldTitle}>Amount</Text>
         <InputField
           value={`$${amount}`}
-          placeholder={"$0.00"}
+          placeholder={'$0.00'}
           isPassword={false}
           onChange={(value) => {
-            const numericValue = value.replace(/[^0-9.]/g, "");
+            const numericValue = value.replace(/[^0-9.]/g, '');
             setAmount(numericValue);
           }}
           isUpload={false}
           bgColor={theme.colors.white}
-          valueColor={"black"}
+          valueColor={'black'}
           paddingVertical={7}
           isNumeric={true}
         />
@@ -30,9 +30,9 @@ const ChargeBalance = () => {
       <View style={styles.ChargeWalletBtnContainer}>
         <AppButton
           onPress={() => {
-            navigation.navigate("ChargeBalanceDetails");
+            navigation.navigate('ChargeBalanceDetails');
           }}
-          buttonTitle={"Charge Wallet"}
+          buttonTitle={'Charge Wallet'}
           // loading={fasle}
           bgColor={theme.colors.primaryDark}
         />
@@ -49,21 +49,21 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     // backgroundColor: "red",
-    width: "95%",
-    marginHorizontal: "auto",
+    width: '95%',
+    marginHorizontal: 'auto',
     marginTop: 50,
   },
   inputFieldTitle: {
     color: theme.colors.white,
     fontSize: 12,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     paddingHorizontal: 10,
     marginBottom: 10,
   },
   ChargeWalletBtnContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginVertical: 30,
   },
 });

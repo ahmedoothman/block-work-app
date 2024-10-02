@@ -1,8 +1,8 @@
-import { API_URL } from "../constants/global/api";
-import { getToken } from "../storage/tokenStorage";
-import axios from "axios";
+import { API_URL } from '../constants/global/api';
+import { getToken } from '../storage/tokenStorage';
+import axios from 'axios';
 
-const PATH = "api/wallets";
+const PATH = 'api/wallets';
 
 // abdo
 export const getWalletService = async () => {
@@ -14,17 +14,17 @@ export const getWalletService = async () => {
       },
     });
     // return { status: 'success', data: response.data.data };
-    return { status: "success", data: response.data };
+    return { status: 'success', data: response.data.data };
   } catch (error) {
-    if (error.code === "ERR_NETWORK") {
+    if (error.code === 'ERR_NETWORK') {
       return {
-        status: "error",
+        status: 'error',
         statusCode: error.code,
-        message: error.message + " Please check your internet connection",
+        message: error.message + ' Please check your internet connection',
       };
     } else {
       return {
-        status: "error",
+        status: 'error',
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -46,17 +46,17 @@ export const updateWalletService = async (wallet) => {
         },
       }
     );
-    return { status: "success", data: response.data.data };
+    return { status: 'success', data: response.data.data };
   } catch (error) {
-    if (error.code === "ERR_NETWORK") {
+    if (error.code === 'ERR_NETWORK') {
       return {
-        status: "error",
+        status: 'error',
         statusCode: error.code,
-        message: error.message + " Please check your internet connection",
+        message: error.message + ' Please check your internet connection',
       };
     } else {
       return {
-        status: "error",
+        status: 'error',
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
