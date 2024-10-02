@@ -3,6 +3,8 @@ import SettingsIcon from "react-native-vector-icons/Ionicons";
 import SearchIcon from "react-native-vector-icons/Feather";
 import EditIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import Entypo from "react-native-vector-icons/Entypo";
+
 
 import Jobs from "../screens/freelancer/Jobs";
 import Proposals from "../screens/freelancer/Proposals";
@@ -11,6 +13,7 @@ import Settings from "../screens/common/Settings";
 import Messages from "../screens/common/Messages";
 import Contracts from "../screens/freelancer/Contracts";
 import Profile from "../screens/common/Profile";
+import Menu from "../screens/common/Menu";
 
 import screenOptionsWithHeader from "./screenOptionsWithHeader";
 
@@ -67,6 +70,8 @@ export default function FreelancerBottomNavigator() {
         }}
       />
 
+     
+
       <Tab.Screen
         name="Messages"
         component={Messages}
@@ -79,7 +84,7 @@ export default function FreelancerBottomNavigator() {
         }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Settings"
         component={Settings}
         options={{
@@ -89,7 +94,23 @@ export default function FreelancerBottomNavigator() {
           ),
           ...screenOptionsWithHeader("Settings"),
         }}
+      /> */}
+       <Tab.Screen
+        name="Menu"
+        component={Menu}
+        options={{
+          tabBarLabel: "Menu",
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="menu" color={color} size={size} />
+          ),
+          ...screenOptionsWithHeader("Menu"),
+        }}
       />
+
+
+
+
+
       {/* implement profile but hide it */}
       <Tab.Screen
         name="Profile"
