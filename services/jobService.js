@@ -1,8 +1,8 @@
-import { API_URL } from '../constants/global/api';
-import { getToken } from '../storage/tokenStorage';
-import axios from 'axios';
+import { API_URL } from "../constants/global/api";
+import { getToken } from "../storage/tokenStorage";
+import axios from "axios";
 
-const PATH = 'api/jobPosts';
+const PATH = "api/jobPosts";
 
 // fatma
 export const getAllJobsService = async () => {
@@ -13,17 +13,17 @@ export const getAllJobsService = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -39,17 +39,17 @@ export const getJobService = async (id) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -57,7 +57,7 @@ export const getJobService = async (id) => {
   }
 };
 
-// abdo
+//- abdo addBtn createJobService============================================================================
 export const createJobService = async (data) => {
   let token = await getToken();
   try {
@@ -66,17 +66,17 @@ export const createJobService = async (data) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -92,17 +92,17 @@ export const updateJobService = async (id, data) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -110,7 +110,7 @@ export const updateJobService = async (id, data) => {
   }
 };
 
-//abdo
+//- abdo getMyJobsService============================================================================
 export const getMyJobsService = async () => {
   let token = await getToken();
   try {
@@ -119,17 +119,17 @@ export const getMyJobsService = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };

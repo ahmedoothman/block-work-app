@@ -1,13 +1,13 @@
-import { API_URL } from '../constants/global/api';
-import { getToken } from '../storage/tokenStorage';
-import axios from 'axios';
+import { API_URL } from "../constants/global/api";
+import { getToken } from "../storage/tokenStorage";
+import axios from "axios";
 
-const PATH = 'api/proposals';
+const PATH = "api/proposals";
 
 /* 
 role : client
 */
-// abdo
+//- abdo getMyJobsService============================================================================
 export const getAllProposalsService = async (jobId) => {
   let token = await getToken();
   try {
@@ -16,17 +16,17 @@ export const getAllProposalsService = async (jobId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -49,17 +49,17 @@ export const getFreelancerProposalsService = async () => {
         },
       }
     );
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -82,17 +82,17 @@ export const submitProposalService = async (jobId, data) => {
         },
       }
     );
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -102,7 +102,7 @@ export const submitProposalService = async (jobId, data) => {
 /* 
 role : freelancer
 */
-//abdo
+//- abdo updateProposalService============================================================================
 export const updateProposalService = async (proposalId, data) => {
   let token = await getToken();
   try {
@@ -111,17 +111,17 @@ export const updateProposalService = async (proposalId, data) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -139,17 +139,17 @@ export const deleteProposalService = async (proposalId) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };
@@ -172,17 +172,17 @@ export const updateProposalStatusService = async (proposalId, status) => {
         },
       }
     );
-    return { status: 'success', data: response.data.data };
+    return { status: "success", data: response.data.data };
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    if (error.code === "ERR_NETWORK") {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.code,
-        message: error.message + ' Please check your internet connection',
+        message: error.message + " Please check your internet connection",
       };
     } else {
       return {
-        status: 'error',
+        status: "error",
         statusCode: error.response.statusCode,
         message: error.response.data.message,
       };

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,12 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import theme from '../../theme';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon from 'react-native-vector-icons/Entypo';
-import ContractBtn from '../../components/btns/ContractBtn';
-import { calcDuration } from '../../utils';
+} from "react-native";
+import theme from "../../theme";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/Entypo";
+import ContractBtn from "../../components/btns/ContractBtn";
+import { calcDuration } from "../../utils";
 
 const ContractDetails = () => {
   //' - Start -> Handel Scroll Skills Container
@@ -42,11 +42,10 @@ const ContractDetails = () => {
             <Text style={styles.dateText}>28 august 2024</Text>
             <TouchableOpacity
               onPress={() => {
-                console.log('hi');
-              }}
-            >
+                console.log("hi");
+              }}>
               <MaterialCommunityIcons
-                name='dots-vertical'
+                name="dots-vertical"
                 size={24}
                 color={theme.colors.ternaryDark}
                 style={{ marginRight: 0 }}
@@ -77,8 +76,7 @@ const ContractDetails = () => {
               onLayout={(event) =>
                 setScrollViewWidth(event.nativeEvent.layout.width)
               }
-              style={styles.skillsBox}
-            >
+              style={styles.skillsBox}>
               <Text style={styles.skillsItem}>HTML</Text>
               <Text style={styles.skillsItem}>CSS</Text>
               <Text style={styles.skillsItem}>JavaScript</Text>
@@ -89,7 +87,7 @@ const ContractDetails = () => {
 
             <TouchableOpacity onPress={scrollRight}>
               <Icon
-                name='chevron-thin-right'
+                name="chevron-thin-right"
                 size={30}
                 color={theme.colors.colorTextBlue}
                 style={styles.arrowRightIcon}
@@ -105,9 +103,8 @@ const ContractDetails = () => {
             <View style={styles.userContainer}>
               <View style={styles.userImage}>
                 <Image
-                  source={require('../../assets/images/user.png')}
-                  style={{ width: '100%', height: '100%' }}
-                ></Image>
+                  source={require("../../assets/images/user.png")}
+                  style={{ width: "100%", height: "100%" }}></Image>
               </View>
               <Text style={styles.userName}>Fatma Okasha</Text>
             </View>
@@ -118,9 +115,8 @@ const ContractDetails = () => {
             <View style={styles.userContainer}>
               <View style={styles.userImage}>
                 <Image
-                  source={require('../../assets/images/user.png')}
-                  style={{ width: '100%', height: '100%' }}
-                ></Image>
+                  source={require("../../assets/images/user.png")}
+                  style={{ width: "100%", height: "100%" }}></Image>
               </View>
               <Text style={styles.userName}>Noran Mohamed</Text>
             </View>
@@ -145,12 +141,12 @@ const ContractDetails = () => {
               borderColor={theme.colors.primaryDark}
               textSize={14}
               textColor={theme.colors.white}
-              fontWeight={'regular'}
+              fontWeight={"regular"}
               paddingHorizontal={5}
               paddingVertical={0}
-              mode={'contained'}
+              mode={"contained"}
               onPress={() => {}}
-              clickText={'close contract'}
+              clickText={"close contract"}
             />
           </View>
           {/* //' Client_Status */}
@@ -178,10 +174,10 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius,
   },
   date_dots_Container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginVertical: 10,
   },
   dateText: {
@@ -192,7 +188,7 @@ const styles = StyleSheet.create({
   },
   contractTitle: {
     fontSize: 17,
-    fontWeight: 'regular',
+    fontWeight: "regular",
     padding: 5,
     marginVertical: 10,
   },
@@ -200,22 +196,22 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
     marginVertical: 10,
     fontSize: 12,
-    fontWeight: 'regular',
+    fontWeight: "regular",
   },
   contractDescription: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: 'regular',
+    fontWeight: "regular",
     marginVertical: 10,
   },
   skillsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 10,
     marginBottom: 22,
   },
   skillsBox: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   skillsItem: {
     backgroundColor: theme.colors.secondaryBright,
@@ -231,14 +227,14 @@ const styles = StyleSheet.create({
   roleTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: 'regular',
+    fontWeight: "regular",
     color: theme.colors.white,
   },
   userContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     gap: 15,
     marginLeft: 10,
   },
@@ -248,27 +244,27 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 14,
-    fontWeight: 'regular',
+    fontWeight: "regular",
     color: theme.colors.white,
   },
   price_duration_Contaienr: {
     marginVertical: 10,
-    width: '95%',
+    width: "95%",
   },
   d_flex_Row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   d_flex_Column: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   mainTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: 'regular',
+    fontWeight: "regular",
     color: theme.colors.white,
   },
   price: {
@@ -282,10 +278,10 @@ const styles = StyleSheet.create({
   },
   Client_Status: {
     fontSize: 12,
-    fontWeight: 'regular',
+    fontWeight: "regular",
     color: theme.colors.ternaryDark,
     marginVertical: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 export default ContractDetails;

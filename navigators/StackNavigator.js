@@ -17,14 +17,15 @@ import PortofolioItemDetails from '../screens/freelancer/PortofolioItemDetails';
 import ContractDetails from '../screens/freelancer/ContractDetails';
 import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
 import theme from '../theme';
+import CreateJobForm from '../screens/client/CreateJobForm';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName='SignIn'>
+    <Stack.Navigator initialRouteName="SignIn">
       <Stack.Screen
-        name='SignIn'
+        name="SignIn"
         component={SignIn}
         options={{
           title: false,
@@ -33,7 +34,7 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ForgotPassword'
+        name="ForgotPassword"
         component={ForgotPassword}
         options={{
           title: false,
@@ -41,7 +42,7 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name='ResetPassword'
+        name="ResetPassword"
         component={ResetPasswordScreen}
         options={{
           title: false,
@@ -50,7 +51,7 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='SignUp'
+        name="SignUp"
         component={SignUp}
         options={{
           title: false,
@@ -58,28 +59,28 @@ const StackNavigator = () => {
         }}
       />
       <Stack.Screen
-        name='FreelancerBase'
+        name="FreelancerBase"
         component={FreelancerBase}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='ClientBase'
+        name="ClientBase"
         component={ClientBase}
         options={{ headerShown: false }}
       />
 
       <Stack.Screen
-        name='ChatScreen'
+        name="ChatScreen"
         component={ChatScreen}
         options={{
-          title: 'Chats',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Chats",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
@@ -87,38 +88,38 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='JobsDetails'
+        name="JobsDetails"
         component={JobsDetails}
         options={{
-          title: 'Job Details',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Job Details",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name='ContractDetails'
+        name="ContractDetails"
         component={ContractDetails}
         options={{
-          title: 'Contract Details',
+          title: "Contract Details",
           // headerStyle: { backgroundColor: theme.colors.secondaryGray },
-          headerStyle: { backgroundColor: 'black' },
+          headerStyle: { backgroundColor: "black" },
           headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
               onPress={() => {
-                console.log('hi');
+                console.log("hi");
               }}
             />
           ),
@@ -126,17 +127,17 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ProposalsDetails'
+        name="ProposalsDetails"
         component={ProposalsDetails}
         options={{
-          title: 'Proposal Details',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Proposal Details",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
@@ -144,79 +145,97 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name='ProposalsForm'
+        name="ProposalsForm"
         component={ProposalsForm}
         options={{
-          title: 'Submit Proposal',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Submit Proposal",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name='Alert'
+        name="Alert"
         // component={Alert}
         component={Portofolio}
         options={{
-          title: 'Alert',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Alert",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
         }}
       />
       {/*pressing on portofoilo button in profile*/}
       <Stack.Screen
-        name='Portofolio'
+        name="Portofolio"
         component={Portofolio}
         options={{
-          title: 'Portofolio',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Portofolio",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name='CreatePortofolio'
+        name="CreatePortofolio"
         component={CreatePortofolio}
         options={{
-          title: 'Create Portofolio',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Create Portofolio",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name='PortofolioItemDetails'
+        name="PortofolioItemDetails"
         component={PortofolioItemDetails}
         options={{
-          title: 'Portofolio Details',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          title: "Portofolio Details",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
           headerRight: () => (
             <MaterialCommunityIcons
-              name='dots-vertical'
+              name="dots-vertical"
               size={24}
-              color='white'
+              color="white"
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="CreateJobForm"
+        component={CreateJobForm}
+        options={{
+          title: "Create Portofolio",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={24}
+              color="white"
               style={{ marginRight: 10 }}
             />
           ),

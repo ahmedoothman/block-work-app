@@ -12,8 +12,7 @@ import Icon from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 
-const { width } = Dimensions.get('window'); // Get screen width for responsiveness Nice
-
+const { width } = Dimensions.get("window"); // Get screen width for responsiveness Nice
 
 const formatTimeAgo = (dateString) => {
   const now = new Date();
