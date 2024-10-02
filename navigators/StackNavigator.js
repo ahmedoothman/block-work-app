@@ -12,6 +12,8 @@ import ProposalsForm from '../screens/freelancer/ProposalsForm';
 
 import ChatScreen from '../screens/common/ChatScreen';
 import Portofolio from '../screens/freelancer/Portofolio';
+import UpdateProfile from '../screens/freelancer/UpdateProfile';
+import Reviews from '../screens/freelancer/Reviews';
 import CreatePortofolio from '../screens/freelancer/CreatePortofolio';
 import PortofolioItemDetails from '../screens/freelancer/PortofolioItemDetails';
 import ContractDetails from '../screens/freelancer/ContractDetails';
@@ -120,6 +122,40 @@ const StackNavigator = () => {
               onPress={() => {
                 console.log('hi');
               }}
+            />
+          ),
+        }}
+      />
+        <Stack.Screen
+        name='Reviews'
+        component={Reviews}
+        options={{
+          title: 'Reviews',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+       <Stack.Screen
+        name='UpdateProfile'
+        component={UpdateProfile}
+        options={{
+          title: 'Update Profile',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
             />
           ),
         }}
