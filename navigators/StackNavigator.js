@@ -11,15 +11,18 @@ import JobsDetails from "../screens/freelancer/JobsDetails";
 import ProposalsForm from "../screens/freelancer/ProposalsForm";
 
 import ChatScreen from "../screens/common/ChatScreen";
+import Balance from "../screens/common/Balance";
+import PasswordSettings from "../screens/common/PasswordSettings";
 import Portofolio from "../screens/freelancer/Portofolio";
 import CreatePortofolio from "../screens/freelancer/CreatePortofolio";
 import PortofolioItemDetails from "../screens/freelancer/PortofolioItemDetails";
 import ContractDetails from "../screens/freelancer/ContractDetails";
 import ProposalsDetails from "../screens/freelancer/ProposalsDetails";
 import theme from "../theme";
-import Balance from "../screens/freelancer/Balance";
+
 import ChargeBalance from "../screens/freelancer/ChargeBalance";
 import ChargeBalanceDetails from "../screens/freelancer/ChargeBalanceDetails";
+
 
 const Stack = createStackNavigator();
 
@@ -229,7 +232,7 @@ const StackNavigator = () => {
         name="Balance"
         component={Balance}
         options={{
-          title: "Balance Details",
+          title: "Balance",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
           headerRight: () => (
@@ -244,17 +247,34 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="ChargeBalance"
+        name="PasswordSettings"
+        component={PasswordSettings}
+        options={{
+          title: "Change Password",
+          headerStyle: { backgroundColor: "black" },
+          headerTintColor: "white",
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={24}
+              color="white"
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name='ChargeBalance'
         component={ChargeBalance}
         options={{
-          title: "Charge Balance",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          title: 'Charge Balance',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
           headerRight: () => (
             <MaterialCommunityIcons
-              name="dots-vertical"
+              name='dots-vertical'
               size={24}
-              color="white"
+              color='white'
               style={{ marginRight: 10 }}
             />
           ),
@@ -262,18 +282,18 @@ const StackNavigator = () => {
       />
 
       <Stack.Screen
-        name="ChargeBalanceDetails"
+        name='ChargeBalanceDetails'
         component={ChargeBalanceDetails}
         options={{
-          title: "Charge Balance Details",
-          headerStyle: { backgroundColor: "black" },
+          title: 'Charge Balance Details',
+          headerStyle: { backgroundColor: 'black' },
           headerTitleStyle: { fontSize: 15 },
-          headerTintColor: "white",
+          headerTintColor: 'white',
           headerRight: () => (
             <MaterialCommunityIcons
-              name="dots-vertical"
+              name='dots-vertical'
               size={24}
-              color="white"
+              color='white'
               style={{ marginRight: 10 }}
             />
           ),
