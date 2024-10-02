@@ -22,7 +22,8 @@ const ContractDetails = () => {
   const contract = useRoute();
   const {
     status,
-    job: { _id, createdAt, skillsRequired, title, description, budget },
+    amount: budget,
+    job: { _id, createdAt, skillsRequired, title, description },
     freelancer: {
       name: freelancerName,
       email: freelancerEmail,
@@ -173,7 +174,7 @@ const ContractDetails = () => {
           <View style={[styles.price_duration_Contaienr, styles.d_flex_Row]}>
             <View style={[styles.priceContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Price</Text>
-              <Text style={styles.price}>${budget}</Text>
+              <Text style={styles.price}>{budget}</Text>
             </View>
             <View style={[styles.durationContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Duration</Text>
