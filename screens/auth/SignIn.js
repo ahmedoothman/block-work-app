@@ -30,7 +30,6 @@ const SignIn = () => {
       const response = await getMeService();
       if (response.status === 'success') {
         dispatch(authActions.login(response.data));
-
         if (response.data.role === 'client') {
           navigation.navigate('ClientBase');
         } else {

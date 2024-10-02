@@ -13,13 +13,16 @@ import ProposalsForm from "../screens/freelancer/ProposalsForm";
 import ChatScreen from "../screens/common/ChatScreen";
 import Balance from "../screens/common/Balance";
 import PasswordSettings from "../screens/common/PasswordSettings";
-
 import Portofolio from "../screens/freelancer/Portofolio";
 import CreatePortofolio from "../screens/freelancer/CreatePortofolio";
 import PortofolioItemDetails from "../screens/freelancer/PortofolioItemDetails";
 import ContractDetails from "../screens/freelancer/ContractDetails";
 import ProposalsDetails from "../screens/freelancer/ProposalsDetails";
 import theme from "../theme";
+
+import ChargeBalance from "../screens/freelancer/ChargeBalance";
+import ChargeBalanceDetails from "../screens/freelancer/ChargeBalanceDetails";
+
 
 const Stack = createStackNavigator();
 
@@ -34,7 +37,6 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
-
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
@@ -256,6 +258,42 @@ const StackNavigator = () => {
               name="dots-vertical"
               size={24}
               color="white"
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name='ChargeBalance'
+        component={ChargeBalance}
+        options={{
+          title: 'Charge Balance',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name='ChargeBalanceDetails'
+        component={ChargeBalanceDetails}
+        options={{
+          title: 'Charge Balance Details',
+          headerStyle: { backgroundColor: 'black' },
+          headerTitleStyle: { fontSize: 15 },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
               style={{ marginRight: 10 }}
             />
           ),

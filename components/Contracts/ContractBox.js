@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import theme from "../../theme";
 
-const ContractBox = ({ onPress, contractTitle }) => {
+const ContractBox = ({ onPress, jopTitle }) => {
   return (
     <View style={styles.headertitleContainer}>
-      <Text style={styles.headertitle}>{contractTitle}</Text>
+      <Text style={styles.headertitle}>{jopTitle}</Text>
       <TouchableOpacity style={styles.imagecontainer} onPress={onPress}>
         <Image
           source={require("../../assets/images/Frame.png")}
