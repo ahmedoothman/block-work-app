@@ -13,7 +13,7 @@ import ProposalsForm from '../screens/freelancer/ProposalsForm';
 import ChatScreen from '../screens/common/ChatScreen';
 import PasswordSettings from '../screens/common/PasswordSettings';
 import Portofolio from '../screens/freelancer/Portofolio';
-import UpdateProfile from '../screens/freelancer/UpdateProfile';
+import UpdateProfile from '../screens/common/UpdateProfile';
 import Reviews from '../screens/freelancer/Reviews';
 import CreatePortofolio from '../screens/freelancer/CreatePortofolio';
 import PortofolioItemDetails from '../screens/freelancer/PortofolioItemDetails';
@@ -130,7 +130,7 @@ const StackNavigator = () => {
           ),
         }}
       />
-        <Stack.Screen
+      <Stack.Screen
         name='Reviews'
         component={Reviews}
         options={{
@@ -147,7 +147,7 @@ const StackNavigator = () => {
           ),
         }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name='UpdateProfile'
         component={UpdateProfile}
         options={{

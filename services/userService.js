@@ -181,10 +181,11 @@ export const updateMeService = async (data) => {
   try {
     const response = await axios.patch(`${API_URL}/api/users/updateMe`, data, {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: 'success', data: response.data.data };
+    return { status: 'success', data: response.data.data.user };
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {
       return {
