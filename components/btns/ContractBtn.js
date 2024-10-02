@@ -13,6 +13,7 @@ const ContractBtn = ({
   mode,
   onPress,
   clickText,
+  loading,
 }) => {
   return (
     <Button
@@ -31,7 +32,11 @@ const ContractBtn = ({
       }}
       mode={mode}
       onPress={onPress}>
-      {clickText}
+      {loading ? (
+        <ActivityIndicator animating={true} color={theme.colors.white} />
+      ) : (
+        clickText
+      )}
     </Button>
   );
 };

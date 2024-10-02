@@ -7,9 +7,9 @@ const useLogout = () => {
   const dispatch = useDispatch();
 
   const logout = async () => {
+    await deleteToken();
     dispatch(authActions.logout());
     navigation.navigate('SignIn');
-    await deleteToken();
   };
 
   return logout;

@@ -30,7 +30,6 @@ const SignIn = () => {
       const response = await getMeService();
       if (response.status === 'success') {
         dispatch(authActions.login(response.data));
-
         if (response.data.role === 'client') {
           // navigation.navigate('ClientBase');
           navigation.navigate('FreelancerBase');
@@ -50,8 +49,9 @@ const SignIn = () => {
     setLoading(true);
     const response = await loginService(data);
     if (response.status == 'success') {
+      console.log('role', response.data.role);
       dispatch(authActions.login(response.data));
-      if (response.data === 'freelancer') {
+      if (response.data.role === 'freelancer') {
         navigation.navigate('FreelancerBase');
       } else {
         navigation.navigate('ClientBase');

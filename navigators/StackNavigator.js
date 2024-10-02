@@ -11,6 +11,7 @@ import JobsDetails from '../screens/freelancer/JobsDetails';
 import ProposalsForm from '../screens/freelancer/ProposalsForm';
 
 import ChatScreen from '../screens/common/ChatScreen';
+import PasswordSettings from '../screens/common/PasswordSettings';
 import Portofolio from '../screens/freelancer/Portofolio';
 import UpdateProfile from '../screens/freelancer/UpdateProfile';
 import Reviews from '../screens/freelancer/Reviews';
@@ -19,6 +20,10 @@ import PortofolioItemDetails from '../screens/freelancer/PortofolioItemDetails';
 import ContractDetails from '../screens/freelancer/ContractDetails';
 import ProposalsDetails from '../screens/freelancer/ProposalsDetails';
 import theme from '../theme';
+
+import Balance from '../screens/common/Balance';
+import ChargeBalance from '../screens/common/ChargeBalance';
+import ChargeBalanceDetails from '../screens/common/ChargeBalanceDetails';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +38,6 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
-
       <Stack.Screen
         name='ForgotPassword'
         component={ForgotPassword}
@@ -206,7 +210,6 @@ const StackNavigator = () => {
           headerTintColor: 'white',
         }}
       />
-      {/*pressing on portofoilo button in profile*/}
       <Stack.Screen
         name='Portofolio'
         component={Portofolio}
@@ -247,6 +250,78 @@ const StackNavigator = () => {
         options={{
           title: 'Portofolio Details',
           headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name='Balance'
+        component={Balance}
+        options={{
+          title: 'Balance',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name='PasswordSettings'
+        component={PasswordSettings}
+        options={{
+          title: 'Change Password',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name='ChargeBalance'
+        component={ChargeBalance}
+        options={{
+          title: 'Charge Balance',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name='ChargeBalanceDetails'
+        component={ChargeBalanceDetails}
+        options={{
+          title: 'Charge Balance Details',
+          headerStyle: { backgroundColor: 'black' },
+          headerTitleStyle: { fontSize: 15 },
           headerTintColor: 'white',
           headerRight: () => (
             <MaterialCommunityIcons

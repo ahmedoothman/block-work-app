@@ -13,6 +13,7 @@ export const getWalletService = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    // return { status: 'success', data: response.data.data };
     return { status: 'success', data: response.data.data };
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {

@@ -34,7 +34,7 @@ export const loginService = async (data) => {
   try {
     const response = await axios.post(`${API_URL}/api/users/login`, data);
     await saveToken(response.data.token);
-    return { status: 'success', data: response.data };
+    return { status: 'success', data: response.data.data.user };
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {
       return {
