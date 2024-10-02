@@ -2,12 +2,13 @@ import { TouchableOpacity, View, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import theme from '../theme';
 const screenOptionsWithHeader = (title) => {
   const user = useSelector((state) => state.auth.user);
   const navigation = useNavigation();
   return {
-    headerStyle: { backgroundColor: 'black' },
-    headerTintColor: 'white',
+    headerStyle: { backgroundColor: theme.colors.secondaryDark },
+    headerTintColor: theme.colors.white,
     headerTitle: title,
     headerLeft: () => (
       <TouchableOpacity
@@ -20,7 +21,7 @@ const screenOptionsWithHeader = (title) => {
               width: 40,
               height: 40,
               borderRadius: 20,
-              backgroundColor: 'white',
+              backgroundColor: theme.colors.white,
             }}
           />
         </View>
@@ -31,7 +32,7 @@ const screenOptionsWithHeader = (title) => {
         onPress={() => navigation.navigate('Alert')} // Navigate to Alert screen
         style={{ marginRight: 15 }}
       >
-        <MaterialCommunityIcons name='bell' size={24} color='white' />
+        <MaterialCommunityIcons name='bell' size={24} color={theme.colors.white} />
       </TouchableOpacity>
     ),
   };

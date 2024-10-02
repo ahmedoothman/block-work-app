@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import theme from "../../theme";
 
 const ChatBox = ({ data }) => {
   const navigation = useNavigation();
@@ -41,13 +42,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 10,
     padding: 10,
-    backgroundColor: '#000', // Black background
+    backgroundColor: theme.colors.secondaryDark, // Black background
     elevation: 2, // For Android shadow effect
     borderRadius: 8, // Rounded corners
     width: '80%',
     marginHorizontal: '10%',
     borderBottomWidth: 1, // Added border bottom width
-    borderBottomColor: '#444', // Dark gray color for the border
+    borderBottomColor: theme.colors.secondaryBright, // Dark gray color for the border
   },
   avatar: {
     width: 50,
@@ -63,14 +64,14 @@ const styles = StyleSheet.create({
   userName: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: '#fff', // White text color
+    color: theme.colors.white, // White text color
   },
   lastMessage: {
-    color: '#ccc', // Light gray text color
+    color: theme.colors.ternaryLight, // Light gray text color
     fontSize: 14,
   },
   timestamp: {
-    color: '#aaa', // Slightly lighter gray for timestamp
+    color: theme.colors.ternaryDark, // Slightly lighter gray for timestamp
     fontSize: 12,
     textAlign: 'right',
   },

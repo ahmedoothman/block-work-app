@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 16,
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.secondaryDark,
     height: '100%',
   },
   jobDetailsBox: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   descriptionText: {
-    color: 'white',
+    color: theme.colors.white,
     marginVertical: 15,
   },
   thirdSection: {
@@ -176,11 +176,11 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   projectTypeText: {
-    color: 'white',
+    color: theme.colors.white,
     marginVertical: 15,
   },
   sectionTitle: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 16,
     marginVertical: 10,
   },

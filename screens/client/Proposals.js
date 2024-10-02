@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     height: height * 0.6, // More dynamic height
   },
   snackbarStyle: {
-    backgroundColor: '#B31312',
+    backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
     position: 'absolute',
     bottom: 10,

@@ -355,9 +355,9 @@ const SignUp = () => {
           onPress: () => {
             setError(false);
           },
-          labelStyle: { color: 'black' },
+          labelStyle: { color: theme.colors.secondaryDark },
         }}
-        style={{ backgroundColor: '#B31312', borderRadius: theme.borderRadius }}
+        style={{ backgroundColor:theme.colors.danger, borderRadius: theme.borderRadius }}
       >
         {/* <Text style={{ fontSize: 13, color: theme.colors.white }}>{errorMessage}</Text> */}
         {errorMessage}

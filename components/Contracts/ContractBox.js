@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   imagecontainer: {
     backgroundColor: theme.colors.primaryDark,
-    color: "red",
+    color: theme.colors.danger,
     width: 38,
     height: 38,
     padding: 5,

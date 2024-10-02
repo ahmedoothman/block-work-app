@@ -134,9 +134,9 @@ const ResetPassword = () => {
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
         undoText="Undo"
-        undoColor="black"
-        bgColor={isSuccess ? theme.colors.colorTextBlue : "red"}
-        messageColor="#fff"
+        undoColor={theme.colors.secondaryDark}
+        bgColor={isSuccess ? theme.colors.colorTextBlue : theme.colors.danger}
+        messageColor={theme.colors.white}
       />
     </SafeAreaView>
   );

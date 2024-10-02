@@ -29,20 +29,20 @@ const styles = StyleSheet.create({
   },
   sender: {
     alignSelf: 'flex-end',
-    backgroundColor: '#007aff', // Blue color for sender messages
+    backgroundColor: theme.colors.primaryBright, // Blue color for sender messages
   },
   receiver: {
     alignSelf: 'flex-start',
-    backgroundColor: '#e5e5ea', // Light gray for receiver messages
+    backgroundColor: theme.colors.ternaryLight, // Light gray for receiver messages
   },
   message: {
     fontSize: 16,
   },
   senderText: {
-    color: 'white', // White text for sender messages
+    color: theme.colors.white, // White text for sender messages
   },
   receiverText: {
-    color: 'black', // Black text for receiver messages
+    color: theme.colors.secondaryDark, // Black text for receiver messages
   },
   timestamp: {
     fontSize: 12,
