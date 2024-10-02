@@ -6,6 +6,7 @@ import { Button,Text } from 'react-native-paper';
 const NoDataBox = ({Title,Massage,Onpress,btnTitle,show}) => {
 
     return (
+      <View >
         <View style={{margin:10}}>
              <View style={styles.noDatacontentContainer}>
             <Text variant='headlineSmall' style={styles.noDataTitle}>
@@ -17,6 +18,7 @@ const NoDataBox = ({Title,Massage,Onpress,btnTitle,show}) => {
              {show?<Button style={styles.btn} mode='contained' onPress={Onpress}>{btnTitle}</Button>:<View></View>}
           </View>
         </View>
+     </View>
     );
 }
 
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 20,
         alignItems:'center',
-        marginTop:150
+        marginVertical:50
       },
       noDataTitle: {
         color: theme.colors.ternaryLight,

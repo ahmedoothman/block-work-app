@@ -54,7 +54,7 @@ const Reviews = ({route}) => {
                 ):( reviews.length?
                     (reviews.map((review,i)=>(<ReviewBox key={i} rating={review.rating} name={review.reviewer.name} photourl={review.reviewer.userPhotoUrl} comment={review.comment}/>))
                 ):(
-                 <NoDataBox Title={"No reviews found"} Onpress={handleNoDataBtn} Massage={" clients reviews will appear here"} btnTitle={"Back to Profile"} show={true}/>
+                   <NoDataBox Title={"No reviews found"} Onpress={handleNoDataBtn} Massage={" clients reviews will appear here"} btnTitle={"Back to Profile"} show={true}/>
                 )  
                 )
                   }
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
       scrollContainer: {
         flex: 1,
       },
+     
 })
 
 export default Reviews;
