@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import theme from '../../theme';
@@ -9,6 +10,7 @@ const CustomInputField = ({ label, placeholder, value, setValue, secureTextEntry
       <TextInput
         style={styles.input}
         placeholder={placeholder}
+        placeholderTextColor={theme.colors.ternaryDark}
         value={value}
         onChangeText={setValue}
         secureTextEntry={secureTextEntry}
@@ -26,15 +28,17 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   label: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 14,
     marginBottom: 10,
   },
   input: {
-    backgroundColor: "#D9D9D9",
+    backgroundColor: theme.colors.ternaryLight,
     borderRadius: 8,
     padding: 10,
-    color: theme.colors.ternaryDark,
+    color: theme.colors.secondaryGray,
     textAlignVertical: "top",
+    
   },
 });
+

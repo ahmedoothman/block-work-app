@@ -31,7 +31,8 @@ const SignIn = () => {
       if (response.status === 'success') {
         dispatch(authActions.login(response.data));
         if (response.data.role === 'client') {
-          navigation.navigate('ClientBase');
+          // navigation.navigate('ClientBase');
+          navigation.navigate('FreelancerBase');
         } else {
           navigation.navigate('FreelancerBase');
         }
