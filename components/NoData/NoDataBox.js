@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, } from 'react-native';
 import theme from '../../theme';
 import { Button,Text } from 'react-native-paper';
 
-const NoDataBox = ({Title,Massage,Onpress,btnTitle}) => {
+const NoDataBox = ({Title,Massage,Onpress,btnTitle,show}) => {
+
     return (
         <View style={{margin:10}}>
              <View style={styles.noDatacontentContainer}>
@@ -13,9 +14,7 @@ const NoDataBox = ({Title,Massage,Onpress,btnTitle}) => {
             <Text  variant='titleMedium' style={styles.noDataMessage}>
               {Massage}
             </Text>
-            <View>
-             <Button style={styles.btn} mode='contained' onPress={Onpress}>{btnTitle}</Button>
-            </View>
+             {show?<Button style={styles.btn} mode='contained' onPress={Onpress}>{btnTitle}</Button>:<View></View>}
           </View>
         </View>
     );
