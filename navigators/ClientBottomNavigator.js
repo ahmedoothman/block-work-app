@@ -6,12 +6,11 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { View, Image } from 'react-native';
 
-import Jobs from '../screens/freelancer/Jobs';
-import Proposals from '../screens/freelancer/Proposals';
+import Jobs from '../screens/client/Jobs';
 import theme from '../theme';
 import Alert from '../screens/common/Alert';
 import Messages from '../screens/common/Messages';
-import Contracts from '../screens/freelancer/Contracts';
+import Contracts from '../screens/client/Contracts';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,21 +57,6 @@ export default function ClientBottomNavigator() {
               size={24}
               color='white'
               style={{ marginRight: 15 }}
-            />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name='Proposals'
-        component={Proposals}
-        options={{
-          tabBarLabel: 'Proposals',
-          tabBarIcon: ({ color, size }) => (
-            <EditIcon
-              name='file-document-edit-outline'
-              color={color}
-              size={size}
             />
           ),
         }}

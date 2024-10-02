@@ -7,6 +7,7 @@ const PATH = 'api/proposals';
 /* 
 role : client
 */
+// abdo
 export const getAllProposalsService = async (jobId) => {
   let token = await getToken();
   try {
@@ -101,6 +102,7 @@ export const submitProposalService = async (jobId, data) => {
 /* 
 role : freelancer
 */
+//abdo
 export const updateProposalService = async (proposalId, data) => {
   let token = await getToken();
   try {
