@@ -1,56 +1,22 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import theme from '../../theme';
 import ContractBtn from '../../components/btns/ContractBtn';
 import { useNavigation } from '@react-navigation/native';
 import ContractBox from '../../components/Contracts/ContractBox';
-import { getAllFreelancerContract } from '../../services/contractService';
-import { ActivityIndicator } from 'react-native-paper';
 const Contracts = () => {
   const navigation = useNavigation();
 
+  const [activecontracts, setActivecontracts] = useState([
+    { title: 'Build ecommerce...' },
+    { title: 'Build dashboard...' },
+    { title: 'Fix Error in app..' },
+  ]);
+
+  const [archivedContracts, setArchivedContracts] = useState(null);
+
   const [isActive, setIsActive] = useState(true);
   const [isArchived, setIsArchived] = useState(false);
-
-  const [activecontracts, setActivecontracts] = useState();
-  const [archivedContracts, setArchivedContracts] = useState();
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchAllFreelancerContracts = async () => {
-      const response = await getAllFreelancerContract();
-      if ((response.status = 'success')) {
-        //' set just the active contracts to the  [activecontracts state]
-        const activeContractsList = response.data.filter(
-          (contract) => contract.job.isActive == true
-        );
-        setActivecontracts(activeContractsList);
-        //' set just the archived contracts to the  [archivedContracts state]
-        const archivedContractsList = response.data.filter(
-          (contract) => contract.job.isActive == false
-        );
-        setArchivedContracts(archivedContractsList);
-      } else {
-        console.log('error ->', response.message);
-        setError(true);
-        setErrorMessage(response.message);
-      }
-      setLoading(false);
-    };
-    fetchAllFreelancerContracts();
-  }, []);
-
-  if (loading) {
-    return (
-      <View style={styles.spinnerContainer}>
-        <ActivityIndicator size='large' color={theme.colors.primary} />
-      </View>
-    );
-  }
   return (
     <View style={styles.container}>
       <View style={styles.btnContaienr}>
@@ -96,16 +62,16 @@ const Contracts = () => {
 
       {isActive ? (
         // ' in case of there are active Contracts
-        activecontracts?.length > 0 ? (
+        activecontracts ? (
           <View style={styles.contractsContainer}>
-            {activecontracts?.map((contract, index) => {
+            {activecontracts.map((contract, index) => {
               return (
                 <ContractBox
                   key={index}
                   onPress={() => {
-                    navigation.navigate('ContractDetails', contract);
+                    navigation.navigate('ContractDetails');
                   }}
-                  jopTitle={contract.job.title}
+                  contractTitle={contract.title}
                 />
               );
             })}
@@ -137,23 +103,10 @@ const Contracts = () => {
             </View>
           </View>
         )
-      ) : archivedContracts?.length > 0 ? (
+      ) : archivedContracts ? (
         // ' in case of there are archived Contracts
-        // <View style={styles.contentContainer}>
-        //   <Text style={styles.headertitle}>Archived Contracts content</Text>
-        // </View>
-        <View style={styles.contractsContainer}>
-          {archivedContracts?.map((contract, index) => {
-            return (
-              <ContractBox
-                key={index}
-                onPress={() => {
-                  navigation.navigate('ContractDetails');
-                }}
-                contractTitle={contract.title}
-              />
-            );
-          })}
+        <View style={styles.contentContainer}>
+          <Text style={styles.headertitle}>Archived Contracts content</Text>
         </View>
       ) : (
         // ' in case of there are NO archived Contracts
@@ -187,12 +140,6 @@ const Contracts = () => {
 };
 
 const styles = StyleSheet.create({
-  spinnerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.secondaryDark,
-  },
   container: {
     flex: 1,
     backgroundColor: theme.colors.secondaryDark,

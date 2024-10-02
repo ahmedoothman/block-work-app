@@ -1,18 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AlertIcon from 'react-native-vector-icons/Fontisto';
 import SearchIcon from 'react-native-vector-icons/Feather';
-import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { View, Image } from 'react-native';
 
-import Jobs from '../screens/freelancer/Jobs';
-import Proposals from '../screens/freelancer/Proposals';
+import Jobs from '../screens/client/Jobs';
 import theme from '../theme';
 import Alert from '../screens/common/Alert';
 import Messages from '../screens/common/Messages';
-import Contracts from '../screens/freelancer/Contracts';
-
+import Contracts from '../screens/client/Contracts';
+import Settings from '../screens/common/Settings';
 const Tab = createBottomTabNavigator();
 
 export default function ClientBottomNavigator() {
@@ -62,21 +60,6 @@ export default function ClientBottomNavigator() {
           ),
         }}
       />
-
-      <Tab.Screen
-        name='Proposals'
-        component={Proposals}
-        options={{
-          tabBarLabel: 'Proposals',
-          tabBarIcon: ({ color, size }) => (
-            <EditIcon
-              name='file-document-edit-outline'
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
       <Tab.Screen
         name='Contract'
         component={Contracts}
@@ -104,6 +87,16 @@ export default function ClientBottomNavigator() {
           tabBarLabel: 'Alerts',
           tabBarIcon: ({ color, size }) => (
             <AlertIcon name='bell' color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name='Settings'
+        component={Settings}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcon name='settings' color={color} size={size} />
           ),
         }}
       />
