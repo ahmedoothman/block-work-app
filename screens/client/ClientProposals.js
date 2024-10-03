@@ -38,7 +38,7 @@ const ClientProposals = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.counter}>
-        <Text style={styles.text}>Proposals({count}) client proposels</Text>
+        <Text style={styles.text}>Proposals({count})</Text>
       </View>
       <ScrollView style={styles.scrollContainer}>
         {isLoading ? (

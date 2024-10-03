@@ -24,60 +24,86 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
     status,
     _id: proposelId,
     coverLetter: proposelCoverLetter,
+    jobPost: { title: jopTitle },
   } = PropsalData;
+  // console.log("PropsalData ", PropsalData);
+
   const navigation = useNavigation();
 
-  const handlePress = () => {
-    navigation.navigate("ClientProposalsDetails", {
-      proposal: PropsalData,
-      date: createdAt,
-      isClient: { isClient },
-      jobDetails: jobDetails ,
-    });
+  const handlePress = (isClient) => {
+    console.log("isClient ", isClient);
+    if (isClient) {
+      navigation.navigate("ClientProposalsDetails", {
+        proposal: PropsalData,
+        date: createdAt,
+        isClient: { isClient },
+        jobDetails: jobDetails,
+      });
+    } else {
+      navigation.navigate("ProposalsDetails", {
+        proposal: PropsalData,
+        date: createdAt,
+      });
+    }
   };
 
-  return (
-    <>
-      {/* <TouchableOpacity activeOpacity={0.8} onPress={handlePress}> */}
-      <Card style={styles.card}>
-        <View style={styles.freelanceContainer}>
-          <View style={styles.userImage}>
-            <Image
-              source={{
-                uri: freelancerPhoto,
-              }}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: 20,
-              }}></Image>
-          </View>
-          <Text style={styles.userName}>{freelancerName}</Text>
+  return isClient ? (
+    <Card style={styles.card}>
+      <View style={styles.freelanceContainer}>
+        <View style={styles.userImage}>
+          <Image
+            source={{ uri: freelancerPhoto }}
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: 20,
+            }}
+          />
         </View>
+        <Text style={styles.userName}>{freelancerName}</Text>
+      </View>
 
+      <Card.Content>
+        <View style={styles.View}>
+          <Text variant="bodyMedium" style={styles.label}>
+            {proposelCoverLetter}
+          </Text>
+        </View>
+        <AppButton
+          buttonTitle="View"
+          onPress={() => {
+            handlePress(true);
+          }}
+          loading={loading}
+          style={styles.appButton}
+          marginY={1}
+          marginX={"auto"}
+          marginBottom={1}
+        />
+      </Card.Content>
+    </Card>
+  ) : (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={() => {
+        handlePress(false);
+      }}>
+      <Card style={styles.card}>
         <Card.Content>
           <View style={styles.View}>
             <Text variant="bodyMedium" style={styles.label}>
-              {proposelCoverLetter}
+              {jopTitle}
             </Text>
-            {/* <Text variant="bodySmall" style={styles.date}>
-                {createdAt}
-              </Text> */}
+            <Text variant="bodySmall" style={styles.date}>
+              {createdAt}
+            </Text>
           </View>
-          {/* <Text variant="bodyMedium" style={styles.date}>
-              {status}
-            </Text> */}
-          <AppButton
-            buttonTitle={"View"}
-            onPress={handlePress}
-            loading={loading}
-            marginBottom={1}
-            marginX={"auto"}
-          />
+          <Text variant="bodyMedium" style={styles.date}>
+            {status}
+          </Text>
         </Card.Content>
       </Card>
-      {/* </TouchableOpacity> */}
-    </>
+    </TouchableOpacity>
   );
 }
 

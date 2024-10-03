@@ -28,6 +28,9 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
     return results;
   };
 
+  console.log("proposal", proposal);
+  console.log("jobDetails", jobDetails);
+
   const handlePress = async (
     proposalId,
     status,
