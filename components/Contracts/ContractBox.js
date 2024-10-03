@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import theme from "../../theme";
 
-const ContractBox = ({ onPress, contractTitle }) => {
+const ContractBox = ({ onPress, jopTitle }) => {
   return (
     <View style={styles.headertitleContainer}>
-      <Text style={styles.headertitle}>{contractTitle}</Text>
+      <Text style={styles.headertitle}>{jopTitle}</Text>
       <TouchableOpacity style={styles.imagecontainer} onPress={onPress}>
         <Image
           source={require("../../assets/images/Frame.png")}
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   imagecontainer: {
     backgroundColor: theme.colors.primaryDark,
-    color: "red",
+    color: theme.colors.danger,
     width: 38,
     height: 38,
     padding: 5,

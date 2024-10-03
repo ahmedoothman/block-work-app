@@ -1,18 +1,17 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AlertIcon from 'react-native-vector-icons/Fontisto';
 import SearchIcon from 'react-native-vector-icons/Feather';
-import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, Image } from 'react-native';
 
+import Entypo from 'react-native-vector-icons/Entypo';
 import Jobs from '../screens/client/Jobs';
 import theme from '../theme';
-import Alert from '../screens/common/Alert';
+import Profile from '../screens/client/ClientProfile';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/client/Contracts';
-
+import Menu from '../screens/common/Menu';
 const Tab = createBottomTabNavigator();
+
+import screenOptionsWithHeader from './screenOptionsWithHeader';
 
 export default function ClientBottomNavigator() {
   return (
@@ -34,31 +33,7 @@ export default function ClientBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <SearchIcon name='search' color={color} size={size} />
           ),
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
-          headerLeft: () => (
-            <View style={{ marginLeft: 10 }}>
-              <Image
-                source={{
-                  uri: 'https://randomuser.me/api/portraits/men/1.jpg',
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  backgroundColor: 'white',
-                }}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name='dots-vertical'
-              size={24}
-              color='white'
-              style={{ marginRight: 15 }}
-            />
-          ),
+          ...screenOptionsWithHeader('Jobs'),
         }}
       />
       <Tab.Screen
@@ -69,26 +44,42 @@ export default function ClientBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcon name='assignment' color={color} size={size} />
           ),
+          ...screenOptionsWithHeader('Contracts'),
         }}
       />
       <Tab.Screen
         name='Messages'
         component={Messages}
         options={{
-          tabBarLabel: 'Proposals',
+          tabBarLabel: 'Messages',
           tabBarIcon: ({ color, size }) => (
             <MaterialIcon name='chat' color={color} size={size} />
           ),
+          ...screenOptionsWithHeader('Messages'),
+        }}
+      />
+
+      <Tab.Screen
+        name='Menu'
+        component={Menu}
+        options={{
+          tabBarLabel: 'Menu',
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name='menu' color={color} size={size} />
+          ),
+          ...screenOptionsWithHeader('Menu'),
         }}
       />
       <Tab.Screen
-        name='Alert'
-        component={Alert}
+        name='Profile'
+        component={Profile}
         options={{
-          tabBarLabel: 'Alerts',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => (
-            <AlertIcon name='bell' color={color} size={size} />
+            <MaterialIcon name='account-circle' color={color} size={size} />
           ),
+          tabBarButton: () => null, // Hide the Profile tab
+          ...screenOptionsWithHeader('Profile'),
         }}
       />
     </Tab.Navigator>

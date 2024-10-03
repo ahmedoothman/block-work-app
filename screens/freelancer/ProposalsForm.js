@@ -144,7 +144,7 @@ const ProposalsForm = ({ route }) => {
         style={[
           styles.snackbar,
           {
-            backgroundColor: messageType === 'success' ? '#388E3C' : '#B31312',
+            backgroundColor: messageType === 'success' ? theme.colors.success : theme.colors.danger,
           },
         ]}
       >
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     padding: 20,
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.secondaryDark,
   },
   jobBox: {
     backgroundColor: theme.colors.secondaryGray,
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   
   label: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 14,
     marginBottom: 5,
   },
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: 'white',
+    color: theme.colors.white,
     fontWeight: 'bold',
     fontSize: 15,
   },
@@ -250,6 +250,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   snackbarText: {
-    color: 'white',
+    color:theme.colors.white,
   },
 });

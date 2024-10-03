@@ -1,5 +1,5 @@
 import { API_URL } from '../constants/global/api';
-import { getToken, saveToken } from '../storage/tokenStorage';
+import { getToken } from '../storage/tokenStorage';
 import axios from 'axios';
 
 const PATH = 'api/contracts';
@@ -89,6 +89,7 @@ export const addContractService = async (contract) => {
 };
 
 // not now
+// abdo
 export const updateContractStatusService = async (id, data) => {
   let token = await getToken();
   try {

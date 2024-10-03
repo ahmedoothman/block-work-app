@@ -34,7 +34,7 @@ export const loginService = async (data) => {
   try {
     const response = await axios.post(`${API_URL}/api/users/login`, data);
     await saveToken(response.data.token);
-    return { status: 'success', data: response.data };
+    return { status: 'success', data: response.data.data.user };
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {
       return {
@@ -180,6 +180,34 @@ export const updateMeService = async (data) => {
   let token = await getToken();
   try {
     const response = await axios.patch(`${API_URL}/api/users/updateMe`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return { status: 'success', data: response.data.data.user };
+  } catch (error) {
+    if (error.code === 'ERR_NETWORK') {
+      return {
+        status: 'error',
+        statusCode: error.code,
+        message: error.message + ' Please check your internet connection',
+      };
+    } else {
+      return {
+        status: 'error',
+        statusCode: error.response.statusCode,
+        message: error.response.data.message,
+      };
+    }
+  }
+};
+
+export const getUserService = async (id) => {
+  console.log('id', id);
+  let token = await getToken();
+  try {
+    const response = await axios.get(`${API_URL}/api/users/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,7 +1,7 @@
-import React from "react";
-import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
-import theme from "../../theme";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
+import React from 'react';
+import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import theme from '../../theme';
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 // <ActivityIndicator animating={true} color={MD2Colors.red800} /> :
 const AppButton = (props) => {
   const {
@@ -26,7 +26,8 @@ const AppButton = (props) => {
           paddingHorizontal: paddingX || 15,
         },
       ]}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       {loading ? (
         <ActivityIndicator animating={true} color={theme.colors.white} />
       ) : (
@@ -41,14 +42,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
 
     backgroundColor: theme.colors.colorTextBlue,
+    paddingVertical: 10,
+    width: 210,
     borderRadius: theme.borderRadius,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 export default AppButton;

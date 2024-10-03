@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../store/auth-slice";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Snackbar } from "react-native-paper";
+import NoDataBox from '../../components/NoData/NoDataBox';
 
 const { height } = Dimensions.get("window");
 export default function Portofolio() {
@@ -45,7 +46,7 @@ export default function Portofolio() {
       setIsLoading(true);
 
       const response = await getPortfolioService(_id);
-      console.log("responseee", response.data.length)
+      // console.log("responseee", response.data.length)
       if (response.status === "success") {
         setProtofolioProjects(response.data);
         
@@ -92,7 +93,7 @@ export default function Portofolio() {
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.ProjectsBox}>
-          {protofolioProjects.map((item) => (
+          {protofolioProjects.length?(protofolioProjects.map((item) => (
             <TouchableOpacity
               key={item._id}
               style={styles.projectItem}
@@ -107,7 +108,10 @@ export default function Portofolio() {
               />
               <Text style={styles.ProjectName}>{item.description}</Text>
             </TouchableOpacity>
-          ))}
+          ))):( <View style={styles.NoDataContainer}>
+                 <NoDataBox Title={"No projects found"} show={false} Massage={"You don't have projects in your protofolio, add some and it will appear here"}/>
+               </View>
+              )}
         </View>
         </ScrollView>
       )}
@@ -126,7 +130,7 @@ export default function Portofolio() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: theme.colors.secondaryDark,
     padding: 10,
     position: "relative",
   },
@@ -136,7 +140,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   AddNewText: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 17,
     alignSelf: "center",
   },
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   snackbarStyle: {
-    backgroundColor: "#B31312",
+    backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
     position: "absolute",
     bottom: 10,
@@ -179,6 +183,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: height * 0.6,
   },
+  NoDataContainer: {
+    flex: 1,
+    justifyContent: 'center',  // Center vertically
+    alignItems: 'center',      // Center horizontally
+   
+  }
 });
 
 {

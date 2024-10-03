@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import theme from "../../theme";
 import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
 import JobsBox from "../../components/Jobs/JobsBox";
+import NoDataBox from "../../components/NoData/NoDataBox";
+
 import { getAllJobsService } from "../../services/jobService";
 import { ActivityIndicator, Snackbar } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
@@ -47,8 +49,10 @@ const Jobs = () => {
               size={50}
             />
           </View>
-        ) : (
-          jobs.map((job) => <JobsBox key={job._id} jobData={job} />)
+        ) : (jobs?
+               (jobs.map((job) => <JobsBox key={job._id} jobData={job} />))
+           :(<NoDataBox Title={"No Jobs Found"} Massage={" Jobs well appear here"} show={false}/>)
+        
         )}
       </ScrollView>
 
@@ -67,7 +71,7 @@ export default Jobs;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: theme.colors.secondaryDark,
     padding: 10,
   },
   scrollContainer: {
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
     height: height * 0.6, // More dynamic height
   },
   snackbarStyle: {
-    backgroundColor: "#B31312",
+    backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
     position: "absolute",
     bottom: 10,

@@ -121,7 +121,7 @@ export default function JobsBox({ jobData, isclient }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: theme.colors.secondaryDark,
     paddingHorizontal: 10,
   },
   jobBox: {
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   titleDescriptionText: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 10,
   },
   descriptionText: {
-    color: "white",
+    color: theme.colors.white,
     marginBottom: 10,
   },
   moreText: {

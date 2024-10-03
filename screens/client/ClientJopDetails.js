@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import React, { useEffect } from "react";
-import theme from "../../theme";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import AppButton from "../../components/btns/AppButton";
-import { useNavigation } from "@react-navigation/native";
-import { calcDuration } from "../../utils";
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import theme from '../../theme';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import AppButton from '../../components/btns/AppButton';
+import { useNavigation } from '@react-navigation/native';
+import { calcDuration } from '../../utils';
 
 const ClientJopDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
@@ -29,7 +29,7 @@ const ClientJopDetails = ({ route }) => {
           <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
           <View style={styles.paymentBox}>
             <AntDesign
-              name="enviromento"
+              name='enviromento'
               size={19}
               color={theme.colors.ternaryDark}
             />
@@ -43,31 +43,31 @@ const ClientJopDetails = ({ route }) => {
         {/* Third Section */}
         <View style={styles.thirdSection}>
           <View style={styles.infoRow}>
-            <EvilIcons name="tag" size={29} color={theme.colors.ternaryDark} />
+            <EvilIcons name='tag' size={29} color={theme.colors.ternaryDark} />
             <Text style={styles.budgetText}>
-              ${budget} {"\n"}
+              ${budget} {'\n'}
               <Text style={styles.subText}>Fixed-price</Text>
             </Text>
           </View>
           <View style={styles.infoRow}>
             <EvilIcons
-              name="calendar"
+              name='calendar'
               size={29}
               color={theme.colors.ternaryDark}
             />
             <Text style={styles.budgetText}>
-              {calcDuration(duration)} {"\n"}
+              {calcDuration(duration)} {'\n'}
               <Text style={styles.subText}>Duration</Text>
             </Text>
           </View>
           <View style={styles.infoRow}>
             <AntDesign
-              name="bulb1"
+              name='bulb1'
               size={20}
               color={theme.colors.ternaryDark}
             />
             <Text style={styles.budgetText}>
-              Entry level{"\n"}
+              Entry level{'\n'}
               <Text style={styles.subText}>Experience level</Text>
             </Text>
           </View>
@@ -95,7 +95,7 @@ const ClientJopDetails = ({ route }) => {
           <Text style={styles.subText}>Proposals:</Text>
           <View style={styles.proposalsRow}>
             <AntDesign
-              name="questioncircleo"
+              name='questioncircleo'
               size={17}
               color={theme.colors.primaryBright}
             />
@@ -106,9 +106,9 @@ const ClientJopDetails = ({ route }) => {
         {/*Apply Now Button in Job Details Page */}
         <View style={styles.applyBtnView}>
           <AppButton
-            buttonTitle={"View proposals"}
+            buttonTitle={'View proposals'}
             onPress={() =>
-              navigation.navigate("ClientProposals", {
+              navigation.navigate('ClientProposals', {
                 jopId: jobDetails._id,
                 jobDetails: jobDetails,
               })
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 20,
     paddingHorizontal: 16,
-    backgroundColor: "black",
-    height: "100%",
+    backgroundColor: theme.colors.secondaryDark,
+    height: '100%',
   },
   jobDetailsBox: {
     backgroundColor: theme.colors.secondaryGray,
@@ -137,9 +137,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   paymentBox: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 8,
   },
   locationText: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   descriptionText: {
-    color: "white",
+    color: theme.colors.white,
     marginVertical: 15,
   },
   thirdSection: {
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   infoRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 10,
   },
   budgetText: {
@@ -178,17 +178,17 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   projectTypeText: {
-    color: "white",
+    color: theme.colors.white,
     marginVertical: 15,
   },
   sectionTitle: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 16,
     marginVertical: 10,
   },
   skillsBox: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 8,
     marginBottom: 20,
   },
@@ -200,20 +200,20 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   lastSection: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginVertical: 15,
   },
   proposalsRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   proposalsCount: {
     color: theme.colors.ternaryDark,
     marginLeft: 5,
   },
   applyBtnView: {
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 20,
   },
 });
