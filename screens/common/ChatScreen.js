@@ -22,6 +22,7 @@ import {
 import theme from '../../theme';
 import { useSelector } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Import icon
+
 const ChatScreen = ({ route }) => {
   const { userId: toUser } = route.params;
   const userId = useSelector((state) => state.auth.user._id);

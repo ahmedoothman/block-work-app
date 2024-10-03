@@ -7,7 +7,7 @@ import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 import { calcDuration } from '../../utils';
 
-const JobsDetails = ({ route }) => {
+const ClientJopDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
   const {
     title,
@@ -21,8 +21,8 @@ const JobsDetails = ({ route }) => {
   const navigation = useNavigation();
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.jobDetailsBox}>
+    <View style={styles.container}>
+      <ScrollView style={styles.jobDetailsBox}>
         {/* First Section */}
         <View style={styles.borderSection}>
           <Text style={styles.title}>{title}</Text>
@@ -89,6 +89,7 @@ const JobsDetails = ({ route }) => {
             ))}
           </View>
         </View>
+
         {/* Sixth Section */}
         <View style={styles.lastSection}>
           <Text style={styles.subText}>Proposals:</Text>
@@ -101,24 +102,25 @@ const JobsDetails = ({ route }) => {
             <Text style={styles.proposalsCount}>{proposalCount}</Text>
           </View>
         </View>
+
         {/*Apply Now Button in Job Details Page */}
-        <View style={styles.ApplyBtnView}>
+        <View style={styles.applyBtnView}>
           <AppButton
-            buttonTitle={'Apply Now'}
+            buttonTitle={'View proposals'}
             onPress={() =>
-              navigation.navigate('ProposalsForm', {
-                jobData: jobDetails,
-                postingTimeOfJob: postingTimeOfJob,
+              navigation.navigate('ClientProposals', {
+                jopId: jobDetails._id,
+                jobDetails: jobDetails,
               })
             }
           />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
-export default JobsDetails;
+export default ClientJopDetails;
 
 const styles = StyleSheet.create({
   container: {
@@ -212,6 +214,6 @@ const styles = StyleSheet.create({
   },
   applyBtnView: {
     alignItems: 'center',
-    marginTop: 20,
+    marginVertical: 20,
   },
 });

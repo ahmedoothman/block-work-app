@@ -16,16 +16,17 @@ const Proposals = () => {
   const [count, setcount] = useState(0);
 
   const onDismissSnackBar = () => setVisible(false);
- const navigation=useNavigation()
- const handleNoData=()=>{
-  navigation.navigate('Jobs')
- }
+  const navigation = useNavigation();
+  const handleNoData = () => {
+    navigation.navigate('Jobs');
+  };
   useEffect(() => {
     const fetchProposals = async () => {
       const response = await getFreelancerProposalsService();
       if (response.status === 'success') {
         setProposals(response.data);
         setcount(proposals.length);
+        console.log(response.data[0]);
       } else {
         setError(true);
         setErrorMessage(response.message);
@@ -35,12 +36,12 @@ const Proposals = () => {
       setIsLoading(false);
     };
     fetchProposals();
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.counter}>
-        <Text style={styles.text}>Proposals({count})</Text>
+        <Text style={styles.text}>Proposals({count}) </Text>
       </View>
       <ScrollView style={styles.scrollContainer}>
         {isLoading ? (
@@ -51,12 +52,18 @@ const Proposals = () => {
               size={50}
             />
           </View>
-        ) : ( proposals?
-          (proposals.map((proposal) => (
+        ) : proposals ? (
+          proposals.map((proposal) => (
             <ProposalBox key={proposal._id} PropsalData={proposal} />
-          ))):(
-            <NoDataBox Title={"No propsal found"} Onpress={handleNoData} Massage={"Your proposals willl appear here "} show={true} btnTitle={"Apply for jobs"} />
-          )
+          ))
+        ) : (
+          <NoDataBox
+            Title={'No propsal found'}
+            Onpress={handleNoData}
+            Massage={'Your proposals willl appear here '}
+            show={true}
+            btnTitle={'Apply for jobs'}
+          />
         )}
       </ScrollView>
       <Snackbar

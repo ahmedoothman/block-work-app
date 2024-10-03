@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
   Text,
   StyleSheet,
   TouchableOpacity,
-} from "react-native";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import theme from "../../../theme";
+} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import theme from '../../../theme';
 
 const InputField = (props) => {
   const {
@@ -17,14 +17,26 @@ const InputField = (props) => {
     onChange,
     isUpload,
     bgColor,
-    valueColor,
-    paddingVertical,
+    paddingY,
+    paddingX,
+    marginY,
+    marginX,
+    isTextArea,
+    textAreaLines,
     isNumeric,
+    textColor,
   } = props;
-  const [text, setText] = useState("");
 
   return (
-    <View style={[styles.inputContaienr, styles.input]}>
+    <View
+      style={[
+        styles.inputContainer,
+        {
+          marginHorizontal: marginX || 0,
+          marginVertical: marginY || 8,
+        },
+      ]}
+    >
       {isUpload ? (
         <TouchableOpacity
           onPress={onChange}
@@ -32,93 +44,72 @@ const InputField = (props) => {
             styles.uploadButton,
             {
               backgroundColor: bgColor || theme.colors.inputBg,
-
-              color: theme.colors.white,
             },
-          ]}>
+          ]}
+        >
           <Text style={{ color: theme.colors.ternaryDark }}>
-            {value ? "Photo Selected" : placeholder}
+            {value ? 'Photo Selected' : placeholder}
           </Text>
           <MaterialIcons
-            name={"file-upload"}
+            name={'file-upload'}
             size={30}
             color={theme.colors.ternaryDark}
             style={styles.icon}
-            onPress={() => {}}
           />
         </TouchableOpacity>
       ) : (
         <TextInput
-          placeholder={placeholder || ""}
+          placeholder={placeholder || ''}
           value={value}
           onChangeText={onChange}
           secureTextEntry={isPassword ?? false}
-          autoCapitalize="none"
+          autoCapitalize='none'
           autoCorrect={false}
-          keyboardType={isNumeric ? "numeric" : "default"}
+          multiline={isTextArea} // Set multiline if isTextArea is true
+          numberOfLines={isTextArea ? textAreaLines || 4 : 1}
+          keyboardType={isNumeric ? 'numeric' : 'default'}
           style={[
             styles.input,
             {
               backgroundColor: bgColor || theme.colors.inputBg,
-              color: valueColor || theme.colors.white,
-              paddingRight: 40,
-              paddingVertical: paddingVertical || 11,
+              color: textColor || theme.colors.white,
+              paddingVertical: paddingY || 15,
+              paddingHorizontal: paddingX || 15,
+              textAlignVertical: 'top', // Align text to the top
+              textAlign: 'left',
             },
           ]}
           placeholderTextColor={theme.colors.ternaryDark}
         />
       )}
-
-      {/* {isUpload &&
-        <MaterialIcons
-          name={"file-upload"}
-          size={30}
-          color={theme.colors.ternaryDark}
-          style={styles.icon}
-          onPress={() => {
-          }}
-
-        />} */}
     </View>
   );
 };
+
 const styles = StyleSheet.create({
-  inputContaienr: {
-    width: "100%",
+  inputContainer: {
+    width: '100%',
     marginVertical: 2,
     padding: 2,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   input: {
     borderRadius: theme.borderRadius,
-    borderTopStartRadius: theme.borderRadius,
-    borderTopEndRadius: theme.borderRadius,
-    width: "100%",
-    overflow: "hidden",
-    
-    paddingHorizontal: 10,
+    width: '100%',
   },
   uploadButton: {
-    width: "100%",
-    overflow: "hidden",
-
+    width: '100%',
     paddingVertical: 11,
     paddingHorizontal: 10,
     borderRadius: theme.borderRadius,
-    borderTopStartRadius: theme.borderRadius,
-    borderTopEndRadius: theme.borderRadius,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   icon: {
-    // position: 'absolute',
-    // right: 10,
-    // top: "50%",
-    // transform: [{ translateY: -12 }],
-    // zIndex: 1,
+    // Additional styles for icon if needed
   },
 });
+
 export default InputField;

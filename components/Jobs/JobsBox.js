@@ -12,8 +12,7 @@ import Icon from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 
-const { width } = Dimensions.get('window'); // Get screen width for responsiveness Nice
-
+const { width } = Dimensions.get("window"); // Get screen width for responsiveness Nice
 
 const formatTimeAgo = (dateString) => {
   const now = new Date();
@@ -32,7 +31,7 @@ const formatTimeAgo = (dateString) => {
   }
 };
 
-export default function JobsBox({ jobData }) {
+export default function JobsBox({ jobData, isclient }) {
   const postingTimeOfJob = formatTimeAgo(jobData.createdAt);
   const navigation = useNavigation();
 
@@ -40,12 +39,17 @@ export default function JobsBox({ jobData }) {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.7}
-      onPress={() =>
-        navigation.navigate("JobsDetails", {
-          jobDetails: jobData,
-          postingTimeOfJob: postingTimeOfJob,
-        })
-      }>
+      onPress={() => {
+        isclient
+          ? navigation.navigate("ClientJopDetails", {
+              jobDetails: jobData,
+              postingTimeOfJob: postingTimeOfJob,
+            })
+          : navigation.navigate("JobsDetails", {
+              jobDetails: jobData,
+              postingTimeOfJob: postingTimeOfJob,
+            });
+      }}>
       <View style={styles.jobBox}>
         <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
         <Text style={styles.titleDescriptionText}>{jobData.title}</Text>

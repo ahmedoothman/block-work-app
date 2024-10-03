@@ -357,7 +357,10 @@ const SignUp = () => {
           },
           labelStyle: { color: theme.colors.secondaryDark },
         }}
-        style={{ backgroundColor:theme.colors.danger, borderRadius: theme.borderRadius }}
+        style={{
+          backgroundColor: theme.colors.danger,
+          borderRadius: theme.borderRadius,
+        }}
       >
         {/* <Text style={{ fontSize: 13, color: theme.colors.white }}>{errorMessage}</Text> */}
         {errorMessage}
@@ -389,7 +392,8 @@ const styles = StyleSheet.create({
   signInTextContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 0,
+    marginBottom: 15,
   },
   signInPrompt: {
     fontSize: 16,

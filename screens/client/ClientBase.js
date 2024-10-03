@@ -1,7 +1,7 @@
-import { View, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, StyleSheet } from "react-native";
+import React from "react";
 
-import ClientBottomNavigator from '../../navigators/ClientBottomNavigator';
+import ClientBottomNavigator from "../../navigators/ClientBottomNavigator";
 const FreelancerBase = () => {
   return (
     <View style={styles.container}>

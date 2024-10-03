@@ -22,11 +22,11 @@ const JobsDetails = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.jobDetailsBox}>
+      <ScrollView style={styles.jobDetailsBox}>
         {/* First Section */}
         <View style={styles.borderSection}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
+          <Text style={styles.timePriceText}>{postingTimeOfJob} </Text>
           <View style={styles.paymentBox}>
             <AntDesign
               name='enviromento'
@@ -102,7 +102,7 @@ const JobsDetails = ({ route }) => {
           </View>
         </View>
         {/*Apply Now Button in Job Details Page */}
-        <View style={styles.ApplyBtnView}>
+        <View style={styles.applyBtnView}>
           <AppButton
             buttonTitle={'Apply Now'}
             onPress={() =>
@@ -113,7 +113,7 @@ const JobsDetails = ({ route }) => {
             }
           />
         </View>
-      </View>
+      </ScrollView>
     </ScrollView>
   );
 };
