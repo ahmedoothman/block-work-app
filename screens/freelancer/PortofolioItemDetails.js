@@ -127,7 +127,7 @@ export default function PortofolioItemDetails({ route }) {
                   <AntDesign
                     name="edit"
                     size={18}
-                    color={"white"}
+                    color={theme.colors.white}
                     style={styles.icon}
                   />{" "}
                   Edit
@@ -146,7 +146,7 @@ export default function PortofolioItemDetails({ route }) {
                     <AntDesign
                       name="delete"
                       size={18}
-                      color={"white"}
+                      color={theme.colors.white}
                       style={styles.icon}
                     />{" "}
                     Delete
@@ -174,7 +174,7 @@ export default function PortofolioItemDetails({ route }) {
         style={[
           styles.snackbar,
           {
-            backgroundColor: messageType === "success" ? "#388E3C" : "#B31312",
+            backgroundColor: messageType === "success" ? theme.colors.success : theme.colors.danger
           },
         ]}
       >
@@ -187,7 +187,7 @@ export default function PortofolioItemDetails({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: theme.colors.secondaryDark,
     padding: 10,
     position: "relative",
   },
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   label: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 20,
     marginBottom: 10,
     alignSelf: "center",
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "black", 
+    backgroundColor: theme.colors.secondaryDark, 
     borderRadius: 10,
     marginVertical: 20,
   },
@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    color: "white",
+    color: theme.colors.white,
     fontWeight: "bold",
     fontSize: 15,
   },
@@ -275,10 +275,10 @@ const styles = StyleSheet.create({
     bottom: 5,
   },
   snackbarText: {
-    color: "white",
+    color: theme.colors.white,
   },
   noItemMessage: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 18,
     textAlign: "center",
     marginTop: 20,

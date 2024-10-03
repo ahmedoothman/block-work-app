@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo';
 import BottomNavigator from './BottomNavigator';
+import theme from '../theme';
 const StackNav = () => {
   const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
@@ -22,7 +23,7 @@ const StackNav = () => {
 
         headerStyle: {
           // backgroundColor: "#0163d2",
-          backgroundColor: '#1E1E1E',
+          backgroundColor: theme.colors.secondaryGray,
         },
         headerTintColor: '#fff',
         headerTitleAlign: 'left',
@@ -91,7 +92,7 @@ const DrawerNav = () => {
       screenOptions={{
         headerShown: false,
         drawerStyle: {
-          backgroundColor: '#1E1E1E',
+          backgroundColor: theme.colors.secondaryGray,
         },
       }}
       initialRouteName='Profile'

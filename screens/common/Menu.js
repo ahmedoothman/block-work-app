@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import useLogout from '../../hooks/useLogout';
+import theme from '../../theme';
 
 const Menu = () => {
   const navigation = useNavigation();
@@ -17,7 +18,7 @@ const Menu = () => {
           onPress={() => navigation.navigate('Balance')}
         >
           <View style={styles.BalanceBox}>
-            <AntDesign name='barschart' color='white' size={30} />
+            <AntDesign name='barschart' color={theme.colors.white} size={30} />
             <Text style={styles.BalanceText}>Balance</Text>
           </View>
         </TouchableOpacity>
@@ -27,7 +28,7 @@ const Menu = () => {
           onPress={() => navigation.navigate('PasswordSettings')}
         >
           <View style={styles.BalanceBox}>
-            <AntDesign name='lock1' color='white' size={30} />
+            <AntDesign name='lock1' color={theme.colors.white} size={30} />
             <Text style={styles.BalanceText}>Password Settings</Text>
           </View>
         </TouchableOpacity>
@@ -39,7 +40,7 @@ const Menu = () => {
         style={styles.logoutContainer}
       >
         <View style={styles.LogoutBox}>
-          <Entypo name='log-out' color='white' size={27} />
+          <Entypo name='log-out' color={theme.colors.white} size={27} />
           <Text style={styles.BalanceText}>Log Out</Text>
         </View>
       </TouchableOpacity>
@@ -52,7 +53,7 @@ export default Menu;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor:theme.colors.secondaryDark,
     padding: 10,
   },
   menuItems: {
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   BalanceText: {
-    color: 'white',
+    color: theme.colors.white,
     alignSelf: 'center',
     fontSize: 22,
   },

@@ -123,9 +123,9 @@ const SignIn = () => {
         alertMessage={errorMessage}
         onDismissSnackBar={onDismissSnackBar}
         undoText='undo'
-        undoColor='black'
-        bgColor='red'
-        messageColor='#fff'
+        undoColor={theme.colors.secondaryDark}
+        bgColor={theme.colors.danger}
+        messageColor={theme.colors.white}
       />
     </SafeAreaView>
   );

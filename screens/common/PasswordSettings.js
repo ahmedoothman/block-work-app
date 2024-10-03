@@ -132,9 +132,9 @@ const PasswordSettings = () => {
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
         undoText='Undo'
-        undoColor='black'
-        bgColor={isSuccess ? '#388E3C' : '#B31312'}
-        messageColor='#fff'
+        undoColor={theme.colors.secondaryDark}
+        bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
+        messageColor={theme.colors.white}
       />
     </View>
   );
@@ -145,13 +145,13 @@ export default PasswordSettings;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.secondaryDark,
     padding: 10,
   },
   ChangePasswordForm: {
     width: width * 0.8,
     // backgroundColor: theme.colors.secondaryGray,
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.secondaryDark,
     borderRadius: 10,
     marginVertical: 25,
     padding: 15,
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    color: 'white',
+    color: theme.colors.white,
     fontWeight: 'bold',
     fontSize: 15,
   },

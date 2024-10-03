@@ -5,6 +5,7 @@ import SearchBox from '../../components/inputs/searchBox/SearchBox';
 import { getAllChats } from '../../services/chatService';
 import ChatBox from '../../components/chat/ChatBox';
 import { ActivityIndicator, Snackbar } from 'react-native-paper'; // Import Snackbar
+import theme from '../../theme';
 
 const Messages = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const Messages = () => {
       <SearchBox placeholder={'Search for chats'} />
       {loading ? ( // Check for loading state
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size='large' color='#ffffff' />
+          <ActivityIndicator size='large' color={theme.colors.white} />
         </View>
       ) : (
         chats.map((chat, index) => <ChatBox key={index} data={chat} />)
@@ -64,7 +65,7 @@ const Messages = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.secondaryDark,
   },
   loadingContainer: {
     flex: 1,
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   notFound: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 20,
     fontWeight: 'bold',
   },

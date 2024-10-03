@@ -47,7 +47,7 @@ const Contracts = () => {
   if (loading) {
     return (
       <View style={styles.spinnerContainer}>
-        <ActivityIndicator size='large' color={theme.colors.primary} />
+        <ActivityIndicator size='large' color={theme.colors.primaryBright} />
       </View>
     );
   }

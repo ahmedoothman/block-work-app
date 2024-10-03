@@ -7,6 +7,7 @@ import { TouchableOpacity } from "react-native";
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
+import theme from "../theme";
 
 const DrawerList = [
   // {icon: 'account-multiple', label: 'Profile', navigateTo: 'Profile'},
@@ -23,10 +24,10 @@ const DrawerLayout = ({ icon, label, navigateTo }) => {
   return (
     <DrawerItem
       icon={({ color, size }) => (
-        <Icon name={icon} color={"white"} size={size} />
+        <Icon name={icon} color={theme.colors.white} size={size} />
       )}
       label={label}
-      labelStyle={{ color: "white" }}
+      labelStyle={{ color: theme.colors.white }}
       onPress={() => {
         navigation.navigate(navigateTo);
       }}
@@ -79,10 +80,10 @@ export default function DrawerContent(props) {
       <View style={styles.bottomDrawerSection}>
         <DrawerItem
           icon={({ color, size }) => (
-            <Icon name="exit-to-app" color={"white"} size={size} />
+            <Icon name="exit-to-app" color={theme.colors.white} size={size} />
           )}
           label="Log Out"
-          labelStyle={{ color: "white" }}
+          labelStyle={{ color: theme.colors.white }}
         />
       </View>
     </View>
@@ -100,12 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 3,
     fontWeight: "bold",
-    color: "#fff",
+    color: theme.colors.white,
   },
   caption: {
     fontSize: 13,
     lineHeight: 14,
-    color: "#6e6e6e",
+    color: theme.colors.ternaryDark,
 
     width: "100%",
   },
@@ -126,15 +127,15 @@ const styles = StyleSheet.create({
   drawerSection: {
     marginTop: 15,
     borderBottomWidth: 0,
-    borderBottomColor: "#dedede",
+    borderBottomColor: theme.colors.ternaryLight,
     borderBottomWidth: 1,
     marginLeft: 10,
   },
   bottomDrawerSection: {
     marginBottom: 15,
-    borderTopColor: "#dedede",
+    borderTopColor:  theme.colors.ternaryLight,
     borderTopWidth: 1,
-    borderBottomColor: "#dedede",
+    borderBottomColor:  theme.colors.ternaryLight,
     borderBottomWidth: 1,
     marginLeft: 10,
   },

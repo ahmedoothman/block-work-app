@@ -130,7 +130,7 @@ export default function Portofolio() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: theme.colors.secondaryDark,
     padding: 10,
     position: "relative",
   },
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   AddNewText: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 17,
     alignSelf: "center",
   },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   snackbarStyle: {
-    backgroundColor: "#B31312",
+    backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
     position: "absolute",
     bottom: 10,

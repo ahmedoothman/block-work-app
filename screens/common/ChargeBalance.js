@@ -22,7 +22,7 @@ const ChargeBalance = () => {
           }}
           isUpload={false}
           bgColor={theme.colors.white}
-          valueColor={'black'}
+          valueColor={theme.colors.secondaryDark}
           paddingVertical={7}
           isNumeric={true}
         />

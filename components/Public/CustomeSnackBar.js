@@ -28,7 +28,7 @@ const CustomeSnackBar = ({
         backgroundColor: bgColor || "red",
         borderRadius: Radius || theme.borderRadius,
       }}>
-      <Text style={{ color: messageColor || "#fff" }}>{alertMessage}</Text>
+      <Text style={{ color: messageColor || theme.colors.white }}>{alertMessage}</Text>
     </Snackbar>
   );
 };

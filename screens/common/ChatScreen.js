@@ -92,7 +92,7 @@ const ChatScreen = ({ route }) => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color='#fff' />
+        <ActivityIndicator size='large' color={theme.colors.white} />
         <Text style={styles.loadingText}>Loading messages...</Text>
       </View>
     );
@@ -130,7 +130,7 @@ const ChatScreen = ({ route }) => {
         />
         <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
           <Text style={styles.sendButtonText}>
-            <MaterialIcons name='send' size={24} color='white' />
+            <MaterialIcons name='send' size={24} color={theme.colors.white} />
           </Text>
         </TouchableOpacity>
       </View>
@@ -141,7 +141,7 @@ const ChatScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.secondaryDark,
   },
   userInfoContainer: {
     flexDirection: 'row',
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   userName: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 18,
   },
   scrollContainer: {
@@ -166,10 +166,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.white,
   },
   loadingText: {
-    color: 'white',
+    color: theme.colors.white,
     fontSize: 20,
     marginTop: 10,
   },
@@ -182,11 +182,11 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: 40,
-    borderColor: 'gray',
+    borderColor: theme.colors.ternaryDark,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: 'white',
+    color: theme.colors.white,
   },
   sendButton: {
     marginLeft: 10,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sendButtonText: {
-    color: 'white',
+    color: theme.colors.white,
   },
 });
 

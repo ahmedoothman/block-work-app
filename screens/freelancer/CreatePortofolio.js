@@ -178,7 +178,7 @@ export default function CreatePortofolio({ route }) {
             value={images.map((img) => img.uri).join(", ")} 
             placeholder="Upload Photos"
             isUpload={true}
-            bgColor="#D9D9D9"
+            bgColor={theme.colors.ternaryLight}
           />
         </View>
 
@@ -204,7 +204,7 @@ export default function CreatePortofolio({ route }) {
         style={[
           styles.snackbar,
           {
-            backgroundColor: messageType === "success" ? "#388E3C" : "#B31312",
+            backgroundColor: messageType === "success" ? theme.colors.success : theme.colors.danger,
           },
         ]}
       >
@@ -217,7 +217,7 @@ export default function CreatePortofolio({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: theme.colors.secondaryDark,
     padding: 10,
     position: "relative",
   },
@@ -230,12 +230,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   label: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 14,
     marginBottom: 10,
   },
   imageLabel: {
-    color: "white",
+    color: theme.colors.white,
     fontSize: 14,
     marginBottom: -1,
   },
@@ -243,14 +243,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    backgroundColor: "#D9D9D9",
+    backgroundColor: theme.colors.ternaryLight,
     borderRadius: 8,
     padding: 10,
     color: theme.colors.ternaryDark,
     textAlignVertical: "top",
   },
   coverLetterInput: {
-    backgroundColor: "#D9D9D9",
+    backgroundColor:theme.colors.ternaryLight,
     borderRadius: 8,
     padding: 10,
     height: 100,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    color: "white",
+    color: theme.colors.white,
     fontWeight: "bold",
     fontSize: 15,
   },
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     bottom: 5,
   },
   snackbarText: {
-    color: "white",
+    color: theme.colors.white,
   },
 });
 
