@@ -36,7 +36,7 @@ const Proposals = () => {
       setIsLoading(false);
     };
     fetchProposals();
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
