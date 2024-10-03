@@ -389,7 +389,8 @@ const styles = StyleSheet.create({
   signInTextContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 20,
+    marginTop: 0,
+    marginBottom: 15,
   },
   signInPrompt: {
     fontSize: 16,

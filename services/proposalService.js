@@ -7,9 +7,11 @@ const PATH = "api/proposals";
 /* 
 role : client
 */
-//- abdo getMyJobsService============================================================================
+//- abdo getAllProposalsService============================================================================
 export const getAllProposalsService = async (jobId) => {
   let token = await getToken();
+  // console.log(token);
+
   try {
     const response = await axios.get(`${API_URL}/${PATH}/${jobId}/proposals`, {
       headers: {
@@ -111,7 +113,7 @@ export const updateProposalService = async (proposalId, data) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return { status: "success", data: response.data.data };
+    return { status: "success", data: response.data };
   } catch (error) {
     if (error.code === "ERR_NETWORK") {
       return {

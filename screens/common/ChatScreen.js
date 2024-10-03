@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,25 +9,26 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-} from 'react-native';
-import MessageBox from '../../components/chat/MessageBox';
-import { getChatHistory } from '../../services/chatService';
+} from "react-native";
+import MessageBox from "../../components/chat/MessageBox";
+import { getChatHistory } from "../../services/chatService";
 import {
   initializeSocket,
   joinChatRoom,
   sendMessage,
   receiveMessage,
   disconnectSocket,
-} from '../../services/socketService';
-import theme from '../../theme';
-import { useSelector } from 'react-redux';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Import icon
+} from "../../services/socketService";
+import theme from "../../theme";
+import { useSelector } from "react-redux";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons"; // Import icon
+
 const ChatScreen = ({ route }) => {
   const { userId: toUser } = route.params;
   const userId = useSelector((state) => state.auth.user._id);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
 
   // Dummy data for user info
   const userInfo = route.params.fromUser;
@@ -36,13 +37,13 @@ const ChatScreen = ({ route }) => {
     const fetchChatHistory = async () => {
       try {
         const response = await getChatHistory(toUser);
-        if (response.status === 'success') {
+        if (response.status === "success") {
           setMessages(response.data); // Set the messages directly from fetched data
         } else {
-          Alert.alert('Error', response.message || 'An error occurred');
+          Alert.alert("Error", response.message || "An error occurred");
         }
       } catch (error) {
-        console.error('Error fetching chat history:', error);
+        console.error("Error fetching chat history:", error);
       } finally {
         setLoading(false);
       }
@@ -85,14 +86,14 @@ const ChatScreen = ({ route }) => {
         message,
         timestamp: new Date().toISOString(),
       });
-      setNewMessage('');
+      setNewMessage("");
     }
   };
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color='#fff' />
+        <ActivityIndicator size="large" color="#fff" />
         <Text style={styles.loadingText}>Loading messages...</Text>
       </View>
     );
@@ -114,8 +115,8 @@ const ChatScreen = ({ route }) => {
             message={msg.message}
             isSender={msg.from._id === userId}
             timestamp={new Date(msg.timestamp).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           />
         ))}
@@ -125,12 +126,12 @@ const ChatScreen = ({ route }) => {
           style={styles.input}
           value={newMessage}
           onChangeText={setNewMessage}
-          placeholder='Type a message...'
-          placeholderTextColor='#ccc'
+          placeholder="Type a message..."
+          placeholderTextColor="#ccc"
         />
         <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
           <Text style={styles.sendButtonText}>
-            <MaterialIcons name='send' size={24} color='white' />
+            <MaterialIcons name="send" size={24} color="white" />
           </Text>
         </TouchableOpacity>
       </View>
@@ -141,11 +142,11 @@ const ChatScreen = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
   userInfoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 10,
     backgroundColor: theme.colors.secondaryGray,
   },
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   userName: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
   },
   scrollContainer: {
@@ -164,29 +165,29 @@ const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "black",
   },
   loadingText: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
     marginTop: 10,
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 10,
     backgroundColor: theme.colors.secondaryGray,
   },
   input: {
     flex: 1,
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: 'white',
+    color: "white",
   },
   sendButton: {
     marginLeft: 10,
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   sendButtonText: {
-    color: 'white',
+    color: "white",
   },
 });
 

@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import theme from "../../theme";
 import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
 import JobsBox from "../../components/Jobs/JobsBox";
-import { getAllJobsService } from "../../services/jobService";
+import { getMyJobsService } from "../../services/jobService";
 import { ActivityIndicator, Snackbar } from "react-native-paper";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 const { height } = Dimensions.get("window");
@@ -30,7 +30,7 @@ const Jobs = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       setIsLoading(true);
-      const response = await getAllJobsService();
+      const response = await getMyJobsService();
       if (response.status === "success") {
         setJobs(response.data);
       } else {
@@ -43,12 +43,14 @@ const Jobs = () => {
     };
     fetchJobs();
   }, []);
-
   return (
     <View style={styles.container}>
       <JobsSearchBar />
-
-      <TouchableOpacity style={styles.createBtn} onPress={() => {navigation.navigate("CreateJobForm");}}>
+      <TouchableOpacity
+        style={styles.createBtn}
+        onPress={() => {
+          navigation.navigate("CreateJobForm");
+        }}>
         <Image
           source={require("../../assets/images/add.png")}
           style={{ width: "100%", height: "100%" }}
@@ -67,7 +69,9 @@ const Jobs = () => {
             />
           </View>
         ) : (
-          jobs.map((job) => <JobsBox key={job._id} jobData={job} />)
+          jobs.map((job) => (
+            <JobsBox key={job._id} jobData={job} isclient={true} />
+          ))
         )}
       </ScrollView>
 

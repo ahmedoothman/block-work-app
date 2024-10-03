@@ -31,7 +31,7 @@ const formatTimeAgo = (dateString) => {
   }
 };
 
-export default function JobsBox({ jobData }) {
+export default function JobsBox({ jobData, isclient }) {
   const postingTimeOfJob = formatTimeAgo(jobData.createdAt);
   const navigation = useNavigation();
 
@@ -39,12 +39,17 @@ export default function JobsBox({ jobData }) {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={0.7}
-      onPress={() =>
-        navigation.navigate("JobsDetails", {
-          jobDetails: jobData,
-          postingTimeOfJob: postingTimeOfJob,
-        })
-      }>
+      onPress={() => {
+        isclient
+          ? navigation.navigate("ClientJopDetails", {
+              jobDetails: jobData,
+              postingTimeOfJob: postingTimeOfJob,
+            })
+          : navigation.navigate("JobsDetails", {
+              jobDetails: jobData,
+              postingTimeOfJob: postingTimeOfJob,
+            });
+      }}>
       <View style={styles.jobBox}>
         <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
         <Text style={styles.titleDescriptionText}>{jobData.title}</Text>

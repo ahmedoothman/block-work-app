@@ -1,24 +1,310 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../../components/inputs/auth/InputField";
-
+import theme from "../../theme";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AppButton from "../../components/btns/AppButton";
+import { createJobService } from "../../services/jobService";
+import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
+import { useNavigation } from "@react-navigation/native";
 const CreateJobForm = () => {
+  const [jopCreatedinfo, setJopCreatedinfo] = useState({
+    title: "",
+    description: "",
+    budget: 0,
+    skillsRequired: [],
+    category: "",
+    duration: "",
+  });
+  const [alert, setAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const onDismissSnackBar = () => setAlert(false);
+  const navigation = useNavigation();
+  // const handelCreate = async () => {
+  //   console.log(jopCreatedinfo);
+  //   if (!validateInputs()) {
+  //     return;
+  //   }
+  //   setLoading(true);
+  //   const response = await createJobService(jopCreatedinfo);
+  //   setAlert(true);
+  //   if (response.status == "success") {
+  //     setIsSuccess(true);
+  //     setAlertMessage(response.data);
+  //     console.log("success response", response.data);
+  //     // setTimeout(() => {
+  //     //   navigation.navigate("ResetPassword");
+  //     // }, 2000);
+  //   } else {
+  //     setIsSuccess(false);
+  //     setAlertMessage(response.message);
+  //     console.log("error response", response.message);
+  //   }
+  //   setLoading(false);
+  //   // clearInputs();
+  // };
+
+  const handelCreate = async () => {
+    if (!validateInputs()) {
+      return;
+    }
+    setLoading(true);
+    const response = await createJobService(jopCreatedinfo);
+    setAlert(true);
+    if (response.status === "success") {
+      setIsSuccess(true);
+      setAlertMessage("added SuccessFully");
+      setTimeout(() => {
+        navigation.navigate("ClientBase");
+      }, 2000);
+    } else {
+      setIsSuccess(false);
+      setAlertMessage(response.message);
+      console.log("error response", response.message);
+    }
+    setLoading(false);
+    // Optionally clear inputs after submission
+    // clearInputs();
+  };
+
+  function clearInputs() {
+    setJopCreatedinfo({
+      Title: "",
+      description: "",
+      budget: "0.00",
+      skillsRequired: [],
+      Category: "",
+    });
+  }
+  //' Validate Inputs
+  const validateInputs = () => {
+    setAlert(false);
+    setAlertMessage("");
+
+    // ------  Title validation
+    if (!jopCreatedinfo.title || jopCreatedinfo.title.trim() === "") {
+      setAlert(true);
+      setAlertMessage("Title is required.");
+      setLoading(false);
+      return false;
+    }
+
+    // ----- Description validation (must not be empty)
+    if (
+      !jopCreatedinfo.description ||
+      jopCreatedinfo.description.trim() === ""
+    ) {
+      setAlert(true);
+      setAlertMessage("Description is required.");
+      setLoading(false);
+      return false;
+    }
+
+    //---- Budget validation
+    if (
+      !jopCreatedinfo.budget ||
+      isNaN(jopCreatedinfo.budget) ||
+      parseFloat(jopCreatedinfo.budget) <= 0
+    ) {
+      setAlert(true);
+      setAlertMessage("Budget must be a valid positive number.");
+      setLoading(false);
+      return false;
+    }
+
+    // ---- Skills validation
+    if (
+      !jopCreatedinfo.skillsRequired ||
+      jopCreatedinfo.skillsRequired.length === 0
+    ) {
+      setAlert(true);
+      setAlertMessage("At least one skill is required.");
+      setLoading(false);
+      return false;
+    }
+
+    // ---- Category validation
+    if (!jopCreatedinfo.category || jopCreatedinfo.category.trim() === "") {
+      setAlert(true);
+      setAlertMessage("Category is required..");
+      setLoading(false);
+      return false;
+    }
+
+    // ------ Duration validation
+    if (
+      !jopCreatedinfo.duration ||
+      isNaN(jopCreatedinfo.duration) ||
+      parseInt(jopCreatedinfo.duration) <= 0
+    ) {
+      setAlert(true);
+      setAlertMessage("Duration must be a valid positive number.");
+      setLoading(false);
+      return false;
+    }
+    return true;
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.formContainer}>
-        {/* jop Title */}
-        <View style={styles.inputContainer}>
-          <Text>Job Title</Text>
-          <InputField
-            value={"value"}
-            placeholder={"value"}
-            isPassword={false}
-            // onChange={}
-            isUpload={false}
-            bgColor="red"
-          />
+      <KeyboardAwareScrollView
+        style={{ width: "100%" }}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.formContainer}>
+          {/* jop Title */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Job Title</Text>
+            <InputField
+              value={jopCreatedinfo.Title}
+              placeholder={"Job Title"}
+              isPassword={false}
+              onChange={
+                (value) =>
+                  setJopCreatedinfo((prev) => ({ ...prev, title: value })) // Update description in the state
+              }
+              isUpload={false}
+              bgColor={theme.colors.white}
+              paddingY={10}
+              paddingX={10}
+              marginY={5}
+              marginX={"auto"}
+              textColor={"black"}
+            />
+          </View>
+          {/* description */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Description</Text>
+            <InputField
+              value={jopCreatedinfo.description}
+              placeholder={"description"}
+              isPassword={false}
+              onChange={
+                (value) =>
+                  setJopCreatedinfo((prev) => ({ ...prev, description: value })) // Update description in the state
+              }
+              isUpload={false}
+              bgColor={theme.colors.white}
+              paddingY={0}
+              paddingX={0}
+              marginY={5}
+              marginX={"auto"}
+              isTextErea={true}
+              textErealines={4}
+              textColor={"black"}
+            />
+          </View>
+          {/*Budget  */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Budget</Text>
+            <InputField
+              value={`$${jopCreatedinfo.budget}`}
+              placeholder={"$0.00"}
+              isPassword={false}
+              onChange={(value) => {
+                const numericValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
+                setJopCreatedinfo((prev) => ({
+                  ...prev,
+                  budget: parseFloat(numericValue),
+                })); // Update state with the numeric value
+              }}
+              isUpload={false}
+              bgColor={theme.colors.white}
+              paddingY={10}
+              paddingX={10}
+              marginY={5}
+              marginX={"auto"}
+              isNumeric={true}
+              textColor={"black"}
+            />
+          </View>
+          {/* Skills Required */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Skills Required</Text>
+            <InputField
+              value={jopCreatedinfo.skillsRequired}
+              placeholder={"Skills Required"}
+              isPassword={false}
+              onChange={(value) => {
+                const skills = value.split(" ");
+                setJopCreatedinfo((prev) => ({
+                  ...prev,
+                  skillsRequired: skills,
+                }));
+              }}
+              isUpload={false}
+              bgColor={theme.colors.white}
+              paddingY={10}
+              paddingX={10}
+              marginY={5}
+              marginX={"auto"}
+              textColor={"black"}
+            />
+          </View>
+          {/* Category*/}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Category</Text>
+            <InputField
+              value={jopCreatedinfo.Category}
+              placeholder={"Category"}
+              isPassword={false}
+              onChange={
+                (value) =>
+                  setJopCreatedinfo((prev) => ({ ...prev, category: value })) // Update description in the state
+              }
+              isUpload={false}
+              bgColor={theme.colors.white}
+              paddingY={10}
+              paddingX={10}
+              marginY={5}
+              marginX={"auto"}
+              textColor={"black"}
+            />
+          </View>
+          {/* Duration*/}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputTitle}>Duration</Text>
+            <InputField
+              value={jopCreatedinfo.duration}
+              placeholder={"Duration"}
+              isPassword={false}
+              onChange={
+                (value) =>
+                  setJopCreatedinfo((prev) => ({ ...prev, duration: value })) // Update description in the state
+              }
+              isUpload={false}
+              isNumeric={true}
+              bgColor={theme.colors.white}
+              paddingY={10}
+              paddingX={10}
+              marginY={5}
+              marginX={"auto"}
+              textColor={"black"}
+            />
+          </View>
+          {/* Create Button*/}
+          <View style={styles.btnContainer}>
+            <AppButton
+              buttonTitle={"Create"}
+              onPress={() => {
+                handelCreate();
+              }}
+              loading={loading}
+              bgColor={theme.colors.primaryDark}
+            />
+          </View>
         </View>
-      </View>
+      </KeyboardAwareScrollView>
+      <CustomeSnackBar
+        visible={alert}
+        alertMessage={alertMessage}
+        onDismissSnackBar={onDismissSnackBar}
+        undoText="Undo"
+        undoColor="black"
+        bgColor={isSuccess ? theme.colors.colorTextBlue : "red"}
+        messageColor="#fff"
+      />
     </View>
   );
 };
@@ -29,9 +315,28 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   formContainer: {
-    backgroundColor: "teal",
-    padding: 5,
+    width: "95%",
+    marginHorizontal: "auto",
+    marginTop: 20,
+    backgroundColor: theme.colors.secondaryGray,
+    padding: 10,
+    borderRadius: 20,
   },
-  inputContainer: {},
+  inputContainer: {
+    marginBottom: 15,
+    // backgroundColor: "red",
+  },
+  inputTitle: {
+    color: theme.colors.white,
+    fontSize: 14,
+    fontWeight: "regular",
+    marginLeft: 5,
+  },
+  btnContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 0,
+  },
 });
 export default CreateJobForm;

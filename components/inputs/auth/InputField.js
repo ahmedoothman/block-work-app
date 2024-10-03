@@ -10,11 +10,33 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import theme from "../../../theme";
 
 const InputField = (props) => {
-  const { value, placeholder, isPassword, onChange, isUpload, bgColor } = props;
+  const {
+    value,
+    placeholder,
+    isPassword,
+    onChange,
+    isUpload,
+    bgColor,
+    paddingY,
+    paddingX,
+    marginY,
+    marginX,
+    isTextErea,
+    textErealines,
+    isNumeric,
+    textColor
+  } = props;
   const [text, setText] = useState("");
 
   return (
-    <View style={[styles.inputContaienr, styles.input]}>
+    <View
+      style={[
+        styles.inputContaienr,
+        {
+          marginHorizontal: marginX || 0,
+          marginVertical: marginY || 8,
+        },
+      ]}>
       {isUpload ? (
         <TouchableOpacity
           onPress={onChange}
@@ -22,7 +44,6 @@ const InputField = (props) => {
             styles.uploadButton,
             {
               backgroundColor: bgColor || theme.colors.inputBg,
-
               color: theme.colors.white,
             },
           ]}>
@@ -45,28 +66,24 @@ const InputField = (props) => {
           secureTextEntry={isPassword ?? false}
           autoCapitalize="none"
           autoCorrect={false}
+          multiline={isTextErea === true} // Set multiline to true if isText is true, otherwise false
+          numberOfLines={isTextErea ? textErealines || 4 : 1}
+          keyboardType={isNumeric ? "numeric" : "default"}
           style={[
             styles.input,
             {
-              backgroundColor: theme.colors.inputBg,
-              color: theme.colors.white,
-              paddingRight: 40,
+              backgroundColor: bgColor || theme.colors.inputBg,
+              color: textColor||theme.colors.white,
+              // paddingRight: 40,
+              paddingVertical: paddingY || 15,
+              paddingHorizontal: paddingX || 15,
+              textAlignVertical: "top", // Align text to the top
+              textAlign: "left",
             },
           ]}
           placeholderTextColor={theme.colors.ternaryDark}
         />
       )}
-
-      {/* {isUpload &&
-        <MaterialIcons
-          name={"file-upload"}
-          size={30}
-          color={theme.colors.ternaryDark}
-          style={styles.icon}
-          onPress={() => {
-          }}
-
-        />} */}
     </View>
   );
 };
@@ -84,9 +101,6 @@ const styles = StyleSheet.create({
     borderTopEndRadius: theme.borderRadius,
     width: "100%",
     overflow: "hidden",
-
-    paddingVertical: 11,
-    paddingHorizontal: 10,
   },
   uploadButton: {
     width: "100%",

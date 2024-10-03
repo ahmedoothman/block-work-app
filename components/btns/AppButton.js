@@ -4,9 +4,29 @@ import theme from "../../theme";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 // <ActivityIndicator animating={true} color={MD2Colors.red800} /> :
 const AppButton = (props) => {
-  const { buttonTitle, onPress, loading } = props;
+  const {
+    buttonTitle,
+    onPress,
+    loading,
+    marginBottom,
+    marginX,
+    btnWidth,
+    paddingY,
+    paddingX,
+  } = props;
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        {
+          marginBottom: marginBottom || 20,
+          marginHorizontal: marginX || 0,
+          width: btnWidth || 210,
+          paddingVertical: paddingY || 10,
+          paddingHorizontal: paddingX || 15,
+        },
+      ]}
+      onPress={onPress}>
       {loading ? (
         <ActivityIndicator animating={true} color={theme.colors.white} />
       ) : (
@@ -19,13 +39,11 @@ const AppButton = (props) => {
 const styles = StyleSheet.create({
   button: {
     marginTop: 20,
-    paddingVertical: 10,
-    width: 210,
+
     backgroundColor: theme.colors.colorTextBlue,
     borderRadius: theme.borderRadius,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
   },
   buttonText: {
     color: theme.colors.white,

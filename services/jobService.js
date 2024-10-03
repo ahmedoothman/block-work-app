@@ -57,7 +57,7 @@ export const getJobService = async (id) => {
   }
 };
 
-//- abdo addBtn createJobService============================================================================
+//'-' abdo addBtn createJobService============================================================================
 export const createJobService = async (data) => {
   let token = await getToken();
   try {
@@ -110,7 +110,7 @@ export const updateJobService = async (id, data) => {
   }
 };
 
-//- abdo getMyJobsService============================================================================
+//'-' abdo getMyJobsService============================================================================
 export const getMyJobsService = async () => {
   let token = await getToken();
   try {
