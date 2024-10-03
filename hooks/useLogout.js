@@ -8,7 +8,6 @@ const useLogout = () => {
 
   const logout = async () => {
     await deleteToken();
-    dispatch(authActions.logout());
     navigation.navigate('SignIn');
   };
 

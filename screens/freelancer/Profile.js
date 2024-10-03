@@ -10,7 +10,6 @@ import {
   IconButton,
   Divider,
 } from 'react-native-paper';
-import { getMeService } from '../../services/userService';
 import RoundedBox from '../../components/profile/RoundedBox';
 import CustomBtn from '../../components/profile/CustomBtn';
 import { useNavigation } from '@react-navigation/native';

@@ -13,7 +13,8 @@ import ProposalsForm from '../screens/freelancer/ProposalsForm';
 import ChatScreen from '../screens/common/ChatScreen';
 import PasswordSettings from '../screens/common/PasswordSettings';
 import Portofolio from '../screens/freelancer/Portofolio';
-import UpdateProfile from '../screens/common/UpdateProfile';
+import UpdateProfile from '../screens/freelancer/UpdateProfile';
+import ClientUpdateProfile from '../screens/client/CientUpdateProfile';
 import Reviews from '../screens/freelancer/Reviews';
 import CreatePortofolio from '../screens/freelancer/CreatePortofolio';
 import PortofolioItemDetails from '../screens/freelancer/PortofolioItemDetails';
@@ -25,6 +26,7 @@ import Balance from '../screens/common/Balance';
 import ChargeBalance from '../screens/common/ChargeBalance';
 import ChargeBalanceDetails from '../screens/common/ChargeBalanceDetails';
 
+import ProfileView from '../screens/common/ProfileView';
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -150,6 +152,24 @@ const StackNavigator = () => {
       <Stack.Screen
         name='UpdateProfile'
         component={UpdateProfile}
+        options={{
+          title: 'Update Profile',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name='ClientUpdateProfile'
+        component={ClientUpdateProfile}
         options={{
           title: 'Update Profile',
           headerStyle: { backgroundColor: 'black' },
@@ -331,6 +351,17 @@ const StackNavigator = () => {
               style={{ marginRight: 10 }}
             />
           ),
+        }}
+      />
+
+      <Stack.Screen
+        name='ProfileView'
+        component={ProfileView}
+        options={{
+          title: 'Profile',
+          headerStyle: { backgroundColor: 'black' },
+          headerTitleStyle: { fontSize: 15 },
+          headerTintColor: 'white',
         }}
       />
     </Stack.Navigator>

@@ -1,13 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AlertIcon from 'react-native-vector-icons/Fontisto';
 import SearchIcon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { View, Image } from 'react-native';
+
 import Entypo from 'react-native-vector-icons/Entypo';
 import Jobs from '../screens/client/Jobs';
 import theme from '../theme';
-
+import Profile from '../screens/client/ClientProfile';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/client/Contracts';
 import Menu from '../screens/common/Menu';
@@ -70,6 +68,18 @@ export default function ClientBottomNavigator() {
             <Entypo name='menu' color={color} size={size} />
           ),
           ...screenOptionsWithHeader('Menu'),
+        }}
+      />
+      <Tab.Screen
+        name='Profile'
+        component={Profile}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcon name='account-circle' color={color} size={size} />
+          ),
+          tabBarButton: () => null, // Hide the Profile tab
+          ...screenOptionsWithHeader('Profile'),
         }}
       />
     </Tab.Navigator>

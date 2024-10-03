@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingsIcon from 'react-native-vector-icons/Ionicons';
 import SearchIcon from 'react-native-vector-icons/Feather';
 import EditIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -10,7 +9,7 @@ import Proposals from '../screens/freelancer/Proposals';
 import theme from '../theme';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/freelancer/Contracts';
-import Profile from '../screens/common/Profile';
+import Profile from '../screens/freelancer/Profile';
 import Menu from '../screens/common/Menu';
 
 import screenOptionsWithHeader from './screenOptionsWithHeader';

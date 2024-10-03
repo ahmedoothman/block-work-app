@@ -12,7 +12,9 @@ const screenOptionsWithHeader = (title) => {
     headerTitle: title,
     headerLeft: () => (
       <TouchableOpacity
-        onPress={() => navigation.navigate('Profile')} // Navigate to Alert screen
+        onPress={() => {
+          navigation.navigate('Profile');
+        }}
       >
         <View style={{ marginLeft: 10 }}>
           <Image
@@ -32,7 +34,11 @@ const screenOptionsWithHeader = (title) => {
         onPress={() => navigation.navigate('Alert')} // Navigate to Alert screen
         style={{ marginRight: 15 }}
       >
-        <MaterialCommunityIcons name='bell' size={24} color={theme.colors.white} />
+        <MaterialCommunityIcons
+          name='bell'
+          size={24}
+          color={theme.colors.white}
+        />
       </TouchableOpacity>
     ),
   };
