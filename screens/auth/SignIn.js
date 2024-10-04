@@ -33,8 +33,7 @@ const SignIn = () => {
         if (response.data.role === "client") {
           navigation.navigate("ClientBase");
         } else {
-          // navigation.navigate('FreelancerBase');
-          navigation.navigate("ClientBase");
+          navigation.navigate("FreelancerBase");
         }
       }
       setIsCheckingToken(false);
