@@ -1,20 +1,23 @@
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import ProposalBox from '../../components/proposals/ProposalBox';
-import theme from '../../theme';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import ProposalBox from "../../components/proposals/ProposalBox";
+import theme from "../../theme";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
 import {
   getAllProposalsService,
   getFreelancerProposalsService,
-} from '../../services/proposalService';
-const { height } = Dimensions.get('window');
+} from "../../services/proposalService";
+import NoDataBox from "../../components/NoData/NoDataBox";
+import { useNavigation } from "@react-navigation/native";
+const { height } = Dimensions.get("window");
 const ClientProposals = ({ route }) => {
+  const navigation = useNavigation();
   const { jopId, jobDetails } = route.params;
 
   const [proposals, setProposals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
   const [count, setcount] = useState(0);
   const onDismissSnackBar = () => setVisible(false);
@@ -22,7 +25,7 @@ const ClientProposals = ({ route }) => {
     const fetchProposals = async () => {
       setIsLoading(true);
       const response = await getAllProposalsService(jopId);
-      if (response.status === 'success') {
+      if (response.status === "success") {
         setProposals(response.data);
         setcount(response.data.length); // Update count after fetching proposals
       } else {
@@ -49,6 +52,15 @@ const ClientProposals = ({ route }) => {
               size={50}
             />
           </View>
+        ) : proposals.length === 0 ? (
+          <NoDataBox
+            Title="No Proposals Available"
+            Massage={"There are no proposals to show."}
+            Onpress={() => navigation.goBack()}
+            btnTitle="Go Back"
+            show={true}
+            textCenter={true}
+          />
         ) : (
           proposals?.map((proposal) => (
             <ProposalBox
@@ -63,8 +75,7 @@ const ClientProposals = ({ route }) => {
       <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
-        style={styles.snackbarStyle}
-      >
+        style={styles.snackbarStyle}>
         {errorMessage}
       </Snackbar>
     </View>
@@ -77,7 +88,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.secondaryDark,
-    position: 'relative',
+    position: "relative",
   },
   scrollContainer: {
     flex: 1,
@@ -91,18 +102,18 @@ const styles = StyleSheet.create({
   },
   text: {
     color: theme.colors.ternaryDark,
-    textAlign: 'center',
+    textAlign: "center",
   },
   loadingIndicator: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     height: height * 0.6, // More dynamic height
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
     left: 10,
     right: 10,

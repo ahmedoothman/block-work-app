@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import theme from '../../theme';
-import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import React from "react";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import theme from "../../theme";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
 // <ActivityIndicator animating={true} color={MD2Colors.red800} /> :
 const AppButton = (props) => {
   const {
@@ -13,6 +13,8 @@ const AppButton = (props) => {
     btnWidth,
     paddingY,
     paddingX,
+    textSize,
+    bgColor,
   } = props;
   return (
     <TouchableOpacity
@@ -24,14 +26,16 @@ const AppButton = (props) => {
           width: btnWidth || 210,
           paddingVertical: paddingY || 10,
           paddingHorizontal: paddingX || 15,
+          backgroundColor: bgColor || theme.colors.colorTextBlue,
         },
       ]}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       {loading ? (
         <ActivityIndicator animating={true} color={theme.colors.white} />
       ) : (
-        <Text style={styles.buttonText}>{buttonTitle}</Text>
+        <Text style={[styles.buttonText, { fontSize: textSize || 14 }]}>
+          {buttonTitle}
+        </Text>
       )}
     </TouchableOpacity>
   );
@@ -40,18 +44,16 @@ const AppButton = (props) => {
 const styles = StyleSheet.create({
   button: {
     marginTop: 20,
-
-    backgroundColor: theme.colors.colorTextBlue,
     paddingVertical: 10,
     width: 210,
     borderRadius: theme.borderRadius,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: theme.colors.white,
-    fontSize: 14,
-    fontWeight: 'bold',
+
+    fontWeight: "bold",
   },
 });
 export default AppButton;
