@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Dimensions,
+
 } from "react-native";
 import React, { useState } from "react";
 import theme from "../../theme";
@@ -12,7 +13,8 @@ import Icon from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 
-const { width } = Dimensions.get("window"); // Get screen width for responsiveness Nice
+
+const { width } = Dimensions.get('window'); // Get screen width for responsiveness Nice
 
 const formatTimeAgo = (dateString) => {
   const now = new Date();
@@ -22,12 +24,12 @@ const formatTimeAgo = (dateString) => {
 
   if (hoursDiff < 1) {
     const minutesDiff = Math.floor(timeDiff / (1000 * 60));
-    return minutesDiff === 1 ? "1 minute ago" : `${minutesDiff} minutes ago`;
+    return minutesDiff === 1 ? '1 minute ago' : `${minutesDiff} minutes ago`;
   } else if (hoursDiff < 24) {
-    return hoursDiff === 1 ? "1 hour ago" : `${hoursDiff} hours ago`;
+    return hoursDiff === 1 ? '1 hour ago' : `${hoursDiff} hours ago`;
   } else {
     const daysDiff = Math.floor(hoursDiff / 24);
-    return daysDiff === 1 ? "1 day ago" : `${daysDiff} days ago`;
+    return daysDiff === 1 ? '1 day ago' : `${daysDiff} days ago`;
   }
 };
 
@@ -40,27 +42,33 @@ export default function JobsBox({ jobData, isclient }) {
       activeOpacity={0.7}
       onPress={() => {
         isclient
-          ? navigation.navigate("ClientJopDetails", {
+          ? navigation.navigate('ClientJopDetails', {
               jobDetails: jobData,
               postingTimeOfJob: postingTimeOfJob,
             })
-          : navigation.navigate("JobsDetails", {
+          : navigation.navigate('JobsDetails', {
               jobDetails: jobData,
               postingTimeOfJob: postingTimeOfJob,
             });
-      }}>
+      }}
+    >
       <View style={styles.jobBox}>
-        <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
+        <View style={styles.header}>
+          <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
+          <Text style={styles.statusText}>Status: {jobData.status}</Text>
+        </View>
         <Text style={styles.titleDescriptionText}>{jobData.title}</Text>
         <Text style={styles.timePriceText}>
           Fixed-price - Entry level - Est. budget: ${jobData.budget}
         </Text>
-        <Text style={styles.descriptionText}>
-          {jobData.description} <Text style={styles.moreText}>{"\n"}more</Text>
-        </Text>
 
+        {/* New Status Field */}
+        <Text style={styles.descriptionText}>
+          {jobData.description} <Text style={styles.moreText}>more</Text>
+        </Text>
         {/* Skills Box */}
         <View style={styles.skillsBox}>
+
           <View style={styles.skillsContainer}>
             {jobData.skillsRequired.map((skill, i) => (
               <Text key={i} style={styles.skillsItem}>
@@ -77,12 +85,11 @@ export default function JobsBox({ jobData, isclient }) {
             />
           </View>
         </View>
-
         {/* Payment and Stars Box */}
         <View style={styles.paymentStarsBox}>
           <View style={styles.paymentBox}>
             <AntDesign
-              name="checkcircle"
+              name='checkcircle'
               size={17}
               color={theme.colors.ternaryDark}
             />
@@ -92,19 +99,18 @@ export default function JobsBox({ jobData, isclient }) {
             {Array.from({ length: 5 }).map((_, index) => (
               <AntDesign
                 key={index}
-                name="star"
+                name='star'
                 size={17}
                 color={theme.colors.warning}
               />
             ))}
           </View>
         </View>
-
         {/* Location and Proposals Box */}
         <View style={styles.locationProposalsBox}>
           <View style={styles.locationBox}>
             <AntDesign
-              name="enviromento"
+              name='enviromento'
               size={19}
               color={theme.colors.ternaryDark}
             />
@@ -122,6 +128,11 @@ export default function JobsBox({ jobData, isclient }) {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: theme.colors.secondaryDark,
@@ -133,7 +144,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 15,
     padding: 15,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   timePriceText: {
     color: theme.colors.ternaryDark,
@@ -143,8 +154,14 @@ const styles = StyleSheet.create({
   titleDescriptionText: {
     color: theme.colors.white,
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 10,
+  },
+  statusText: {
+    // New Status Text Style
+    color: theme.colors.primaryBright,
+    fontSize: 14,
+    marginBottom: 5,
   },
   descriptionText: {
     color: theme.colors.white,
@@ -181,42 +198,44 @@ const styles = StyleSheet.create({
     width: "10%",
   },
   arrowRightIcon: {
+
     // position: "absolute",
     // right: 10,
     // top: "50%",
+
   },
   paymentStarsBox: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 20,
   },
   paymentBox: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   paymentText: {
     color: theme.colors.ternaryDark,
     marginLeft: 5,
   },
   starsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   locationProposalsBox: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 15,
   },
   locationBox: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   locationText: {
     color: theme.colors.ternaryDark,
     marginLeft: 5,
   },
   proposalsBox: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   proposalsText: {
     color: theme.colors.ternaryDark,
