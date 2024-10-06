@@ -23,6 +23,14 @@ const Profile = () => {
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
   const user = useSelector((state) => state.auth.user);
+  const [userData, setUserData] = useState({
+    name: '',
+    jobTitle: '',
+    bio: '',
+    country: '',
+    skills: [],
+    userPhotoUrl: '',
+  });
   const handlePortofolio = () => {
     navigation.navigate('Portofolio', {
       userId: user._id,
@@ -38,17 +46,26 @@ const Profile = () => {
       userdata: user,
     });
   };
-
+  useEffect(() => {
+    setUserData({
+      name: user.name,
+      jobTitle: user.jobTitle || 'No job title',
+      bio: user.bio || 'No bio',
+      country: user.country,
+      skills: user.skills || [],
+      userPhotoUrl: user.userPhotoUrl,
+    });
+  }, [user]);
   return (
     <>
       <View style={styles.container}>
         <View>
           <View style={styles.avtarView}>
             <View style={styles.avtarView}>
-              <Avatar.Image size={70} source={{ uri: user.userPhotoUrl }} />
+              <Avatar.Image size={70} source={{ uri: userData.userPhotoUrl }} />
               <View style={{ justifyContent: 'space-between', margin: 10 }}>
                 <Text variant='titleLarge' style={styles.title}>
-                  {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
+                  {userData.name}
                 </Text>
                 <View style={{ flexDirection: 'row' }}>
                   <Icon
@@ -60,8 +77,7 @@ const Profile = () => {
                     variant='titleSmall'
                     style={{ color: theme.colors.ternaryDark }}
                   >
-                    {user.country.charAt(0).toUpperCase() +
-                      user.country.slice(1)}
+                    {userData.country}
                   </Text>
                 </View>
               </View>
@@ -76,11 +92,11 @@ const Profile = () => {
           <Divider style={styles.divider} />
           <View style={styles.bioView}>
             <Text variant='titleLarge' style={styles.title}>
-              {user.jobTitle}
+              {userData.jobTitle}
             </Text>
             <Text variant='titleMedium' style={styles.title}>
               {'\n'}
-              {user.bio.charAt(0).toUpperCase() + user.bio.slice(1)}
+              {userData.bio}
             </Text>
           </View>
           <Divider style={styles.divider} />
@@ -90,9 +106,14 @@ const Profile = () => {
               Skills:{' '}
             </Text>
             <View style={{ flexDirection: 'row', margin: 5, flexWrap: 'wrap' }}>
-              {user.skills.map((s, index) => (
+              {userData.skills.map((s, index) => (
                 <RoundedBox key={index} txt={s} />
               ))}
+              {userData.skills.length === 0 && (
+                <Text variant='titleMedium' style={styles.title}>
+                  No skills added
+                </Text>
+              )}
             </View>
           </View>
           <View>

@@ -4,10 +4,12 @@ import theme from '../../theme';
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
-const value = 'hello';
 const ChargeBalance = () => {
   const navigation = useNavigation();
   const [amount, setAmount] = useState('');
+  const handlePayment = () => {
+    navigation.navigate('ChargeBalanceDetails', { amount: amount });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -21,7 +23,7 @@ const ChargeBalance = () => {
             setAmount(numericValue);
           }}
           isUpload={false}
-          bgColor={theme.colors.white}
+          bgColor={theme.colors.ternaryDark}
           valueColor={theme.colors.secondaryDark}
           paddingVertical={7}
           isNumeric={true}
@@ -29,9 +31,7 @@ const ChargeBalance = () => {
       </View>
       <View style={styles.ChargeWalletBtnContainer}>
         <AppButton
-          onPress={() => {
-            navigation.navigate('ChargeBalanceDetails');
-          }}
+          onPress={handlePayment}
           buttonTitle={'Charge Wallet'}
           // loading={fasle}
           bgColor={theme.colors.primaryDark}

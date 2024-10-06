@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   TextInput,
@@ -16,70 +16,41 @@ const InputField = (props) => {
     isPassword,
     onChange,
     isUpload,
-    bgColor,
-    paddingY,
-    paddingX,
     marginY,
     marginX,
     isTextArea,
     textAreaLines,
     isNumeric,
-    textColor,
   } = props;
 
   return (
     <View
       style={[
         styles.inputContainer,
-        {
-          marginHorizontal: marginX || 0,
-          marginVertical: marginY || 8,
-        },
+        { marginHorizontal: marginX || 0, marginVertical: marginY || 0 },
       ]}
     >
       {isUpload ? (
-        <TouchableOpacity
-          onPress={onChange}
-          style={[
-            styles.uploadButton,
-            {
-              backgroundColor: bgColor || theme.colors.inputBg,
-            },
-          ]}
-        >
-          <Text style={{ color: theme.colors.ternaryDark }}>
-            {value ? 'Photo Selected' : placeholder}
-          </Text>
+        <TouchableOpacity onPress={onChange} style={styles.uploadBtn}>
+          <Text style={styles.uploadText}>{value || placeholder}</Text>
           <MaterialIcons
-            name={'file-upload'}
-            size={30}
-            color={theme.colors.ternaryDark}
-            style={styles.icon}
+            name='cloud-upload'
+            size={24}
+            color={theme.colors.primary}
           />
         </TouchableOpacity>
       ) : (
         <TextInput
-          placeholder={placeholder || ''}
           value={value}
           onChangeText={onChange}
-          secureTextEntry={isPassword ?? false}
-          autoCapitalize='none'
-          autoCorrect={false}
-          multiline={isTextArea} // Set multiline if isTextArea is true
+          placeholder={placeholder}
+          secureTextEntry={isPassword}
+          style={styles.textInput}
+          multiline={isTextArea}
           numberOfLines={isTextArea ? textAreaLines || 4 : 1}
           keyboardType={isNumeric ? 'numeric' : 'default'}
-          style={[
-            styles.input,
-            {
-              backgroundColor: bgColor || theme.colors.inputBg,
-              color: textColor || theme.colors.white,
-              paddingVertical: paddingY || 15,
-              paddingHorizontal: paddingX || 15,
-              textAlignVertical: 'top', // Align text to the top
-              textAlign: 'left',
-            },
-          ]}
-          placeholderTextColor={theme.colors.ternaryDark}
+          textAlignVertical={isTextArea ? 'top' : 'center'}
+          placeholderTextColor='white' // Set the placeholder color to white
         />
       )}
     </View>
@@ -89,26 +60,31 @@ const InputField = (props) => {
 const styles = StyleSheet.create({
   inputContainer: {
     width: '100%',
-    marginVertical: 2,
-    padding: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input: {
     borderRadius: theme.borderRadius,
-    width: '100%',
+    borderColor: theme.colors.gray,
+    borderWidth: 1,
+    padding: 10,
   },
-  uploadButton: {
-    width: '100%',
-    paddingVertical: 11,
+  textInput: {
+    height: 50,
     paddingHorizontal: 10,
     borderRadius: theme.borderRadius,
+    backgroundColor: theme.colors.secondaryBright,
+    color: 'white', // Set the text color to white
+  },
+  uploadBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 50,
+    paddingHorizontal: 10,
+    borderRadius: theme.borderRadius,
+    backgroundColor: theme.colors.secondaryBright,
+    borderColor: theme.colors.gray,
+    borderWidth: 1,
   },
-  icon: {
-    // Additional styles for icon if needed
+  uploadText: {
+    color: theme.colors.gray,
   },
 });
 

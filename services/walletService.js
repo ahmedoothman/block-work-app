@@ -34,11 +34,11 @@ export const getWalletService = async () => {
 
 // abdo
 // update wallet
-export const updateWalletService = async (wallet) => {
+export const chargeWalletService = async (wallet) => {
   let token = await getToken();
   try {
-    const response = await axios.put(
-      `${API_URL}/${PATH}/updateWallet`,
+    const response = await axios.patch(
+      `${API_URL}/${PATH}/chargeWallet`,
       wallet,
       {
         headers: {

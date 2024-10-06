@@ -5,17 +5,14 @@ import axios from 'axios';
 // sign up
 export const signUpService = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/api/users/signup`, data, {
-      'Content-Type': 'multipart/form-data',
-    });
-    return { status: 'success', data: response.data.message };
+    const response = await axios.post(`${API_URL}/api/users/signup`, data);
+    return { status: 'success' };
   } catch (error) {
     if (error.code === 'ERR_NETWORK') {
-      console.log('error', error);
       return {
         status: 'error',
         statusCode: error.code,
-        message: error.message + 'Please check your internet connection',
+        message: error.message + ' Please check your internet connection',
       };
     } else {
       return {
@@ -23,7 +20,7 @@ export const signUpService = async (data) => {
         statusCode: error.response.statusCode,
         message: error.response.data.message,
         // statusCode: error.response?.status || 'Unknown Error',
-        // message: error.response?.data?.message || 'An unknown error occurred',
+        // message: error.response?.data.message || 'An unknown error occurred',
       };
     }
   }
@@ -204,7 +201,6 @@ export const updateMeService = async (data) => {
 };
 
 export const getUserService = async (id) => {
-  console.log('id', id);
   let token = await getToken();
   try {
     const response = await axios.get(`${API_URL}/api/users/${id}`, {

@@ -26,7 +26,6 @@ const Proposals = () => {
       if (response.status === 'success') {
         setProposals(response.data);
         setcount(proposals.length);
-        console.log(response.data[0]);
       } else {
         setError(true);
         setErrorMessage(response.message);

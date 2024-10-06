@@ -35,14 +35,12 @@ const ForgotPassword = () => {
     if (response.status == 'success') {
       setIsSuccess(true);
       setAlertMessage(response.data);
-      console.log('success response', isSuccess, alert, email, response.data);
       setTimeout(() => {
         navigation.navigate('ResetPassword');
       }, 2000);
     } else {
       setIsSuccess(false);
       setAlertMessage(response.message);
-      console.log('error response', isSuccess, alert, email, response.message);
     }
     setLoading(false);
     clearInputs();

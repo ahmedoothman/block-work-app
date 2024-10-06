@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,81 +6,26 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from "react-native";
-import theme from "../../theme";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon from "react-native-vector-icons/Entypo";
-import ContractBtn from "../../components/btns/ContractBtn";
-import { calcDuration } from "../../utils";
-import { useRoute } from "@react-navigation/native";
-import moment from "moment";
-import AppButton from "../../components/btns/AppButton";
-import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
-import { useNavigation } from "@react-navigation/native";
-import { updateContractStatusService } from "../../services/contractService";
-const ClientContractDetails = () => {
-  const contract = useRoute();
-  const {
-    status,
-    amount: price,
-    createdDate,
-    duration,
-    job: {
-      _id: jobId,
-      createdAt: jobCreatedAt,
-      skillsRequired,
-      title,
-      description,
-      budget: jobBudget,
-      category,
-      client: jobClient,
-      duration: jobDuration,
-      isActive,
-    },
-    freelancer: {
-      name: freelancerName,
-      email: freelancerEmail,
-      jobTitle: freelancerJobTitle,
-      skills: freelancerSkills,
-      userPhotoUrl: freelancerUserPhotoUrl,
-      _id: freelancerId,
-      accountCreatedAt: freelancerAccountCreatedAt,
-      backIdPhotoUrl: freelancerBackIdPhotoUrl,
-      country: freelancerCountry,
-      frontIdPhotoUrl: freelancerFrontIdPhotoUrl,
-      nationalId: freelancerNationalId,
-      phone: freelancerPhone,
-      role: freelancerRole,
-      verified: freelancerVerified,
-    },
-    client: {
-      name: clientName,
-      email: clientEmail,
-      jobTitle: clientJobTitle,
-      skills: clientSkills,
-      userPhotoUrl: clientUserPhotoUrl,
-      _id: clientId,
-      accountCreatedAt: clientAccountCreatedAt,
-      backIdPhotoUrl: clientBackIdPhotoUrl,
-      bio: clientBio,
-      country: clientCountry,
-      frontIdPhotoUrl: clientFrontIdPhotoUrl,
-      nationalId: clientNationalId,
-      phone: clientPhone,
-      role: clientRole,
-      verified: clientVerified,
-    },
-  } = contract.params;
+} from 'react-native';
+import theme from '../../theme';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Entypo';
+import { calcDuration } from '../../utils';
+import { ActivityIndicator } from 'react-native';
+import moment from 'moment';
+import AppButton from '../../components/btns/AppButton';
+import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
+import { useNavigation } from '@react-navigation/native';
+import { updateContractStatusService } from '../../services/contractService';
+const ClientContractDetails = ({ route }) => {
+  const navigation = useNavigation();
+  const { contract } = route.params;
 
   const [alert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
   const onDismissSnackBar = () => setAlert(false);
-  const [completeContractLoading, setCompleteContractLoading] = useState(false);
-  const [cancelContractLoading, setCancelContractLoading] = useState(false);
-
-  //' - Start -> Handel Scroll Skills Container
+  const [isLoading, setIsLoading] = useState(false);
   const scrollViewRef = useRef(null);
   const [contentWidth, setContentWidth] = useState(0);
   const [scrollViewWidth, setScrollViewWidth] = useState(0);
@@ -97,61 +42,36 @@ const ClientContractDetails = () => {
       setDis(newDis);
     }
   };
-  //' - End ->----------------------------------------------------------------------------
 
-  const handelContractStatus = async (
-    contractId,
-    status,
-    completeContract,
-    cancelContract
-  ) => {
-    const data = {
-      status: status,
-    };
-    setLoading(true);
-    //'handel the loading of tow btns (complete and cancel contracts)
-    if (completeContract) {
-      setCompleteContractLoading(true);
-      setCancelContractLoading(false);
-    } else {
-      setCompleteContractLoading(false);
-      setCancelContractLoading(true);
-    }
-    const response = await updateContractStatusService(contractId, data);
-    setAlert(true);
-    if (response.status === "success") {
-      console.log("success");
+  const handelContractStatus = async (contractId, status) => {
+    setIsLoading(true);
+    const response = await updateContractStatusService(contractId, status);
+    if (response.status === 'success') {
+      setAlert(true);
       setIsSuccess(true);
-      setAlertMessage("added SuccessFully");
-      // setTimeout(() => {
-      //   navigation.navigate("ClientBase");
-      // }, 2000);
+      setAlertMessage('added SuccessFully');
+      setTimeout(() => {
+        navigation.goBack();
+      }, 2000);
     } else {
       setIsSuccess(false);
       setAlertMessage(response.message);
-      console.log("error response", response.message);
     }
-    setLoading(false);
-
-    setCompleteContractLoading(false);
-    setCancelContractLoading(false);
+    setIsLoading(false);
   };
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <View style={styles.container}>
         <View style={styles.detailsContainer}>
           {/* //' date_dots_Container */}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(jobCreatedAt).format("D MMMM YYYY")}
+              {moment(contract.jobID.createdAt).format('D MMMM YYYY')}
             </Text>
-            <TouchableOpacity
-              onPress={() => {
-                console.log("hi");
-              }}>
+            <TouchableOpacity onPress={() => {}}>
               <MaterialCommunityIcons
-                name="dots-vertical"
+                name='dots-vertical'
                 size={24}
                 color={theme.colors.ternaryDark}
                 style={{ marginRight: 0 }}
@@ -160,17 +80,17 @@ const ClientContractDetails = () => {
             </TouchableOpacity>
           </View>
           {/* //' contractTitle */}
-          <Text style={[styles.contractTitle, styles.textColor]}>{title}</Text>
+          <Text style={[styles.contractTitle, styles.textColor]}>
+            {contract.jobID.title}
+          </Text>
           {/* //' Fixed_price */}
           <Text style={[styles.Fixed_price]}>
             Fixed-price -Entry level-Est.budget:$
-            {jobBudget.length > 5
-              ? jobBudget.split("").slice(0, 5).join("")
-              : jobBudget}
+            {contract.jobID.budget}
           </Text>
           {/* //' contractDescription */}
           <Text style={[styles.contractDescription, styles.textColor]}>
-            {description}
+            {contract.jobID.description}
           </Text>
           {/* //' skillsContainer */}
           <View style={styles.skillsContainer}>
@@ -182,9 +102,10 @@ const ClientContractDetails = () => {
               onLayout={(event) =>
                 setScrollViewWidth(event.nativeEvent.layout.width)
               }
-              style={styles.skillsBox}>
-              {skillsRequired.length > 0 ? (
-                skillsRequired.map((skill, index) => {
+              style={styles.skillsBox}
+            >
+              {contract.jobID.skillsRequired.length > 0 ? (
+                contract.jobID.skillsRequired.map((skill, index) => {
                   return (
                     <Text key={index} style={styles.skillsItem}>
                       {skill}
@@ -200,7 +121,7 @@ const ClientContractDetails = () => {
 
             <TouchableOpacity onPress={scrollRight}>
               <Icon
-                name="chevron-thin-right"
+                name='chevron-thin-right'
                 size={30}
                 color={theme.colors.colorTextBlue}
                 style={styles.arrowRightIcon}
@@ -209,20 +130,18 @@ const ClientContractDetails = () => {
             </TouchableOpacity>
           </View>
 
-          {/* //' Client & Freelancer  */}
-          {/* //' ------------Client   */}
           <View style={styles.roleContaienr}>
             <Text style={styles.roleTitle}>Client</Text>
             <View style={styles.userContainer}>
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: clientUserPhotoUrl,
+                    uri: contract.clientId.userPhotoUrl,
                   }}
-                  style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 />
               </View>
-              <Text style={styles.userName}>{clientName}</Text>
+              <Text style={styles.userName}>{contract.clientId.name}</Text>
             </View>
           </View>
           {/* //' ------------Freelancer  */}
@@ -232,16 +151,16 @@ const ClientContractDetails = () => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: freelancerUserPhotoUrl,
+                    uri: contract.freelancerId.userPhotoUrl,
                   }}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: '100%',
+                    height: '100%',
                     borderRadius: 20,
                   }}
                 />
               </View>
-              <Text style={styles.userName}>{freelancerName}</Text>
+              <Text style={styles.userName}>{contract.freelancerId.name}</Text>
             </View>
           </View>
 
@@ -249,85 +168,61 @@ const ClientContractDetails = () => {
           <View style={[styles.price_duration_Contaienr, styles.d_flex_Row]}>
             <View style={[styles.priceContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Price</Text>
-              <Text style={styles.price}>
-                {price.length > 5
-                  ? price.split("").slice(0, 5).join("")
-                  : price}
-              </Text>
+              <Text style={styles.price}>${contract.amount.toString()}</Text>
             </View>
             <View style={[styles.durationContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Duration</Text>
-              <Text style={styles.duration}>{calcDuration(duration)}</Text>
+              <Text style={styles.duration}>
+                {calcDuration(contract.duration)}
+              </Text>
             </View>
           </View>
 
           {/* //' BTNs  */}
           <View style={styles.contractBTNS_Container}>
             <AppButton
-              buttonTitle={"complete contract"}
+              buttonTitle={'complete contract'}
               onPress={() => {
-                const completeContract = true;
-                const cancelContract = false;
-                handelContractStatus(
-                  jobId,
-                  1,
-                  completeContract,
-                  cancelContract
-                );
+                handelContractStatus(contract.jobID._id, 'completed');
               }}
-              loading={completeContractLoading}
               marginBottom={1}
               marginX={0}
-              btnWidth={"50%"}
+              btnWidth={'50%'}
               paddingY={13}
               paddingX={7}
               textSize={12}
               bgColor={theme.colors.primaryDark}
             />
             <AppButton
-              buttonTitle={"cancel contract"}
+              buttonTitle={'cancel contract'}
               onPress={() => {
-                const completeContract = false;
-                const cancelContract = true;
-                handelContractStatus(
-                  jobId,
-                  2,
-                  completeContract,
-                  cancelContract
-                );
+                handelContractStatus(contract.jobID._id, 'cancelled');
               }}
-              loading={cancelContractLoading}
               marginBottom={1}
               marginX={0}
-              btnWidth={"50%"}
+              btnWidth={'50%'}
               paddingY={13}
               paddingX={7}
               textSize={12}
               bgColor={theme.colors.primaryDark}
             />
           </View>
-          {/* //' Client_Status */}
-
           <Text style={styles.Client_Status}>
-            Contract Status:{"  "}
-            {status == 0
-              ? "pending"
-              : status == 1
-              ? "completed"
-              : status == 2
-              ? "Closed"
-              : ""}
+            Contract Status:{'  '}
+            {contract.status}
           </Text>
+
+          {isLoading && <ActivityIndicator size='large' color='#0000ff' />}
         </View>
       </View>
       <CustomeSnackBar
         visible={alert}
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
-        undoText="Undo"
-        undoColor="black"
-        bgColor={isSuccess ? theme.colors.colorTextBlue : "red"}
-        messageColor="#fff"
+        undoText='Undo'
+        undoColor='black'
+        bgColor={isSuccess ? theme.colors.colorTextBlue : 'red'}
+        messageColor='#fff'
       />
     </ScrollView>
   );
@@ -340,6 +235,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
+  scrollViewContainer: {
+    flexGrow: 1, // Allows the ScrollView to expand
+  },
   detailsContainer: {
     backgroundColor: theme.colors.secondaryGray,
     paddingVertical: 10,
@@ -348,10 +246,10 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius,
   },
   date_dots_Container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginVertical: 10,
   },
   dateText: {
@@ -362,7 +260,7 @@ const styles = StyleSheet.create({
   },
   contractTitle: {
     fontSize: 17,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     padding: 5,
     marginVertical: 10,
   },
@@ -370,22 +268,22 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
     marginVertical: 10,
     fontSize: 12,
-    fontWeight: "regular",
+    fontWeight: 'regular',
   },
   contractDescription: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     marginVertical: 10,
   },
   skillsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10,
     marginBottom: 22,
   },
   skillsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   skillsItem: {
     backgroundColor: theme.colors.secondaryBright,
@@ -401,14 +299,14 @@ const styles = StyleSheet.create({
   roleTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   userContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     gap: 15,
     marginLeft: 10,
   },
@@ -418,27 +316,27 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   price_duration_Contaienr: {
     marginVertical: 10,
-    width: "95%",
+    width: '95%',
   },
   d_flex_Row: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   d_flex_Column: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   },
   mainTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   price: {
@@ -449,17 +347,17 @@ const styles = StyleSheet.create({
   },
   contractBTNS_Container: {
     marginTop: 20,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
     gap: 5,
   },
   Client_Status: {
     fontSize: 12,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.ternaryDark,
     marginVertical: 20,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });
 export default ClientContractDetails;

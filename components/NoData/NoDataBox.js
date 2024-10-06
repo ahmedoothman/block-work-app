@@ -1,28 +1,27 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import theme from "../../theme";
-import { Button, Text } from "react-native-paper";
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import theme from '../../theme';
+import { Button, Text } from 'react-native-paper';
 
 const NoDataBox = ({ Title, Massage, Onpress, btnTitle, show, textCenter }) => {
-  console.log(Massage);
-
   return (
     <View>
       <View style={{ margin: 10 }}>
         <View style={styles.noDatacontentContainer}>
           <Text
-            variant="headlineSmall"
+            variant='headlineSmall'
             style={[
               styles.noDataTitle,
-              textCenter ? { textAlign: "center" } : {},
-            ]}>
+              textCenter ? { textAlign: 'center' } : {},
+            ]}
+          >
             {Title}
           </Text>
-          <Text variant="titleMedium" style={styles.noDataMessage}>
+          <Text variant='titleMedium' style={styles.noDataMessage}>
             {Massage}
           </Text>
           {show ? (
-            <Button style={styles.btn} mode="contained" onPress={Onpress}>
+            <Button style={styles.btn} mode='contained' onPress={Onpress}>
               {btnTitle}
             </Button>
           ) : (
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius,
     paddingHorizontal: 10,
     paddingVertical: 20,
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 50,
   },
   noDataTitle: {
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
   },
   noDataMessage: {
     color: theme.colors.ternaryDark,
-    textAlign: "center",
+    textAlign: 'center',
     paddingHorizontal: 10,
     marginVertical: 15,
   },

@@ -24,19 +24,19 @@ import { useSelector } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Import icon
 
 const ChatScreen = ({ route }) => {
-  const { userId: toUser } = route.params;
+  const { otherUser } = route.params;
   const userId = useSelector((state) => state.auth.user._id);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newMessage, setNewMessage] = useState('');
 
   // Dummy data for user info
-  const userInfo = route.params.fromUser;
+  // const userInfo = route.params.fromUser;
 
   useEffect(() => {
     const fetchChatHistory = async () => {
       try {
-        const response = await getChatHistory(toUser);
+        const response = await getChatHistory(otherUser._id);
         if (response.status === 'success') {
           setMessages(response.data); // Set the messages directly from fetched data
         } else {
@@ -79,10 +79,10 @@ const ChatScreen = ({ route }) => {
   const handleSendMessage = () => {
     const message = newMessage.trim();
     if (message) {
-      sendMessage(userId, toUser, message);
+      sendMessage(userId, otherUser._id, message);
       addMessage({
         from: { _id: userId },
-        to: { _id: toUser },
+        to: { _id: otherUser._id },
         message,
         timestamp: new Date().toISOString(),
       });
@@ -103,10 +103,10 @@ const ChatScreen = ({ route }) => {
     <View style={styles.container}>
       <View style={styles.userInfoContainer}>
         <Image
-          source={{ uri: userInfo.userPhotoUrl }}
+          source={{ uri: otherUser.userPhotoUrl }}
           style={styles.userPhoto}
         />
-        <Text style={styles.userName}>{userInfo.name}</Text>
+        <Text style={styles.userName}>{otherUser.name}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {messages.map((msg, index) => (

@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import theme from '../../theme';
 import JobsSearchBar from '../../components/Jobs/JobsSearchBar';
 import JobsBox from '../../components/Jobs/JobsBox';
-import { getMyJobsService } from '../../services/jobService';
+import { getMyJobsService, deleteJobService } from '../../services/jobService';
 import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 const { height } = Dimensions.get('window');
@@ -27,22 +27,54 @@ const Jobs = () => {
 
   const onDismissSnackBar = () => setVisible(false);
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      setIsLoading(true);
-      const response = await getMyJobsService();
+  useFocusEffect(
+    useCallback(() => {
+      const fetchJobs = async () => {
+        setIsLoading(true);
+        const response = await getMyJobsService();
+        if (response.status === 'success') {
+          // Sort the jobs by createdAt, assuming it's a timestamp string or Date object
+          const sortedJobs = response.data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          setJobs(sortedJobs);
+        } else {
+          setError(true);
+          setErrorMessage(response.message);
+          setVisible(true);
+          setJobs([]);
+        }
+        setIsLoading(false);
+      };
+
+      fetchJobs();
+
+      // Cleanup function (optional) can be returned here if needed
+      return () => {
+        setJobs([]); // Example cleanup logic if necessary
+      };
+    }, [])
+  );
+
+  const handleDelete = async (jobId) => {
+    try {
+      const response = await deleteJobService(jobId);
       if (response.status === 'success') {
-        setJobs(response.data);
+        setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
       } else {
-        setError(true);
         setErrorMessage(response.message);
         setVisible(true);
-        setJobs([]);
       }
-      setIsLoading(false);
-    };
-    fetchJobs();
-  }, []);
+    } catch (error) {
+      setErrorMessage('Error deleting the job.');
+      setVisible(true);
+    }
+  };
+
+  const editJob = (jobId) => {
+    const job = jobs.find((job) => job._id === jobId);
+    navigation.navigate('UpdateJobForm', { job });
+  };
   return (
     <View style={styles.container}>
       <JobsSearchBar />
@@ -72,7 +104,13 @@ const Jobs = () => {
           </View>
         ) : (
           jobs.map((job) => (
-            <JobsBox key={job._id} jobData={job} isclient={true} />
+            <JobsBox
+              key={job._id}
+              jobData={job}
+              isclient={true}
+              onDelete={handleDelete}
+              onEdit={editJob}
+            />
           ))
         )}
       </ScrollView>

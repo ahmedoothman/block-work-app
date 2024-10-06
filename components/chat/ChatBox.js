@@ -1,17 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import theme from "../../theme";
-
+import theme from '../../theme';
+import { useSelector } from 'react-redux';
 const ChatBox = ({ data }) => {
   const navigation = useNavigation();
-  const { lastMessage = 'No messages yet', lastTimestamp, fromUser } = data;
+  const user = useSelector((state) => state.auth.user);
+  const {
+    lastMessage = 'No messages yet',
+    lastTimestamp,
+    fromUser,
+    toUser,
+  } = data;
+
+  const otherUser = fromUser?._id === user._id ? toUser : fromUser;
 
   // Handle potential undefined fromUser properties
-  const userId = fromUser?._id || '';
-  const userName = fromUser?.name || 'Unknown User';
+  const userId = otherUser?._id || '';
+  const userName = otherUser?.name || 'Unknown User';
   const userPhotoUrl =
-    fromUser?.userPhotoUrl || 'https://via.placeholder.com/50'; // Fallback image
+    otherUser?.userPhotoUrl || 'https://via.placeholder.com/50'; // Fallback image
 
   // Convert timestamp to a more readable format
   const formattedTime = lastTimestamp
@@ -24,7 +32,7 @@ const ChatBox = ({ data }) => {
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('ChatScreen', { userId, fromUser })}
+      onPress={() => navigation.navigate('ChatScreen', { userId, otherUser })}
     >
       <Image source={{ uri: userPhotoUrl }} style={styles.avatar} />
       <View style={styles.textContainer}>

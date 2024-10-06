@@ -5,14 +5,12 @@ import {
   Text,
   View,
   Dimensions,
-
-} from "react-native";
-import React, { useState } from "react";
-import theme from "../../theme";
-import Icon from "react-native-vector-icons/Entypo";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
-
+} from 'react-native';
+import React, { useState } from 'react';
+import theme from '../../theme';
+import Icon from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window'); // Get screen width for responsiveness Nice
 
@@ -33,9 +31,14 @@ const formatTimeAgo = (dateString) => {
   }
 };
 
-export default function JobsBox({ jobData, isclient }) {
+export default function JobsBox({ jobData, isclient, onDelete, onEdit }) {
   const postingTimeOfJob = formatTimeAgo(jobData.createdAt);
   const navigation = useNavigation();
+
+  const handleDelete = async () => {
+    await onDelete(jobData._id);
+  };
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -55,20 +58,20 @@ export default function JobsBox({ jobData, isclient }) {
       <View style={styles.jobBox}>
         <View style={styles.header}>
           <Text style={styles.timePriceText}>{postingTimeOfJob}</Text>
-          <Text style={styles.statusText}>Status: {jobData.status}</Text>
+          {isclient && (
+            <Text style={styles.statusText}>Status: {jobData.status}</Text>
+          )}
         </View>
         <Text style={styles.titleDescriptionText}>{jobData.title}</Text>
         <Text style={styles.timePriceText}>
           Fixed-price - Entry level - Est. budget: ${jobData.budget}
         </Text>
 
-        {/* New Status Field */}
         <Text style={styles.descriptionText}>
           {jobData.description} <Text style={styles.moreText}>more</Text>
         </Text>
-        {/* Skills Box */}
-        <View style={styles.skillsBox}>
 
+        <View style={styles.skillsBox}>
           <View style={styles.skillsContainer}>
             {jobData.skillsRequired.map((skill, i) => (
               <Text key={i} style={styles.skillsItem}>
@@ -78,14 +81,14 @@ export default function JobsBox({ jobData, isclient }) {
           </View>
           <View style={styles.arrowRightContainer}>
             <Icon
-              name="chevron-thin-right"
+              name='chevron-thin-right'
               size={25}
               color={theme.colors.primaryBright}
               style={styles.arrowRightIcon}
             />
           </View>
         </View>
-        {/* Payment and Stars Box */}
+
         <View style={styles.paymentStarsBox}>
           <View style={styles.paymentBox}>
             <AntDesign
@@ -106,7 +109,7 @@ export default function JobsBox({ jobData, isclient }) {
             ))}
           </View>
         </View>
-        {/* Location and Proposals Box */}
+
         <View style={styles.locationProposalsBox}>
           <View style={styles.locationBox}>
             <AntDesign
@@ -122,11 +125,29 @@ export default function JobsBox({ jobData, isclient }) {
             </Text>
           </View>
         </View>
+
+        {isclient && (
+          <View style={styles.actions}>
+            <TouchableOpacity
+              onPress={handleDelete}
+              style={styles.deleteButton}
+            >
+              <AntDesign name='delete' size={20} color={theme.colors.white} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                onEdit(jobData._id);
+              }}
+              style={styles.editButton}
+            >
+              <AntDesign name='edit' size={20} color={theme.colors.white} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
 }
-
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
@@ -171,18 +192,18 @@ const styles = StyleSheet.create({
     color: theme.colors.primaryBright,
   },
   skillsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 10,
     marginBottom: 15,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   skillsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "flex-start",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     gap: 5,
-    width: "90%",
+    width: '90%',
   },
   skillsItem: {
     backgroundColor: theme.colors.secondaryBright,
@@ -194,15 +215,13 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
   },
   arrowRightContainer: {
-    marginVertical: "auto",
-    width: "10%",
+    marginVertical: 'auto',
+    width: '10%',
   },
   arrowRightIcon: {
-
     // position: "absolute",
     // right: 10,
     // top: "50%",
-
   },
   paymentStarsBox: {
     flexDirection: 'row',
@@ -239,5 +258,26 @@ const styles = StyleSheet.create({
   },
   proposalsText: {
     color: theme.colors.ternaryDark,
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  deleteButton: {
+    backgroundColor: theme.colors.danger,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  editButton: {
+    backgroundColor: theme.colors.primaryDark,
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

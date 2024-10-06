@@ -6,7 +6,8 @@ import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 import { getWalletService } from '../../services/walletService';
 import { ActivityIndicator } from 'react-native-paper';
-
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
 export default function Balance() {
   const navigation = useNavigation();
   const [WalWetService, setWalletService] = useState(null);
@@ -14,21 +15,41 @@ export default function Balance() {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchGetWalletService = async () => {
-      const response = await getWalletService();
-      if (response.status == 'success') {
-        console.log(response.data);
-        setWalletService(response.data);
-      } else {
-        setError(true);
-        setErrorMessage(response.message);
-      }
-      setLoading(false);
-    };
-    fetchGetWalletService();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      let isActive = true; // to track if the component is still mounted
+
+      const fetchGetWalletService = async () => {
+        setLoading(true);
+        try {
+          const response = await getWalletService();
+          if (isActive) {
+            if (response.status === 'success') {
+              setWalletService(response.data);
+            } else {
+              setError(true);
+              setErrorMessage(response.message);
+            }
+          }
+        } catch (error) {
+          if (isActive) {
+            setError(true);
+            setErrorMessage('Failed to fetch data');
+          }
+        } finally {
+          if (isActive) {
+            setLoading(false);
+          }
+        }
+      };
+
+      fetchGetWalletService();
+
+      return () => {
+        isActive = false; // cleanup when the component unmounts
+      };
+    }, [])
+  );
 
   if (loading) {
     return (

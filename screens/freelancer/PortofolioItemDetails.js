@@ -6,17 +6,17 @@ import {
   TouchableOpacity,
   Dimensions,
   Animated,
-} from "react-native";
-import React, { useRef } from "react";
-import theme from "../../theme";
-import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native-gesture-handler";
-import { deletePortfolioService } from "../../services/portofolioService";
-import { ActivityIndicator, Snackbar } from "react-native-paper";
-import { useState } from "react";
-import AntDesign from "react-native-vector-icons/AntDesign";
+} from 'react-native';
+import React, { useRef } from 'react';
+import theme from '../../theme';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { deletePortfolioService } from '../../services/portofolioService';
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import { useState } from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get('window');
 
 export default function PortofolioItemDetails({ route }) {
   let { item, checkFreelancerRole } = route.params;
@@ -27,34 +27,32 @@ export default function PortofolioItemDetails({ route }) {
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [messageType, setMessageType] = useState("");
-  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState('');
+  const [message, setMessage] = useState('');
   const [visible, setVisible] = useState(false);
-  const scrollX = useRef(new Animated.Value(0)).current; 
+  const scrollX = useRef(new Animated.Value(0)).current;
 
   const onDismissSnackBar = () => setVisible(false);
 
   const handleDeletePortoflioItem = async () => {
-    console.log("deleteeeeee");
     setIsLoading(true);
     const response = await deletePortfolioService(_id);
-    if (response.status === "success") {
+    if (response.status === 'success') {
       setVisible(true);
-      setMessageType("success");
-      setMessage("Portfolio item is deleted successfully");
+      setMessageType('success');
+      setMessage('Portfolio item is deleted successfully');
       setPortfolioItem(null);
       setTimeout(() => {
         navigation.goBack();
       }, 2000);
     } else {
       setVisible(true);
-      setMessageType("error");
+      setMessageType('error');
       setMessage(response.message);
     }
     setIsLoading(false);
   };
 
-  
   const position = Animated.divide(scrollX, width);
 
   return (
@@ -66,19 +64,16 @@ export default function PortofolioItemDetails({ route }) {
             <Text style={styles.label}>{title}</Text>
             <Animated.ScrollView
               horizontal
-              pagingEnabled 
+              pagingEnabled
               scrollEventThrottle={16}
               onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                { useNativeDriver: false } 
+                { useNativeDriver: false }
               )}
             >
               {files.map((uri, i) => (
                 <View key={i} style={styles.imageContainer}>
-                  <Image
-                    source={{ uri: uri }}
-                    style={styles.image}
-                  />
+                  <Image source={{ uri: uri }} style={styles.image} />
                 </View>
               ))}
             </Animated.ScrollView>
@@ -90,13 +85,13 @@ export default function PortofolioItemDetails({ route }) {
               const dotScale = position.interpolate({
                 inputRange: [i - 1, i, i + 1],
                 outputRange: [0.8, 1.5, 0.8],
-                extrapolate: "clamp",
+                extrapolate: 'clamp',
               });
-              
+
               return (
                 <Animated.View
                   key={i}
-                  style={[styles.dot, { transform: [{ scale: dotScale }]}]}
+                  style={[styles.dot, { transform: [{ scale: dotScale }] }]}
                 />
               );
             })}
@@ -114,9 +109,9 @@ export default function PortofolioItemDetails({ route }) {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  navigation.navigate("CreatePortofolio", {
+                  navigation.navigate('CreatePortofolio', {
                     isEdit,
-                    screenTitle: "Update Portofolio",
+                    screenTitle: 'Update Portofolio',
                     _id,
                     item,
                   });
@@ -125,11 +120,11 @@ export default function PortofolioItemDetails({ route }) {
               >
                 <Text style={styles.buttonText}>
                   <AntDesign
-                    name="edit"
+                    name='edit'
                     size={18}
                     color={theme.colors.white}
                     style={styles.icon}
-                  />{" "}
+                  />{' '}
                   Edit
                 </Text>
               </TouchableOpacity>
@@ -144,11 +139,11 @@ export default function PortofolioItemDetails({ route }) {
                 ) : (
                   <Text style={styles.buttonText}>
                     <AntDesign
-                      name="delete"
+                      name='delete'
                       size={18}
                       color={theme.colors.white}
                       style={styles.icon}
-                    />{" "}
+                    />{' '}
                     Delete
                   </Text>
                 )}
@@ -158,13 +153,13 @@ export default function PortofolioItemDetails({ route }) {
         </>
       ) : (
         <View style={styles.folderContainer}>
-        <Image
-          source={require("../../assets/images/blueEmpty.webp")}
-          style={styles.folderImage}
-        />
-        <Text style={styles.noItemMessage}>
-          This portfolio item has been deleted.
-        </Text>
+          <Image
+            source={require('../../assets/images/blueEmpty.webp')}
+            style={styles.folderImage}
+          />
+          <Text style={styles.noItemMessage}>
+            This portfolio item has been deleted.
+          </Text>
         </View>
       )}
 
@@ -174,7 +169,10 @@ export default function PortofolioItemDetails({ route }) {
         style={[
           styles.snackbar,
           {
-            backgroundColor: messageType === "success" ? theme.colors.success : theme.colors.danger
+            backgroundColor:
+              messageType === 'success'
+                ? theme.colors.success
+                : theme.colors.danger,
           },
         ]}
       >
@@ -189,31 +187,31 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.secondaryDark,
     padding: 10,
-    position: "relative",
+    position: 'relative',
   },
   imageGroup: {
     marginVertical: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   label: {
     color: theme.colors.white,
     fontSize: 20,
     marginBottom: 10,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   imageContainer: {
-    width: width * 0.9, 
+    width: width * 0.9,
     marginRight: 10,
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: width * 0.5,
     borderRadius: 10,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   dotsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginVertical: 10,
   },
   dot: {
@@ -221,24 +219,24 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 5,
     // backgroundColor: "white",
-    backgroundColor:theme.colors.primaryBright,
+    backgroundColor: theme.colors.primaryBright,
     marginHorizontal: 5,
   },
   description: {
     color: theme.colors.ternaryLight,
     fontSize: 16,
-    textAlign: "justify",
+    textAlign: 'justify',
   },
   descriptionGroup: {
     marginVertical: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   folderContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
-    backgroundColor: theme.colors.secondaryDark, 
+    backgroundColor: theme.colors.secondaryDark,
     borderRadius: 10,
     marginVertical: 20,
   },
@@ -246,11 +244,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginBottom: 15,
-    // tintColor: theme.colors.primaryBright, 
+    // tintColor: theme.colors.primaryBright,
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     marginVertical: 40,
   },
   button: {
@@ -258,20 +256,20 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
     color: theme.colors.white,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 15,
   },
   icon: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   snackbar: {
     borderRadius: 8,
-    position: "absolute",
+    position: 'absolute',
     bottom: 5,
   },
   snackbarText: {
@@ -280,7 +278,7 @@ const styles = StyleSheet.create({
   noItemMessage: {
     color: theme.colors.white,
     fontSize: 18,
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 20,
   },
 });

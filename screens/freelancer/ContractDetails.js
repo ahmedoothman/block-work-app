@@ -19,27 +19,7 @@ import moment from 'moment';
 const ContractDetails = () => {
   // const user = useSelector((state) => state.auth.user);
   const userRole = useSelector((state) => state.auth.user).role;
-  const contract = useRoute();
-  const {
-    status,
-    amount: budget,
-    job: { _id, createdAt, skillsRequired, title, description },
-    freelancer: {
-      name: freelancerName,
-      email: freelancerEmail,
-      jobTitle: freelancerJobTitle,
-      skills: freelancerSkills,
-      userPhotoUrl: freelancerUserPhotoUrl,
-    },
-    client: {
-      name: clientName,
-      email: clientEmail,
-      jobTitle: clientJobTitle,
-      skills: clientSkills,
-      userPhotoUrl: clientUserPhotoUrl,
-    },
-    duration,
-  } = contract.params;
+  const { contract } = useRoute().params;
 
   // ' Hande date -----------------------------------------------------
   //' - Start -> Handel Scroll Skills Container
@@ -63,13 +43,13 @@ const ContractDetails = () => {
   //' - End ->----------------------------------------------------------------------------
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <View style={styles.container}>
         <View style={styles.detailsContainer}>
           {/* //' date_dots_Container */}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(createdAt).format('D MMMM YYYY')}
+              {moment(contract.jobID.createdAt).format('D MMMM YYYY')}
             </Text>
             {/* //'28 august 2024' */}
             <TouchableOpacity
@@ -87,14 +67,16 @@ const ContractDetails = () => {
             </TouchableOpacity>
           </View>
           {/* //' contractTitle */}
-          <Text style={[styles.contractTitle, styles.textColor]}>{title}</Text>
+          <Text style={[styles.contractTitle, styles.textColor]}>
+            {contract.jobID.title}
+          </Text>
           {/* //' Fixed_price */}
           <Text style={[styles.Fixed_price]}>
-            Fixed-price -Entry level-Est.budget:${budget}
+            Fixed-price -Entry level-Est.budget:${contract.jobID.budget}
           </Text>
           {/* //' contractDescription */}
           <Text style={[styles.contractDescription, styles.textColor]}>
-            {description}
+            {contract.jobID.description}
           </Text>
           {/* //' skillsContainer */}
           <View style={styles.skillsContainer}>
@@ -108,8 +90,8 @@ const ContractDetails = () => {
               }
               style={styles.skillsBox}
             >
-              {skillsRequired.length > 0 ? (
-                skillsRequired.map((skill, index) => {
+              {contract.jobID.skillsRequired.length > 0 ? (
+                contract.jobID.skillsRequired.map((skill, index) => {
                   return (
                     <Text key={index} style={styles.skillsItem}>
                       {skill}
@@ -142,12 +124,12 @@ const ContractDetails = () => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: clientUserPhotoUrl,
+                    uri: contract.clientId.userPhotoUrl,
                   }}
                   style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 />
               </View>
-              <Text style={styles.userName}>{clientName}</Text>
+              <Text style={styles.userName}>{contract.clientId.name}</Text>
             </View>
           </View>
           {/* //' ------------Freelancer  */}
@@ -157,7 +139,7 @@ const ContractDetails = () => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: freelancerUserPhotoUrl,
+                    uri: contract.freelancerId.userPhotoUrl,
                   }}
                   style={{
                     width: '100%',
@@ -166,7 +148,7 @@ const ContractDetails = () => {
                   }}
                 ></Image>
               </View>
-              <Text style={styles.userName}>{freelancerName}</Text>
+              <Text style={styles.userName}>{contract.freelancerId.name}</Text>
             </View>
           </View>
 
@@ -174,11 +156,13 @@ const ContractDetails = () => {
           <View style={[styles.price_duration_Contaienr, styles.d_flex_Row]}>
             <View style={[styles.priceContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Price</Text>
-              <Text style={styles.price}>{budget}</Text>
+              <Text style={styles.price}>{contract.amount}</Text>
             </View>
             <View style={[styles.durationContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Duration</Text>
-              <Text style={styles.duration}>{calcDuration(duration)}</Text>
+              <Text style={styles.duration}>
+                {calcDuration(contract.duration)}
+              </Text>
             </View>
           </View>
 
@@ -188,7 +172,7 @@ const ContractDetails = () => {
             <>
               {/* //' Client_Status */}
               <Text style={styles.Client_Status}>
-                Client Status: {status == 1 ? 'closed' : 'not closed yet'}
+                Client Status: {contract.status}
               </Text>
             </>
           ) : (
@@ -221,6 +205,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     paddingVertical: 10,
+  },
+  scrollViewContainer: {
+    flexGrow: 1, // Allows the ScrollView to expand
   },
   detailsContainer: {
     backgroundColor: theme.colors.secondaryGray,

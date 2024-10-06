@@ -5,24 +5,24 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
-  ScrollView
-} from "react-native";
-import React from "react";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import theme from "../../theme";
-import { getPortfolioService } from "../../services/portofolioService";
+  ScrollView,
+} from 'react-native';
+import React from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import theme from '../../theme';
+import { getPortfolioService } from '../../services/portofolioService';
 
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../../store/auth-slice";
-import { useEffect, useState } from "react";
-import { ActivityIndicator, Snackbar } from "react-native-paper";
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useCallback } from 'react';
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import NoDataBox from '../../components/NoData/NoDataBox';
+import { useFocusEffect } from '@react-navigation/native';
 
-const { height } = Dimensions.get("window");
-export default function Portofolio() {
+const { height } = Dimensions.get('window');
+export default function Portofolio({ route }) {
   //{route}
-  // const { userId} = route.params;
+  const { userId } = route.params;
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -30,37 +30,36 @@ export default function Portofolio() {
   const [protofolioProjects, setProtofolioProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
 
   const onDismissSnackBar = () => setVisible(false);
 
-  const { _id, role } = user;
- 
-  const checkFreelancerRole = role === "freelancer";
-  const isEdit=false;
-  
-     
-  useEffect(() => {
-    const fetchPortofolioProjects = async () => {
-      setIsLoading(true);
+  const { role } = user;
 
-      const response = await getPortfolioService(_id);
-      // console.log("responseee", response.data.length)
-      if (response.status === "success") {
-        setProtofolioProjects(response.data);
-        
-      } else {
-        setError(true);
-        setErrorMessage(response.message);
-        setVisible(true);
-        setProtofolioProjects([]);
-      }
-      setIsLoading(false);
-    };
-    fetchPortofolioProjects();
-  }, [_id]);
+  const checkFreelancerRole = role === 'freelancer';
+  const isEdit = false;
 
+  useFocusEffect(
+    useCallback(() => {
+      const fetchPortofolioProjects = async () => {
+        setIsLoading(true);
+
+        const response = await getPortfolioService(userId);
+        if (response.status === 'success') {
+          setProtofolioProjects(response.data);
+        } else {
+          setError(true);
+          setErrorMessage(response.message);
+          setVisible(true);
+          setProtofolioProjects([]);
+        }
+        setIsLoading(false);
+      };
+
+      fetchPortofolioProjects();
+    }, [userId])
+  );
   return (
     <View style={styles.container}>
       {/* AddNewButton Box*/}
@@ -68,11 +67,11 @@ export default function Portofolio() {
         <View>
           <TouchableOpacity
             style={styles.AddNewBox}
-            onPress={() => navigation.navigate("CreatePortofolio",{isEdit})}
+            onPress={() => navigation.navigate('CreatePortofolio', { isEdit })}
             activeOpacity={0.8}
           >
             <AntDesign
-              name="pluscircleo"
+              name='pluscircleo'
               size={25}
               color={theme.colors.primaryBright}
             />
@@ -92,27 +91,41 @@ export default function Portofolio() {
         </View>
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.ProjectsBox}>
-          {protofolioProjects.length?(protofolioProjects.map((item) => (
-            <TouchableOpacity
-              key={item._id}
-              style={styles.projectItem}
-              activeOpacity={0.7}
-              onPress={() => navigation.navigate("PortofolioItemDetails",{item,checkFreelancerRole})}
-            >
-              <Image
-                source={{
-                  uri: item.files[3],
-                }}
-                style={styles.image}
-              />
-              <Text style={styles.ProjectName}>{item.description}</Text>
-            </TouchableOpacity>
-          ))):( <View style={styles.NoDataContainer}>
-                 <NoDataBox Title={"No projects found"} show={false} Massage={"You don't have projects in your protofolio, add some and it will appear here"}/>
-               </View>
-              )}
-        </View>
+          <View style={styles.ProjectsBox}>
+            {protofolioProjects.length ? (
+              protofolioProjects.map((item) => (
+                <TouchableOpacity
+                  key={item._id}
+                  style={styles.projectItem}
+                  activeOpacity={0.7}
+                  onPress={() =>
+                    navigation.navigate('PortofolioItemDetails', {
+                      item,
+                      checkFreelancerRole,
+                    })
+                  }
+                >
+                  <Image
+                    source={{
+                      uri: item.files[0],
+                    }}
+                    style={styles.image}
+                  />
+                  <Text style={styles.ProjectName}>{item.title}</Text>
+                </TouchableOpacity>
+              ))
+            ) : (
+              <View style={styles.NoDataContainer}>
+                <NoDataBox
+                  Title={'No projects found'}
+                  show={false}
+                  Massage={
+                    "You don't have projects in your protofolio, add some and it will appear here"
+                  }
+                />
+              </View>
+            )}
+          </View>
         </ScrollView>
       )}
 
@@ -132,63 +145,62 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.secondaryDark,
     padding: 10,
-    position: "relative",
+    position: 'relative',
   },
   AddNewBox: {
     margin: 20,
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 10,
   },
   AddNewText: {
     color: theme.colors.white,
     fontSize: 17,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   ProjectsBox: {
     marginTop: 30,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     // backgroundColor:"red",
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   scrollContainer: {
-    paddingBottom: 20, 
+    paddingBottom: 20,
   },
   projectItem: {
-    width: "47%",
+    width: '47%',
     marginBottom: 20,
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: 100,
     borderRadius: 10,
   },
   ProjectName: {
     color: theme.colors.primaryBright,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 8,
     fontSize: 15,
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
-    position: "absolute",
+    position: 'absolute',
     bottom: 10,
     left: 10,
     right: 10,
   },
   loadingIndicator: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     height: height * 0.6,
   },
   NoDataContainer: {
     flex: 1,
-    justifyContent: 'center',  // Center vertically
-    alignItems: 'center',      // Center horizontally
-   
-  }
+    justifyContent: 'center', // Center vertically
+    alignItems: 'center', // Center horizontally
+  },
 });
 
 {
