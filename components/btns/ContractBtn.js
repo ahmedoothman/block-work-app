@@ -22,6 +22,7 @@ const ContractBtn = ({
         {
           backgroundColor: bgc,
           borderColor: borderColor,
+          width: "auto",
         },
       ]}
       labelStyle={{ fontSize: textSize, fontWeight: fontWeight }}

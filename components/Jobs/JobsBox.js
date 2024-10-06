@@ -5,12 +5,14 @@ import {
   Text,
   View,
   Dimensions,
-} from 'react-native';
-import React from 'react';
-import theme from '../../theme';
-import Icon from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
+
+} from "react-native";
+import React, { useState } from "react";
+import theme from "../../theme";
+import Icon from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
+
 
 const { width } = Dimensions.get('window'); // Get screen width for responsiveness Nice
 
@@ -34,7 +36,6 @@ const formatTimeAgo = (dateString) => {
 export default function JobsBox({ jobData, isclient }) {
   const postingTimeOfJob = formatTimeAgo(jobData.createdAt);
   const navigation = useNavigation();
-
   return (
     <TouchableOpacity
       style={styles.container}
@@ -67,17 +68,22 @@ export default function JobsBox({ jobData, isclient }) {
         </Text>
         {/* Skills Box */}
         <View style={styles.skillsBox}>
-          {jobData.skillsRequired.map((skill, i) => (
-            <Text key={i} style={styles.skillsItem}>
-              {skill}
-            </Text>
-          ))}
-          <Icon
-            name='chevron-thin-right'
-            size={20}
-            color={theme.colors.primaryBright}
-            style={styles.arrowRightIcon}
-          />
+
+          <View style={styles.skillsContainer}>
+            {jobData.skillsRequired.map((skill, i) => (
+              <Text key={i} style={styles.skillsItem}>
+                {skill}
+              </Text>
+            ))}
+          </View>
+          <View style={styles.arrowRightContainer}>
+            <Icon
+              name="chevron-thin-right"
+              size={25}
+              color={theme.colors.primaryBright}
+              style={styles.arrowRightIcon}
+            />
+          </View>
         </View>
         {/* Payment and Stars Box */}
         <View style={styles.paymentStarsBox}>
@@ -165,11 +171,18 @@ const styles = StyleSheet.create({
     color: theme.colors.primaryBright,
   },
   skillsBox: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+    flexDirection: "row",
     marginTop: 10,
     marginBottom: 15,
+    justifyContent: "space-between",
+  },
+  skillsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 5,
+    width: "90%",
   },
   skillsItem: {
     backgroundColor: theme.colors.secondaryBright,
@@ -177,13 +190,19 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 8,
     marginRight: 8,
-    marginBottom: 8,
+    // marginBottom: 8,
     color: theme.colors.ternaryDark,
   },
+  arrowRightContainer: {
+    marginVertical: "auto",
+    width: "10%",
+  },
   arrowRightIcon: {
-    position: 'absolute',
-    right: 10,
-    top: '50%',
+
+    // position: "absolute",
+    // right: 10,
+    // top: "50%",
+
   },
   paymentStarsBox: {
     flexDirection: 'row',
