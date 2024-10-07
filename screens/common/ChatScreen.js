@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -21,7 +21,7 @@ import {
 } from '../../services/socketService';
 import theme from '../../theme';
 import { useSelector } from 'react-redux';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'; // Import icon
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ChatScreen = ({ route }) => {
   const { otherUser } = route.params;
@@ -29,16 +29,17 @@ const ChatScreen = ({ route }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newMessage, setNewMessage] = useState('');
-
-  // Dummy data for user info
-  // const userInfo = route.params.fromUser;
+  const scrollViewRef = useRef(null);
 
   useEffect(() => {
     const fetchChatHistory = async () => {
       try {
         const response = await getChatHistory(otherUser._id);
         if (response.status === 'success') {
-          setMessages(response.data); // Set the messages directly from fetched data
+          setMessages(response.data);
+          if (scrollViewRef.current) {
+            scrollViewRef.current.scrollToEnd({ animated: true });
+          }
         } else {
           Alert.alert('Error', response.message || 'An error occurred');
         }
@@ -68,9 +69,15 @@ const ChatScreen = ({ route }) => {
     setupSocket();
 
     return () => {
-      disconnectSocket(); // Clean up the socket connection
+      disconnectSocket();
     };
   }, [userId]);
+
+  useEffect(() => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  }, [messages]);
 
   const addMessage = (msg) => {
     setMessages((prevMessages) => [...prevMessages, msg]);
@@ -108,7 +115,11 @@ const ChatScreen = ({ route }) => {
         />
         <Text style={styles.userName}>{otherUser.name}</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView
+        ref={scrollViewRef}
+        contentContainerStyle={styles.scrollContainer}
+        inverted
+      >
         {messages.map((msg, index) => (
           <MessageBox
             key={msg._id || index}
@@ -138,7 +149,6 @@ const ChatScreen = ({ route }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -200,5 +210,4 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
   },
 });
-
 export default ChatScreen;

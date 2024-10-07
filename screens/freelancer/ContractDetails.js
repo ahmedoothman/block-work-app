@@ -49,7 +49,7 @@ const ContractDetails = () => {
           {/* //' date_dots_Container */}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(contract.jobID.createdAt).format('D MMMM YYYY')}
+              {moment(contract.job.createdAt).format('D MMMM YYYY')}
             </Text>
             {/* //'28 august 2024' */}
             <TouchableOpacity
@@ -68,15 +68,15 @@ const ContractDetails = () => {
           </View>
           {/* //' contractTitle */}
           <Text style={[styles.contractTitle, styles.textColor]}>
-            {contract.jobID.title}
+            {contract.job.title}
           </Text>
           {/* //' Fixed_price */}
           <Text style={[styles.Fixed_price]}>
-            Fixed-price -Entry level-Est.budget:${contract.jobID.budget}
+            Fixed-price -Entry level-Est.budget:${contract.job.budget}
           </Text>
           {/* //' contractDescription */}
           <Text style={[styles.contractDescription, styles.textColor]}>
-            {contract.jobID.description}
+            {contract.job.description}
           </Text>
           {/* //' skillsContainer */}
           <View style={styles.skillsContainer}>
@@ -90,8 +90,8 @@ const ContractDetails = () => {
               }
               style={styles.skillsBox}
             >
-              {contract.jobID.skillsRequired.length > 0 ? (
-                contract.jobID.skillsRequired.map((skill, index) => {
+              {contract.job.skillsRequired.length > 0 ? (
+                contract.job.skillsRequired.map((skill, index) => {
                   return (
                     <Text key={index} style={styles.skillsItem}>
                       {skill}
@@ -124,12 +124,12 @@ const ContractDetails = () => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: contract.clientId.userPhotoUrl,
+                    uri: contract.client.userPhotoUrl,
                   }}
                   style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 />
               </View>
-              <Text style={styles.userName}>{contract.clientId.name}</Text>
+              <Text style={styles.userName}>{contract.client.name}</Text>
             </View>
           </View>
           {/* //' ------------Freelancer  */}
@@ -139,7 +139,7 @@ const ContractDetails = () => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: contract.freelancerId.userPhotoUrl,
+                    uri: contract.freelancer.userPhotoUrl,
                   }}
                   style={{
                     width: '100%',
@@ -148,7 +148,7 @@ const ContractDetails = () => {
                   }}
                 ></Image>
               </View>
-              <Text style={styles.userName}>{contract.freelancerId.name}</Text>
+              <Text style={styles.userName}>{contract.freelancer.name}</Text>
             </View>
           </View>
 

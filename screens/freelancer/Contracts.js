@@ -55,7 +55,7 @@ const Contracts = () => {
                     contract: contract,
                   });
                 }}
-                contractTitle={contract.jobID.title}
+                contractTitle={contract.job.title}
               />
             );
           })}

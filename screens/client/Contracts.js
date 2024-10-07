@@ -21,6 +21,7 @@ const Contracts = () => {
       const fetchAllClientContracts = async () => {
         const response = await getAllClientContract();
         if (response.status === 'success') {
+          console.log(response.data);
           setContracts(response.data);
         } else {
           setError(true);
@@ -54,7 +55,7 @@ const Contracts = () => {
                     contract: contract,
                   });
                 }}
-                contractTitle={contract.jobID.title}
+                contractTitle={contract.job.title}
               />
             );
           })}

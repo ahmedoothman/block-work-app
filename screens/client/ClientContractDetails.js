@@ -47,7 +47,7 @@ const ClientContractDetails = ({ route }) => {
     setIsLoading(true);
     const response = await updateContractStatusService(
       contractId,
-      contract.freelancerId._id,
+      contract.freelancer._id,
       status
     );
     if (response.status === 'success') {
@@ -71,7 +71,7 @@ const ClientContractDetails = ({ route }) => {
           {/* //' date_dots_Container */}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(contract.jobID.createdAt).format('D MMMM YYYY')}
+              {moment(contract.job.createdAt).format('D MMMM YYYY')}
             </Text>
             <TouchableOpacity onPress={() => {}}>
               <MaterialCommunityIcons
@@ -85,16 +85,16 @@ const ClientContractDetails = ({ route }) => {
           </View>
           {/* //' contractTitle */}
           <Text style={[styles.contractTitle, styles.textColor]}>
-            {contract.jobID.title}
+            {contract.job.title}
           </Text>
           {/* //' Fixed_price */}
           <Text style={[styles.Fixed_price]}>
             Fixed-price -Entry level-Est.budget:$
-            {contract.jobID.budget}
+            {contract.job.budget}
           </Text>
           {/* //' contractDescription */}
           <Text style={[styles.contractDescription, styles.textColor]}>
-            {contract.jobID.description}
+            {contract.job.description}
           </Text>
           {/* //' skillsContainer */}
           <View style={styles.skillsContainer}>
@@ -108,8 +108,8 @@ const ClientContractDetails = ({ route }) => {
               }
               style={styles.skillsBox}
             >
-              {contract.jobID.skillsRequired.length > 0 ? (
-                contract.jobID.skillsRequired.map((skill, index) => {
+              {contract.job.skillsRequired.length > 0 ? (
+                contract.job.skillsRequired.map((skill, index) => {
                   return (
                     <Text key={index} style={styles.skillsItem}>
                       {skill}
@@ -140,12 +140,12 @@ const ClientContractDetails = ({ route }) => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: contract.clientId.userPhotoUrl,
+                    uri: contract.client.userPhotoUrl,
                   }}
                   style={{ width: '100%', height: '100%', borderRadius: 20 }}
                 />
               </View>
-              <Text style={styles.userName}>{contract.clientId.name}</Text>
+              <Text style={styles.userName}>{contract.client.name}</Text>
             </View>
           </View>
           {/* //' ------------Freelancer  */}
@@ -155,7 +155,7 @@ const ClientContractDetails = ({ route }) => {
               <View style={styles.userImage}>
                 <Image
                   source={{
-                    uri: contract.freelancerId.userPhotoUrl,
+                    uri: contract.freelancer.userPhotoUrl,
                   }}
                   style={{
                     width: '100%',
@@ -164,7 +164,7 @@ const ClientContractDetails = ({ route }) => {
                   }}
                 />
               </View>
-              <Text style={styles.userName}>{contract.freelancerId.name}</Text>
+              <Text style={styles.userName}>{contract.freelancer.name}</Text>
             </View>
           </View>
 
@@ -187,7 +187,7 @@ const ClientContractDetails = ({ route }) => {
             <AppButton
               buttonTitle={'complete contract'}
               onPress={() => {
-                handelContractStatus(contract.jobID._id, 'completed');
+                handelContractStatus(contract.job._id, 'completed');
               }}
               marginBottom={1}
               marginX={0}
@@ -200,7 +200,7 @@ const ClientContractDetails = ({ route }) => {
             <AppButton
               buttonTitle={'cancel contract'}
               onPress={() => {
-                handelContractStatus(contract.jobID._id, 'cancelled');
+                handelContractStatus(contract.job._id, 'cancelled');
               }}
               marginBottom={1}
               marginX={0}
