@@ -61,8 +61,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: '100%',
     borderRadius: theme.borderRadius,
-    borderColor: theme.colors.gray,
-    borderWidth: 1,
     padding: 10,
   },
   textInput: {

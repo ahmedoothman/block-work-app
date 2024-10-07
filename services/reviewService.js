@@ -31,6 +31,15 @@ export const getReviewsService = async (userId) => {
   }
 };
 // not now
+
+/* 
+abdo
+{
+    "reviewee":"66f8837ef3d43d1de8fd4976",
+    "comment":"good freelnacer, well organized , good communication skills",
+    "rating":5
+}
+*/
 export const addReviewService = async (review) => {
   let token = await getToken();
   try {

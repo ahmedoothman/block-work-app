@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SearchIcon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Entypo from 'react-native-vector-icons/Entypo';
 import Jobs from '../screens/client/Jobs';
@@ -74,12 +75,18 @@ export default function ClientBottomNavigator() {
         name='Profile'
         component={Profile}
         options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcon name='account-circle' color={color} size={size} />
+          title: 'Profile',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          tabBarButton: () => null,
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
           ),
-          tabBarButton: () => null, // Hide the Profile tab
-          ...screenOptionsWithHeader('Profile'),
         }}
       />
     </Tab.Navigator>

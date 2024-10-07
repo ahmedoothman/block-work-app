@@ -276,7 +276,7 @@ const UpdateJobForm = ({ route }) => {
         onDismissSnackBar={onDismissSnackBar}
         undoText='Undo'
         undoColor='black'
-        bgColor={isSuccess ? theme.colors.colorTextBlue : 'red'}
+        bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
         messageColor='#fff'
       />
     </View>

@@ -17,10 +17,11 @@ import AppButton from '../../components/btns/AppButton';
 import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
 import { useNavigation } from '@react-navigation/native';
 import { updateContractStatusService } from '../../services/contractService';
+import UserBox from '../../components/UserBox/UserBox';
+
 const ClientContractDetails = ({ route }) => {
   const navigation = useNavigation();
   const { contract } = route.params;
-
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -55,9 +56,15 @@ const ClientContractDetails = ({ route }) => {
       setIsSuccess(true);
       setAlertMessage('added SuccessFully');
       setTimeout(() => {
-        navigation.goBack();
+        navigation.navigate('ProfileView', {
+          id: contract.freelancer._id,
+        });
+        // navigation.navigate('ReviewForm', {
+        //   id: contract.freelancer._id,
+        // });
       }, 2000);
     } else {
+      setAlert(true);
       setIsSuccess(false);
       setAlertMessage(response.message);
     }
@@ -136,39 +143,14 @@ const ClientContractDetails = ({ route }) => {
 
           <View style={styles.roleContaienr}>
             <Text style={styles.roleTitle}>Client</Text>
-            <View style={styles.userContainer}>
-              <View style={styles.userImage}>
-                <Image
-                  source={{
-                    uri: contract.client.userPhotoUrl,
-                  }}
-                  style={{ width: '100%', height: '100%', borderRadius: 20 }}
-                />
-              </View>
-              <Text style={styles.userName}>{contract.client.name}</Text>
-            </View>
+            <UserBox otherUser={contract.client} isMe={true} />
           </View>
           {/* //' ------------Freelancer  */}
           <View style={styles.roleContaienr}>
             <Text style={styles.roleTitle}>Freelancer</Text>
-            <View style={styles.userContainer}>
-              <View style={styles.userImage}>
-                <Image
-                  source={{
-                    uri: contract.freelancer.userPhotoUrl,
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                  }}
-                />
-              </View>
-              <Text style={styles.userName}>{contract.freelancer.name}</Text>
-            </View>
+            <UserBox otherUser={contract.freelancer} />
           </View>
 
-          {/* //' Price &    Duration  */}
           <View style={[styles.price_duration_Contaienr, styles.d_flex_Row]}>
             <View style={[styles.priceContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Price</Text>
@@ -216,7 +198,9 @@ const ClientContractDetails = ({ route }) => {
             {contract.status}
           </Text>
 
-          {isLoading && <ActivityIndicator size='large' color='#0000ff' />}
+          {isLoading && (
+            <ActivityIndicator size='large' color={theme.colors.primaryDark} />
+          )}
         </View>
       </View>
       <CustomeSnackBar
@@ -225,7 +209,7 @@ const ClientContractDetails = ({ route }) => {
         onDismissSnackBar={onDismissSnackBar}
         undoText='Undo'
         undoColor='black'
-        bgColor={isSuccess ? theme.colors.colorTextBlue : 'red'}
+        bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
         messageColor='#fff'
       />
     </ScrollView>

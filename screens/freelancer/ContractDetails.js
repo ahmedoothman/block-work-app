@@ -116,43 +116,16 @@ const ContractDetails = () => {
             </TouchableOpacity>
           </View>
 
-          {/* //' Client & Freelancer  */}
-          {/* //' ------------Client   */}
           <View style={styles.roleContaienr}>
             <Text style={styles.roleTitle}>Client</Text>
-            <View style={styles.userContainer}>
-              <View style={styles.userImage}>
-                <Image
-                  source={{
-                    uri: contract.client.userPhotoUrl,
-                  }}
-                  style={{ width: '100%', height: '100%', borderRadius: 20 }}
-                />
-              </View>
-              <Text style={styles.userName}>{contract.client.name}</Text>
-            </View>
-          </View>
-          {/* //' ------------Freelancer  */}
-          <View style={styles.roleContaienr}>
-            <Text style={styles.roleTitle}>Freelancer</Text>
-            <View style={styles.userContainer}>
-              <View style={styles.userImage}>
-                <Image
-                  source={{
-                    uri: contract.freelancer.userPhotoUrl,
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                  }}
-                ></Image>
-              </View>
-              <Text style={styles.userName}>{contract.freelancer.name}</Text>
-            </View>
+            <UserBox otherUser={contract.freelancer} />
           </View>
 
-          {/* //' Price &    Duration  */}
+          <View style={styles.roleContaienr}>
+            <Text style={styles.roleTitle}>Freelancer</Text>
+            <UserBox otherUser={contract.freelancer} isMe={true} />
+          </View>
+
           <View style={[styles.price_duration_Contaienr, styles.d_flex_Row]}>
             <View style={[styles.priceContaienr, styles.d_flex_Column]}>
               <Text style={styles.mainTitle}>Price</Text>
@@ -166,13 +139,10 @@ const ContractDetails = () => {
             </View>
           </View>
 
-          {/* //'  Status  */}
-
           {userRole == 'freelancer' ? (
             <>
-              {/* //' Client_Status */}
               <Text style={styles.Client_Status}>
-                Client Status: {contract.status}
+                Contract Status: {contract.status}
               </Text>
             </>
           ) : (

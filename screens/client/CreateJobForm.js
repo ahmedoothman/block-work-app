@@ -193,7 +193,7 @@ const CreateJobForm = () => {
               placeholder={'Skills Required'}
               isPassword={false}
               onChange={(value) => {
-                const skills = value.split(' ');
+                const skills = value.split(',');
                 setJopCreatedinfo((prev) => ({
                   ...prev,
                   skillsRequired: skills,
@@ -266,7 +266,7 @@ const CreateJobForm = () => {
         onDismissSnackBar={onDismissSnackBar}
         undoText='Undo'
         undoColor='black'
-        bgColor={isSuccess ? theme.colors.colorTextBlue : 'red'}
+        bgColor={isSuccess ? theme.colors.success : theme.colors.red}
         messageColor='#fff'
       />
     </View>

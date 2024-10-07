@@ -11,7 +11,7 @@ import Messages from '../screens/common/Messages';
 import Contracts from '../screens/freelancer/Contracts';
 import Profile from '../screens/freelancer/Profile';
 import Menu from '../screens/common/Menu';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import screenOptionsWithHeader from './screenOptionsWithHeader';
 
 const Tab = createBottomTabNavigator();
@@ -97,12 +97,18 @@ export default function FreelancerBottomNavigator() {
         name='Profile'
         component={Profile}
         options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcon name='account-circle' color={color} size={size} />
+          title: 'Profile',
+          headerStyle: { backgroundColor: 'black' },
+          headerTintColor: 'white',
+          tabBarButton: () => null,
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name='dots-vertical'
+              size={24}
+              color='white'
+              style={{ marginRight: 10 }}
+            />
           ),
-          tabBarButton: () => null, // Hide the Profile tab
-          ...screenOptionsWithHeader('Profile'),
         }}
       />
     </Tab.Navigator>

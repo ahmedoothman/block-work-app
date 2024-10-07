@@ -17,11 +17,11 @@ import {
 } from '../../services/proposalService';
 import CustomeSnackBar from '../Public/CustomeSnackBar';
 import { useNavigation } from '@react-navigation/native';
+import UserBox from '../UserBox/UserBox';
 
 const Details = ({ proposal, date, isClient, jobDetails }) => {
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
@@ -47,12 +47,6 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
       setIsSuccess(false);
       setAlertMessage(response.message);
     }
-  };
-
-  const viewFreelancerProfile = () => {
-    navigation.navigate('ProfileView', {
-      id: proposal?.freelancer?._id,
-    });
   };
 
   return (
@@ -121,39 +115,7 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
 
       {isClient && (
         <>
-          <View style={styles.freelanceContainer}>
-            <TouchableOpacity onPress={viewFreelancerProfile}>
-              <View style={styles.userImage}>
-                <Image
-                  source={{
-                    uri: proposal?.freelancer?.userPhotoUrl || '',
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 20,
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.userName}>
-              {proposal?.freelancer?.name || 'Unknown Freelancer'}
-            </Text>
-
-            <MaterialCommunityIcons
-              name='chat-processing'
-              size={30}
-              color={theme.colors.ternaryDark}
-              style={{ marginRight: 0 }}
-              onPress={() => {
-                navigation.navigate('ChatScreen', {
-                  userId: proposal?.freelancer?._id,
-                  otherUser: proposal?.freelancer,
-                });
-              }}
-            />
-          </View>
-
+          <UserBox otherUser={proposal?.freelancer} />
           <View style={styles.BtnStatusContainer}>
             {proposal?.status === 'submitted' ? (
               <>
@@ -211,7 +173,7 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
             onDismissSnackBar={onDismissSnackBar}
             undoText='Undo'
             undoColor='black'
-            bgColor={isSuccess ? theme.colors.colorTextBlue : 'red'}
+            bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
             messageColor='#fff'
           />
         </>
@@ -238,27 +200,7 @@ const styles = StyleSheet.create({
   Divider: {
     marginVertical: 10,
   },
-  freelanceContainer: {
-    padding: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 10,
-    marginLeft: 5,
-  },
-  userName: {
-    fontSize: 15,
-    color: theme.colors.ternaryDark,
-  },
-  userImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: theme.colors.ternaryDark,
-    overflow: 'hidden',
-  },
+
   BtnStatusContainer: {
     display: 'flex',
     flexDirection: 'row',
