@@ -95,12 +95,16 @@ export const addContractService = async (contract) => {
   }
 */
 
-export const updateContractStatusService = async (contractId, status) => {
+export const updateContractStatusService = async (
+  contractId,
+  freelancerId,
+  status
+) => {
   let token = await getToken();
   console.log(status, 'status');
   try {
     const response = await axios.patch(
-      `${API_URL}/${PATH}/${contractId}/status`,
+      `${API_URL}/${PATH}/${contractId}/${freelancerId}/status`,
       { contractStatus: status },
       {
         headers: {

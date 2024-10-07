@@ -45,7 +45,11 @@ const ClientContractDetails = ({ route }) => {
 
   const handelContractStatus = async (contractId, status) => {
     setIsLoading(true);
-    const response = await updateContractStatusService(contractId, status);
+    const response = await updateContractStatusService(
+      contractId,
+      contract.freelancerId._id,
+      status
+    );
     if (response.status === 'success') {
       setAlert(true);
       setIsSuccess(true);
