@@ -14,6 +14,7 @@ import JobsBox from '../../components/Jobs/JobsBox';
 import { getMyJobsService, deleteJobService } from '../../services/jobService';
 import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import NoDataBox from '../../components/NoData/NoDataBox';
 const { height } = Dimensions.get('window');
 
 const Jobs = () => {
@@ -112,6 +113,14 @@ const Jobs = () => {
               onEdit={editJob}
             />
           ))
+        )}
+        {jobs.length === 0 && !isLoading && (
+          <NoDataBox
+            Title={'There Are No Jobs.'}
+            Massage={'Jobs you’re actively work on wil appear here.'}
+            show={false}
+            textCenter={true}
+          />
         )}
       </ScrollView>
 

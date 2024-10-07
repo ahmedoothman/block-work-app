@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ProposalBox from '../../components/proposals/ProposalBox';
 import theme from '../../theme';
 import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import { getFreelancerProposalsService } from '../../services/proposalService';
 import NoDataBox from '../../components/NoData/NoDataBox';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 const { height } = Dimensions.get('window');
+
 const Proposals = () => {
   const [proposals, setProposals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,25 +18,32 @@ const Proposals = () => {
 
   const onDismissSnackBar = () => setVisible(false);
   const navigation = useNavigation();
+
   const handleNoData = () => {
     navigation.navigate('Jobs');
   };
-  useEffect(() => {
-    const fetchProposals = async () => {
-      const response = await getFreelancerProposalsService();
-      if (response.status === 'success') {
-        setProposals(response.data);
-        setcount(proposals.length);
-      } else {
-        setError(true);
-        setErrorMessage(response.message);
-        setVisible(true);
-        setProposals([]);
-      }
-      setIsLoading(false);
-    };
-    fetchProposals();
-  }, []);
+
+  const fetchProposals = async () => {
+    setIsLoading(true);
+    const response = await getFreelancerProposalsService();
+    if (response.status === 'success') {
+      setProposals(response.data);
+      setcount(response.data.length);
+    } else {
+      setError(true);
+      setErrorMessage(response.message);
+      setVisible(true);
+      setProposals([]);
+    }
+    setIsLoading(false);
+  };
+
+  // Use useFocusEffect to refetch proposals when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      fetchProposals();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
@@ -51,15 +59,15 @@ const Proposals = () => {
               size={50}
             />
           </View>
-        ) : proposals ? (
+        ) : proposals && proposals.length > 0 ? (
           proposals.map((proposal) => (
             <ProposalBox key={proposal._id} PropsalData={proposal} />
           ))
         ) : (
           <NoDataBox
-            Title={'No propsal found'}
+            Title={'No proposal found'}
             Onpress={handleNoData}
-            Massage={'Your proposals willl appear here '}
+            Massage={'Your proposals will appear here '}
             show={true}
             btnTitle={'Apply for jobs'}
           />

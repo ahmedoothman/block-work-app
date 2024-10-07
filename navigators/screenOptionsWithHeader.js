@@ -31,7 +31,7 @@ const screenOptionsWithHeader = (title) => {
     ),
     headerRight: () => (
       <TouchableOpacity
-        onPress={() => navigation.navigate('Alert')} // Navigate to Alert screen
+        onPress={() => {}} // Navigate to Alert screen
         style={{ marginRight: 15 }}
       >
         <MaterialCommunityIcons

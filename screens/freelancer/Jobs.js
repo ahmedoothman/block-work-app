@@ -61,13 +61,16 @@ const Jobs = () => {
               size={50}
             />
           </View>
-        ) : jobs ? (
-          jobs.map((job) => <JobsBox key={job._id} jobData={job} />)
         ) : (
+          jobs.map((job) => <JobsBox key={job._id} jobData={job} />)
+        )}
+
+        {jobs.length === 0 && !isLoading && (
           <NoDataBox
-            Title={'No Jobs Found'}
-            Massage={' Jobs well appear here'}
+            Title={'There Are No Jobs.'}
+            Massage={'Jobs you’re actively work on wil appear here.'}
             show={false}
+            textCenter={true}
           />
         )}
       </ScrollView>

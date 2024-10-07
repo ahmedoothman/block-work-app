@@ -7,28 +7,31 @@ import ContractBox from '../../components/Contracts/ContractBox';
 import ClientContractBox from '../../components/Contracts/ClientContractBox';
 import { getAllFreelancerContract } from '../../services/contractService';
 import { ActivityIndicator } from 'react-native-paper';
+import { useFocusEffect } from '@react-navigation/native';
 const Contracts = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [contracts, setCotnracts] = useState([]);
+  const [contracts, setContracts] = useState([]);
 
   // ---------------------------------------------
-  useEffect(() => {
-    setLoading(true);
-    const fetchAllClientContracts = async () => {
-      const response = await getAllFreelancerContract();
-      if ((response.status = 'success')) {
-        setCotnracts(response.data);
-      } else {
-        setError(true);
-        setErrorMessage(response.message);
-      }
-      setLoading(false);
-    };
-    fetchAllClientContracts();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      setLoading(true);
+      const fetchAllClientContracts = async () => {
+        const response = await getAllFreelancerContract();
+        if (response.status === 'success') {
+          setContracts(response.data);
+        } else {
+          setError(true);
+          setErrorMessage(response.message);
+        }
+        setLoading(false);
+      };
+      fetchAllClientContracts();
+    }, [])
+  );
 
   // ---------------------------------------------
 
