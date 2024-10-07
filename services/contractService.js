@@ -101,7 +101,6 @@ export const updateContractStatusService = async (
   status
 ) => {
   let token = await getToken();
-  console.log(status, 'status');
   try {
     const response = await axios.patch(
       `${API_URL}/${PATH}/${contractId}/${freelancerId}/status`,
@@ -114,7 +113,6 @@ export const updateContractStatusService = async (
     );
     return { status: 'success', data: response.data.data };
   } catch (error) {
-    console.log('error', error);
     if (error.code === 'ERR_NETWORK') {
       return {
         status: 'error',

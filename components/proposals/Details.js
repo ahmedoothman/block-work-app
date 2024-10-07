@@ -55,11 +55,6 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
     });
   };
 
-  useEffect(() => {
-    console.log('jobDetails', jobDetails);
-    console.log('proposal', proposal.status);
-  }, []);
-
   return (
     <Card style={styles.card}>
       <Card.Content>
