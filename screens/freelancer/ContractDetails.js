@@ -119,7 +119,7 @@ const ContractDetails = () => {
 
           <View style={styles.roleContaienr}>
             <Text style={styles.roleTitle}>Client</Text>
-            <UserBox otherUser={contract.freelancer} />
+            <UserBox otherUser={contract.client} />
           </View>
 
           <View style={styles.roleContaienr}>
