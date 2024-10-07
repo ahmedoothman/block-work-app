@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: theme.borderRadius,
     backgroundColor: theme.colors.secondaryBright,
-    color: 'white', // Set the text color to white
+    color: theme.colors.white, // Set the text color to white
   },
   uploadBtn: {
     flexDirection: 'row',
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   uploadText: {
-    color: theme.colors.gray,
+    color: theme.colors.white,
   },
 });
 

@@ -88,7 +88,7 @@ const SignUp = () => {
       quality: 1,
     });
 
-    if (!result.cancelled) {
+    if (!result.canceled) {
       setUserInfo((prev) => ({ ...prev, [field]: result.assets[0] }));
     }
   };

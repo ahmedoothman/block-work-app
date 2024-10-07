@@ -54,7 +54,7 @@ const ClientContractDetails = ({ route }) => {
     if (response.status === 'success') {
       setAlert(true);
       setIsSuccess(true);
-      setAlertMessage('added SuccessFully');
+      setAlertMessage('work is finished successfully');
       setTimeout(() => {
         navigation.navigate('ProfileView', {
           id: contract.freelancer._id,
