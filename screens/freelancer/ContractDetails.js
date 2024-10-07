@@ -15,6 +15,7 @@ import { calcDuration } from '../../utils';
 import { useRoute } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import UserBox from '../../components/UserBox/UserBox';
 
 const ContractDetails = () => {
   // const user = useSelector((state) => state.auth.user);
