@@ -5,29 +5,26 @@ import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import theme from '../../theme';
 
-const CustomBtn = ({ handlePress, txt }) => {
+const CustomBtn = ({ handlePress, txt, marginBottom }) => {
   return (
     <View>
       <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
         <View
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 10,
-          }}
-        >
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: marginBottom || 10,
+          }}>
           <Text
-            variant='headlineSmall'
-            style={{ color: theme.colors.colorTextBlue, marginBottom: 5 }}
-          >
-            {' '}
-            {txt}{' '}
+            variant="headlineSmall"
+            style={{ color: theme.colors.colorTextBlue, marginBottom: 5 }}>
+            {" "}
+            {txt}{" "}
           </Text>
           <Icon
-            name='arrow-forward-ios'
+            name="arrow-forward-ios"
             color={theme.colors.colorTextBlue}
-            size={25}
-          ></Icon>
+            size={25}></Icon>
         </View>
       </TouchableOpacity>
     </View>
