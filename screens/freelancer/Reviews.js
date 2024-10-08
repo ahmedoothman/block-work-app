@@ -9,9 +9,11 @@ import { ActivityIndicator, Snackbar } from "react-native-paper";
 import NoDataBox from "../../components/NoData/NoDataBox";
 import { useNavigation } from "@react-navigation/native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { useSelector } from "react-redux";
 // const { height } = Dimensions.get('window');
 const Reviews = ({ route }) => {
   const { userId, isMe, user } = route.params;
+  const myId = useSelector((state) => state.auth.user)._id;
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -63,7 +65,7 @@ const Reviews = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      {isMe == false && (
+      {!(myId == userId) && (
         <View style={styles.leaveReviewContainer}>
           <TouchableOpacity
             style={styles.createReviews}
@@ -131,9 +133,10 @@ const styles = StyleSheet.create({
   },
   loadingIndicator: {
     flex: 1,
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    //  height: height * 0.6, // More dynamic height
+    marginTop: 300,
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,

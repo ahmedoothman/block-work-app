@@ -70,7 +70,7 @@ const Profile = () => {
                 <View style={{ justifyContent: "space-between", margin: 10 }}>
                   <Text
                     variant="titleLarge"
-                    style={[styles.title, { fontSize: 16 }]}>
+                    style={[styles.title, { width: 190 }]}>
                     {userData.name}
                   </Text>
                   <View style={{ flexDirection: "row" }}>

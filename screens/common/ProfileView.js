@@ -73,7 +73,9 @@ const ProfileView = () => {
                 <View style={styles.avtarView}>
                   <Avatar.Image size={70} source={{ uri: user.userPhotoUrl }} />
                   <View style={{ justifyContent: "space-between", margin: 10 }}>
-                    <Text variant="titleLarge" style={styles.title}>
+                    <Text
+                      variant="titleLarge"
+                      style={[styles.title, { width: 250 }]}>
                       {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
                     </Text>
                     <View style={{ flexDirection: "row" }}>

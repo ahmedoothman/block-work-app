@@ -79,7 +79,7 @@ const ReviewForm = () => {
 
   function clearInputs() {
     setRating(0);
-    setComment("0");
+    setComment("");
   }
 
   const validateInputs = () => {

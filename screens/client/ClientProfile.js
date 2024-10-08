@@ -40,20 +40,21 @@ const Profile = () => {
           <View style={styles.avtarView}>
             <View style={styles.avtarView}>
               <Avatar.Image size={70} source={{ uri: user.userPhotoUrl }} />
-              <View style={{ justifyContent: 'space-between', margin: 10 }}>
-                <Text variant='titleLarge' style={styles.title}>
+              <View style={{ justifyContent: "space-between", margin: 10 }}>
+                <Text
+                  variant="titleLarge"
+                  style={[styles.title, { width: 190 }]}>
                   {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
                 </Text>
-                <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: "row" }}>
                   <Icon
-                    source='map-marker-outline'
+                    source="map-marker-outline"
                     color={theme.colors.ternaryDark}
                     size={25}
                   />
                   <Text
-                    variant='titleSmall'
-                    style={{ color: theme.colors.ternaryDark }}
-                  >
+                    variant="titleSmall"
+                    style={{ color: theme.colors.ternaryDark }}>
                     {user.country.charAt(0).toUpperCase() +
                       user.country.slice(1)}
                   </Text>
@@ -61,7 +62,7 @@ const Profile = () => {
               </View>
             </View>
             <IconButton
-              icon={'account-edit-outline'}
+              icon={"account-edit-outline"}
               size={35}
               iconColor={theme.colors.primaryBright}
               onPress={handleUpdate}
@@ -69,26 +70,25 @@ const Profile = () => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.bioView}>
-            <Text variant='titleLarge' style={styles.title}>
+            <Text variant="titleLarge" style={styles.title}>
               {user.jobTitle}
             </Text>
-            <Text variant='titleMedium' style={styles.title}>
-              {'\n'}
+            <Text variant="titleMedium" style={styles.title}>
+              {"\n"}
               {user.bio.charAt(0).toUpperCase() + user.bio.slice(1)}
             </Text>
           </View>
           <Divider style={styles.divider} />
 
           <View>
-            <CustomBtn txt={'Reviews'} handlePress={handleReviews} />
+            <CustomBtn txt={"Reviews"} handlePress={handleReviews} />
           </View>
         </View>
 
         <Snackbar
           visible={visible}
           onDismiss={onDismissSnackBar}
-          style={styles.snackbarStyle}
-        >
+          style={styles.snackbarStyle}>
           {errorMessage}
         </Snackbar>
       </View>
