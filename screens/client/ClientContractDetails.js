@@ -44,10 +44,11 @@ const ClientContractDetails = ({ route }) => {
     }
   };
 
-  const handelContractStatus = async (contractId, status) => {
+  const handelContractStatus = async (contractId, jobId, status) => {
     setIsLoading(true);
     const response = await updateContractStatusService(
       contractId,
+      jobId,
       contract.freelancer._id,
       status
     );
@@ -166,7 +167,11 @@ const ClientContractDetails = ({ route }) => {
             <AppButton
               buttonTitle={'complete contract'}
               onPress={() => {
-                handelContractStatus(contract.job._id, 'completed');
+                handelContractStatus(
+                  contract._id,
+                  contract.job._id,
+                  'completed'
+                );
               }}
               marginBottom={1}
               marginX={0}
@@ -179,7 +184,11 @@ const ClientContractDetails = ({ route }) => {
             <AppButton
               buttonTitle={'cancel contract'}
               onPress={() => {
-                handelContractStatus(contract.job._id, 'cancelled');
+                handelContractStatus(
+                  contract._id,
+                  contract.job._id,
+                  'cancelled'
+                );
               }}
               marginBottom={1}
               marginX={0}
