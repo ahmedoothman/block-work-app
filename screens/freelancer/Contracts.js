@@ -1,37 +1,51 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
 import theme from '../../theme';
 import ContractBtn from '../../components/btns/ContractBtn';
 import { useNavigation } from '@react-navigation/native';
-import ContractBox from '../../components/Contracts/ContractBox';
 import ClientContractBox from '../../components/Contracts/ClientContractBox';
 import { getAllFreelancerContract } from '../../services/contractService';
 import { ActivityIndicator } from 'react-native-paper';
-import { useFocusEffect } from '@react-navigation/native';
+
 const Contracts = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [contracts, setContracts] = useState([]);
 
-  // ---------------------------------------------
-  useFocusEffect(
-    React.useCallback(() => {
-      setLoading(true);
-      const fetchAllClientContracts = async () => {
-        const response = await getAllFreelancerContract();
-        if (response.status === 'success') {
-          setContracts(response.data);
-        } else {
-          setError(true);
-          setErrorMessage(response.message);
-        }
-        setLoading(false);
-      };
-      fetchAllClientContracts();
-    }, [])
-  );
+  // Function to fetch contracts
+  const fetchAllFreelancerContracts = async () => {
+    setLoading(true);
+    const response = await getAllFreelancerContract();
+    if (response.status === 'success') {
+      setContracts(response.data);
+    } else {
+      setError(true);
+      setErrorMessage(response.message);
+    }
+    setLoading(false);
+  };
+
+  // Fetch contracts on component mount
+  useEffect(() => {
+    fetchAllFreelancerContracts();
+  }, []);
+
+  // Function to handle refresh
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchAllFreelancerContracts().finally(() => {
+      setRefreshing(false);
+    });
+  }, []);
 
   // ---------------------------------------------
 
@@ -42,8 +56,18 @@ const Contracts = () => {
       </View>
     );
   }
+
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          tintColor={theme.colors.primaryBright}
+        />
+      }
+    >
       {contracts.length > 0 ? (
         <View style={styles.contractsContainer}>
           {contracts.map((contract, index) => {
@@ -65,7 +89,7 @@ const Contracts = () => {
         <View style={styles.noDatacontentContainer}>
           <Text style={styles.noDataTitle}>There Are No Active Contracts.</Text>
           <Text style={styles.noDataMessage}>
-            Contracts you’re actively work on wil appear here.
+            Contracts you’re actively working on will appear here.
           </Text>
           <View>
             <ContractBtn
@@ -85,7 +109,7 @@ const Contracts = () => {
           </View>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -97,31 +121,14 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.secondaryDark,
   },
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: theme.colors.secondaryDark,
     paddingHorizontal: 20,
     paddingVertical: 40,
   },
-  btnContaienr: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 20,
-    marginVertical: 25,
-  },
   contractsContainer: {
     // marginVertical: 10,
   },
-
-  headertitleContainer: {
-    marginTop: 10,
-    marginBottom: 15,
-  },
-  headertitle: {
-    color: theme.colors.white,
-    fontSize: 22,
-    fontWeight: 'regular',
-  },
-
   noDatacontentContainer: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,

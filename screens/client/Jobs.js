@@ -6,8 +6,9 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
+  RefreshControl, // Import RefreshControl
 } from 'react-native';
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import theme from '../../theme';
 import JobsSearchBar from '../../components/Jobs/JobsSearchBar';
 import JobsBox from '../../components/Jobs/JobsBox';
@@ -25,35 +26,32 @@ const Jobs = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false); // State for refreshing
 
   const onDismissSnackBar = () => setVisible(false);
 
+  // Function to fetch jobs
+  const fetchJobs = async () => {
+    setIsLoading(true);
+    const response = await getMyJobsService();
+    if (response.status === 'success') {
+      const sortedJobs = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setJobs(sortedJobs);
+    } else {
+      setError(true);
+      setErrorMessage(response.message);
+      setVisible(true);
+      setJobs([]);
+    }
+    setIsLoading(false);
+    setRefreshing(false); // Stop refreshing after fetching
+  };
+
   useFocusEffect(
     useCallback(() => {
-      const fetchJobs = async () => {
-        setIsLoading(true);
-        const response = await getMyJobsService();
-        if (response.status === 'success') {
-          // Sort the jobs by createdAt, assuming it's a timestamp string or Date object
-          const sortedJobs = response.data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          setJobs(sortedJobs);
-        } else {
-          setError(true);
-          setErrorMessage(response.message);
-          setVisible(true);
-          setJobs([]);
-        }
-        setIsLoading(false);
-      };
-
       fetchJobs();
-
-      // Cleanup function (optional) can be returned here if needed
-      return () => {
-        setJobs([]); // Example cleanup logic if necessary
-      };
     }, [])
   );
 
@@ -76,8 +74,20 @@ const Jobs = () => {
     const job = jobs.find((job) => job._id === jobId);
     navigation.navigate('UpdateJobForm', { job });
   };
+
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing} // Bind the refreshing state
+          onRefresh={async () => {
+            setRefreshing(true); // Set refreshing to true when pulling down
+            await fetchJobs(); // Fetch jobs on refresh
+          }}
+        />
+      }
+    >
       <JobsSearchBar />
       <TouchableOpacity
         style={styles.createBtn}
@@ -117,7 +127,7 @@ const Jobs = () => {
         {jobs.length === 0 && !isLoading && (
           <NoDataBox
             Title={'There Are No Jobs.'}
-            Massage={'Jobs you’re actively work on wil appear here.'}
+            Massage={'Jobs you’re actively working on will appear here.'}
             show={false}
             textCenter={true}
           />
@@ -131,7 +141,7 @@ const Jobs = () => {
       >
         {errorMessage}
       </Snackbar>
-    </View>
+    </ScrollView>
   );
 };
 
