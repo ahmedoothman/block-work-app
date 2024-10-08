@@ -1,15 +1,15 @@
-import React, { useEffect, Dimensions, useState, useCallback } from "react";
-import { useFocusEffect } from "@react-navigation/native";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import ReviewBox from "../../components/reviews/ReviewBox";
-import theme from "../../theme";
-import { getReviewsService } from "../../services/reviewService";
-import { ScrollView } from "react-native-gesture-handler";
-import { ActivityIndicator, Snackbar } from "react-native-paper";
-import NoDataBox from "../../components/NoData/NoDataBox";
-import { useNavigation } from "@react-navigation/native";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { useSelector } from "react-redux";
+import React, { useEffect, Dimensions, useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import ReviewBox from '../../components/reviews/ReviewBox';
+import theme from '../../theme';
+import { getReviewsService } from '../../services/reviewService';
+import { ScrollView } from 'react-native-gesture-handler';
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import NoDataBox from '../../components/NoData/NoDataBox';
+import { useNavigation } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from 'react-redux';
 // const { height } = Dimensions.get('window');
 const Reviews = ({ route }) => {
   const { userId, isMe, user } = route.params;
@@ -17,7 +17,7 @@ const Reviews = ({ route }) => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
   const handleNoDataBtn = () => {
@@ -43,7 +43,7 @@ const Reviews = ({ route }) => {
   const fetchReviews = useCallback(async () => {
     setIsLoading(true);
     const response = await getReviewsService(userId);
-    if (response.status === "success") {
+    if (response.status === 'success') {
       setReviews(response.data);
     } else {
       setError(true);
@@ -54,7 +54,6 @@ const Reviews = ({ route }) => {
     setIsLoading(false);
   }, [userId]);
 
-  // Use useFocusEffect to refetch reviews when screen is focused
   useFocusEffect(
     useCallback(() => {
       fetchReviews();
@@ -65,27 +64,6 @@ const Reviews = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      {!(myId == userId) && (
-        <View style={styles.leaveReviewContainer}>
-          <TouchableOpacity
-            style={styles.createReviews}
-            onPress={() => {
-              navigation.navigate("ReviewForm", {
-                user: user,
-                isMe,
-              });
-            }}>
-            {/* <Ionicon name="pencil-outline" size={20} color="#fff" /> */}
-            <MaterialIcons
-              name="rate-review"
-              size={22}
-              color={theme.colors.white}
-            />
-          </TouchableOpacity>
-          <Text style={styles.btnText}> Leave a Review</Text>
-        </View>
-      )}
-
       <ScrollView style={styles.scrollContainer}>
         {isLoading ? (
           <View style={styles.loadingIndicator}>
@@ -107,10 +85,10 @@ const Reviews = ({ route }) => {
           ))
         ) : (
           <NoDataBox
-            Title={"No reviews found"}
+            Title={'No reviews found'}
             Onpress={handleNoDataBtn}
-            Massage={" clients reviews will appear here"}
-            btnTitle={"Back to Profile"}
+            Massage={' clients reviews will appear here'}
+            btnTitle={'Back to Profile'}
             show={true}
           />
         )}
@@ -118,7 +96,8 @@ const Reviews = ({ route }) => {
       <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
-        style={styles.snackbarStyle}>
+        style={styles.snackbarStyle}
+      >
         {errorMessage}
       </Snackbar>
     </View>
@@ -129,19 +108,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.secondaryDark,
-    position: "relative",
+    position: 'relative',
   },
   loadingIndicator: {
     flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 300,
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
-    position: "absolute",
+    position: 'absolute',
     bottom: 10,
     left: 10,
     right: 10,
@@ -151,10 +130,10 @@ const styles = StyleSheet.create({
   },
   leaveReviewContainer: {
     // backgroundColor: "red",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     gap: 5,
     padding: 15,
   },
@@ -163,8 +142,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: theme.borderRadius,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   btnText: {
     fontSize: 12,
