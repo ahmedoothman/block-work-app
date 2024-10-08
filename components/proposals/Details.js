@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Card, Divider, Text } from 'react-native-paper';
 import theme from '../../theme';
 import { calcDuration } from '../../utils';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppButton from '../btns/AppButton';
-import {
-  updateProposalService,
-  updateProposalStatusService,
-} from '../../services/proposalService';
+import { updateProposalStatusService } from '../../services/proposalService';
 import CustomeSnackBar from '../Public/CustomeSnackBar';
 import { useNavigation } from '@react-navigation/native';
 import UserBox from '../UserBox/UserBox';
 
-const Details = ({ proposal, date, isClient, jobDetails }) => {
-  const [loading, setLoading] = useState(false);
+const Details = ({ proposal, date, isClient }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -35,7 +24,9 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
   };
 
   const manageProposalStatus = async (proposalId, status) => {
+    setIsLoading(true); // Show loading indicator
     const response = await updateProposalStatusService(proposalId, status);
+    setIsLoading(false); // Hide loading indicator after response
     setAlert(true);
     if (response.status === 'success') {
       setIsSuccess(true);
@@ -116,6 +107,9 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
       {isClient && (
         <>
           <UserBox otherUser={proposal?.freelancer} />
+          {isLoading && (
+            <ActivityIndicator size='large' color={theme.colors.primary} />
+          )}
           <View style={styles.BtnStatusContainer}>
             {proposal?.status === 'submitted' ? (
               <>
@@ -129,6 +123,7 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
                   marginX='auto'
                   paddingY={10}
                   paddingX={10}
+                  disabled={isLoading} // Disable button during loading
                 />
                 <AppButton
                   buttonTitle='Reject'
@@ -140,6 +135,7 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
                   marginX='auto'
                   paddingY={10}
                   paddingX={10}
+                  disabled={isLoading} // Disable button during loading
                 />
               </>
             ) : proposal?.status === 'accepted' ? (
@@ -151,6 +147,7 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
                 marginX='auto'
                 paddingY={10}
                 paddingX={10}
+                disabled={isLoading} // Disable button during loading
               />
             ) : (
               <AppButton
@@ -161,12 +158,11 @@ const Details = ({ proposal, date, isClient, jobDetails }) => {
                 marginX='auto'
                 paddingY={10}
                 paddingX={10}
+                disabled={isLoading} // Disable button during loading
               />
             )}
           </View>
-          {isLoading && (
-            <ActivityIndicator size='large' color={theme.colors.primary} />
-          )}
+
           <CustomeSnackBar
             visible={alert}
             alertMessage={alertMessage}
@@ -200,7 +196,6 @@ const styles = StyleSheet.create({
   Divider: {
     marginVertical: 10,
   },
-
   BtnStatusContainer: {
     display: 'flex',
     flexDirection: 'row',
