@@ -11,6 +11,9 @@ const theme = {
     secondaryBright: '#414141',
     ternaryDark: '#9f9fa0',
     ternaryLight: '#e1e1e1',
+    primary: '#1A4489',
+    secondary: '#414141',
+    tertiary: '#9f9fa0',
     warning: '#FFE234',
     danger: '#d31212',
     success: '#019437',
@@ -18,16 +21,8 @@ const theme = {
     inputBg: '#393939',
     colorTextBlue: '#1354C0',
   },
-  /**  
-   // ' -----> if we using Fonts this error will shown 
-   //! { Error: Variant labelLarge was not provided properly.Valid variants are regular, medium.}
- */
-  // fonts: {
-  //   regular: 'Roboto',
-  //   medium: 'Roboto_medium',
-  // },
-
   borderRadius: 10,
+  background: '#1A4489',
 };
 
 export default theme;
