@@ -70,12 +70,14 @@ const Profile = () => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.bioView}>
-            <Text variant="titleLarge" style={styles.title}>
-              {user.jobTitle}
+
+            <Text variant='titleLarge' style={styles.title}>
+              {user.jobTitle ? user.jobTitle : 'No job title'}
             </Text>
-            <Text variant="titleMedium" style={styles.title}>
-              {"\n"}
-              {user.bio.charAt(0).toUpperCase() + user.bio.slice(1)}
+            <Text variant='titleMedium' style={styles.title}>
+              {user.bio
+                ? user.bio.charAt(0).toUpperCase() + user.bio.slice(1)
+                : 'No bio'}
             </Text>
           </View>
           <Divider style={styles.divider} />

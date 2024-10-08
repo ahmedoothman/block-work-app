@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import store from './store/index.js';
 import theme from './theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 const queryClient = new QueryClient();
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>

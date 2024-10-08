@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Dimensions,
+  RefreshControl,
+} from 'react-native';
 import React, { useCallback, useState } from 'react';
 import ProposalBox from '../../components/proposals/ProposalBox';
 import theme from '../../theme';
@@ -6,15 +13,17 @@ import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import { getFreelancerProposalsService } from '../../services/proposalService';
 import NoDataBox from '../../components/NoData/NoDataBox';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+
 const { height } = Dimensions.get('window');
 
 const Proposals = () => {
   const [proposals, setProposals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false); // Added for refresh control
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
-  const [count, setcount] = useState(0);
+  const [count, setCount] = useState(0);
 
   const onDismissSnackBar = () => setVisible(false);
   const navigation = useNavigation();
@@ -23,12 +32,13 @@ const Proposals = () => {
     navigation.navigate('Jobs');
   };
 
+  // Function to fetch proposals
   const fetchProposals = async () => {
     setIsLoading(true);
     const response = await getFreelancerProposalsService();
     if (response.status === 'success') {
       setProposals(response.data);
-      setcount(response.data.length);
+      setCount(response.data.length);
     } else {
       setError(true);
       setErrorMessage(response.message);
@@ -38,19 +48,34 @@ const Proposals = () => {
     setIsLoading(false);
   };
 
-  // Use useFocusEffect to refetch proposals when screen comes into focus
+  // Use useFocusEffect to refetch proposals when the screen comes into focus
   useFocusEffect(
     useCallback(() => {
       fetchProposals();
     }, [])
   );
 
+  // Handle pull-to-refresh action
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchProposals().finally(() => setRefreshing(false)); // Ensure refreshing state is reset after fetching
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.counter}>
-        <Text style={styles.text}>Proposals({count}) </Text>
+        <Text style={styles.text}>Proposals({count})</Text>
       </View>
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView
+        style={styles.scrollContainer}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing} // Bind refresh state
+            onRefresh={onRefresh} // Trigger refresh action
+            tintColor={theme.colors.primaryBright}
+          />
+        }
+      >
         {isLoading ? (
           <View style={styles.loadingIndicator}>
             <ActivityIndicator

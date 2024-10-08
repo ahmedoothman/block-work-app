@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import theme from '../../theme';
 import ContractBtn from '../../components/btns/ContractBtn';
@@ -7,32 +13,42 @@ import ClientContractBox from '../../components/Contracts/ClientContractBox';
 import { getAllClientContract } from '../../services/contractService';
 import { ActivityIndicator } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
+
 const Contracts = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [contracts, setContracts] = useState([]);
 
-  // ---------------------------------------------
+  // Fetch all client contracts
+  const fetchAllClientContracts = async () => {
+    setLoading(true);
+    const response = await getAllClientContract();
+    if (response.status === 'success') {
+      setContracts(response.data);
+      setError(false); // Reset error state on successful fetch
+    } else {
+      setError(true);
+      setErrorMessage(response.message);
+    }
+    setLoading(false);
+  };
+
+  // useFocusEffect to fetch contracts on screen focus
   useFocusEffect(
     React.useCallback(() => {
-      setLoading(true);
-      const fetchAllClientContracts = async () => {
-        const response = await getAllClientContract();
-        if (response.status === 'success') {
-          setContracts(response.data);
-        } else {
-          setError(true);
-          setErrorMessage(response.message);
-        }
-        setLoading(false);
-      };
       fetchAllClientContracts();
     }, [])
   );
 
-  // ---------------------------------------------
+  // Handle refresh action
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchAllClientContracts();
+    setRefreshing(false);
+  };
 
   if (loading) {
     return (
@@ -41,49 +57,58 @@ const Contracts = () => {
       </View>
     );
   }
+
   return (
     <View style={styles.container}>
-      {contracts.length > 0 ? (
-        <View style={styles.contractsContainer}>
-          {contracts.map((contract, index) => {
-            return (
-              <ClientContractBox
-                key={index}
-                onPress={() => {
-                  navigation.navigate('ClientContractDetails', {
-                    contract: contract,
-                  });
-                }}
-                contractTitle={contract.job.title}
-              />
-            );
-          })}
-        </View>
-      ) : (
-        // ' in case of there are no active Contracts
-        <View style={styles.noDatacontentContainer}>
-          <Text style={styles.noDataTitle}>There Are No Active Contracts.</Text>
-          <Text style={styles.noDataMessage}>
-            Contracts you’re actively work on wil appear here.
-          </Text>
-          <View>
-            <ContractBtn
-              bgc={theme.colors.primaryDark}
-              borderColor={theme.colors.primaryDark}
-              textSize={14}
-              textColor={theme.colors.white}
-              fontWeight={'regular'}
-              paddingHorizontal={5}
-              paddingVertical={0}
-              mode={'contained'}
-              onPress={() => {
-                navigation.navigate('Jobs');
-              }}
-              clickText={'Search for new projects'}
-            />
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {contracts.length > 0 ? (
+          <View style={styles.contractsContainer}>
+            {contracts.map((contract, index) => {
+              return (
+                <ClientContractBox
+                  key={index}
+                  onPress={() => {
+                    navigation.navigate('ClientContractDetails', {
+                      contract: contract,
+                    });
+                  }}
+                  contractTitle={contract.job.title}
+                />
+              );
+            })}
           </View>
-        </View>
-      )}
+        ) : (
+          // ' in case of there are no active Contracts
+          <View style={styles.noDatacontentContainer}>
+            <Text style={styles.noDataTitle}>
+              There Are No Active Contracts.
+            </Text>
+            <Text style={styles.noDataMessage}>
+              Contracts you’re actively working on will appear here.
+            </Text>
+            <View>
+              <ContractBtn
+                bgc={theme.colors.primaryDark}
+                borderColor={theme.colors.primaryDark}
+                textSize={14}
+                textColor={theme.colors.white}
+                fontWeight={'regular'}
+                paddingHorizontal={5}
+                paddingVertical={0}
+                mode={'contained'}
+                onPress={() => {
+                  navigation.navigate('Jobs');
+                }}
+                clickText={'Search for new projects'}
+              />
+            </View>
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };
@@ -101,26 +126,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 40,
   },
-  btnContaienr: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 20,
-    marginVertical: 25,
-  },
   contractsContainer: {
     // marginVertical: 10,
   },
-
-  headertitleContainer: {
-    marginTop: 10,
-    marginBottom: 15,
-  },
-  headertitle: {
-    color: theme.colors.white,
-    fontSize: 22,
-    fontWeight: 'regular',
-  },
-
   noDatacontentContainer: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,

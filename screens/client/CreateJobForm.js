@@ -32,7 +32,7 @@ const CreateJobForm = () => {
     setAlert(true);
     if (response.status === 'success') {
       setIsSuccess(true);
-      setAlertMessage('added SuccessFully');
+      setAlertMessage('Job created successfully.');
       setTimeout(() => {
         navigation.navigate('ClientBase');
       }, 2000);

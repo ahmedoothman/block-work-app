@@ -18,7 +18,11 @@ const screenOptionsWithHeader = (title) => {
       >
         <View style={{ marginLeft: 10 }}>
           <Image
-            source={{ uri: user.userPhotoUrl }}
+            source={{
+              uri: user.userPhotoUrl
+                ? user.userPhotoUrl
+                : 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+            }}
             style={{
               width: 40,
               height: 40,
@@ -35,7 +39,7 @@ const screenOptionsWithHeader = (title) => {
         style={{ marginRight: 15 }}
       >
         <MaterialCommunityIcons
-          name='bell'
+          name='message-text-outline'
           size={24}
           color={theme.colors.white}
         />
