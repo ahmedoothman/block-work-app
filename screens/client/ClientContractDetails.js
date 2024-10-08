@@ -56,12 +56,9 @@ const ClientContractDetails = ({ route }) => {
       setIsSuccess(true);
       setAlertMessage('work is finished successfully');
       setTimeout(() => {
-        navigation.navigate('ProfileView', {
+        navigation.navigate('ReviewForm', {
           id: contract.freelancer._id,
         });
-        // navigation.navigate('ReviewForm', {
-        //   id: contract.freelancer._id,
-        // });
       }, 2000);
     } else {
       setAlert(true);
