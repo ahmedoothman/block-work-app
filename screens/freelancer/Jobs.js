@@ -5,24 +5,24 @@ import {
   StyleSheet,
   Dimensions,
   RefreshControl,
-} from 'react-native';
-import React, { useEffect, useState, useCallback } from 'react';
-import theme from '../../theme';
-import JobsSearchBar from '../../components/Jobs/JobsSearchBar';
-import JobsBox from '../../components/Jobs/JobsBox';
-import NoDataBox from '../../components/NoData/NoDataBox';
+} from "react-native";
+import React, { useEffect, useState, useCallback } from "react";
+import theme from "../../theme";
+import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
+import JobsBox from "../../components/Jobs/JobsBox";
+import NoDataBox from "../../components/NoData/NoDataBox";
 
-import { getAllJobsService } from '../../services/jobService';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
-import { useFocusEffect } from '@react-navigation/native';
-const { height } = Dimensions.get('window');
+import { getAllJobsService } from "../../services/jobService";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
+const { height } = Dimensions.get("window");
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false); // Added for refresh control
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
 
   const onDismissSnackBar = () => setVisible(false);
@@ -31,7 +31,7 @@ const Jobs = () => {
   const fetchJobs = async () => {
     setIsLoading(true);
     const response = await getAllJobsService();
-    if (response.status === 'success') {
+    if (response.status === "success") {
       const sortedJobs = response.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -73,8 +73,7 @@ const Jobs = () => {
             onRefresh={onRefresh} // Trigger refresh action
             tintColor={theme.colors.primaryBright}
           />
-        }
-      >
+        }>
         {isLoading ? (
           <View style={styles.loadingIndicator}>
             <ActivityIndicator
@@ -89,8 +88,8 @@ const Jobs = () => {
 
         {jobs.length === 0 && !isLoading && (
           <NoDataBox
-            Title={'There Are No Jobs.'}
-            Massage={'Jobs you’re actively working on will appear here.'}
+            Title={"There Are No Jobs."}
+            Massage={"Jobs you’re actively working on will appear here."}
             show={false}
             textCenter={true}
           />
@@ -100,8 +99,7 @@ const Jobs = () => {
       <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
-        style={styles.snackbarStyle}
-      >
+        style={styles.snackbarStyle}>
         {errorMessage}
       </Snackbar>
     </View>
@@ -121,14 +119,14 @@ const styles = StyleSheet.create({
   },
   loadingIndicator: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     height: height * 0.6, // More dynamic height
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
-    position: 'absolute',
+    position: "absolute",
     bottom: 10,
     left: 10,
     right: 10,

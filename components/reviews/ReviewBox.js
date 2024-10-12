@@ -1,11 +1,32 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Image } from "react-native";
 import { Avatar, Card, Text } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import theme from "../../theme";
+import starImgFilled from "../../assets/images/star_filled.png";
+import starImgCorner from "../../assets/images/star_corner.png";
 
 const ReviewBox = ({ photourl, name, rating, comment }) => {
   const rate = Number(rating);
+
+  const [userRate, setUserRate] = useState(rate);
+  const maxRating = [1, 2, 3, 4, 5];
+  const CustomRatingBar = () => {
+    return (
+      <View style={styles.customRatingBarStyle}>
+        {maxRating.map((num, key) => {
+          return (
+            <Image
+              key={key}
+              style={styles.starImgStyle}
+              source={num <= userRate ? starImgFilled : starImgCorner}
+            />
+          );
+        })}
+      </View>
+    );
+  };
+
   return (
     <Card style={styles.container}>
       <Card.Content>
@@ -30,14 +51,18 @@ const ReviewBox = ({ photourl, name, rating, comment }) => {
         </View>
         <View>
           <View style={styles.starsBox}>
-            {Array.from({ length: rate }).map((_, index) => (
+            <CustomRatingBar />
+            <Text style={styles.rateText}>
+              {rating + " / " + maxRating.length}
+            </Text>
+            {/* {Array.from({ length: rate }).map((_, index) => (
               <AntDesign
                 key={index}
                 name="star"
                 size={17}
                 color={theme.colors.warning}
               />
-            ))}
+            ))} */}
           </View>
         </View>
       </Card.Content>
@@ -63,6 +88,24 @@ const styles = StyleSheet.create({
   starsBox: {
     flexDirection: "row",
     justifyContent: "flex-end",
+    gap: 5,
+    padding: 2,
+  },
+  customRatingBarStyle: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  rateText: {
+    color: theme.colors.white,
+    fontSize: 12,
+    fontWeight: "regular",
+  },
+  starImgStyle: {
+    width: 15,
+    height: 15,
+    resizeMode: "cover",
+    marginHorizontal: 3,
   },
 });
 
