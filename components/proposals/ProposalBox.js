@@ -97,7 +97,18 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
               {createdAt}
             </Text>
           </View>
-          <Text variant='bodyMedium' style={styles.date}>
+
+          <Text
+            variant='bodyMedium'
+            style={{
+              color:
+                status === 'submitted'
+                  ? theme.colors.primaryBright
+                  : status === 'accepted'
+                  ? theme.colors.success
+                  : theme.colors.danger,
+            }}
+          >
             {status}
           </Text>
         </Card.Content>
@@ -118,12 +129,13 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.white,
     textAlign: 'center',
-    margin: 'auto',
+    marginBottom: 10,
   },
   card: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,
     margin: 10,
+    padding: 10,
   },
   freelanceContainer: {
     display: 'flex',

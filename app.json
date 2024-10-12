@@ -4,10 +4,10 @@
     "slug": "block-work-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon-custom.png",
+    "icon": "./assets/icon-22.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-custom-c.png",
+      "image": "./assets/splash-2.png",
       "resizeMode": "contain",
       "backgroundColor": "#0a0a0b"
     },
@@ -16,7 +16,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon-custom.png",
+        "foregroundImage": "./assets/adaptive-icon-2.png",
         "backgroundColor": "#0a0a0b"
       }
     },

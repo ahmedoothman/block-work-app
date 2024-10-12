@@ -97,7 +97,7 @@ const ForgotPassword = () => {
         onDismissSnackBar={onDismissSnackBar}
         undoText='Undo'
         undoColor={theme.colors.secondaryDark}
-        bgColor={isSuccess ? theme.colors.colorTextBlue : theme.colors.danger}
+        bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
         messageColor={theme.colors.white}
       />
     </SafeAreaView>

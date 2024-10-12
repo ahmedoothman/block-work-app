@@ -16,6 +16,7 @@ import { getMyJobsService, deleteJobService } from '../../services/jobService';
 import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import NoDataBox from '../../components/NoData/NoDataBox';
+import Icon from 'react-native-vector-icons/Entypo';
 const { height } = Dimensions.get('window');
 
 const Jobs = () => {
@@ -95,10 +96,7 @@ const Jobs = () => {
           navigation.navigate('CreateJobForm');
         }}
       >
-        <Image
-          source={require('../../assets/images/add.png')}
-          style={{ width: '100%', height: '100%' }}
-        />
+        <Icon name='circle-with-plus' size={30} color={theme.colors.white} />
       </TouchableOpacity>
 
       <ScrollView
@@ -175,7 +173,8 @@ const styles = StyleSheet.create({
   },
   createBtn: {
     backgroundColor: theme.colors.primaryDark,
-    color: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 40,
     height: 40,
     padding: 5,
