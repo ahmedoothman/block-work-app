@@ -19,6 +19,8 @@ const { height } = Dimensions.get("window");
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [filteredMessage, setFilteredMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false); // Added for refresh control
   const [error, setError] = useState(false);
@@ -36,6 +38,7 @@ const Jobs = () => {
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setJobs(sortedJobs);
+      setFilteredJobs(sortedJobs);
     } else {
       setError(true);
       setErrorMessage(response.message);
@@ -61,10 +64,82 @@ const Jobs = () => {
     fetchJobs().finally(() => setRefreshing(false)); // Ensure refreshing state is reset after fetching
   }, []);
 
+  //----------------Filtration ------------------
+  //' filter search by => {budget , title}
+  const searchFilter = (searchText) => {
+    if (searchText.length === 0) {
+      setFilteredJobs(jobs);
+      setFilteredMessage("");
+      return;
+    }
+
+    const filteredJobs = jobs.filter((job) => {
+      const titleMatches = job.title
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
+      const budgetMatches =
+        job.budget && job.budget.toString().includes(searchText.trim());
+
+      return titleMatches || budgetMatches;
+    });
+
+    if (filteredJobs.length === 0) {
+      setFilteredMessage(
+        `No jobs found for "${searchText}". Try adjusting the job title or budget.`
+      );
+      setFilteredJobs(filteredJobs);
+    } else {
+      setFilteredMessage("");
+      setFilteredJobs(filteredJobs);
+    }
+  };
+
+  const skillFilter = (skill) => {
+    if (skill == "All") {
+      setFilteredJobs(jobs);
+      return;
+    } else {
+      const jobsMatchingSkills = jobs.filter((job) =>
+        job.skillsRequired.includes(skill)
+      );
+
+      if (jobsMatchingSkills.length == 0) {
+        setFilteredMessage(
+          `The skill "${skill}" is currently not available. Please select a different skills or check back later.`
+        );
+        setFilteredJobs(jobsMatchingSkills);
+      } else {
+        setFilteredMessage("");
+        setFilteredJobs(jobsMatchingSkills);
+      }
+    }
+  };
+
+  const categoryFilter = (category) => {
+    if (category == "All") {
+      setFilteredJobs(jobs);
+      return;
+    } else {
+      const selectedCategory = jobs.filter((job) => job.category === category);
+      if (selectedCategory.length == 0) {
+        setFilteredJobs(selectedCategory);
+        setFilteredMessage(
+          `The category "${category}" is currently not available. Please select a different category or check back later.`
+        );
+      } else {
+        setFilteredMessage("");
+        setFilteredJobs(selectedCategory);
+      }
+    }
+  };
+  //----------------------------------
   return (
     <View style={styles.container}>
-      <JobsSearchBar />
-
+      <JobsSearchBar
+        searchFilter={searchFilter}
+        skillFilter={skillFilter}
+        categoryFilter={categoryFilter}
+      />
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         refreshControl={
@@ -83,13 +158,17 @@ const Jobs = () => {
             />
           </View>
         ) : (
-          jobs.map((job) => <JobsBox key={job._id} jobData={job} />)
+          filteredJobs.map((job) => <JobsBox key={job._id} jobData={job} />)
         )}
 
-        {jobs.length === 0 && !isLoading && (
+        {filteredJobs.length === 0 && !isLoading && (
           <NoDataBox
             Title={"There Are No Jobs."}
-            Massage={"Jobs you’re actively working on will appear here."}
+            Massage={
+              filteredMessage.length > 0
+                ? filteredMessage
+                : "Jobs you’re actively working on will appear here."
+            }
             show={false}
             textCenter={true}
           />
