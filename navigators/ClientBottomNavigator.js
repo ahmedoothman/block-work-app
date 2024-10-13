@@ -10,6 +10,7 @@ import Profile from '../screens/client/ClientProfile';
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/client/Contracts';
 import Menu from '../screens/common/Menu';
+import Icon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 import screenOptionsWithHeader from './screenOptionsWithHeader';
@@ -61,12 +62,12 @@ export default function ClientBottomNavigator() {
       />
 
       <Tab.Screen
-        name='Menu'
+        name='Settings'
         component={Menu}
         options={{
-          tabBarLabel: 'Menu',
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
-            <Entypo name='menu' color={color} size={size} />
+            <Icon name='settings' color={color} size={size} />
           ),
           ...screenOptionsWithHeader('Menu'),
         }}

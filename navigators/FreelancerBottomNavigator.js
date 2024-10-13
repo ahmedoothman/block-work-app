@@ -13,7 +13,7 @@ import Profile from '../screens/freelancer/Profile';
 import Menu from '../screens/common/Menu';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import screenOptionsWithHeader from './screenOptionsWithHeader';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 export default function FreelancerBottomNavigator() {
@@ -81,12 +81,12 @@ export default function FreelancerBottomNavigator() {
       />
 
       <Tab.Screen
-        name='Menu'
+        name='Settings'
         component={Menu}
         options={{
-          tabBarLabel: 'Menu',
+          tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
-            <Entypo name='menu' color={color} size={size} />
+            <Icon name='settings' color={color} size={size} />
           ),
           ...screenOptionsWithHeader('Menu'),
         }}
