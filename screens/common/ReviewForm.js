@@ -5,35 +5,36 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-} from 'react-native';
-import React, { useState, useEffect } from 'react';
-import theme from '../../theme';
-import starImgFilled from '../../assets/images/star_filled.png';
-import starImgCorner from '../../assets/images/star_corner.png';
-import InputField from '../../components/inputs/auth/InputField';
-import AppButton from '../../components/btns/AppButton';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import UserBox from '../../components/UserBox/UserBox';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
-import { addReviewService } from '../../services/reviewService';
-import { getUserService } from '../../services/userService';
+} from "react-native";
+import React, { useState, useEffect } from "react";
+import theme from "../../theme";
+import starImgFilled from "../../assets/images/star_filled.png";
+import starImgCorner from "../../assets/images/star_corner.png";
+import InputField from "../../components/inputs/auth/InputField";
+import AppButton from "../../components/btns/AppButton";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import UserBox from "../../components/UserBox/UserBox";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
+import { addReviewService } from "../../services/reviewService";
+import { getUserService } from "../../services/userService";
 const ReviewForm = () => {
   const navigation = useNavigation();
   const { userId, isMe } = useRoute().params;
   const [user, setUser] = useState({
-    name: '',
+    name: "",
     userPhotoUrl:
-      'https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account',
+      "https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account",
   });
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
+  const commentMaxLength = 200;
   const maxRating = [1, 2, 3, 4, 5];
 
   useEffect(() => {
     const fetchUser = async () => {
       const response = await getUserService(userId);
-      if (response.status === 'success') {
+      if (response.status === "success") {
         setUser(response.data);
       }
     };
@@ -48,8 +49,7 @@ const ReviewForm = () => {
             <TouchableOpacity
               activeOpacity={0.7}
               key={key}
-              onPress={() => setRating(item)}
-            >
+              onPress={() => setRating(item)}>
               <Image
                 style={styles.starImgStyle}
                 source={item <= rating ? starImgFilled : starImgCorner}
@@ -64,7 +64,7 @@ const ReviewForm = () => {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const onDismissSnackBar = () => setAlert(false);
 
   const submitReview = async () => {
@@ -79,9 +79,9 @@ const ReviewForm = () => {
     };
     const response = await addReviewService(review);
     setAlert(true);
-    if (response.status == 'success') {
+    if (response.status == "success") {
       setIsSuccess(true);
-      setAlertMessage('Review Added Successfully');
+      setAlertMessage("Review Added Successfully");
       setTimeout(() => {
         navigation.goBack();
       }, 1000);
@@ -95,28 +95,28 @@ const ReviewForm = () => {
 
   function clearInputs() {
     setRating(0);
-    setComment('');
+    setComment("");
   }
 
   const validateInputs = () => {
     setAlert(false);
-    setAlertMessage('');
+    setAlertMessage("");
     if (rating <= 0 || rating > 5) {
       setAlert(true);
-      setAlertMessage('Please provide a rating between 1 and 5.');
+      setAlertMessage("Please provide a rating between 1 and 5.");
       setLoading(false);
       return false;
     }
     if (!comment.trim()) {
       setAlert(true);
-      setAlertMessage('Comment cannot be empty.');
+      setAlertMessage("Comment cannot be empty.");
       setLoading(false);
       return false;
     }
 
     if (comment.trim().length < 4) {
       setAlert(true);
-      setAlertMessage('Comment must be at least 4 characters long.');
+      setAlertMessage("Comment must be at least 4 characters long.");
       setLoading(false);
       return false;
     }
@@ -136,7 +136,7 @@ const ReviewForm = () => {
             <View style={styles.ratingBarContainer}>
               <CustomRatingBar />
               <Text style={styles.rateText}>
-                {rating + ' / ' + maxRating.length}
+                {rating + " / " + maxRating.length}
               </Text>
             </View>
           </View>
@@ -145,19 +145,33 @@ const ReviewForm = () => {
             <Text style={styles.inputTitle}>Comment</Text>
             <TextInput
               value={comment}
-              onChangeText={(value) => setComment(value)}
-              placeholder={'Leave a comment'}
+              onChangeText={(value) => {
+                if (value.length > commentMaxLength) {
+                  setAlert(true);
+                  setIsSuccess(false);
+                  setAlertMessage(
+                    `Maximum character limit is ${commentMaxLength}.`
+                  );
+                } else {
+                  setAlert(false);
+                  setComment(value);
+                }
+              }}
+              placeholder={"Leave a comment"}
               style={styles.textInput}
               multiline={true}
               numberOfLines={5}
-              textAlignVertical={'top'}
-              placeholderTextColor='white'
+              textAlignVertical={"top"}
+              placeholderTextColor={theme.colors.ternaryDark}
             />
+            <Text style={styles.charCount}>
+              {comment.length}/{commentMaxLength}
+            </Text>
           </View>
 
           <View style={styles.btnContainer}>
             <AppButton
-              buttonTitle={'Submit Review'}
+              buttonTitle={"Submit Review"}
               onPress={() => {
                 submitReview();
               }}
@@ -172,7 +186,7 @@ const ReviewForm = () => {
         visible={alert}
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
-        undoText='Undo'
+        undoText="Undo"
         undoColor={theme.colors.secondaryDark}
         bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
         messageColor={theme.colors.white}
@@ -188,31 +202,31 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   headerTitle: {
-    color: 'white',
+    color: "white",
     fontSize: 24,
     marginVertical: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   formContainer: {
-    arginBottom: 15,
-    width: '95%',
-    marginHorizontal: 'auto',
+    marginBottom: 15,
+    width: "95%",
+    marginHorizontal: "auto",
   },
   rateContainer: {
     marginVertical: 15,
   },
   inputTitle: {
     color: theme.colors.white,
-    fontSize: 14,
-    fontWeight: 'regular',
+    fontSize: 16,
+    fontWeight: "regular",
     marginLeft: 5,
     paddingVertical: 10,
   },
   ratingBarContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     paddingHorizontal: 20,
     marginTop: 10,
     gap: 10,
@@ -221,35 +235,46 @@ const styles = StyleSheet.create({
   rateText: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: 'regular',
+    fontWeight: "regular",
   },
   customRatingBarStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    // marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   starImgStyle: {
     width: 40,
     height: 40,
-    resizeMode: 'cover',
-    marginHorizontal: 5, // Add spacing between stars
+    resizeMode: "cover",
+    marginHorizontal: 5,
   },
 
   commentContainer: {
     marginVertical: 15,
+    position: "relative",
   },
   textInput: {
     padding: 10,
     borderRadius: theme.borderRadius,
     backgroundColor: theme.colors.white,
-    color: theme.colors.primaryDark,
+    color: theme.colors.secondaryGray,
+    height: 180,
+    paddingBottom: 20,
+    fontSize: 14,
+    fontWeight: "regular",
   },
 
   btnContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     marginVertical: 0,
+  },
+  charCount: {
+    position: "absolute",
+    right: 10,
+    bottom: 5,
+    color: theme.colors.secondaryGray,
+    fontSize: 12,
   },
 });
 
