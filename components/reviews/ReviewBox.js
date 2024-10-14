@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { Avatar, Card, Text } from "react-native-paper";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import starImgFilled from "../../assets/images/star_filled.png";
 import starImgCorner from "../../assets/images/star_corner.png";
 
 const ReviewBox = ({ photourl, name, rating, comment }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const rate = Number(rating);
 
   const [userRate, setUserRate] = useState(rate);
@@ -70,43 +72,44 @@ const ReviewBox = ({ photourl, name, rating, comment }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: 20,
-    margin: 8,
-  },
-  RowView: {
-    flexDirection: "row",
-  },
-  row2View: {
-    flexDirection: "row",
-    // justifyContent:'space-between',
-    margin: 5,
-    flexWrap: "wrap",
-  },
-  starsBox: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    gap: 5,
-    padding: 2,
-  },
-  customRatingBarStyle: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  rateText: {
-    color: theme.colors.white,
-    fontSize: 12,
-    fontWeight: "regular",
-  },
-  starImgStyle: {
-    width: 15,
-    height: 15,
-    resizeMode: "cover",
-    marginHorizontal: 3,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: 20,
+      margin: 8,
+    },
+    RowView: {
+      flexDirection: "row",
+    },
+    row2View: {
+      flexDirection: "row",
+      // justifyContent:'space-between',
+      margin: 5,
+      flexWrap: "wrap",
+    },
+    starsBox: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      gap: 5,
+      padding: 2,
+    },
+    customRatingBarStyle: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    rateText: {
+      color: theme.colors.white,
+      fontSize: 12,
+      fontWeight: "regular",
+    },
+    starImgStyle: {
+      width: 15,
+      height: 15,
+      resizeMode: "cover",
+      marginHorizontal: 3,
+    },
+  });
 
 export default ReviewBox;

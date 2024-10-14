@@ -7,7 +7,7 @@ import {
   RefreshControl,
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
 import JobsBox from "../../components/Jobs/JobsBox";
 import NoDataBox from "../../components/NoData/NoDataBox";
@@ -18,6 +18,8 @@ import { useFocusEffect } from "@react-navigation/native";
 const { height } = Dimensions.get("window");
 
 const Jobs = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [filteredMessage, setFilteredMessage] = useState("");
@@ -187,27 +189,28 @@ const Jobs = () => {
 
 export default Jobs;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    padding: 10,
-  },
-  scrollContainer: {
-    paddingBottom: 20,
-  },
-  loadingIndicator: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: height * 0.6, // More dynamic height
-  },
-  snackbarStyle: {
-    backgroundColor: theme.colors.danger,
-    borderRadius: theme.borderRadius,
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    right: 10,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+      padding: 10,
+    },
+    scrollContainer: {
+      paddingBottom: 20,
+    },
+    loadingIndicator: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      height: height * 0.6, // More dynamic height
+    },
+    snackbarStyle: {
+      backgroundColor: theme.colors.danger,
+      borderRadius: theme.borderRadius,
+      position: "absolute",
+      bottom: 10,
+      left: 10,
+      right: 10,
+    },
+  });

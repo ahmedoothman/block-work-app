@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AppButton from '../../components/btns/AppButton';
@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import { calcDuration } from '../../utils';
 
 const JobsDetails = ({ route }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const { jobDetails, postingTimeOfJob } = route.params;
   const {
     title,
@@ -120,98 +122,99 @@ const JobsDetails = ({ route }) => {
 
 export default JobsDetails;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingVertical: 20,
-    paddingHorizontal: 16,
-    backgroundColor: theme.colors.secondaryDark,
-    height: '100%',
-  },
-  jobDetailsBox: {
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: theme.borderRadius,
-    flex: 1,
-    padding: 16,
-  },
-  title: {
-    color: theme.colors.white,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  timePriceText: {
-    color: theme.colors.ternaryDark,
-    fontSize: 14,
-    marginVertical: 5,
-  },
-  paymentBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 8,
-  },
-  locationText: {
-    color: theme.colors.ternaryDark,
-    marginLeft: 5,
-  },
-  descriptionText: {
-    color: theme.colors.white,
-    marginVertical: 15,
-  },
-  thirdSection: {
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.secondaryBright,
-    marginVertical: 20,
-    paddingBottom: 10,
-  },
-  infoRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  budgetText: {
-    color: theme.colors.white,
-    marginLeft: 8,
-  },
-  subText: {
-    color: theme.colors.ternaryDark,
-  },
-  projectTypeText: {
-    color: theme.colors.white,
-    marginVertical: 15,
-  },
-  sectionTitle: {
-    color: theme.colors.white,
-    fontSize: 16,
-    marginVertical: 10,
-  },
-  skillsBox: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 20,
-  },
-  skillsItem: {
-    backgroundColor: theme.colors.secondaryBright,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
-    color: theme.colors.ternaryDark,
-  },
-  lastSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 15,
-  },
-  proposalsRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  proposalsCount: {
-    color: theme.colors.ternaryDark,
-    marginLeft: 5,
-  },
-  applyBtnView: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingVertical: 20,
+      paddingHorizontal: 16,
+      backgroundColor: theme.colors.secondaryDark,
+      height: "100%",
+    },
+    jobDetailsBox: {
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: theme.borderRadius,
+      flex: 1,
+      padding: 16,
+    },
+    title: {
+      color: theme.colors.white,
+      fontSize: 20,
+      fontWeight: "bold",
+    },
+    timePriceText: {
+      color: theme.colors.ternaryDark,
+      fontSize: 14,
+      marginVertical: 5,
+    },
+    paymentBox: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginVertical: 8,
+    },
+    locationText: {
+      color: theme.colors.ternaryDark,
+      marginLeft: 5,
+    },
+    descriptionText: {
+      color: theme.colors.white,
+      marginVertical: 15,
+    },
+    thirdSection: {
+      borderBottomWidth: 1,
+      borderBottomColor: theme.colors.secondaryBright,
+      marginVertical: 20,
+      paddingBottom: 10,
+    },
+    infoRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginVertical: 10,
+    },
+    budgetText: {
+      color: theme.colors.white,
+      marginLeft: 8,
+    },
+    subText: {
+      color: theme.colors.ternaryDark,
+    },
+    projectTypeText: {
+      color: theme.colors.white,
+      marginVertical: 15,
+    },
+    sectionTitle: {
+      color: theme.colors.white,
+      fontSize: 16,
+      marginVertical: 10,
+    },
+    skillsBox: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 8,
+      marginBottom: 20,
+    },
+    skillsItem: {
+      backgroundColor: theme.colors.secondaryBright,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      borderRadius: 8,
+      color: theme.colors.ternaryDark,
+    },
+    lastSection: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginVertical: 15,
+    },
+    proposalsRow: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    proposalsCount: {
+      color: theme.colors.ternaryDark,
+      marginLeft: 5,
+    },
+    applyBtnView: {
+      alignItems: "center",
+      marginTop: 20,
+    },
+  });

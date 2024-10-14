@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import starImgFilled from "../../assets/images/star_filled.png";
 import starImgCorner from "../../assets/images/star_corner.png";
 import InputField from "../../components/inputs/auth/InputField";
@@ -19,6 +19,8 @@ import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
 import { addReviewService } from "../../services/reviewService";
 import { getUserService } from "../../services/userService";
 const ReviewForm = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
   const { userId, isMe } = useRoute().params;
   const [user, setUser] = useState({
@@ -195,87 +197,88 @@ const ReviewForm = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    padding: 10,
-  },
-  headerTitle: {
-    color: "white",
-    fontSize: 24,
-    marginVertical: 20,
-    textAlign: "center",
-  },
-  formContainer: {
-    marginBottom: 15,
-    width: "95%",
-    marginHorizontal: "auto",
-  },
-  rateContainer: {
-    marginVertical: 15,
-  },
-  inputTitle: {
-    color: theme.colors.white,
-    fontSize: 16,
-    fontWeight: "regular",
-    marginLeft: 5,
-    paddingVertical: 10,
-  },
-  ratingBarContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    marginTop: 10,
-    gap: 10,
-  },
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+      padding: 10,
+    },
+    headerTitle: {
+      color: "white",
+      fontSize: 24,
+      marginVertical: 20,
+      textAlign: "center",
+    },
+    formContainer: {
+      marginBottom: 15,
+      width: "95%",
+      marginHorizontal: "auto",
+    },
+    rateContainer: {
+      marginVertical: 15,
+    },
+    inputTitle: {
+      color: theme.colors.white,
+      fontSize: 16,
+      fontWeight: "regular",
+      marginLeft: 5,
+      paddingVertical: 10,
+    },
+    ratingBarContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      marginTop: 10,
+      gap: 10,
+    },
 
-  rateText: {
-    color: theme.colors.white,
-    fontSize: 14,
-    fontWeight: "regular",
-  },
-  customRatingBarStyle: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  starImgStyle: {
-    width: 40,
-    height: 40,
-    resizeMode: "cover",
-    marginHorizontal: 5,
-  },
+    rateText: {
+      color: theme.colors.white,
+      fontSize: 14,
+      fontWeight: "regular",
+    },
+    customRatingBarStyle: {
+      flexDirection: "row",
+      justifyContent: "center",
+    },
+    starImgStyle: {
+      width: 40,
+      height: 40,
+      resizeMode: "cover",
+      marginHorizontal: 5,
+    },
 
-  commentContainer: {
-    marginVertical: 15,
-    position: "relative",
-  },
-  textInput: {
-    padding: 10,
-    borderRadius: theme.borderRadius,
-    backgroundColor: theme.colors.white,
-    color: theme.colors.secondaryGray,
-    height: 180,
-    paddingBottom: 20,
-    fontSize: 14,
-    fontWeight: "regular",
-  },
+    commentContainer: {
+      marginVertical: 15,
+      position: "relative",
+    },
+    textInput: {
+      padding: 10,
+      borderRadius: theme.borderRadius,
+      backgroundColor: theme.colors.white,
+      color: theme.colors.secondaryGray,
+      height: 180,
+      paddingBottom: 20,
+      fontSize: 14,
+      fontWeight: "regular",
+    },
 
-  btnContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginVertical: 0,
-  },
-  charCount: {
-    position: "absolute",
-    right: 10,
-    bottom: 5,
-    color: theme.colors.secondaryGray,
-    fontSize: 12,
-  },
-});
+    btnContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginVertical: 0,
+    },
+    charCount: {
+      position: "absolute",
+      right: 10,
+      bottom: 5,
+      color: theme.colors.secondaryGray,
+      fontSize: 12,
+    },
+  });
 
 export default ReviewForm;

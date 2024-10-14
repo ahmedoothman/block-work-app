@@ -9,7 +9,7 @@ import {
   RefreshControl, // Import RefreshControl
 } from "react-native";
 import React, { useCallback, useState } from "react";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
 import JobsBox from "../../components/Jobs/JobsBox";
 import { getMyJobsService, deleteJobService } from "../../services/jobService";
@@ -22,6 +22,8 @@ import { logEvent } from "firebase/analytics";
 const { height } = Dimensions.get("window");
 
 const Jobs = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
 
   const [jobs, setJobs] = useState([]);
@@ -242,41 +244,42 @@ const Jobs = () => {
 
 export default Jobs;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    padding: 10,
-  },
-  scrollContainerStyle: {
-    padding: 0,
-  },
-  scrollContainer: {
-    paddingBottom: 20,
-  },
-  loadingIndicator: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: height * 0.6,
-  },
-  snackbarStyle: {
-    backgroundColor: theme.colors.danger,
-    borderRadius: theme.borderRadius,
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    right: 10,
-  },
-  createBtn: {
-    backgroundColor: theme.colors.primaryDark,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 40,
-    height: 40,
-    padding: 5,
-    marginHorizontal: 25,
-    marginTop: 10,
-    borderRadius: theme.borderRadius,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+      padding: 10,
+    },
+    scrollContainerStyle: {
+      padding: 0,
+    },
+    scrollContainer: {
+      paddingBottom: 20,
+    },
+    loadingIndicator: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      height: height * 0.6,
+    },
+    snackbarStyle: {
+      backgroundColor: theme.colors.danger,
+      borderRadius: theme.borderRadius,
+      position: "absolute",
+      bottom: 10,
+      left: 10,
+      right: 10,
+    },
+    createBtn: {
+      backgroundColor: theme.colors.primaryDark,
+      alignItems: "center",
+      justifyContent: "center",
+      width: 40,
+      height: 40,
+      padding: 5,
+      marginHorizontal: 25,
+      marginTop: 10,
+      borderRadius: theme.borderRadius,
+    },
+  });

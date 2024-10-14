@@ -6,7 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import Jobs from '../screens/freelancer/Jobs';
 import Proposals from '../screens/freelancer/Proposals';
-import theme from '../theme';
+import useTheme from "../hooks/useTheme";
 import Messages from '../screens/common/Messages';
 import Contracts from '../screens/freelancer/Contracts';
 import Profile from '../screens/freelancer/Profile';
@@ -17,6 +17,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 
 export default function FreelancerBottomNavigator() {
+    const theme = useTheme();
   return (
     <Tab.Navigator
       initialRouteName='Jobs'
@@ -98,14 +99,14 @@ export default function FreelancerBottomNavigator() {
         component={Profile}
         options={{
           title: 'Profile',
-          headerStyle: { backgroundColor: 'black' },
-          headerTintColor: 'white',
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           tabBarButton: () => null,
           headerRight: () => (
             <MaterialCommunityIcons
               name='dots-vertical'
               size={24}
-              color='white'
+              color={theme.colors.white}
               style={{ marginRight: 10 }}
             />
           ),

@@ -1,10 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import Details from "../../components/proposals/Details";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import { ScrollView } from "react-native-gesture-handler";
 
 const ClientProposalsDetails = ({ route }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const { proposal, date, isClient, jobDetails } = route.params;
   const {
     freelancer: {
@@ -32,13 +34,14 @@ const ClientProposalsDetails = ({ route }) => {
 };
 
 export default ClientProposalsDetails;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    position: "relative",
-  },
-  scrollContainer: {
-    flex: 1,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+      position: "relative",
+    },
+    scrollContainer: {
+      flex: 1,
+    },
+  });

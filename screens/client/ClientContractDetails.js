@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/Entypo';
 import { calcDuration } from '../../utils';
@@ -20,6 +20,8 @@ import { updateContractStatusService } from '../../services/contractService';
 import UserBox from '../../components/UserBox/UserBox';
 
 const ClientContractDetails = ({ route }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
   const { contract } = route.params;
   const [alert, setAlert] = useState(false);
@@ -222,136 +224,137 @@ const ClientContractDetails = ({ route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.secondaryDark,
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-  },
-  scrollViewContainer: {
-    flexGrow: 1, // Allows the ScrollView to expand
-  },
-  detailsContainer: {
-    backgroundColor: theme.colors.secondaryGray,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    marginVertical: 10,
-    borderRadius: theme.borderRadius,
-  },
-  date_dots_Container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  dateText: {
-    color: theme.colors.ternaryDark,
-  },
-  textColor: {
-    color: theme.colors.white,
-  },
-  contractTitle: {
-    fontSize: 17,
-    fontWeight: 'regular',
-    padding: 5,
-    marginVertical: 10,
-  },
-  Fixed_price: {
-    color: theme.colors.ternaryDark,
-    marginVertical: 10,
-    fontSize: 12,
-    fontWeight: 'regular',
-  },
-  contractDescription: {
-    color: theme.colors.white,
-    fontSize: 14,
-    fontWeight: 'regular',
-    marginVertical: 10,
-  },
-  skillsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 22,
-  },
-  skillsBox: {
-    flexDirection: 'row',
-  },
-  skillsItem: {
-    backgroundColor: theme.colors.secondaryBright,
-    color: theme.colors.ternaryDark,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: theme.borderRadius,
-    marginRight: 8,
-  },
-  roleContaienr: {
-    marginBottom: 20,
-  },
-  roleTitle: {
-    marginBottom: 10,
-    fontSize: 18,
-    fontWeight: 'regular',
-    color: theme.colors.white,
-  },
-  userContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    gap: 15,
-    marginLeft: 10,
-  },
-  userImage: {
-    width: 40,
-    height: 40,
-  },
-  userName: {
-    fontSize: 14,
-    fontWeight: 'regular',
-    color: theme.colors.white,
-  },
-  price_duration_Contaienr: {
-    marginVertical: 10,
-    width: '95%',
-  },
-  d_flex_Row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  d_flex_Column: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  mainTitle: {
-    marginBottom: 10,
-    fontSize: 18,
-    fontWeight: 'regular',
-    color: theme.colors.white,
-  },
-  price: {
-    color: theme.colors.ternaryDark,
-  },
-  duration: {
-    color: theme.colors.ternaryDark,
-  },
-  contractBTNS_Container: {
-    marginTop: 20,
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    gap: 5,
-  },
-  Client_Status: {
-    fontSize: 12,
-    fontWeight: 'regular',
-    color: theme.colors.ternaryDark,
-    marginVertical: 20,
-    textAlign: 'center',
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: theme.colors.secondaryDark,
+      flex: 1,
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+    },
+    scrollViewContainer: {
+      flexGrow: 1, // Allows the ScrollView to expand
+    },
+    detailsContainer: {
+      backgroundColor: theme.colors.secondaryGray,
+      paddingVertical: 10,
+      paddingHorizontal: 15,
+      marginVertical: 10,
+      borderRadius: theme.borderRadius,
+    },
+    date_dots_Container: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginVertical: 10,
+    },
+    dateText: {
+      color: theme.colors.ternaryDark,
+    },
+    textColor: {
+      color: theme.colors.white,
+    },
+    contractTitle: {
+      fontSize: 17,
+      fontWeight: "regular",
+      padding: 5,
+      marginVertical: 10,
+    },
+    Fixed_price: {
+      color: theme.colors.ternaryDark,
+      marginVertical: 10,
+      fontSize: 12,
+      fontWeight: "regular",
+    },
+    contractDescription: {
+      color: theme.colors.white,
+      fontSize: 14,
+      fontWeight: "regular",
+      marginVertical: 10,
+    },
+    skillsContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginTop: 10,
+      marginBottom: 22,
+    },
+    skillsBox: {
+      flexDirection: "row",
+    },
+    skillsItem: {
+      backgroundColor: theme.colors.secondaryBright,
+      color: theme.colors.ternaryDark,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: theme.borderRadius,
+      marginRight: 8,
+    },
+    roleContaienr: {
+      marginBottom: 20,
+    },
+    roleTitle: {
+      marginBottom: 10,
+      fontSize: 18,
+      fontWeight: "regular",
+      color: theme.colors.white,
+    },
+    userContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: 15,
+      marginLeft: 10,
+    },
+    userImage: {
+      width: 40,
+      height: 40,
+    },
+    userName: {
+      fontSize: 14,
+      fontWeight: "regular",
+      color: theme.colors.white,
+    },
+    price_duration_Contaienr: {
+      marginVertical: 10,
+      width: "95%",
+    },
+    d_flex_Row: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    d_flex_Column: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    mainTitle: {
+      marginBottom: 10,
+      fontSize: 18,
+      fontWeight: "regular",
+      color: theme.colors.white,
+    },
+    price: {
+      color: theme.colors.ternaryDark,
+    },
+    duration: {
+      color: theme.colors.ternaryDark,
+    },
+    contractBTNS_Container: {
+      marginTop: 20,
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      gap: 5,
+    },
+    Client_Status: {
+      fontSize: 12,
+      fontWeight: "regular",
+      color: theme.colors.ternaryDark,
+      marginVertical: 20,
+      textAlign: "center",
+    },
+  });
 export default ClientContractDetails;

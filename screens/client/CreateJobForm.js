@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import InputField from '../../components/inputs/auth/InputField';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AppButton from '../../components/btns/AppButton';
 import { createJobService } from '../../services/jobService';
@@ -11,6 +11,8 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { categories, skillsEnum } from '../../constants/global/data';
 
 const CreateJobForm = () => {
+    const theme = useTheme();
+  const styles = createStyles(theme)
   const [jobCreatedInfo, setJobCreatedInfo] = useState({
     title: '',
     description: '',
@@ -308,40 +310,41 @@ const CreateJobForm = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: theme.colors.secondaryDark,
-    padding: 10,
-  },
-  formContainer: {
-    width: '95%',
-    marginHorizontal: 'auto',
-    marginTop: 20,
-    backgroundColor: theme.colors.secondaryGray,
-    padding: 10,
-    borderRadius: 20,
-  },
-  inputContainer: {
-    marginBottom: 15,
-  },
-  inputTitle: {
-    color: theme.colors.white,
-    marginBottom: 5,
-  },
-  dropdown: {
-    backgroundColor: theme.colors.secondaryBright,
-    borderRadius: 5,
-    width: '90%',
-    marginHorizontal: 'auto',
-    padding: 10,
-    color: 'white',
-  },
-  btnContainer: {
-    alignItems: 'center',
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column",
+      alignItems: "center",
+      backgroundColor: theme.colors.secondaryDark,
+      padding: 10,
+    },
+    formContainer: {
+      width: "95%",
+      marginHorizontal: "auto",
+      marginTop: 20,
+      backgroundColor: theme.colors.secondaryGray,
+      padding: 10,
+      borderRadius: 20,
+    },
+    inputContainer: {
+      marginBottom: 15,
+    },
+    inputTitle: {
+      color: theme.colors.white,
+      marginBottom: 5,
+    },
+    dropdown: {
+      backgroundColor: theme.colors.secondaryBright,
+      borderRadius: 5,
+      width: "90%",
+      marginHorizontal: "auto",
+      padding: 10,
+      color: "white",
+    },
+    btnContainer: {
+      alignItems: "center",
+    },
+  });
 
 export default CreateJobForm;

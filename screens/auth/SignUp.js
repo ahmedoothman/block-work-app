@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import InputField from '../../components/inputs/auth/InputField';
 import { RadioButton } from 'react-native-paper';
 import AppButton from '../../components/btns/AppButton';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import { signUpService } from '../../services/userService';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +15,8 @@ import * as ImagePicker from 'expo-image-picker';
 import { uploadFile } from '../../utils/uploadFile';
 
 const SignUp = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -258,38 +260,39 @@ const SignUp = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  radioGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-  },
-  radioLabel: {
-    fontSize: 16,
-    marginRight: 20,
-  },
-  centerBtn: {
-    margin: 'auto',
-  },
-  signInTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  signInPrompt: {
-    color: theme.colors.white,
-  },
-  signInText: {
-    color: theme.colors.primaryBright,
-    marginLeft: 5,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 20,
+    },
+    radioGroup: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: 20,
+    },
+    radioLabel: {
+      fontSize: 16,
+      marginRight: 20,
+    },
+    centerBtn: {
+      margin: "auto",
+    },
+    signInTextContainer: {
+      flexDirection: "row",
+      justifyContent: "center",
+      marginTop: 20,
+    },
+    signInPrompt: {
+      color: theme.colors.white,
+    },
+    signInText: {
+      color: theme.colors.primaryBright,
+      marginLeft: 5,
+    },
+  });
 
 export default SignUp;

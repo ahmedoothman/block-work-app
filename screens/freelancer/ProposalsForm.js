@@ -5,14 +5,18 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
-import theme from "../../theme";
-import { useNavigation } from "@react-navigation/native";
-import { submitProposalService } from "../../services/proposalService";
-import { ActivityIndicator, Snackbar } from "react-native-paper";
+
+} from 'react-native';
+import React, { useState } from 'react';
+import useTheme from "../../hooks/useTheme";
+import { useNavigation } from '@react-navigation/native';
+import { submitProposalService } from '../../services/proposalService';
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
+
 
 const ProposalsForm = ({ route }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const { jobData, postingTimeOfJob } = route.params;
   const { category, description, title, _id } = jobData;
 
@@ -160,100 +164,103 @@ const ProposalsForm = ({ route }) => {
 
 export default ProposalsForm;
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: theme.colors.secondaryDark,
-  },
-  jobBox: {
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: 8,
-    padding: 20,
-    marginBottom: 20,
-  },
-  title: {
-    color: theme.colors.white,
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  description: {
-    color: theme.colors.ternaryDark,
-    fontSize: 14,
-    marginTop: 10,
-  },
-  skillsBox: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 10,
-  },
-  skill: {
-    backgroundColor: theme.colors.secondaryBright,
-    padding: 5,
-    borderRadius: 8,
-    color: theme.colors.ternaryDark,
-  },
-  postingTime: {
-    color: theme.colors.ternaryDark,
-  },
-  formSection: {
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: 8,
-    padding: 20,
-    marginBottom: 20,
-  },
 
-  label: {
-    color: theme.colors.white,
-    fontSize: 14,
-    marginBottom: 5,
-  },
-  input: {
-    backgroundColor: theme.colors.secondaryBright,
-    borderRadius: 8,
-    padding: 10,
-    color: theme.colors.ternaryDark,
-  },
-  coverLetterInput: {
-    backgroundColor: theme.colors.secondaryBright,
-    borderRadius: 8,
-    padding: 10,
-    height: 100,
-    textAlignVertical: "top",
-    color: theme.colors.ternaryDark,
-  },
-  feeGroup: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 10,
-  },
-  fee: {
-    color: theme.colors.ternaryDark,
-    fontSize: 14,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginVertical: 20,
-  },
-  button: {
-    backgroundColor: theme.colors.colorTextBlue,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: theme.colors.white,
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  snackbar: {
-    borderRadius: 8,
-  },
-  snackbarText: {
-    color: theme.colors.white,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flexGrow: 1,
+      padding: 20,
+      backgroundColor: theme.colors.secondaryDark,
+    },
+    jobBox: {
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: 8,
+      padding: 20,
+      marginBottom: 20,
+    },
+    title: {
+      color: theme.colors.white,
+      fontSize: 18,
+      fontWeight: "bold",
+      marginBottom: 10,
+    },
+    description: {
+      color: theme.colors.ternaryDark,
+      fontSize: 14,
+      marginTop: 10,
+    },
+    skillsBox: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginVertical: 10,
+    },
+    skill: {
+      backgroundColor: theme.colors.secondaryBright,
+      padding: 5,
+      borderRadius: 8,
+      color: theme.colors.ternaryDark,
+    },
+    postingTime: {
+      color: theme.colors.ternaryDark,
+    },
+    formSection: {
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: 8,
+      padding: 20,
+      marginBottom: 20,
+    },
+
+    label: {
+      color: theme.colors.white,
+      fontSize: 14,
+      marginBottom: 5,
+    },
+    input: {
+      backgroundColor: theme.colors.secondaryBright,
+      borderRadius: 8,
+      padding: 10,
+      color: theme.colors.ternaryDark,
+    },
+    coverLetterInput: {
+      backgroundColor: theme.colors.secondaryBright,
+      borderRadius: 8,
+      padding: 10,
+      height: 100,
+      textAlignVertical: "top",
+      color: theme.colors.ternaryDark,
+    },
+    feeGroup: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginVertical: 10,
+    },
+    fee: {
+      color: theme.colors.ternaryDark,
+      fontSize: 14,
+    },
+    buttonContainer: {
+      flexDirection: "row",
+      justifyContent: "space-around",
+      marginVertical: 20,
+    },
+    button: {
+      backgroundColor: theme.colors.colorTextBlue,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    buttonText: {
+      color: theme.colors.white,
+      fontWeight: "bold",
+      fontSize: 15,
+    },
+    snackbar: {
+      borderRadius: 8,
+    },
+    snackbarText: {
+      color: theme.colors.white,
+    },
+  });
+

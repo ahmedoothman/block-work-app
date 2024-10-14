@@ -1,6 +1,6 @@
 import { View, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import {
   Avatar,
   Icon,
@@ -18,6 +18,8 @@ const { height } = Dimensions.get("window");
 const onDismissSnackBar = () => setVisible(false);
 
 const Profile = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
@@ -141,40 +143,41 @@ const Profile = () => {
 };
 
 export default Profile;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-  },
-  avtarView: {
-    flexDirection: "row",
-    margin: 5,
-    justifyContent: "space-between",
-  },
-  loadingIndicator: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: height * 0.6, // More dynamic height
-  },
-  snackbarStyle: {
-    backgroundColor: theme.colors.danger,
-    borderRadius: theme.borderRadius,
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    right: 10,
-  },
-  title: {
-    color: theme.colors.ternaryLight,
-    // margin:5,
-  },
-  divider: {
-    backgroundColor: theme.colors.secondaryBright,
-    marginHorizontal: 10,
-    marginVertical: 5,
-  },
-  bioView: {
-    margin: 10,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+    },
+    avtarView: {
+      flexDirection: "row",
+      margin: 5,
+      justifyContent: "space-between",
+    },
+    loadingIndicator: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      height: height * 0.6, // More dynamic height
+    },
+    snackbarStyle: {
+      backgroundColor: theme.colors.danger,
+      borderRadius: theme.borderRadius,
+      position: "absolute",
+      bottom: 10,
+      left: 10,
+      right: 10,
+    },
+    title: {
+      color: theme.colors.ternaryLight,
+      // margin:5,
+    },
+    divider: {
+      backgroundColor: theme.colors.secondaryBright,
+      marginHorizontal: 10,
+      marginVertical: 5,
+    },
+    bioView: {
+      margin: 10,
+    },
+  });

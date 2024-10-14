@@ -3,9 +3,11 @@ import { StyleSheet, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 
 const CustomBtn = ({ handlePress, txt, marginBottom }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   return (
     <View>
       <TouchableOpacity activeOpacity={0.8} onPress={handlePress}>
@@ -31,6 +33,6 @@ const CustomBtn = ({ handlePress, txt, marginBottom }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const createStyles = (theme) => StyleSheet.create({});
 
 export default CustomBtn;
