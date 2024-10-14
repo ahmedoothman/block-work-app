@@ -1,3 +1,4 @@
+
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
@@ -8,9 +9,10 @@ import { useSelector } from 'react-redux';
 const UserBox = ({ otherUser, isMe = false }) => {
     const theme = useTheme();
     const styles = createStyles(theme);
+
   const navigation = useNavigation();
   const viewFreelancerProfile = () => {
-    navigation.navigate('ProfileView', {
+    navigation.navigate("ProfileView", {
       id: otherUser?._id,
       isMe,
     });
@@ -24,37 +26,58 @@ const UserBox = ({ otherUser, isMe = false }) => {
         <View style={styles.userImage}>
           <Image
             source={{
-              uri: otherUser?.userPhotoUrl || '',
+              uri: otherUser?.userPhotoUrl || "",
             }}
             style={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
               borderRadius: 20,
             }}
           />
         </View>
       </TouchableOpacity>
       <Text style={styles.userName}>
-        {otherUser?.name || 'Unknown Freelancer'}
+        {otherUser?.name || "Unknown Freelancer"}
       </Text>
 
       {!isMe && (
         <MaterialCommunityIcons
-          name='chat-processing'
+          name="chat-processing"
           size={30}
           color={theme.colors.ternaryDark}
           style={{ marginRight: 0 }}
           onPress={() => {
-            navigation.navigate('ChatScreen', {
+            navigation.navigate("ChatScreen", {
               userId: user._id,
               otherUser,
             });
           }}
         />
       )}
+
+      {showAddReview && (
+        <View style={styles.leaveReviewContainer}>
+          <TouchableOpacity
+            style={styles.createReviews}
+            onPress={() => {
+              navigation.navigate("ReviewForm", {
+                userId: otherUser?._id,
+                isMe,
+              });
+            }}>
+            <MaterialIcons
+              name="rate-review"
+              size={20}
+              color={theme.colors.white}
+            />
+          </TouchableOpacity>
+          <Text style={styles.btnText}> Leave a Review</Text>
+        </View>
+      )}
     </View>
   );
 };
+
 
 const createStyles = (theme) =>
   StyleSheet.create({
@@ -80,4 +103,5 @@ const createStyles = (theme) =>
       overflow: "hidden",
     },
   });
+
 export default UserBox;

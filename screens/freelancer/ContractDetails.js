@@ -124,6 +124,7 @@ const ContractDetails = () => {
             <UserBox
               otherUser={contract.client}
               isMe={userId == contract.client._id}
+              showAddReview={contract.status == "completed"}
             />
           </View>
 
