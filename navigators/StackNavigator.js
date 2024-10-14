@@ -20,7 +20,7 @@ import CreatePortofolio from "../screens/freelancer/CreatePortofolio";
 import PortofolioItemDetails from "../screens/freelancer/PortofolioItemDetails";
 import ContractDetails from "../screens/freelancer/ContractDetails";
 import ProposalsDetails from "../screens/freelancer/ProposalsDetails";
-import useTheme from "../hooks/useTheme";
+import theme from "../theme";
 import CreateJobForm from "../screens/client/CreateJobForm";
 import UpdateJobForm from "../screens/client/UpadteJobForm";
 import ClientJopDetails from "../screens/client/ClientJopDetails";
@@ -36,7 +36,6 @@ import ReviewForm from "../screens/common/ReviewForm";
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-  const theme = useTheme();
   return (
     <Stack.Navigator initialRouteName="SignIn">
       {/* //' Auth Screens */}

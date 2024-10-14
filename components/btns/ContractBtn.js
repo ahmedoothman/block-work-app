@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
-import useTheme from "../../hooks/useTheme";
+
 const ContractBtn = ({
   bgc,
   borderColor,
@@ -15,9 +15,6 @@ const ContractBtn = ({
   clickText,
   loading,
 }) => {
-  const theme = useTheme();
-  const styles = createStyles(theme);
-
   return (
     <Button
       style={[
@@ -45,6 +42,6 @@ const ContractBtn = ({
   );
 };
 
-const createStyles = (theme) => StyleSheet.create({});
+const styles = StyleSheet.create({});
 
 export default ContractBtn;

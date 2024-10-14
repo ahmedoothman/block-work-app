@@ -10,9 +10,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo';
 import BottomNavigator from './BottomNavigator';
-import useTheme from "../hooks/useTheme";
+import theme from '../theme';
 const StackNav = () => {
-    const theme = useTheme();
   const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
 
@@ -26,55 +25,56 @@ const StackNav = () => {
           // backgroundColor: "#0163d2",
           backgroundColor: theme.colors.secondaryGray,
         },
-        headerTintColor: theme.colors.white,
-        headerTitleAlign: "left",
-      }}>
+        headerTintColor: '#fff',
+        headerTitleAlign: 'left',
+      }}
+    >
       <Stack.Screen
-        name="Profile"
+        name='Profile'
         component={Profile}
         options={{
           headerLeft: () => (
             <Icon
-              name="menu"
+              name='menu'
               onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
               size={30}
               style={{ marginRight: 15 }}
-              color={theme.colors.white}
+              color='#fff'
             />
           ),
           headerRight: () => (
             <MaterialCommunityIcons
-              name="dots-vertical"
+              name='dots-vertical'
               size={24}
-              color={theme.colors.white}
+              color='white'
               style={{ marginRight: 5 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name="Balance"
+        name='Balance'
         component={Balance}
         options={{
           headerRight: () => (
             <MaterialCommunityIcons
-              name="dots-vertical"
+              name='dots-vertical'
               size={24}
-              color={theme.colors.white}
+              color='white'
               style={{ marginRight: 5 }}
             />
           ),
         }}
       />
       <Stack.Screen
-        name="Settings"
+        name='Settings'
         component={Settings}
         options={{
           headerRight: () => (
             <MaterialCommunityIcons
-              name="dots-vertical"
+              name='dots-vertical'
               size={24}
-              color={theme.colors.white}
+              color='white'
               style={{ marginRight: 5 }}
             />
           ),
@@ -85,7 +85,6 @@ const StackNav = () => {
 };
 
 const DrawerNav = () => {
-    const theme = useTheme();
   const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator

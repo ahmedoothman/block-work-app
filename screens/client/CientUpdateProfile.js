@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text } from 'react-native';
 import React, { useState } from 'react';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
 import { TextInput, Snackbar } from 'react-native-paper';
 import CustomInputField from '../../components/btns/CustomInputField';
@@ -10,8 +10,6 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 import { useNavigation } from '@react-navigation/native';
 export default function UpdateProfile({ route }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const navigation = useNavigation();
   const { userdata } = route.params;
   const [uname, setName] = useState(userdata.name);
@@ -128,42 +126,41 @@ export default function UpdateProfile({ route }) {
     </View>
   );
 }
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      position: "relative",
-    },
-    scrollContainer: {
-      flex: 1,
-    },
-    formContainer: {
-      backgroundColor: theme.colors.secondaryGray,
-      borderRadius: theme.borderRadius,
-      margin: 10,
-      padding: 30,
-      justifyContent: "center",
-    },
-    input: {
-      backgroundColor: theme.colors.ternaryLight,
-      borderRadius: theme.borderRadius,
-      padding: 10,
-      color: theme.colors.ternaryDark,
-      textAlignVertical: "top",
-      borderColor: theme.colors.ternaryLight,
-    },
-    label: {
-      color: theme.colors.white,
-      fontSize: 14,
-      marginBottom: 10,
-    },
-    snackbarStyle: {
-      backgroundColor: theme.colors.danger,
-      borderRadius: theme.borderRadius,
-      position: "absolute",
-      bottom: 10,
-      left: 10,
-      right: 10,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    position: 'relative',
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  formContainer: {
+    backgroundColor: theme.colors.secondaryGray,
+    borderRadius: theme.borderRadius,
+    margin: 10,
+    padding: 30,
+    justifyContent: 'center',
+  },
+  input: {
+    backgroundColor: theme.colors.ternaryLight,
+    borderRadius: theme.borderRadius,
+    padding: 10,
+    color: theme.colors.ternaryDark,
+    textAlignVertical: 'top',
+    borderColor: theme.colors.ternaryLight,
+  },
+  label: {
+    color: theme.colors.white,
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  snackbarStyle: {
+    backgroundColor: theme.colors.danger,
+    borderRadius: theme.borderRadius,
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+});

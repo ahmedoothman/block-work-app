@@ -7,7 +7,8 @@ import { TouchableOpacity } from "react-native";
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
-import useTheme from "../hooks/useTheme";
+import theme from "../theme";
+
 const DrawerList = [
   // {icon: 'account-multiple', label: 'Profile', navigateTo: 'Profile'},
   // {icon: 'account-group', label: 'Balance', navigateTo: 'Balance'},
@@ -18,7 +19,6 @@ const DrawerList = [
 ];
 
 const DrawerLayout = ({ icon, label, navigateTo }) => {
-  const theme = useTheme();
   const navigation = useNavigation();
 
   return (
@@ -48,8 +48,6 @@ const DrawerItems = (props) => {
   });
 };
 export default function DrawerContent(props) {
-  const theme = useTheme();
-  const styles = createStyles(theme);
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -92,60 +90,59 @@ export default function DrawerContent(props) {
   );
 }
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    drawerContent: {
-      flex: 1,
-    },
-    userInfoSection: {
-      paddingLeft: 20,
-    },
-    title: {
-      fontSize: 16,
-      marginTop: 3,
-      fontWeight: "bold",
-      color: theme.colors.white,
-    },
-    caption: {
-      fontSize: 13,
-      lineHeight: 14,
-      color: theme.colors.ternaryDark,
+const styles = StyleSheet.create({
+  drawerContent: {
+    flex: 1,
+  },
+  userInfoSection: {
+    paddingLeft: 20,
+  },
+  title: {
+    fontSize: 16,
+    marginTop: 3,
+    fontWeight: "bold",
+    color: theme.colors.white,
+  },
+  caption: {
+    fontSize: 13,
+    lineHeight: 14,
+    color: theme.colors.ternaryDark,
 
-      width: "100%",
-    },
-    row: {
-      marginTop: 20,
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    section: {
-      flexDirection: "row",
-      alignItems: "center",
-      // marginRight: 15,
-    },
-    paragraph: {
-      fontWeight: "bold",
-      marginRight: 3,
-    },
-    drawerSection: {
-      marginTop: 15,
-      borderBottomWidth: 0,
-      borderBottomColor: theme.colors.ternaryLight,
-      borderBottomWidth: 1,
-      marginLeft: 10,
-    },
-    bottomDrawerSection: {
-      marginBottom: 15,
-      borderTopColor: theme.colors.ternaryLight,
-      borderTopWidth: 1,
-      borderBottomColor: theme.colors.ternaryLight,
-      borderBottomWidth: 1,
-      marginLeft: 10,
-    },
-    preference: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      paddingVertical: 12,
-      paddingHorizontal: 16,
-    },
-  });
+    width: "100%",
+  },
+  row: {
+    marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  section: {
+    flexDirection: "row",
+    alignItems: "center",
+    // marginRight: 15,
+  },
+  paragraph: {
+    fontWeight: "bold",
+    marginRight: 3,
+  },
+  drawerSection: {
+    marginTop: 15,
+    borderBottomWidth: 0,
+    borderBottomColor: theme.colors.ternaryLight,
+    borderBottomWidth: 1,
+    marginLeft: 10,
+  },
+  bottomDrawerSection: {
+    marginBottom: 15,
+    borderTopColor:  theme.colors.ternaryLight,
+    borderTopWidth: 1,
+    borderBottomColor:  theme.colors.ternaryLight,
+    borderBottomWidth: 1,
+    marginLeft: 10,
+  },
+  preference: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+});

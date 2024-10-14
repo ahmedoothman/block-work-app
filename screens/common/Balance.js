@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 import { getWalletService } from '../../services/walletService';
@@ -9,8 +9,6 @@ import { ActivityIndicator } from 'react-native-paper';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 export default function Balance() {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const navigation = useNavigation();
   const [WalWetService, setWalletService] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -97,46 +95,45 @@ export default function Balance() {
   );
 }
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      paddingHorizontal: 20,
-    },
-    spinnerContainer: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: theme.colors.secondaryDark,
-    },
-    balanceHeader: {
-      color: theme.colors.white,
-      fontSize: 22,
-      fontWeight: "regular",
-      marginTop: 20,
-    },
-    balanceparent: {
-      marginVertical: 15,
-    },
-    balanceContainer: {
-      marginVertical: 7,
-    },
-    balanceTitle: {
-      color: theme.colors.primaryBright,
-      fontSize: 18,
-      fontWeight: "regular",
-      marginVertical: 10,
-    },
-    balance: {
-      color: theme.colors.white,
-      fontSize: 20,
-      fontWeight: "bold",
-    },
-    ChargeWalletBtnContainer: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginVertical: 30,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    paddingHorizontal: 20,
+  },
+  spinnerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: theme.colors.secondaryDark,
+  },
+  balanceHeader: {
+    color: theme.colors.white,
+    fontSize: 22,
+    fontWeight: 'regular',
+    marginTop: 20,
+  },
+  balanceparent: {
+    marginVertical: 15,
+  },
+  balanceContainer: {
+    marginVertical: 7,
+  },
+  balanceTitle: {
+    color: theme.colors.primaryBright,
+    fontSize: 18,
+    fontWeight: 'regular',
+    marginVertical: 10,
+  },
+  balance: {
+    color: theme.colors.white,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  ChargeWalletBtnContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 30,
+  },
+});

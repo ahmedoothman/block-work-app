@@ -2,7 +2,7 @@ import React, { useEffect, Dimensions, useState, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import ReviewBox from "../../components/reviews/ReviewBox";
-import useTheme from "../../hooks/useTheme";
+import theme from "../../theme";
 import { getReviewsService } from "../../services/reviewService";
 import { ScrollView } from "react-native-gesture-handler";
 import { ActivityIndicator, Snackbar } from "react-native-paper";
@@ -12,8 +12,6 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { useSelector } from "react-redux";
 // const { height } = Dimensions.get('window');
 const Reviews = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const { userId, isMe, user } = route.params;
   const myId = useSelector((state) => state.auth.user)._id;
   const [reviews, setReviews] = useState([]);
@@ -105,52 +103,51 @@ const Reviews = ({ route }) => {
   );
 };
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      position: "relative",
-    },
-    loadingIndicator: {
-      flex: 1,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 300,
-    },
-    snackbarStyle: {
-      backgroundColor: theme.colors.danger,
-      borderRadius: theme.borderRadius,
-      position: "absolute",
-      bottom: 10,
-      left: 10,
-      right: 10,
-    },
-    scrollContainer: {
-      flex: 1,
-    },
-    leaveReviewContainer: {
-      // backgroundColor: "red",
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      alignItems: "center",
-      gap: 5,
-      padding: 15,
-    },
-    createReviews: {
-      backgroundColor: theme.colors.primaryDark,
-      width: 40,
-      height: 40,
-      borderRadius: theme.borderRadius,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    btnText: {
-      fontSize: 12,
-      color: theme.colors.white,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    position: "relative",
+  },
+  loadingIndicator: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 300,
+  },
+  snackbarStyle: {
+    backgroundColor: theme.colors.danger,
+    borderRadius: theme.borderRadius,
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  leaveReviewContainer: {
+    // backgroundColor: "red",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    gap: 5,
+    padding: 15,
+  },
+  createReviews: {
+    backgroundColor: theme.colors.primaryDark,
+    width: 40,
+    height: 40,
+    borderRadius: theme.borderRadius,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  btnText: {
+    fontSize: 12,
+    color: theme.colors.white,
+  },
+});
 
 export default Reviews;

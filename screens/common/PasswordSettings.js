@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 const { width } = Dimensions.get('window');
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import CustomInputField from '../../components/btns/CustomInputField';
 import { useState } from 'react';
 import { changePasswordService } from '../../services/userService';
@@ -17,8 +17,6 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native-paper';
 import useLogout from '../../hooks/useLogout';
 const PasswordSettings = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const logoutHandler = useLogout();
   const navigation = useNavigation();
 
@@ -144,39 +142,38 @@ const PasswordSettings = () => {
 
 export default PasswordSettings;
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      padding: 10,
-    },
-    ChangePasswordForm: {
-      width: width * 0.8,
-      // backgroundColor: theme.colors.secondaryGray,
-      backgroundColor: theme.colors.secondaryDark,
-      borderRadius: 10,
-      marginVertical: 25,
-      padding: 15,
-      alignSelf: "center",
-    },
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    padding: 10,
+  },
+  ChangePasswordForm: {
+    width: width * 0.8,
+    // backgroundColor: theme.colors.secondaryGray,
+    backgroundColor: theme.colors.secondaryDark,
+    borderRadius: 10,
+    marginVertical: 25,
+    padding: 15,
+    alignSelf: 'center',
+  },
 
-    buttonView: {
-      marginTop: 20,
-    },
-    buttonText: {
-      color: theme.colors.white,
-      fontWeight: "bold",
-      fontSize: 15,
-    },
-    button: {
-      backgroundColor: theme.colors.colorTextBlue,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderRadius: 8,
-      justifyContent: "center",
-      alignItems: "center",
-      alignSelf: "center",
-      width: width * 0.45,
-    },
-  });
+  buttonView: {
+    marginTop: 20,
+  },
+  buttonText: {
+    color: theme.colors.white,
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  button: {
+    backgroundColor: theme.colors.colorTextBlue,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: width * 0.45,
+  },
+});
