@@ -5,36 +5,37 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
-} from 'react-native';
-import React, { useState } from 'react';
-import theme from '../../theme';
-import { useNavigation } from '@react-navigation/native';
-import { submitProposalService } from '../../services/proposalService';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
+} from "react-native";
+import React, { useState } from "react";
+import theme from "../../theme";
+import { useNavigation } from "@react-navigation/native";
+import { submitProposalService } from "../../services/proposalService";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
 
 const ProposalsForm = ({ route }) => {
   const { jobData, postingTimeOfJob } = route.params;
   const { category, description, title, _id } = jobData;
 
   const navigation = useNavigation();
-  const [coverLetter, setCoverLetter] = useState('');
-  const [proposedAmount, setProposedAmount] = useState('');
-  const [duration, setDuration] = useState('');
+  const [coverLetter, setCoverLetter] = useState("");
+  const [proposedAmount, setProposedAmount] = useState("");
+  const [duration, setDuration] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [messageType, setMessageType] = useState(''); // success or error
-  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(""); // success or error
+  const [message, setMessage] = useState("");
 
   const onDismissSnackBar = () => setVisible(false);
-  const ServiceFee = Math.round(proposedAmount * 0.1);
+  const feesRate = 0.05;
+  const ServiceFee = Math.round(proposedAmount * feesRate);
   const AmountReceived = proposedAmount - ServiceFee;
 
   const handleApplyBtn = async () => {
     if (!coverLetter || !proposedAmount || !duration) {
       setVisible(true);
-      setMessageType('error');
-      setMessage('All fields are required');
+      setMessageType("error");
+      setMessage("All fields are required");
       return;
     }
     const data = {
@@ -45,26 +46,26 @@ const ProposalsForm = ({ route }) => {
 
     setIsLoading(true);
     const response = await submitProposalService(_id, data);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setVisible(true);
-      setMessageType('success');
-      setMessage('Proposal submitted successfully');
+      setMessageType("success");
+      setMessage("Proposal submitted successfully");
       handleResetForm();
       setTimeout(() => {
-        navigation.navigate('FreelancerBase');
+        navigation.navigate("FreelancerBase");
       }, 2000);
     } else {
       setVisible(true);
-      setMessageType('error');
+      setMessageType("error");
       setMessage(response.message);
     }
     setIsLoading(false);
   };
 
   function handleResetForm() {
-    setCoverLetter('');
-    setProposedAmount('');
-    setDuration('');
+    setCoverLetter("");
+    setProposedAmount("");
+    setDuration("");
   }
 
   return (
@@ -86,19 +87,21 @@ const ProposalsForm = ({ route }) => {
           </Text>
           <TextInput
             style={styles.input}
-            placeholder='$50.0'
+            placeholder="$50.0"
             value={proposedAmount}
             onChangeText={setProposedAmount}
-            keyboardType='numeric'
+            keyboardType="numeric"
           />
         </View>
         <View style={styles.feeGroup}>
-          <Text style={styles.label}>10% Freelancer Service Fee</Text>
-          <Text style={styles.fee}>-${ServiceFee || 3.5}</Text>
+          <Text style={styles.label}>5% Freelancer Service Fee</Text>
+          <Text style={styles.fee}>-${ServiceFee || 50 * feesRate}</Text>
         </View>
         <View style={styles.feeGroup}>
           <Text style={styles.label}>You’ll Receive</Text>
-          <Text style={styles.fee}>${AmountReceived || 31.5}</Text>
+          <Text style={styles.fee}>
+            ${AmountReceived || 50 * (feesRate - 1)}
+          </Text>
         </View>
         <View style={styles.inputGroup}>
           <Text style={styles.label}>How long will this project take?</Text>
@@ -106,7 +109,7 @@ const ProposalsForm = ({ route }) => {
             style={styles.input}
             value={duration}
             onChangeText={setDuration}
-            keyboardType='numeric'
+            keyboardType="numeric"
           />
         </View>
         <View style={styles.inputGroup}>
@@ -132,8 +135,7 @@ const ProposalsForm = ({ route }) => {
           style={styles.button}
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableOpacity>
       </View>
@@ -144,10 +146,12 @@ const ProposalsForm = ({ route }) => {
         style={[
           styles.snackbar,
           {
-            backgroundColor: messageType === 'success' ? theme.colors.success : theme.colors.danger,
+            backgroundColor:
+              messageType === "success"
+                ? theme.colors.success
+                : theme.colors.danger,
           },
-        ]}
-      >
+        ]}>
         <Text style={styles.snackbarText}>{message}</Text>
       </Snackbar>
     </ScrollView>
@@ -171,7 +175,7 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.white,
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   description: {
@@ -180,8 +184,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   skillsBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginVertical: 10,
   },
   skill: {
@@ -199,7 +203,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
   },
-  
+
   label: {
     color: theme.colors.white,
     fontSize: 14,
@@ -216,12 +220,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     height: 100,
-    textAlignVertical: 'top',
+    textAlignVertical: "top",
     color: theme.colors.ternaryDark,
   },
   feeGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginVertical: 10,
   },
   fee: {
@@ -229,8 +233,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginVertical: 20,
   },
   button: {
@@ -238,18 +242,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: theme.colors.white,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 15,
   },
   snackbar: {
     borderRadius: 8,
   },
   snackbarText: {
-    color:theme.colors.white,
+    color: theme.colors.white,
   },
 });
