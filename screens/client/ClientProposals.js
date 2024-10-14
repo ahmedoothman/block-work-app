@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import ProposalBox from "../../components/proposals/ProposalBox";
-import useTheme from "../../hooks/useTheme";
+import theme from "../../theme";
 import { ActivityIndicator, Snackbar } from "react-native-paper";
 import {
   getAllProposalsService,
@@ -11,8 +11,6 @@ import NoDataBox from "../../components/NoData/NoDataBox";
 import { useNavigation } from "@react-navigation/native";
 const { height } = Dimensions.get("window");
 const ClientProposals = ({ route }) => {
-    const theme = useTheme();
-  const styles = createStyles(theme)
   const navigation = useNavigation();
   const { jopId, jobDetails } = route.params;
 
@@ -86,39 +84,38 @@ const ClientProposals = ({ route }) => {
 
 export default ClientProposals;
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      position: "relative",
-    },
-    scrollContainer: {
-      flex: 1,
-    },
-    counter: {
-      borderRadius: 20,
-      padding: 5,
-      margin: 5,
-      width: 130,
-      backgroundColor: theme.colors.secondaryBright,
-    },
-    text: {
-      color: theme.colors.ternaryDark,
-      textAlign: "center",
-    },
-    loadingIndicator: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      height: height * 0.6, // More dynamic height
-    },
-    snackbarStyle: {
-      backgroundColor: theme.colors.danger,
-      borderRadius: theme.borderRadius,
-      position: "absolute",
-      bottom: 10,
-      left: 10,
-      right: 10,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    position: "relative",
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  counter: {
+    borderRadius: 20,
+    padding: 5,
+    margin: 5,
+    width: 130,
+    backgroundColor: theme.colors.secondaryBright,
+  },
+  text: {
+    color: theme.colors.ternaryDark,
+    textAlign: "center",
+  },
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: height * 0.6, // More dynamic height
+  },
+  snackbarStyle: {
+    backgroundColor: theme.colors.danger,
+    borderRadius: theme.borderRadius,
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+});

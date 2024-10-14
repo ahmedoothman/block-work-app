@@ -1,10 +1,9 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import theme from "../../theme";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
-import useTheme from "../../hooks/useTheme";
+// <ActivityIndicator animating={true} color={MD2Colors.red800} /> :
 const AppButton = (props) => {
-  const theme = useTheme();
-  const styles = createStyles(theme);
   const {
     buttonTitle,
     onPress,
@@ -41,21 +40,20 @@ const AppButton = (props) => {
     </TouchableOpacity>
   );
 };
-const createStyles = (theme) =>
-  StyleSheet.create({
-    button: {
-      marginTop: 20,
-      paddingVertical: 10,
-      width: 210,
-      borderRadius: theme.borderRadius,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    buttonText: {
-      color: theme.colors.white,
 
-      fontWeight: "bold",
-    },
-  });
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 20,
+    paddingVertical: 10,
+    width: 210,
+    borderRadius: theme.borderRadius,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: theme.colors.white,
 
+    fontWeight: "bold",
+  },
+});
 export default AppButton;

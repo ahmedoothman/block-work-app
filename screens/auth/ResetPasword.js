@@ -5,13 +5,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Logo from '../../components/Public/logo';
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { resetPasswordService } from '../../services/userService';
 import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
 
 const ResetPassword = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const navigation = useNavigation();
 
   //'  Main States
@@ -137,20 +135,19 @@ const ResetPassword = () => {
   );
 };
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      paddingHorizontal: 20,
-    },
-    content: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "100%",
-      height: "50%",
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  content: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '50%',
+  },
+});
 export default ResetPassword;

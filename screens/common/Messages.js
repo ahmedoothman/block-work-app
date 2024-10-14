@@ -5,12 +5,10 @@ import SearchBox from '../../components/inputs/searchBox/SearchBox';
 import { getAllChats } from '../../services/chatService';
 import ChatBox from '../../components/chat/ChatBox';
 import { ActivityIndicator, Snackbar } from 'react-native-paper';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { useQuery } from 'react-query';
 
 const Messages = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -62,29 +60,28 @@ const Messages = () => {
   );
 };
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-    },
-    loadingContainer: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100%",
-    },
-    notFoundContainer: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 40,
-    },
-    notFound: {
-      color: theme.colors.white,
-      fontSize: 20,
-      fontWeight: "bold",
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
+  notFoundContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  notFound: {
+    color: theme.colors.white,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});
 
 export default Messages;

@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import useTheme from "../../hooks/useTheme";
+import theme from "../../theme";
 import { ScrollView } from "react-native-gesture-handler";
 import { TextInput, Snackbar } from "react-native-paper";
 import CustomInputField from "../../components/btns/CustomInputField";
@@ -14,8 +14,6 @@ import Icon from "react-native-vector-icons/FontAwesome"; // Import FontAwesome
 import { skillsEnum } from "../../constants/global/data";
 import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
 export default function UpdateProfile({ route }) {
-  const theme = useTheme();
-  const styles = createStyles(theme);
   const navigation = useNavigation();
   const { userdata } = route.params;
   console.log("userdata.skills ", userdata.skills);
@@ -207,71 +205,70 @@ export default function UpdateProfile({ route }) {
     </View>
   );
 }
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      position: "relative",
-    },
-    scrollContainer: {
-      flex: 1,
-    },
-    formContainer: {
-      backgroundColor: theme.colors.secondaryGray,
-      borderRadius: theme.borderRadius,
-      margin: 10,
-      padding: 30,
-      justifyContent: "center",
-    },
-    input: {
-      backgroundColor: theme.colors.ternaryLight,
-      borderRadius: theme.borderRadius,
-      padding: 10,
-      color: theme.colors.ternaryDark,
-      textAlignVertical: "top",
-      borderColor: theme.colors.ternaryLight,
-    },
-    label: {
-      color: theme.colors.white,
-      fontSize: 14,
-      marginBottom: 10,
-    },
-    snackbarStyle: {
-      backgroundColor: theme.colors.danger,
-      borderRadius: theme.borderRadius,
-      position: "absolute",
-      bottom: 10,
-      left: 10,
-      right: 10,
-    },
-    inputTitle: {
-      color: theme.colors.white,
-      marginBottom: 5,
-    },
-    skillsParent: {
-      padding: 2,
-      borderRadius: 10,
-      borderWidth: 0.5,
-      borderColor: "white",
-      borderStyle: "solid",
-      marginBottom: 15,
-    },
-    inputContainer: {
-      // marginBottom: 15,
-      // backgroundColor: "red",
-    },
-    dropdown: {
-      backgroundColor: theme.colors.ternaryLight,
-      borderRadius: 5,
-      width: "100%",
-      marginHorizontal: "auto",
-      marginVertical: 2,
-      padding: 10,
-      color: theme.colors.ternaryDark,
-    },
-    skillsItemsContainer: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    position: "relative",
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  formContainer: {
+    backgroundColor: theme.colors.secondaryGray,
+    borderRadius: theme.borderRadius,
+    margin: 10,
+    padding: 30,
+    justifyContent: "center",
+  },
+  input: {
+    backgroundColor: theme.colors.ternaryLight,
+    borderRadius: theme.borderRadius,
+    padding: 10,
+    color: theme.colors.ternaryDark,
+    textAlignVertical: "top",
+    borderColor: theme.colors.ternaryLight,
+  },
+  label: {
+    color: theme.colors.white,
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  snackbarStyle: {
+    backgroundColor: theme.colors.danger,
+    borderRadius: theme.borderRadius,
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+  inputTitle: {
+    color: theme.colors.white,
+    marginBottom: 5,
+  },
+  skillsParent: {
+    padding: 2,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: "white",
+    borderStyle: "solid",
+    marginBottom: 15,
+  },
+  inputContainer: {
+    // marginBottom: 15,
+    // backgroundColor: "red",
+  },
+  dropdown: {
+    backgroundColor: theme.colors.ternaryLight,
+    borderRadius: 5,
+    width: "100%",
+    marginHorizontal: "auto",
+    marginVertical: 2,
+    padding: 10,
+    color: theme.colors.ternaryDark,
+  },
+  skillsItemsContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+});

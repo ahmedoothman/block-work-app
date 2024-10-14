@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { getPortfolioService } from '../../services/portofolioService';
 
 import { useNavigation } from '@react-navigation/native';
@@ -21,8 +21,6 @@ import { useFocusEffect } from '@react-navigation/native';
 
 const { height } = Dimensions.get('window');
 export default function Portofolio({ route }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   //{route}
   const { userId } = route.params;
 
@@ -142,69 +140,68 @@ export default function Portofolio({ route }) {
   );
 }
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.secondaryDark,
-      padding: 10,
-      position: "relative",
-    },
-    AddNewBox: {
-      margin: 20,
-      flexDirection: "row",
-      gap: 10,
-    },
-    AddNewText: {
-      color: theme.colors.white,
-      fontSize: 17,
-      alignSelf: "center",
-    },
-    ProjectsBox: {
-      marginTop: 30,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      // backgroundColor:"red",
-      flexWrap: "wrap",
-    },
-    scrollContainer: {
-      paddingBottom: 20,
-    },
-    projectItem: {
-      width: "47%",
-      marginBottom: 20,
-    },
-    image: {
-      width: "100%",
-      height: 100,
-      borderRadius: 10,
-    },
-    ProjectName: {
-      color: theme.colors.primaryBright,
-      alignSelf: "center",
-      marginTop: 8,
-      fontSize: 15,
-    },
-    snackbarStyle: {
-      backgroundColor: theme.colors.danger,
-      borderRadius: theme.borderRadius,
-      position: "absolute",
-      bottom: 10,
-      left: 10,
-      right: 10,
-    },
-    loadingIndicator: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      height: height * 0.6,
-    },
-    NoDataContainer: {
-      flex: 1,
-      justifyContent: "center", // Center vertically
-      alignItems: "center", // Center horizontally
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.secondaryDark,
+    padding: 10,
+    position: 'relative',
+  },
+  AddNewBox: {
+    margin: 20,
+    flexDirection: 'row',
+    gap: 10,
+  },
+  AddNewText: {
+    color: theme.colors.white,
+    fontSize: 17,
+    alignSelf: 'center',
+  },
+  ProjectsBox: {
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // backgroundColor:"red",
+    flexWrap: 'wrap',
+  },
+  scrollContainer: {
+    paddingBottom: 20,
+  },
+  projectItem: {
+    width: '47%',
+    marginBottom: 20,
+  },
+  image: {
+    width: '100%',
+    height: 100,
+    borderRadius: 10,
+  },
+  ProjectName: {
+    color: theme.colors.primaryBright,
+    alignSelf: 'center',
+    marginTop: 8,
+    fontSize: 15,
+  },
+  snackbarStyle: {
+    backgroundColor: theme.colors.danger,
+    borderRadius: theme.borderRadius,
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height * 0.6,
+  },
+  NoDataContainer: {
+    flex: 1,
+    justifyContent: 'center', // Center vertically
+    alignItems: 'center', // Center horizontally
+  },
+});
 
 {
   /*static Design*/

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Card, Divider, Text } from 'react-native-paper';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { calcDuration } from '../../utils';
 import AppButton from '../btns/AppButton';
 import { updateProposalStatusService } from '../../services/proposalService';
@@ -10,8 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 import UserBox from '../UserBox/UserBox';
 
 const Details = ({ proposal, date, isClient }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -180,32 +178,31 @@ const Details = ({ proposal, date, isClient }) => {
   );
 };
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    card: {
-      backgroundColor: theme.colors.secondaryGray,
-      borderRadius: theme.borderRadius,
-      margin: 10,
-      paddingVertical: 10,
-      paddingBottom: 20,
-    },
-    title: {
-      color: theme.colors.ternaryLight,
-      marginVertical: 5,
-    },
-    data: {
-      color: theme.colors.ternaryDark,
-    },
-    Divider: {
-      marginVertical: 10,
-    },
-    BtnStatusContainer: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-around",
-      alignItems: "center",
-      marginVertical: 10,
-    },
-  });
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: theme.colors.secondaryGray,
+    borderRadius: theme.borderRadius,
+    margin: 10,
+    paddingVertical: 10,
+    paddingBottom: 20,
+  },
+  title: {
+    color: theme.colors.ternaryLight,
+    marginVertical: 5,
+  },
+  data: {
+    color: theme.colors.ternaryDark,
+  },
+  Divider: {
+    marginVertical: 10,
+  },
+  BtnStatusContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+});
 
 export default Details;

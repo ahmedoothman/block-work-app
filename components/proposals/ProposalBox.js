@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image } from 'react-native';
 import React, { useState } from 'react';
 import { Card, Text } from 'react-native-paper';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import AppButton from '../btns/AppButton';
@@ -13,8 +13,6 @@ const formatDate = (dateString) => {
 };
 
 export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const createdAt = formatDate(PropsalData.createdAt);
   const [loading, setLoading] = useState(false);
   const {
@@ -119,48 +117,47 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
   );
 }
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    View: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      flexWrap: "wrap",
-    },
-    date: {
-      color: theme.colors.ternaryDark,
-    },
-    label: {
-      color: theme.colors.white,
-      textAlign: "center",
-      marginBottom: 10,
-    },
-    card: {
-      backgroundColor: theme.colors.secondaryGray,
-      borderRadius: theme.borderRadius,
-      margin: 10,
-      padding: 10,
-    },
-    freelanceContainer: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      alignItems: "center",
-      gap: 15,
-      marginLeft: 10,
-      padding: 5,
-    },
-    userImage: {
-      width: 40,
-      height: 40,
-      borderRadius: 20,
-      overflow: "hidden",
-      alignItems: "center",
-      justifyContent: "center",
-      display: "flex",
-    },
-    userName: {
-      fontSize: 14,
-      fontWeight: "regular",
-      color: theme.colors.white,
-    },
-  });
+const styles = StyleSheet.create({
+  View: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  },
+  date: {
+    color: theme.colors.ternaryDark,
+  },
+  label: {
+    color: theme.colors.white,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  card: {
+    backgroundColor: theme.colors.secondaryGray,
+    borderRadius: theme.borderRadius,
+    margin: 10,
+    padding: 10,
+  },
+  freelanceContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: 15,
+    marginLeft: 10,
+    padding: 5,
+  },
+  userImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+  },
+  userName: {
+    fontSize: 14,
+    fontWeight: 'regular',
+    color: theme.colors.white,
+  },
+});

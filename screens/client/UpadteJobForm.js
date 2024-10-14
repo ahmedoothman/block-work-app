@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import InputField from '../../components/inputs/auth/InputField';
-import useTheme from "../../hooks/useTheme";
+import theme from '../../theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AppButton from '../../components/btns/AppButton';
 import { updateJobService } from '../../services/jobService'; // Only update service
@@ -9,8 +9,6 @@ import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
 import { useNavigation } from '@react-navigation/native';
 
 const UpdateJobForm = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
   const { job } = route.params;
   const [jobCreatedInfo, setJobCreatedInfo] = useState({
     title: '',
@@ -285,32 +283,31 @@ const UpdateJobForm = ({ route }) => {
   );
 };
 
-const createStyles = (theme) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "black",
-      padding: 10,
-    },
-    formContainer: {
-      width: "95%",
-      marginHorizontal: "auto",
-      marginTop: 20,
-      backgroundColor: theme.colors.secondaryGray,
-      padding: 10,
-      borderRadius: 20,
-    },
-    inputContainer: {
-      marginBottom: 15,
-    },
-    inputTitle: {
-      color: theme.colors.colorTextBlue,
-      fontSize: 17,
-      fontWeight: "bold",
-    },
-    btnContainer: {
-      marginTop: 10,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    padding: 10,
+  },
+  formContainer: {
+    width: '95%',
+    marginHorizontal: 'auto',
+    marginTop: 20,
+    backgroundColor: theme.colors.secondaryGray,
+    padding: 10,
+    borderRadius: 20,
+  },
+  inputContainer: {
+    marginBottom: 15,
+  },
+  inputTitle: {
+    color: theme.colors.colorTextBlue,
+    fontSize: 17,
+    fontWeight: 'bold',
+  },
+  btnContainer: {
+    marginTop: 10,
+  },
+});
 
 export default UpdateJobForm;
