@@ -19,11 +19,13 @@ import {
   receiveMessage,
   disconnectSocket,
 } from '../../services/socketService';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import { useSelector } from 'react-redux';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ChatScreen = ({ route }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const { otherUser } = route.params;
   const userId = useSelector((state) => state.auth.user._id);
   const [messages, setMessages] = useState([]);
@@ -149,65 +151,66 @@ const ChatScreen = ({ route }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-  },
-  userInfoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: theme.colors.secondaryGray,
-  },
-  userPhoto: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
-  },
-  userName: {
-    color: theme.colors.white,
-    fontSize: 18,
-  },
-  scrollContainer: {
-    padding: 10,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.white,
-  },
-  loadingText: {
-    color: theme.colors.white,
-    fontSize: 20,
-    marginTop: 10,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: theme.colors.secondaryGray,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: theme.colors.ternaryDark,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    color: theme.colors.white,
-  },
-  sendButton: {
-    marginLeft: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: theme.colors.colorTextBlue,
-    borderRadius: 5,
-  },
-  sendButtonText: {
-    color: theme.colors.white,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+    },
+    userInfoContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 10,
+      backgroundColor: theme.colors.secondaryGray,
+    },
+    userPhoto: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      marginRight: 10,
+    },
+    userName: {
+      color: theme.colors.white,
+      fontSize: 18,
+    },
+    scrollContainer: {
+      padding: 10,
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: theme.colors.white,
+    },
+    loadingText: {
+      color: theme.colors.white,
+      fontSize: 20,
+      marginTop: 10,
+    },
+    inputContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      padding: 10,
+      backgroundColor: theme.colors.secondaryGray,
+    },
+    input: {
+      flex: 1,
+      height: 40,
+      borderColor: theme.colors.ternaryDark,
+      borderWidth: 1,
+      borderRadius: 5,
+      paddingHorizontal: 10,
+      color: theme.colors.white,
+    },
+    sendButton: {
+      marginLeft: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 15,
+      backgroundColor: theme.colors.colorTextBlue,
+      borderRadius: 5,
+    },
+    sendButtonText: {
+      color: theme.colors.white,
+    },
+  });
 export default ChatScreen;

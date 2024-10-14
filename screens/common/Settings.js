@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import useLogout from '../../hooks/useLogout';
-
+import useTheme from "../../hooks/useTheme";
 const Settings = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const logout = useLogout();
 
   return (
@@ -14,5 +16,6 @@ const Settings = () => {
     </View>
   );
 };
-
+const createStyles = (theme) =>
+  StyleSheet.create({})
 export default Settings;

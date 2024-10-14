@@ -6,7 +6,7 @@ import {
   Image,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import {
   Avatar,
   Icon,
@@ -26,6 +26,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const { height } = Dimensions.get("window");
 const onDismissSnackBar = () => setVisible(false);
 const ProfileView = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
@@ -165,65 +167,66 @@ const ProfileView = () => {
 
 export default ProfileView;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-  },
-  avtarView: {
-    flexDirection: "row",
-    margin: 5,
-    justifyContent: "space-between",
-  },
-  loadingIndicator: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: height * 0.6, // More dynamic height
-  },
-  snackbarStyle: {
-    backgroundColor: theme.colors.danger,
-    borderRadius: theme.borderRadius,
-    position: "absolute",
-    bottom: 10,
-    left: 10,
-    right: 10,
-  },
-  title: {
-    color: theme.colors.ternaryLight,
-  },
-  divider: {
-    backgroundColor: theme.colors.secondaryBright,
-    marginHorizontal: 10,
-    marginVertical: 5,
-  },
-  bioView: {
-    margin: 10,
-  },
-  reviewContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    gap: 15,
-  },
-  leaveReviewContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    gap: 5,
-  },
-  createReviews: {
-    backgroundColor: theme.colors.primaryDark,
-    width: 40,
-    height: 40,
-    borderRadius: theme.borderRadius,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  btnText: {
-    fontSize: 12,
-    color: theme.colors.white,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+    },
+    avtarView: {
+      flexDirection: "row",
+      margin: 5,
+      justifyContent: "space-between",
+    },
+    loadingIndicator: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      height: height * 0.6, // More dynamic height
+    },
+    snackbarStyle: {
+      backgroundColor: theme.colors.danger,
+      borderRadius: theme.borderRadius,
+      position: "absolute",
+      bottom: 10,
+      left: 10,
+      right: 10,
+    },
+    title: {
+      color: theme.colors.ternaryLight,
+    },
+    divider: {
+      backgroundColor: theme.colors.secondaryBright,
+      marginHorizontal: 10,
+      marginVertical: 5,
+    },
+    bioView: {
+      margin: 10,
+    },
+    reviewContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: 15,
+    },
+    leaveReviewContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: 5,
+    },
+    createReviews: {
+      backgroundColor: theme.colors.primaryDark,
+      width: 40,
+      height: 40,
+      borderRadius: theme.borderRadius,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    btnText: {
+      fontSize: 12,
+      color: theme.colors.white,
+    },
+  });

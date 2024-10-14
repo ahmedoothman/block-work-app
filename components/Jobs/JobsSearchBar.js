@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, TextInput, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Picker } from "@react-native-picker/picker";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import { categories, skillsEnum } from "../../constants/global/data";
 import { Dropdown } from "react-native-element-dropdown";
 export default function JobsSearchBar({
@@ -12,6 +12,8 @@ export default function JobsSearchBar({
   statusFilter,
   isClient,
 }) {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSkill, setSelectedSkill] = useState("All");
@@ -136,68 +138,69 @@ export default function JobsSearchBar({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: 30,
-  },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: theme.colors.white,
-    width: "100%",
-    borderWidth: 1,
-    borderColor: theme.colors.white,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  searchInput: {
-    flex: 1,
-    padding: 10,
-    paddingLeft: 10,
-    fontSize: 14,
-  },
-  searchButton: {
-    height: 40,
-    width: 40,
-    backgroundColor: theme.colors.primaryDark,
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 5,
-  },
-  pickerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    width: "100%",
-    borderRadius: 10,
-    padding: 5,
-    rowGap: 5,
-  },
-  pickerWrapper: {
-    // borderWidth: 1,
-    // borderColor: theme.colors.primaryDark,
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  picker: {
-    width: "100%",
-    backgroundColor: theme.colors.white,
-    borderRadius: 10,
-    height: "auto",
-  },
-  pickerItem: {
-    color: "red",
-  },
-  dropdown: {
-    backgroundColor: theme.colors.ternaryLight,
-    borderRadius: 5,
-    width: "100%",
-    marginHorizontal: "auto",
-    marginVertical: 2,
-    padding: 10,
-    color: theme.colors.ternaryDark,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flexDirection: "column",
+      alignItems: "center",
+      marginTop: 30,
+    },
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: theme.colors.white,
+      width: "100%",
+      borderWidth: 1,
+      borderColor: theme.colors.white,
+      borderRadius: 10,
+      marginBottom: 10,
+    },
+    searchInput: {
+      flex: 1,
+      padding: 10,
+      paddingLeft: 10,
+      fontSize: 14,
+    },
+    searchButton: {
+      height: 40,
+      width: 40,
+      backgroundColor: theme.colors.primaryDark,
+      borderRadius: 8,
+      alignItems: "center",
+      justifyContent: "center",
+      marginRight: 5,
+    },
+    pickerContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+      width: "100%",
+      borderRadius: 10,
+      padding: 5,
+      rowGap: 5,
+    },
+    pickerWrapper: {
+      // borderWidth: 1,
+      // borderColor: theme.colors.primaryDark,
+      borderRadius: 10,
+      overflow: "hidden",
+    },
+    picker: {
+      width: "100%",
+      backgroundColor: theme.colors.white,
+      borderRadius: 10,
+      height: "auto",
+    },
+    pickerItem: {
+      color: "red",
+    },
+    dropdown: {
+      backgroundColor: theme.colors.ternaryLight,
+      borderRadius: 5,
+      width: "100%",
+      marginHorizontal: "auto",
+      marginVertical: 2,
+      padding: 10,
+      color: theme.colors.ternaryDark,
+    },
+  });

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import theme from "../../theme";
+import useTheme from "../../hooks/useTheme";
 import { Snackbar } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const CustomeSnackBar = ({
@@ -13,6 +13,8 @@ const CustomeSnackBar = ({
   messageColor,
   Radius,
 }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   return (
     <Snackbar
       visible={visible}
@@ -33,6 +35,6 @@ const CustomeSnackBar = ({
   );
 };
 
-const styles = StyleSheet.create({});
+const createStyles = (theme) => StyleSheet.create({});
 
 export default CustomeSnackBar;

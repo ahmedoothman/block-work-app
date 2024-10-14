@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import InputField from '../../components/inputs/auth/InputField';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 const ChargeBalance = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
   const [amount, setAmount] = useState('');
   const handlePayment = () => {
@@ -41,30 +43,31 @@ const ChargeBalance = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.secondaryDark,
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  inputContainer: {
-    // backgroundColor: "red",
-    width: '95%',
-    marginHorizontal: 'auto',
-    marginTop: 50,
-  },
-  inputFieldTitle: {
-    color: theme.colors.white,
-    fontSize: 12,
-    fontWeight: 'regular',
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  ChargeWalletBtnContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 30,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      backgroundColor: theme.colors.secondaryDark,
+      flex: 1,
+      paddingHorizontal: 20,
+    },
+    inputContainer: {
+      // backgroundColor: "red",
+      width: "95%",
+      marginHorizontal: "auto",
+      marginTop: 50,
+    },
+    inputFieldTitle: {
+      color: theme.colors.white,
+      fontSize: 12,
+      fontWeight: "regular",
+      paddingHorizontal: 10,
+      marginBottom: 10,
+    },
+    ChargeWalletBtnContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginVertical: 30,
+    },
+  });
 export default ChargeBalance;

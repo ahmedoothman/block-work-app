@@ -15,12 +15,14 @@ import {
 import { ActivityIndicator, Snackbar } from 'react-native-paper';
 import InputField from '../../components/inputs/auth/InputField';
 import * as ImagePicker from 'expo-image-picker';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import { uploadFile } from '../../utils/uploadFile';
 import { useSelector } from 'react-redux';
 const { width } = Dimensions.get('window');
 
 export default function CreatePortfolio({ route }) {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const user = useSelector((state) => state.auth.user);
   const { isEdit, screenTitle, _id, item } = route.params;
   const navigation = useNavigation();
@@ -187,73 +189,74 @@ export default function CreatePortfolio({ route }) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    padding: 10,
-    position: 'relative',
-  },
-  portfolioForm: {
-    width: width * 0.8,
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: 10,
-    marginVertical: 25,
-    padding: 15,
-    alignSelf: 'center',
-  },
-  label: {
-    color: theme.colors.white,
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  imageLabel: {
-    color: theme.colors.white,
-    fontSize: 14,
-    marginBottom: -1,
-  },
-  inputGroup: {
-    marginBottom: 15,
-  },
-  input: {
-    backgroundColor: theme.colors.ternaryLight,
-    borderRadius: 8,
-    padding: 10,
-    color: theme.colors.ternaryDark,
-    textAlignVertical: 'top',
-  },
-  coverLetterInput: {
-    backgroundColor: theme.colors.ternaryLight,
-    borderRadius: 8,
-    padding: 10,
-    height: 100,
-    textAlignVertical: 'top',
-    color: theme.colors.ternaryDark,
-  },
-  buttonView: {
-    marginTop: 20,
-  },
-  buttonText: {
-    color: theme.colors.white,
-    fontWeight: 'bold',
-    fontSize: 15,
-  },
-  button: {
-    backgroundColor: theme.colors.colorTextBlue,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    width: width * 0.45,
-  },
-  snackbar: {
-    borderRadius: 8,
-    position: 'absolute',
-    bottom: 5,
-  },
-  snackbarText: {
-    color: theme.colors.white,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.secondaryDark,
+      padding: 10,
+      position: "relative",
+    },
+    portfolioForm: {
+      width: width * 0.8,
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: 10,
+      marginVertical: 25,
+      padding: 15,
+      alignSelf: "center",
+    },
+    label: {
+      color: theme.colors.white,
+      fontSize: 14,
+      marginBottom: 10,
+    },
+    imageLabel: {
+      color: theme.colors.white,
+      fontSize: 14,
+      marginBottom: -1,
+    },
+    inputGroup: {
+      marginBottom: 15,
+    },
+    input: {
+      backgroundColor: theme.colors.ternaryLight,
+      borderRadius: 8,
+      padding: 10,
+      color: theme.colors.ternaryDark,
+      textAlignVertical: "top",
+    },
+    coverLetterInput: {
+      backgroundColor: theme.colors.ternaryLight,
+      borderRadius: 8,
+      padding: 10,
+      height: 100,
+      textAlignVertical: "top",
+      color: theme.colors.ternaryDark,
+    },
+    buttonView: {
+      marginTop: 20,
+    },
+    buttonText: {
+      color: theme.colors.white,
+      fontWeight: "bold",
+      fontSize: 15,
+    },
+    button: {
+      backgroundColor: theme.colors.colorTextBlue,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 8,
+      justifyContent: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      width: width * 0.45,
+    },
+    snackbar: {
+      borderRadius: 8,
+      position: "absolute",
+      bottom: 5,
+    },
+    snackbarText: {
+      color: theme.colors.white,
+    },
+  });

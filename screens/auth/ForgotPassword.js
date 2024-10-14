@@ -5,12 +5,14 @@ import InputField from '../../components/inputs/auth/InputField';
 import { useNavigation } from '@react-navigation/native';
 import Logo from '../../components/Public/logo';
 import AppButton from '../../components/btns/AppButton';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import { Snackbar } from 'react-native-paper';
 import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
 import { forgotPasswordService } from '../../services/userService';
 
 const ForgotPassword = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
 
   //'  Main States
@@ -104,20 +106,21 @@ const ForgotPassword = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '50%',
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: 20,
+    },
+    content: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "50%",
+    },
+  });
 
 export default ForgotPassword;

@@ -6,7 +6,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import React, { useState, useEffect, useCallback } from 'react';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import ContractBtn from '../../components/btns/ContractBtn';
 import { useNavigation } from '@react-navigation/native';
 import ClientContractBox from '../../components/Contracts/ClientContractBox';
@@ -14,6 +14,8 @@ import { getAllFreelancerContract } from '../../services/contractService';
 import { ActivityIndicator } from 'react-native-paper';
 
 const Contracts = () => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -113,42 +115,43 @@ const Contracts = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  spinnerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.secondaryDark,
-  },
-  container: {
-    flexGrow: 1,
-    backgroundColor: theme.colors.secondaryDark,
-    paddingHorizontal: 20,
-    paddingVertical: 40,
-  },
-  contractsContainer: {
-    // marginVertical: 10,
-  },
-  noDatacontentContainer: {
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: theme.borderRadius,
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-  noDataTitle: {
-    color: theme.colors.white,
-    fontSize: 20,
-    fontWeight: 'regular',
-    textAlign: 'center',
-  },
-  noDataMessage: {
-    color: theme.colors.white,
-    fontSize: 14,
-    fontWeight: 'regular',
-    textAlign: 'center',
-    paddingHorizontal: 15,
-    marginVertical: 20,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    spinnerContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: theme.colors.secondaryDark,
+    },
+    container: {
+      flexGrow: 1,
+      backgroundColor: theme.colors.secondaryDark,
+      paddingHorizontal: 20,
+      paddingVertical: 40,
+    },
+    contractsContainer: {
+      // marginVertical: 10,
+    },
+    noDatacontentContainer: {
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: theme.borderRadius,
+      paddingHorizontal: 20,
+      paddingVertical: 30,
+    },
+    noDataTitle: {
+      color: theme.colors.white,
+      fontSize: 20,
+      fontWeight: "regular",
+      textAlign: "center",
+    },
+    noDataMessage: {
+      color: theme.colors.white,
+      fontSize: 14,
+      fontWeight: "regular",
+      textAlign: "center",
+      paddingHorizontal: 15,
+      marginVertical: 20,
+    },
+  });
 
 export default Contracts;

@@ -1,9 +1,10 @@
-import { TouchableOpacity, View, Image } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-import theme from '../theme';
+import { TouchableOpacity, View, Image } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import useTheme from "../hooks/useTheme";
 const screenOptionsWithHeader = (title) => {
+  const theme = useTheme();
   const user = useSelector((state) => state.auth.user);
   const navigation = useNavigation();
   return {
@@ -13,15 +14,14 @@ const screenOptionsWithHeader = (title) => {
     headerLeft: () => (
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Profile');
-        }}
-      >
+          navigation.navigate("Profile");
+        }}>
         <View style={{ marginLeft: 10 }}>
           <Image
             source={{
               uri: user.userPhotoUrl
                 ? user.userPhotoUrl
-                : 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                : "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
             }}
             style={{
               width: 40,
@@ -36,10 +36,9 @@ const screenOptionsWithHeader = (title) => {
     headerRight: () => (
       <TouchableOpacity
         onPress={() => {}} // Navigate to Alert screen
-        style={{ marginRight: 15 }}
-      >
+        style={{ marginRight: 15 }}>
         <MaterialCommunityIcons
-          name='message-text-outline'
+          name="message-text-outline"
           size={24}
           color={theme.colors.white}
         />

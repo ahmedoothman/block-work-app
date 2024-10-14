@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import theme from '../../../theme';
+ import useTheme from "../../../hooks/useTheme";
 
 const InputField = (props) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   const {
     value,
     placeholder,
@@ -57,33 +59,34 @@ const InputField = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  inputContainer: {
-    width: '100%',
-    borderRadius: theme.borderRadius,
-    padding: 10,
-  },
-  textInput: {
-    height: 50,
-    paddingHorizontal: 10,
-    borderRadius: theme.borderRadius,
-    backgroundColor: theme.colors.secondaryBright,
-    color: theme.colors.white, // Set the text color to white
-  },
-  uploadBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: 50,
-    paddingHorizontal: 10,
-    borderRadius: theme.borderRadius,
-    backgroundColor: theme.colors.secondaryBright,
-    borderColor: theme.colors.gray,
-    borderWidth: 1,
-  },
-  uploadText: {
-    color: theme.colors.white,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    inputContainer: {
+      width: "100%",
+      borderRadius: theme.borderRadius,
+      padding: 10,
+    },
+    textInput: {
+      height: 50,
+      paddingHorizontal: 10,
+      borderRadius: theme.borderRadius,
+      backgroundColor: theme.colors.secondaryBright,
+      color: theme.colors.white, // Set the text color to white
+    },
+    uploadBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: 50,
+      paddingHorizontal: 10,
+      borderRadius: theme.borderRadius,
+      backgroundColor: theme.colors.secondaryBright,
+      borderColor: theme.colors.gray,
+      borderWidth: 1,
+    },
+    uploadText: {
+      color: theme.colors.white,
+    },
+  });
 
 export default InputField;

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import theme from '../../theme';
+import useTheme from "../../hooks/useTheme";
 import { Button, Text } from 'react-native-paper';
 
 const NoDataBox = ({ Title, Massage, Onpress, btnTitle, show, textCenter }) => {
+    const theme = useTheme();
+    const styles = createStyles(theme);
   return (
     <View>
       <View style={{ margin: 10 }}>
@@ -33,28 +35,29 @@ const NoDataBox = ({ Title, Massage, Onpress, btnTitle, show, textCenter }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  noDatacontentContainer: {
-    backgroundColor: theme.colors.secondaryGray,
-    borderRadius: theme.borderRadius,
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-    alignItems: 'center',
-    marginVertical: 50,
-  },
-  noDataTitle: {
-    color: theme.colors.ternaryLight,
-  },
-  noDataMessage: {
-    color: theme.colors.ternaryDark,
-    textAlign: 'center',
-    paddingHorizontal: 10,
-    marginVertical: 15,
-  },
-  btn: {
-    backgroundColor: theme.colors.primaryDark,
-    color: theme.colors.ternaryLight,
-  },
-});
+const createStyles = (theme) =>
+  StyleSheet.create({
+    noDatacontentContainer: {
+      backgroundColor: theme.colors.secondaryGray,
+      borderRadius: theme.borderRadius,
+      paddingHorizontal: 10,
+      paddingVertical: 20,
+      alignItems: "center",
+      marginVertical: 50,
+    },
+    noDataTitle: {
+      color: theme.colors.ternaryLight,
+    },
+    noDataMessage: {
+      color: theme.colors.ternaryDark,
+      textAlign: "center",
+      paddingHorizontal: 10,
+      marginVertical: 15,
+    },
+    btn: {
+      backgroundColor: theme.colors.primaryDark,
+      color: theme.colors.ternaryLight,
+    },
+  });
 
 export default NoDataBox;

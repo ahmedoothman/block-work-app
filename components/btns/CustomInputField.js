@@ -1,11 +1,18 @@
-
-import React from 'react';
-import { View, TextInput, Text, StyleSheet } from 'react-native';
-import theme from '../../theme';
-
-const CustomInputField = ({ label, placeholder, value, setValue, secureTextEntry, keyboardType }) => {
+import React from "react";
+import { View, TextInput, Text, StyleSheet } from "react-native";
+import useTheme from "../../hooks/useTheme";
+const CustomInputField = ({
+  label,
+  placeholder,
+  value,
+  setValue,
+  secureTextEntry,
+  keyboardType,
+}) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         style={styles.input}
@@ -22,23 +29,21 @@ const CustomInputField = ({ label, placeholder, value, setValue, secureTextEntry
 };
 
 export default CustomInputField;
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 15,
-  },
-  label: {
-    color: theme.colors.white,
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  input: {
-    backgroundColor: theme.colors.ternaryLight,
-    borderRadius: 8,
-    padding: 10,
-    color: theme.colors.secondaryGray,
-    textAlignVertical: "top",
-    
-  },
-});
-
+const createStyles = (theme) =>
+  StyleSheet.create({
+    container: {
+      marginBottom: 15,
+    },
+    label: {
+      color: theme.colors.white,
+      fontSize: 14,
+      marginBottom: 10,
+    },
+    input: {
+      backgroundColor: theme.colors.ternaryLight,
+      borderRadius: 8,
+      padding: 10,
+      color: theme.colors.secondaryGray,
+      textAlignVertical: "top",
+    },
+  });
