@@ -1,11 +1,11 @@
-import { StyleSheet, TouchableOpacity, TextInput, View } from 'react-native';
-import React from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { StyleSheet, TouchableOpacity, TextInput, View } from "react-native";
+import React from "react";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import useTheme from "../../../hooks/useTheme";
 
 export default function SearchBox({ placeholder }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   return (
     <View style={styles.asembler}>
       <View style={styles.Main}>
@@ -13,22 +13,19 @@ export default function SearchBox({ placeholder }) {
           style={styles.searchInput}
           placeholder={placeholder}
           placeholderTextColor={theme.colors.secondaryBright}
-          placeholderStyle={{ marginLeft: 10 }}
-        ></TextInput>
+          placeholderStyle={{ marginLeft: 10 }}></TextInput>
 
         <AntDesign
-          name='search1'
+          name="search1"
           size={20}
-          style={styles.searchIconTextBox}
-        ></AntDesign>
+          style={styles.searchIconTextBox}></AntDesign>
       </View>
       <View style={styles.buttonP}>
         <TouchableOpacity>
           <AntDesign
-            name='search1'
+            name="search1"
             size={25}
-            style={styles.iconLeft}
-          ></AntDesign>
+            style={styles.iconLeft}></AntDesign>
         </TouchableOpacity>
       </View>
     </View>
@@ -44,11 +41,11 @@ const createStyles = (theme) =>
     },
 
     Main: {
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.inputBg,
       width: 266,
       height: 40,
       borderWidth: 1,
-      borderColor: theme.colors.white,
+      borderColor: theme.colors.inputBg,
       borderRadius: 10,
     },
 

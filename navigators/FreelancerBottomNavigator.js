@@ -26,7 +26,7 @@ export default function FreelancerBottomNavigator() {
           backgroundColor: theme.colors.secondaryDark,
         },
         tabBarActiveTintColor: theme.colors.primaryBright,
-        tabBarInactiveTintColor: theme.colors.ternaryLight,
+        tabBarInactiveTintColor: theme.colors.white,
       }}
     >
       <Tab.Screen

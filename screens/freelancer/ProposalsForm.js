@@ -5,18 +5,16 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
-
-} from 'react-native';
-import React, { useState } from 'react';
+} from "react-native";
+import React, { useState } from "react";
 import useTheme from "../../hooks/useTheme";
-import { useNavigation } from '@react-navigation/native';
-import { submitProposalService } from '../../services/proposalService';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
-
+import { useNavigation } from "@react-navigation/native";
+import { submitProposalService } from "../../services/proposalService";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
 
 const ProposalsForm = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { jobData, postingTimeOfJob } = route.params;
   const { category, description, title, _id } = jobData;
 
@@ -164,7 +162,6 @@ const ProposalsForm = ({ route }) => {
 
 export default ProposalsForm;
 
-
 const createStyles = (theme) =>
   StyleSheet.create({
     container: {
@@ -179,7 +176,7 @@ const createStyles = (theme) =>
       marginBottom: 20,
     },
     title: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 18,
       fontWeight: "bold",
       marginBottom: 10,
@@ -211,23 +208,23 @@ const createStyles = (theme) =>
     },
 
     label: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 14,
       marginBottom: 5,
     },
     input: {
-      backgroundColor: theme.colors.secondaryBright,
+      backgroundColor: theme.colors.thirdBright,
       borderRadius: 8,
       padding: 10,
-      color: theme.colors.ternaryDark,
+      color: theme.colors.thirdTernary,
     },
     coverLetterInput: {
-      backgroundColor: theme.colors.secondaryBright,
+      backgroundColor: theme.colors.thirdBright,
       borderRadius: 8,
       padding: 10,
       height: 100,
       textAlignVertical: "top",
-      color: theme.colors.ternaryDark,
+      color: theme.colors.thirdTernary,
     },
     feeGroup: {
       flexDirection: "row",
@@ -263,4 +260,3 @@ const createStyles = (theme) =>
       color: theme.colors.white,
     },
   });
-

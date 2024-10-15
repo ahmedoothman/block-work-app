@@ -5,35 +5,35 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   createPortfolioService,
   updatePortfolioService,
-} from '../../services/portofolioService';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
-import InputField from '../../components/inputs/auth/InputField';
-import * as ImagePicker from 'expo-image-picker';
+} from "../../services/portofolioService";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
+import InputField from "../../components/inputs/auth/InputField";
+import * as ImagePicker from "expo-image-picker";
 import useTheme from "../../hooks/useTheme";
-import { uploadFile } from '../../utils/uploadFile';
-import { useSelector } from 'react-redux';
-const { width } = Dimensions.get('window');
+import { uploadFile } from "../../utils/uploadFile";
+import { useSelector } from "react-redux";
+const { width } = Dimensions.get("window");
 
 export default function CreatePortfolio({ route }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const user = useSelector((state) => state.auth.user);
   const { isEdit, screenTitle, _id, item } = route.params;
   const navigation = useNavigation();
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [messageType, setMessageType] = useState('');
-  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState("");
+  const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
   const onDismissSnackBar = () => setVisible(false);
@@ -41,16 +41,16 @@ export default function CreatePortfolio({ route }) {
   useEffect(() => {
     navigation.setOptions({ title: screenTitle });
     if (isEdit && item) {
-      setTitle(item.title || '');
-      setDescription(item.description || '');
+      setTitle(item.title || "");
+      setDescription(item.description || "");
       setImages(item.files || []);
     }
   }, [navigation]);
 
   const handleResetForm = () => {
     setImages([]);
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
   };
 
   const createPortofolioItem = async () => {
@@ -61,17 +61,17 @@ export default function CreatePortfolio({ route }) {
       files: images,
     };
     const response = await createPortfolioService(newData);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setVisible(true);
-      setMessageType('success');
-      setMessage('Portfolio submitted successfully');
+      setMessageType("success");
+      setMessage("Portfolio submitted successfully");
       handleResetForm();
       setTimeout(() => {
         navigation.goBack();
       }, 2000);
     } else {
       setVisible(true);
-      setMessageType('error');
+      setMessageType("error");
       setMessage(response.message);
     }
   };
@@ -84,16 +84,16 @@ export default function CreatePortfolio({ route }) {
       files: images,
     };
     const response = await updatePortfolioService(_id, newData);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setVisible(true);
-      setMessageType('success');
-      setMessage('Portfolio updated successfully');
+      setMessageType("success");
+      setMessage("Portfolio updated successfully");
       setTimeout(() => {
-        navigation.navigate('Portofolio', { userId: user._id });
+        navigation.navigate("Portofolio", { userId: user._id });
       }, 2000);
     } else {
       setVisible(true);
-      setMessageType('error');
+      setMessageType("error");
       setMessage(response.message);
     }
   };
@@ -109,8 +109,8 @@ export default function CreatePortfolio({ route }) {
       // upload the selected image
       const uploadedImage = await uploadFile(
         result.assets[0].uri,
-        'portfolios',
-        'images'
+        "portfolios",
+        "images"
       );
       setImages([...images, uploadedImage]);
       setImageUploading(false);
@@ -146,8 +146,8 @@ export default function CreatePortfolio({ route }) {
           <Text style={styles.imageLabel}>Images</Text>
           <InputField
             onChange={pickImage}
-            value={images.map((img) => img.uri).join(', ')}
-            placeholder='Upload Photos'
+            value={images.map((img) => img.uri).join(", ")}
+            placeholder="Upload Photos"
             isUpload={true}
             bgColor={theme.colors.ternaryLight}
           />
@@ -159,12 +159,11 @@ export default function CreatePortfolio({ route }) {
             activeOpacity={0.7}
             onPress={() => {
               isEdit ? updatePortfolioItem() : createPortofolioItem();
-            }}
-          >
+            }}>
             {isLoading || imageUploading ? (
               <ActivityIndicator color={theme.colors.white} />
             ) : (
-              <Text style={styles.buttonText}>{isEdit ? 'Update' : 'Add'}</Text>
+              <Text style={styles.buttonText}>{isEdit ? "Update" : "Add"}</Text>
             )}
           </TouchableOpacity>
         </View>
@@ -177,12 +176,11 @@ export default function CreatePortfolio({ route }) {
           styles.snackbar,
           {
             backgroundColor:
-              messageType === 'success'
+              messageType === "success"
                 ? theme.colors.success
                 : theme.colors.danger,
           },
-        ]}
-      >
+        ]}>
         <Text style={styles.snackbarText}>{message}</Text>
       </Snackbar>
     </View>
@@ -206,12 +204,12 @@ const createStyles = (theme) =>
       alignSelf: "center",
     },
     label: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 14,
       marginBottom: 10,
     },
     imageLabel: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 14,
       marginBottom: -1,
     },

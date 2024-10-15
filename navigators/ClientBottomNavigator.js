@@ -17,7 +17,6 @@ import screenOptionsWithHeader from "./screenOptionsWithHeader";
 
 export default function ClientBottomNavigator() {
   const theme = useTheme();
-  const styles = createStyles(theme);
   return (
     <Tab.Navigator
       initialRouteName="Jobs"
@@ -25,8 +24,10 @@ export default function ClientBottomNavigator() {
         tabBarStyle: {
           backgroundColor: theme.colors.secondaryDark,
         },
+        // tabBarActiveTintColor: theme.colors.primaryBright,
+        // tabBarInactiveTintColor: theme.colors.ternaryLight,
         tabBarActiveTintColor: theme.colors.primaryBright,
-        tabBarInactiveTintColor: theme.colors.ternaryLight,
+        tabBarInactiveTintColor: theme.colors.white,
       }}>
       <Tab.Screen
         name="Jobs"
@@ -79,7 +80,7 @@ export default function ClientBottomNavigator() {
         options={{
           title: "Profile",
           headerStyle: { backgroundColor: theme.colors.secondaryDark },
-          headerTintColor: { backgroundColor: theme.colors.white },
+          headerTintColor: theme.colors.white,
           tabBarButton: () => null,
           headerRight: () => (
             <MaterialCommunityIcons

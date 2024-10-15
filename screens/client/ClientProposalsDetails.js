@@ -5,8 +5,8 @@ import useTheme from "../../hooks/useTheme";
 import { ScrollView } from "react-native-gesture-handler";
 
 const ClientProposalsDetails = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { proposal, date, isClient, jobDetails } = route.params;
   const {
     freelancer: {

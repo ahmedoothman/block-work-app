@@ -13,7 +13,15 @@ const CustomInputField = ({
   const styles = createStyles(theme);
   return (
     <View style={styles.container}>
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && (
+        <Text
+          style={[
+            styles.label,
+            secureTextEntry ? { color: theme.colors.white } : null,
+          ]}>
+          {label}
+        </Text>
+      )}
       <TextInput
         style={styles.input}
         placeholder={placeholder}
@@ -35,7 +43,7 @@ const createStyles = (theme) =>
       marginBottom: 15,
     },
     label: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 14,
       marginBottom: 10,
     },

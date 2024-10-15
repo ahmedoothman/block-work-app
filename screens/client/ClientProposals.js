@@ -11,8 +11,8 @@ import NoDataBox from "../../components/NoData/NoDataBox";
 import { useNavigation } from "@react-navigation/native";
 const { height } = Dimensions.get("window");
 const ClientProposals = ({ route }) => {
-    const theme = useTheme();
-  const styles = createStyles(theme)
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const navigation = useNavigation();
   const { jopId, jobDetails } = route.params;
 
@@ -42,8 +42,12 @@ const ClientProposals = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.counter}>
+      {/* <View style={styles.counter}>
         <Text style={styles.text}>Proposals({count})</Text>
+      </View> */}
+      <View style={styles.counter}>
+        <Text style={styles.countertext}>Proposals</Text>
+        <Text style={styles.text}>({count})</Text>
       </View>
       <ScrollView style={styles.scrollContainer}>
         {isLoading ? (
@@ -98,14 +102,19 @@ const createStyles = (theme) =>
     },
     counter: {
       borderRadius: 20,
-      padding: 5,
+      padding: 10,
       margin: 5,
-      width: 130,
+      width: 140,
       backgroundColor: theme.colors.secondaryBright,
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    countertext: {
+      color: theme.colors.ternaryDark,
     },
     text: {
-      color: theme.colors.ternaryDark,
-      textAlign: "center",
+      color: theme.colors.whiteTitle,
     },
     loadingIndicator: {
       flex: 1,

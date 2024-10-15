@@ -18,8 +18,8 @@ import moment from "moment";
 import UserBox from "../../components/UserBox/UserBox";
 
 const ContractDetails = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { role: userRole, _id: userId } = useSelector(
     (state) => state.auth.user
   );
@@ -152,7 +152,16 @@ const ContractDetails = () => {
           {userRole == "freelancer" ? (
             <>
               <Text style={styles.Client_Status}>
-                Contract Status: {contract.status}
+                Contract Status:{" "}
+                <Text
+                  style={{
+                    color:
+                      contract.status == "completed"
+                        ? theme.colors.success
+                        : theme.colors.primaryBright,
+                  }}>
+                  {contract.status}
+                </Text>
               </Text>
             </>
           ) : (
@@ -208,7 +217,7 @@ const createStyles = (theme) =>
       color: theme.colors.ternaryDark,
     },
     textColor: {
-      color: theme.colors.white,
+      color: theme.colors.ternaryLight,
     },
     contractTitle: {
       fontSize: 17,
@@ -252,7 +261,7 @@ const createStyles = (theme) =>
       marginBottom: 10,
       fontSize: 18,
       fontWeight: "regular",
-      color: theme.colors.white,
+      color: theme.colors.ternaryLight,
     },
     userContainer: {
       display: "flex",
@@ -300,7 +309,7 @@ const createStyles = (theme) =>
       marginBottom: 10,
       fontSize: 18,
       fontWeight: "regular",
-      color: theme.colors.white,
+      color: theme.colors.ternaryLight,
     },
     price: {
       color: theme.colors.ternaryDark,

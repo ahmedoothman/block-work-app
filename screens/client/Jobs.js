@@ -22,8 +22,8 @@ import { logEvent } from "firebase/analytics";
 const { height } = Dimensions.get("window");
 
 const Jobs = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const navigation = useNavigation();
 
   const [jobs, setJobs] = useState([]);
@@ -193,7 +193,11 @@ const Jobs = () => {
         onPress={() => {
           navigation.navigate("CreateJobForm");
         }}>
-        <Icon name="circle-with-plus" size={30} color={theme.colors.white} />
+        <Icon
+          name="circle-with-plus"
+          size={30}
+          color={theme.colors.whiteTitle}
+        />
       </TouchableOpacity>
 
       <ScrollView

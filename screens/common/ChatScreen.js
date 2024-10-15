@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   Text,
@@ -9,44 +9,44 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-} from 'react-native';
-import MessageBox from '../../components/chat/MessageBox';
-import { getChatHistory } from '../../services/chatService';
+} from "react-native";
+import MessageBox from "../../components/chat/MessageBox";
+import { getChatHistory } from "../../services/chatService";
 import {
   initializeSocket,
   joinChatRoom,
   sendMessage,
   receiveMessage,
   disconnectSocket,
-} from '../../services/socketService';
+} from "../../services/socketService";
 import useTheme from "../../hooks/useTheme";
-import { useSelector } from 'react-redux';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useSelector } from "react-redux";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const ChatScreen = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { otherUser } = route.params;
   const userId = useSelector((state) => state.auth.user._id);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
   const scrollViewRef = useRef(null);
 
   useEffect(() => {
     const fetchChatHistory = async () => {
       try {
         const response = await getChatHistory(otherUser._id);
-        if (response.status === 'success') {
+        if (response.status === "success") {
           setMessages(response.data);
           if (scrollViewRef.current) {
             scrollViewRef.current.scrollToEnd({ animated: true });
           }
         } else {
-          Alert.alert('Error', response.message || 'An error occurred');
+          Alert.alert("Error", response.message || "An error occurred");
         }
       } catch (error) {
-        console.error('Error fetching chat history:', error);
+        console.error("Error fetching chat history:", error);
       } finally {
         setLoading(false);
       }
@@ -95,14 +95,14 @@ const ChatScreen = ({ route }) => {
         message,
         timestamp: new Date().toISOString(),
       });
-      setNewMessage('');
+      setNewMessage("");
     }
   };
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color={theme.colors.white} />
+        <ActivityIndicator size="large" color={theme.colors.white} />
         <Text style={styles.loadingText}>Loading messages...</Text>
       </View>
     );
@@ -120,16 +120,15 @@ const ChatScreen = ({ route }) => {
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={styles.scrollContainer}
-        inverted
-      >
+        inverted>
         {messages.map((msg, index) => (
           <MessageBox
             key={msg._id || index}
             message={msg.message}
             isSender={msg.from._id === userId}
             timestamp={new Date(msg.timestamp).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
+              hour: "2-digit",
+              minute: "2-digit",
             })}
           />
         ))}
@@ -139,12 +138,12 @@ const ChatScreen = ({ route }) => {
           style={styles.input}
           value={newMessage}
           onChangeText={setNewMessage}
-          placeholder='Type a message...'
-          placeholderTextColor='#ccc'
+          placeholder="Type a message..."
+          placeholderTextColor="#ccc"
         />
         <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
           <Text style={styles.sendButtonText}>
-            <MaterialIcons name='send' size={24} color={theme.colors.white} />
+            <MaterialIcons name="send" size={24} color={theme.colors.white} />
           </Text>
         </TouchableOpacity>
       </View>
@@ -170,7 +169,7 @@ const createStyles = (theme) =>
       marginRight: 10,
     },
     userName: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 18,
     },
     scrollContainer: {

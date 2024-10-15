@@ -50,20 +50,20 @@ const Menu = () => {
             {isDark === true ? (
               <>
                 <MaterialIcons
+                  name="light-mode"
+                  color={theme.colors.primaryBright}
+                  size={30}
+                />
+                <Text style={styles.BalanceText}>Change To Dark Mode</Text>
+              </>
+            ) : (
+              <>
+                <MaterialIcons
                   name="dark-mode"
                   color={theme.colors.white}
                   size={30}
                 />
                 <Text style={styles.BalanceText}>Change To Light Mode</Text>
-              </>
-            ) : (
-              <>
-                <MaterialIcons
-                  name="light-mode"
-                  color={theme.colors.white}
-                  size={30}
-                />
-                <Text style={styles.BalanceText}>Change To Dark Mode</Text>
               </>
             )}
           </View>

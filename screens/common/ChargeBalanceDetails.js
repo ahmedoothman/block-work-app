@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { Button, Card, Title } from 'react-native-paper';
-import { CreditCardInput } from 'react-native-credit-card-input';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { Button, Card, Title } from "react-native-paper";
+import { CreditCardInput } from "react-native-credit-card-input";
 import useTheme from "../../hooks/useTheme";
-import { useNavigation } from '@react-navigation/native';
-import { chargeWalletService } from '../../services/walletService';
-import AppButton from '../../components/btns/AppButton';
+import { useNavigation } from "@react-navigation/native";
+import { chargeWalletService } from "../../services/walletService";
+import AppButton from "../../components/btns/AppButton";
 const ChargeBalanceDetails = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { amount } = route.params;
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
@@ -23,8 +23,8 @@ const ChargeBalanceDetails = ({ route }) => {
   const handlePayment = async () => {
     setLoading(false);
     const response = await chargeWalletService({ amount });
-    if (response.status === 'success') {
-      navigation.navigate('Balance');
+    if (response.status === "success") {
+      navigation.navigate("Balance");
     } else {
       // add alert
     }
@@ -48,12 +48,14 @@ const ChargeBalanceDetails = ({ route }) => {
             inputStyle={styles.input}
           />
 
-          <AppButton
-            onPress={handlePayment}
-            buttonTitle={'Confirm Payment'}
-            // loading={fasle}
-            bgColor={theme.colors.primaryDark}
-          />
+          <View style={{ margin: "auto" }}>
+            <AppButton
+              onPress={handlePayment}
+              buttonTitle={"Confirm Payment"}
+              // loading={fasle}
+              bgColor={theme.colors.primaryDark}
+            />
+          </View>
         </Card.Content>
       </Card>
     </ScrollView>
@@ -66,13 +68,14 @@ const createStyles = (theme) =>
       backgroundColor: theme.colors.secondaryDark,
       flexGrow: 1,
       justifyContent: "center",
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
       paddingBottom: 30,
     },
     card: {
-      backgroundColor: theme.colors.white,
+      // backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.paymentCardBg,
       borderRadius: 10,
-      padding: 20,
+      padding: 5,
     },
     title: {
       textAlign: "center",

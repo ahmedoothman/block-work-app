@@ -148,10 +148,10 @@ const createStyles = (theme) =>
     searchContainer: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.inputBg,
       width: "100%",
       borderWidth: 1,
-      borderColor: theme.colors.white,
+      borderColor: theme.colors.inputBg,
       borderRadius: 10,
       marginBottom: 10,
     },
@@ -187,7 +187,7 @@ const createStyles = (theme) =>
     },
     picker: {
       width: "100%",
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.inputBg,
       borderRadius: 10,
       height: "auto",
     },

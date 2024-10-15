@@ -8,8 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 import { calcDuration } from "../../utils";
 
 const ClientJopDetails = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { jobDetails, postingTimeOfJob } = route.params;
   const {
     title,
@@ -139,7 +139,7 @@ const createStyles = (theme) =>
       padding: 16,
     },
     title: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 20,
       fontWeight: "bold",
     },
@@ -158,7 +158,7 @@ const createStyles = (theme) =>
       marginLeft: 5,
     },
     descriptionText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginVertical: 15,
     },
     thirdSection: {
@@ -173,18 +173,18 @@ const createStyles = (theme) =>
       marginVertical: 10,
     },
     budgetText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginLeft: 8,
     },
     subText: {
       color: theme.colors.ternaryDark,
     },
     projectTypeText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginVertical: 15,
     },
     sectionTitle: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 16,
       marginVertical: 10,
     },

@@ -1,5 +1,5 @@
-import { View, StyleSheet, Dimensions } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
 import useTheme from "../../hooks/useTheme";
 import {
   Avatar,
@@ -8,29 +8,29 @@ import {
   Text,
   IconButton,
   Divider,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import CustomBtn from '../../components/profile/CustomBtn';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-const { height } = Dimensions.get('window');
+import CustomBtn from "../../components/profile/CustomBtn";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+const { height } = Dimensions.get("window");
 const onDismissSnackBar = () => setVisible(false);
 
 const Profile = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
   const navigation = useNavigation();
   const user = useSelector((state) => state.auth.user);
   const handleReviews = () => {
-    navigation.navigate('Reviews', {
+    navigation.navigate("Reviews", {
       userId: user._id,
     });
   };
   const handleUpdate = () => {
-    navigation.navigate('ClientUpdateProfile', {
+    navigation.navigate("ClientUpdateProfile", {
       userdata: user,
     });
   };
@@ -72,14 +72,13 @@ const Profile = () => {
           </View>
           <Divider style={styles.divider} />
           <View style={styles.bioView}>
-
-            <Text variant='titleLarge' style={styles.title}>
-              {user.jobTitle ? user.jobTitle : 'No job title'}
+            <Text variant="titleLarge" style={styles.title}>
+              {user.jobTitle ? user.jobTitle : "No job title"}
             </Text>
-            <Text variant='titleMedium' style={styles.title}>
+            <Text variant="titleMedium" style={styles.title}>
               {user.bio
                 ? user.bio.charAt(0).toUpperCase() + user.bio.slice(1)
-                : 'No bio'}
+                : "No bio"}
             </Text>
           </View>
           <Divider style={styles.divider} />
@@ -127,7 +126,7 @@ const createStyles = (theme) =>
       right: 10,
     },
     title: {
-      color: theme.colors.ternaryLight,
+      color: theme.colors.white,
       // margin:5,
     },
     divider: {

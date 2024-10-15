@@ -1,20 +1,20 @@
-import { StyleSheet, View, Image } from 'react-native';
-import React, { useState } from 'react';
-import { Card, Text } from 'react-native-paper';
+import { StyleSheet, View, Image } from "react-native";
+import React, { useState } from "react";
+import { Card, Text } from "react-native-paper";
 import useTheme from "../../hooks/useTheme";
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import AppButton from '../btns/AppButton';
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
+import AppButton from "../btns/AppButton";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const options = { day: 'numeric', month: 'short', year: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
+  const options = { day: "numeric", month: "short", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
 };
 
 export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const createdAt = formatDate(PropsalData.createdAt);
   const [loading, setLoading] = useState(false);
   const {
@@ -33,14 +33,14 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
 
   const handlePress = (isClient) => {
     if (isClient) {
-      navigation.navigate('ClientProposalsDetails', {
+      navigation.navigate("ClientProposalsDetails", {
         proposal: PropsalData,
         date: createdAt,
         isClient: isClient,
         jobDetails: jobDetails,
       });
     } else {
-      navigation.navigate('ProposalsDetails', {
+      navigation.navigate("ProposalsDetails", {
         proposal: PropsalData,
         date: createdAt,
       });
@@ -54,8 +54,8 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
           <Image
             source={{ uri: freelancerPhoto }}
             style={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
               borderRadius: 20,
             }}
           />
@@ -65,19 +65,19 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
 
       <Card.Content>
         <View style={styles.View}>
-          <Text variant='bodyMedium' style={styles.label}>
+          <Text variant="bodyMedium" style={styles.label}>
             {proposelCoverLetter}
           </Text>
         </View>
         <AppButton
-          buttonTitle='View'
+          buttonTitle="View"
           onPress={() => {
             handlePress(true);
           }}
           loading={loading}
           style={styles.appButton}
           marginY={1}
-          marginX={'auto'}
+          marginX={"auto"}
           marginBottom={1}
         />
       </Card.Content>
@@ -87,30 +87,28 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
       activeOpacity={0.8}
       onPress={() => {
         handlePress(false);
-      }}
-    >
+      }}>
       <Card style={styles.card}>
         <Card.Content>
           <View style={styles.View}>
-            <Text variant='bodyMedium' style={styles.label}>
+            <Text variant="bodyMedium" style={styles.label}>
               {jopTitle}
             </Text>
-            <Text variant='bodySmall' style={styles.date}>
+            <Text variant="bodySmall" style={styles.date}>
               {createdAt}
             </Text>
           </View>
 
           <Text
-            variant='bodyMedium'
+            variant="bodyMedium"
             style={{
               color:
-                status === 'submitted'
+                status === "submitted"
                   ? theme.colors.primaryBright
-                  : status === 'accepted'
+                  : status === "accepted"
                   ? theme.colors.success
                   : theme.colors.danger,
-            }}
-          >
+            }}>
             {status}
           </Text>
         </Card.Content>
@@ -130,7 +128,7 @@ const createStyles = (theme) =>
       color: theme.colors.ternaryDark,
     },
     label: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       textAlign: "center",
       marginBottom: 10,
     },
@@ -138,7 +136,7 @@ const createStyles = (theme) =>
       backgroundColor: theme.colors.secondaryGray,
       borderRadius: theme.borderRadius,
       margin: 10,
-      padding: 10,
+      padding: 5,
     },
     freelanceContainer: {
       display: "flex",
@@ -161,6 +159,6 @@ const createStyles = (theme) =>
     userName: {
       fontSize: 14,
       fontWeight: "regular",
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
     },
   });

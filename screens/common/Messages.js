@@ -1,31 +1,31 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
-import SearchBox from '../../components/inputs/searchBox/SearchBox';
-import { getAllChats } from '../../services/chatService';
-import ChatBox from '../../components/chat/ChatBox';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { ScrollView } from "react-native-gesture-handler";
+import SearchBox from "../../components/inputs/searchBox/SearchBox";
+import { getAllChats } from "../../services/chatService";
+import ChatBox from "../../components/chat/ChatBox";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
 import useTheme from "../../hooks/useTheme";
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 
 const Messages = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [error, setError] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const {
     data,
     error: queryError,
     isLoading,
-  } = useQuery('chats', getAllChats, {
+  } = useQuery("chats", getAllChats, {
     refetchInterval: 5000, // Refetch every 5 seconds
   });
 
   React.useEffect(() => {
     if (queryError) {
       setError(true);
-      setErrorMessage(queryError.message || 'An unknown error occurred');
+      setErrorMessage(queryError.message || "An unknown error occurred");
     }
   }, [queryError]);
 
@@ -33,13 +33,13 @@ const Messages = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <SearchBox placeholder={'Search for chats'} />
+      <SearchBox placeholder={"Search for chats"} />
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size='large' color={theme.colors.white} />
+          <ActivityIndicator size="large" color={theme.colors.white} />
         </View>
       ) : (
-        data?.status === 'success' &&
+        data?.status === "success" &&
         data.data.map((chat, index) => <ChatBox key={index} data={chat} />)
       )}
       {!isLoading && data?.data?.length === 0 && (
@@ -52,11 +52,10 @@ const Messages = () => {
         onDismiss={onDismissSnackbar}
         duration={3000}
         action={{
-          label: 'Close',
+          label: "Close",
           onPress: onDismissSnackbar,
-        }}
-      >
-        {errorMessage || 'An unknown error occurred.'}
+        }}>
+        {errorMessage || "An unknown error occurred."}
       </Snackbar>
     </ScrollView>
   );

@@ -4,30 +4,30 @@ import {
   StyleSheet,
   ScrollView,
   RefreshControl,
-} from 'react-native';
-import React, { useState, useEffect, useCallback } from 'react';
+} from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
 import useTheme from "../../hooks/useTheme";
-import ContractBtn from '../../components/btns/ContractBtn';
-import { useNavigation } from '@react-navigation/native';
-import ClientContractBox from '../../components/Contracts/ClientContractBox';
-import { getAllFreelancerContract } from '../../services/contractService';
-import { ActivityIndicator } from 'react-native-paper';
+import ContractBtn from "../../components/btns/ContractBtn";
+import { useNavigation } from "@react-navigation/native";
+import ClientContractBox from "../../components/Contracts/ClientContractBox";
+import { getAllFreelancerContract } from "../../services/contractService";
+import { ActivityIndicator } from "react-native-paper";
 
 const Contracts = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [contracts, setContracts] = useState([]);
 
   // Function to fetch contracts
   const fetchAllFreelancerContracts = async () => {
     setLoading(true);
     const response = await getAllFreelancerContract();
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setContracts(response.data);
     } else {
       setError(true);
@@ -54,7 +54,7 @@ const Contracts = () => {
   if (loading) {
     return (
       <View style={styles.spinnerContainer}>
-        <ActivityIndicator size='large' color={theme.colors.primaryBright} />
+        <ActivityIndicator size="large" color={theme.colors.primaryBright} />
       </View>
     );
   }
@@ -68,8 +68,7 @@ const Contracts = () => {
           onRefresh={onRefresh}
           tintColor={theme.colors.primaryBright}
         />
-      }
-    >
+      }>
       {contracts.length > 0 ? (
         <View style={styles.contractsContainer}>
           {contracts.map((contract, index) => {
@@ -77,11 +76,12 @@ const Contracts = () => {
               <ClientContractBox
                 key={index}
                 onPress={() => {
-                  navigation.navigate('ContractDetails', {
+                  navigation.navigate("ContractDetails", {
                     contract: contract,
                   });
                 }}
                 contractTitle={contract.job.title}
+                status={contract.status}
               />
             );
           })}
@@ -99,14 +99,14 @@ const Contracts = () => {
               borderColor={theme.colors.primaryDark}
               textSize={14}
               textColor={theme.colors.white}
-              fontWeight={'regular'}
+              fontWeight={"regular"}
               paddingHorizontal={5}
               paddingVertical={0}
-              mode={'contained'}
+              mode={"contained"}
               onPress={() => {
-                navigation.navigate('Jobs');
+                navigation.navigate("Jobs");
               }}
-              clickText={'Search for new projects'}
+              clickText={"Search for new projects"}
             />
           </View>
         </View>
@@ -139,13 +139,13 @@ const createStyles = (theme) =>
       paddingVertical: 30,
     },
     noDataTitle: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 20,
       fontWeight: "regular",
       textAlign: "center",
     },
     noDataMessage: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 14,
       fontWeight: "regular",
       textAlign: "center",

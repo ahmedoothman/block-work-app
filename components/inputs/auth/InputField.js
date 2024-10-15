@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   TextInput,
   Text,
   StyleSheet,
   TouchableOpacity,
-} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
- import useTheme from "../../../hooks/useTheme";
+} from "react-native";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import useTheme from "../../../hooks/useTheme";
 
 const InputField = (props) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const {
     value,
     placeholder,
@@ -30,13 +30,12 @@ const InputField = (props) => {
       style={[
         styles.inputContainer,
         { marginHorizontal: marginX || 0, marginVertical: marginY || 0 },
-      ]}
-    >
+      ]}>
       {isUpload ? (
         <TouchableOpacity onPress={onChange} style={styles.uploadBtn}>
           <Text style={styles.uploadText}>{value || placeholder}</Text>
           <MaterialIcons
-            name='cloud-upload'
+            name="cloud-upload"
             size={24}
             color={theme.colors.primary}
           />
@@ -50,9 +49,9 @@ const InputField = (props) => {
           style={styles.textInput}
           multiline={isTextArea}
           numberOfLines={isTextArea ? textAreaLines || 4 : 1}
-          keyboardType={isNumeric ? 'numeric' : 'default'}
-          textAlignVertical={isTextArea ? 'top' : 'center'}
-          placeholderTextColor='white' // Set the placeholder color to white
+          keyboardType={isNumeric ? "numeric" : "default"}
+          textAlignVertical={isTextArea ? "top" : "center"}
+          placeholderTextColor="white" // Set the placeholder color to white
         />
       )}
     </View>
@@ -71,7 +70,7 @@ const createStyles = (theme) =>
       paddingHorizontal: 10,
       borderRadius: theme.borderRadius,
       backgroundColor: theme.colors.secondaryBright,
-      color: theme.colors.white, // Set the text color to white
+      color: theme.colors.inputText,
     },
     uploadBtn: {
       flexDirection: "row",
@@ -85,7 +84,7 @@ const createStyles = (theme) =>
       borderWidth: 1,
     },
     uploadText: {
-      color: theme.colors.white,
+      color: theme.colors.inputText,
     },
   });
 

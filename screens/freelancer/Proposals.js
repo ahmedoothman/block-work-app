@@ -66,7 +66,8 @@ const Proposals = () => {
   return (
     <View style={styles.container}>
       <View style={styles.counter}>
-        <Text style={styles.text}>Proposals({count})</Text>
+        <Text style={styles.countertext}>Proposals</Text>
+        <Text style={styles.text}>({count})</Text>
       </View>
       <ScrollView
         style={styles.scrollContainer}
@@ -123,14 +124,19 @@ const createStyles = (theme) =>
     },
     counter: {
       borderRadius: 20,
-      padding: 5,
+      padding: 10,
       margin: 5,
-      width: 130,
+      width: 150,
       backgroundColor: theme.colors.secondaryBright,
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    countertext: {
+      color: theme.colors.ternaryDark,
     },
     text: {
-      color: theme.colors.ternaryDark,
-      textAlign: "center",
+      color: theme.colors.whiteTitle,
     },
     loadingIndicator: {
       flex: 1,

@@ -1,15 +1,15 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect } from "react";
 import useTheme from "../../hooks/useTheme";
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import AppButton from '../../components/btns/AppButton';
-import { useNavigation } from '@react-navigation/native';
-import { calcDuration } from '../../utils';
+import AntDesign from "react-native-vector-icons/AntDesign";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import AppButton from "../../components/btns/AppButton";
+import { useNavigation } from "@react-navigation/native";
+import { calcDuration } from "../../utils";
 
 const JobsDetails = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { jobDetails, postingTimeOfJob } = route.params;
   const {
     title,
@@ -31,7 +31,7 @@ const JobsDetails = ({ route }) => {
           <Text style={styles.timePriceText}>{postingTimeOfJob} </Text>
           <View style={styles.paymentBox}>
             <AntDesign
-              name='enviromento'
+              name="enviromento"
               size={19}
               color={theme.colors.ternaryDark}
             />
@@ -45,31 +45,31 @@ const JobsDetails = ({ route }) => {
         {/* Third Section */}
         <View style={styles.thirdSection}>
           <View style={styles.infoRow}>
-            <EvilIcons name='tag' size={29} color={theme.colors.ternaryDark} />
+            <EvilIcons name="tag" size={29} color={theme.colors.ternaryDark} />
             <Text style={styles.budgetText}>
-              ${budget} {'\n'}
+              ${budget} {"\n"}
               <Text style={styles.subText}>Fixed-price</Text>
             </Text>
           </View>
           <View style={styles.infoRow}>
             <EvilIcons
-              name='calendar'
+              name="calendar"
               size={29}
               color={theme.colors.ternaryDark}
             />
             <Text style={styles.budgetText}>
-              {calcDuration(duration)} {'\n'}
+              {calcDuration(duration)} {"\n"}
               <Text style={styles.subText}>Duration</Text>
             </Text>
           </View>
           <View style={styles.infoRow}>
             <AntDesign
-              name='bulb1'
+              name="bulb1"
               size={20}
               color={theme.colors.ternaryDark}
             />
             <Text style={styles.budgetText}>
-              Entry level{'\n'}
+              Entry level{"\n"}
               <Text style={styles.subText}>Experience level</Text>
             </Text>
           </View>
@@ -96,7 +96,7 @@ const JobsDetails = ({ route }) => {
           <Text style={styles.subText}>Proposals:</Text>
           <View style={styles.proposalsRow}>
             <AntDesign
-              name='questioncircleo'
+              name="questioncircleo"
               size={17}
               color={theme.colors.primaryBright}
             />
@@ -106,9 +106,9 @@ const JobsDetails = ({ route }) => {
         {/*Apply Now Button in Job Details Page */}
         <View style={styles.applyBtnView}>
           <AppButton
-            buttonTitle={'Apply Now'}
+            buttonTitle={"Apply Now"}
             onPress={() =>
-              navigation.navigate('ProposalsForm', {
+              navigation.navigate("ProposalsForm", {
                 jobData: jobDetails,
                 postingTimeOfJob: postingTimeOfJob,
               })
@@ -138,7 +138,7 @@ const createStyles = (theme) =>
       padding: 16,
     },
     title: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 20,
       fontWeight: "bold",
     },
@@ -157,7 +157,7 @@ const createStyles = (theme) =>
       marginLeft: 5,
     },
     descriptionText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginVertical: 15,
     },
     thirdSection: {
@@ -172,18 +172,18 @@ const createStyles = (theme) =>
       marginVertical: 10,
     },
     budgetText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginLeft: 8,
     },
     subText: {
       color: theme.colors.ternaryDark,
     },
     projectTypeText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginVertical: 15,
     },
     sectionTitle: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 16,
       marginVertical: 10,
     },
@@ -215,6 +215,7 @@ const createStyles = (theme) =>
     },
     applyBtnView: {
       alignItems: "center",
-      marginTop: 20,
+      marginTop: 15,
+      marginBottom: 5,
     },
   });

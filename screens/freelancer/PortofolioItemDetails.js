@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
   Dimensions,
   Animated,
-} from 'react-native';
-import React, { useRef } from 'react';
+} from "react-native";
+import React, { useRef } from "react";
 import useTheme from "../../hooks/useTheme";
-import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { deletePortfolioService } from '../../services/portofolioService';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
-import { useState } from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
+import { deletePortfolioService } from "../../services/portofolioService";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
+import { useState } from "react";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 export default function PortofolioItemDetails({ route }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   let { item, checkFreelancerRole } = route.params;
   const { title, description, files, _id } = item;
   const [portfolioItem, setPortfolioItem] = useState(item);
@@ -29,8 +29,8 @@ export default function PortofolioItemDetails({ route }) {
   const navigation = useNavigation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [messageType, setMessageType] = useState('');
-  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState("");
+  const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(false);
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -39,17 +39,17 @@ export default function PortofolioItemDetails({ route }) {
   const handleDeletePortoflioItem = async () => {
     setIsLoading(true);
     const response = await deletePortfolioService(_id);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setVisible(true);
-      setMessageType('success');
-      setMessage('Portfolio item is deleted successfully');
+      setMessageType("success");
+      setMessage("Portfolio item is deleted successfully");
       setPortfolioItem(null);
       setTimeout(() => {
         navigation.goBack();
       }, 2000);
     } else {
       setVisible(true);
-      setMessageType('error');
+      setMessageType("error");
       setMessage(response.message);
     }
     setIsLoading(false);
@@ -71,8 +71,7 @@ export default function PortofolioItemDetails({ route }) {
               onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { x: scrollX } } }],
                 { useNativeDriver: false }
-              )}
-            >
+              )}>
               {files.map((uri, i) => (
                 <View key={i} style={styles.imageContainer}>
                   <Image source={{ uri: uri }} style={styles.image} />
@@ -87,7 +86,7 @@ export default function PortofolioItemDetails({ route }) {
               const dotScale = position.interpolate({
                 inputRange: [i - 1, i, i + 1],
                 outputRange: [0.8, 1.5, 0.8],
-                extrapolate: 'clamp',
+                extrapolate: "clamp",
               });
 
               return (
@@ -111,22 +110,21 @@ export default function PortofolioItemDetails({ route }) {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  navigation.navigate('CreatePortofolio', {
+                  navigation.navigate("CreatePortofolio", {
                     isEdit,
-                    screenTitle: 'Update Portofolio',
+                    screenTitle: "Update Portofolio",
                     _id,
                     item,
                   });
                 }}
-                activeOpacity={0.7}
-              >
+                activeOpacity={0.7}>
                 <Text style={styles.buttonText}>
                   <AntDesign
-                    name='edit'
+                    name="edit"
                     size={18}
                     color={theme.colors.white}
                     style={styles.icon}
-                  />{' '}
+                  />{" "}
                   Edit
                 </Text>
               </TouchableOpacity>
@@ -134,18 +132,17 @@ export default function PortofolioItemDetails({ route }) {
               <TouchableOpacity
                 style={styles.button}
                 activeOpacity={0.7}
-                onPress={handleDeletePortoflioItem}
-              >
+                onPress={handleDeletePortoflioItem}>
                 {isLoading ? (
                   <ActivityIndicator color={theme.colors.white} />
                 ) : (
                   <Text style={styles.buttonText}>
                     <AntDesign
-                      name='delete'
+                      name="delete"
                       size={18}
                       color={theme.colors.white}
                       style={styles.icon}
-                    />{' '}
+                    />{" "}
                     Delete
                   </Text>
                 )}
@@ -156,7 +153,7 @@ export default function PortofolioItemDetails({ route }) {
       ) : (
         <View style={styles.folderContainer}>
           <Image
-            source={require('../../assets/images/blueEmpty.webp')}
+            source={require("../../assets/images/blueEmpty.webp")}
             style={styles.folderImage}
           />
           <Text style={styles.noItemMessage}>
@@ -172,12 +169,11 @@ export default function PortofolioItemDetails({ route }) {
           styles.snackbar,
           {
             backgroundColor:
-              messageType === 'success'
+              messageType === "success"
                 ? theme.colors.success
                 : theme.colors.danger,
           },
-        ]}
-      >
+        ]}>
         <Text style={styles.snackbarText}>{message}</Text>
       </Snackbar>
     </View>
@@ -226,7 +222,7 @@ const createStyles = (theme) =>
       marginHorizontal: 5,
     },
     description: {
-      color: theme.colors.ternaryLight,
+      color: theme.colors.ternaryDark,
       fontSize: 16,
       textAlign: "justify",
     },

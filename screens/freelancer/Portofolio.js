@@ -6,23 +6,23 @@ import {
   View,
   Dimensions,
   ScrollView,
-} from 'react-native';
-import React from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+} from "react-native";
+import React from "react";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import useTheme from "../../hooks/useTheme";
-import { getPortfolioService } from '../../services/portofolioService';
+import { getPortfolioService } from "../../services/portofolioService";
 
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useCallback } from 'react';
-import { ActivityIndicator, Snackbar } from 'react-native-paper';
-import NoDataBox from '../../components/NoData/NoDataBox';
-import { useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useCallback } from "react";
+import { ActivityIndicator, Snackbar } from "react-native-paper";
+import NoDataBox from "../../components/NoData/NoDataBox";
+import { useFocusEffect } from "@react-navigation/native";
 
-const { height } = Dimensions.get('window');
+const { height } = Dimensions.get("window");
 export default function Portofolio({ route }) {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   //{route}
   const { userId } = route.params;
 
@@ -32,14 +32,14 @@ export default function Portofolio({ route }) {
   const [protofolioProjects, setProtofolioProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
 
   const onDismissSnackBar = () => setVisible(false);
 
   const { role } = user;
 
-  const checkFreelancerRole = role === 'freelancer';
+  const checkFreelancerRole = role === "freelancer";
   const isEdit = false;
 
   useFocusEffect(
@@ -48,7 +48,7 @@ export default function Portofolio({ route }) {
         setIsLoading(true);
 
         const response = await getPortfolioService(userId);
-        if (response.status === 'success') {
+        if (response.status === "success") {
           setProtofolioProjects(response.data);
         } else {
           setError(true);
@@ -69,11 +69,10 @@ export default function Portofolio({ route }) {
         <View>
           <TouchableOpacity
             style={styles.AddNewBox}
-            onPress={() => navigation.navigate('CreatePortofolio', { isEdit })}
-            activeOpacity={0.8}
-          >
+            onPress={() => navigation.navigate("CreatePortofolio", { isEdit })}
+            activeOpacity={0.8}>
             <AntDesign
-              name='pluscircleo'
+              name="pluscircleo"
               size={25}
               color={theme.colors.primaryBright}
             />
@@ -101,12 +100,11 @@ export default function Portofolio({ route }) {
                   style={styles.projectItem}
                   activeOpacity={0.7}
                   onPress={() =>
-                    navigation.navigate('PortofolioItemDetails', {
+                    navigation.navigate("PortofolioItemDetails", {
                       item,
                       checkFreelancerRole,
                     })
-                  }
-                >
+                  }>
                   <Image
                     source={{
                       uri: item.files[0],
@@ -119,7 +117,7 @@ export default function Portofolio({ route }) {
             ) : (
               <View style={styles.NoDataContainer}>
                 <NoDataBox
-                  Title={'No projects found'}
+                  Title={"No projects found"}
                   show={false}
                   Massage={
                     "You don't have projects in your protofolio, add some and it will appear here"
@@ -134,8 +132,7 @@ export default function Portofolio({ route }) {
       <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
-        style={styles.snackbarStyle}
-      >
+        style={styles.snackbarStyle}>
         {errorMessage}
       </Snackbar>
     </View>

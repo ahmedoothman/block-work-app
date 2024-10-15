@@ -160,9 +160,9 @@ const createStyles = (theme) =>
       paddingHorizontal: 10,
     },
     jobBox: {
-      width: width * 0.8,
+      // width: width * 0.8,
       backgroundColor: theme.colors.secondaryGray,
-      borderRadius: 10,
+      borderRadius: theme.borderRadius,
       marginVertical: 15,
       padding: 15,
       alignSelf: "center",
@@ -173,7 +173,7 @@ const createStyles = (theme) =>
       marginBottom: 5,
     },
     titleDescriptionText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 16,
       fontWeight: "bold",
       marginBottom: 10,
@@ -185,7 +185,7 @@ const createStyles = (theme) =>
       marginBottom: 5,
     },
     descriptionText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       marginBottom: 10,
     },
     moreText: {

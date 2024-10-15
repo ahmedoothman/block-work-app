@@ -19,8 +19,8 @@ import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
 import { addReviewService } from "../../services/reviewService";
 import { getUserService } from "../../services/userService";
 const ReviewForm = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const navigation = useNavigation();
   const { userId, isMe } = useRoute().params;
   const [user, setUser] = useState({
@@ -164,7 +164,7 @@ const ReviewForm = () => {
               multiline={true}
               numberOfLines={5}
               textAlignVertical={"top"}
-              placeholderTextColor={theme.colors.ternaryDark}
+              placeholderTextColor={theme.colors.secondaryBright}
             />
             <Text style={styles.charCount}>
               {comment.length}/{commentMaxLength}
@@ -205,7 +205,7 @@ const createStyles = (theme) =>
       padding: 10,
     },
     headerTitle: {
-      color: "white",
+      color: theme.colors.white,
       fontSize: 24,
       marginVertical: 20,
       textAlign: "center",
@@ -258,7 +258,7 @@ const createStyles = (theme) =>
     textInput: {
       padding: 10,
       borderRadius: theme.borderRadius,
-      backgroundColor: theme.colors.white,
+      backgroundColor: theme.colors.inputBg,
       color: theme.colors.secondaryGray,
       height: 180,
       paddingBottom: 20,

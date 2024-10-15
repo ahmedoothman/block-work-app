@@ -154,7 +154,7 @@ const createStyles = (theme) =>
       borderColor: theme.colors.ternaryLight,
     },
     label: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 14,
       marginBottom: 10,
     },

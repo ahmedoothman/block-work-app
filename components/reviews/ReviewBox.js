@@ -100,7 +100,7 @@ const createStyles = (theme) =>
       alignItems: "center",
     },
     rateText: {
-      color: theme.colors.white,
+      color: theme.colors.whiteTitle,
       fontSize: 12,
       fontWeight: "regular",
     },

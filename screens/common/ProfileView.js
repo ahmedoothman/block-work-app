@@ -26,8 +26,8 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const { height } = Dimensions.get("window");
 const onDismissSnackBar = () => setVisible(false);
 const ProfileView = () => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [visible, setVisible] = useState(false);
@@ -193,7 +193,7 @@ const createStyles = (theme) =>
       right: 10,
     },
     title: {
-      color: theme.colors.ternaryLight,
+      color: theme.colors.white,
     },
     divider: {
       backgroundColor: theme.colors.secondaryBright,

@@ -34,7 +34,8 @@ const createStyles = (theme) =>
     },
     receiver: {
       alignSelf: "flex-start",
-      backgroundColor: theme.colors.ternaryLight, // Light gray for receiver messages
+      // backgroundColor: theme.colors.ternaryLight, // Light gray for receiver messages
+      backgroundColor: theme.colors.thirdBright, // Light gray for receiver messages
     },
     message: {
       fontSize: 16,
@@ -43,11 +44,13 @@ const createStyles = (theme) =>
       color: theme.colors.white, // White text for sender messages
     },
     receiverText: {
-      color: theme.colors.secondaryDark, // Black text for receiver messages
+      // color: theme.colors.secondaryDark, // Black text for receiver messages
+      color: theme.colors.white, // Black text for receiver messages
     },
     timestamp: {
       fontSize: 12,
-      color: theme.colors.ternaryDark,
+      // color: theme.colors.ternaryDark,
+      color: theme.colors.secondaryLight,
       marginTop: 5,
       alignSelf: "flex-end", // Align timestamp to the end
     },

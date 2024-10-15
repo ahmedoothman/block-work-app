@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,26 +6,26 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from 'react-native';
+} from "react-native";
 import useTheme from "../../hooks/useTheme";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon from 'react-native-vector-icons/Entypo';
-import { calcDuration } from '../../utils';
-import { ActivityIndicator } from 'react-native';
-import moment from 'moment';
-import AppButton from '../../components/btns/AppButton';
-import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
-import { useNavigation } from '@react-navigation/native';
-import { updateContractStatusService } from '../../services/contractService';
-import UserBox from '../../components/UserBox/UserBox';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/Entypo";
+import { calcDuration } from "../../utils";
+import { ActivityIndicator } from "react-native";
+import moment from "moment";
+import AppButton from "../../components/btns/AppButton";
+import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
+import { useNavigation } from "@react-navigation/native";
+import { updateContractStatusService } from "../../services/contractService";
+import UserBox from "../../components/UserBox/UserBox";
 
 const ClientContractDetails = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const navigation = useNavigation();
   const { contract } = route.params;
   const [alert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const onDismissSnackBar = () => setAlert(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,12 +54,12 @@ const ClientContractDetails = ({ route }) => {
       contract.freelancer._id,
       status
     );
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setAlert(true);
       setIsSuccess(true);
-      setAlertMessage('work is finished successfully');
+      setAlertMessage("work is finished successfully");
       setTimeout(() => {
-        navigation.navigate('ReviewForm', {
+        navigation.navigate("ReviewForm", {
           userId: contract.freelancer._id,
         });
       }, 2000);
@@ -78,11 +78,11 @@ const ClientContractDetails = ({ route }) => {
           {/* //' date_dots_Container */}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(contract.job.createdAt).format('D MMMM YYYY')}
+              {moment(contract.job.createdAt).format("D MMMM YYYY")}
             </Text>
             <TouchableOpacity onPress={() => {}}>
               <MaterialCommunityIcons
-                name='dots-vertical'
+                name="dots-vertical"
                 size={24}
                 color={theme.colors.ternaryDark}
                 style={{ marginRight: 0 }}
@@ -113,8 +113,7 @@ const ClientContractDetails = ({ route }) => {
               onLayout={(event) =>
                 setScrollViewWidth(event.nativeEvent.layout.width)
               }
-              style={styles.skillsBox}
-            >
+              style={styles.skillsBox}>
               {contract.job.skillsRequired.length > 0 ? (
                 contract.job.skillsRequired.map((skill, index) => {
                   return (
@@ -132,7 +131,7 @@ const ClientContractDetails = ({ route }) => {
 
             <TouchableOpacity onPress={scrollRight}>
               <Icon
-                name='chevron-thin-right'
+                name="chevron-thin-right"
                 size={30}
                 color={theme.colors.colorTextBlue}
                 style={styles.arrowRightIcon}
@@ -167,34 +166,34 @@ const ClientContractDetails = ({ route }) => {
           {/* //' BTNs  */}
           <View style={styles.contractBTNS_Container}>
             <AppButton
-              buttonTitle={'complete contract'}
+              buttonTitle={"complete contract"}
               onPress={() => {
                 handelContractStatus(
                   contract._id,
                   contract.job._id,
-                  'completed'
+                  "completed"
                 );
               }}
               marginBottom={1}
               marginX={0}
-              btnWidth={'50%'}
+              btnWidth={"50%"}
               paddingY={13}
               paddingX={7}
               textSize={12}
               bgColor={theme.colors.primaryDark}
             />
             <AppButton
-              buttonTitle={'cancel contract'}
+              buttonTitle={"cancel contract"}
               onPress={() => {
                 handelContractStatus(
                   contract._id,
                   contract.job._id,
-                  'cancelled'
+                  "cancelled"
                 );
               }}
               marginBottom={1}
               marginX={0}
-              btnWidth={'50%'}
+              btnWidth={"50%"}
               paddingY={13}
               paddingX={7}
               textSize={12}
@@ -202,12 +201,21 @@ const ClientContractDetails = ({ route }) => {
             />
           </View>
           <Text style={styles.Client_Status}>
-            Contract Status:{'  '}
-            {contract.status}
+            Contract Status:{"  "}
+            {/* {contract.status} */}
+            <Text
+              style={{
+                color:
+                  contract.status == "completed"
+                    ? theme.colors.success
+                    : theme.colors.primaryBright,
+              }}>
+              {contract.status}
+            </Text>
           </Text>
 
           {isLoading && (
-            <ActivityIndicator size='large' color={theme.colors.primaryDark} />
+            <ActivityIndicator size="large" color={theme.colors.primaryDark} />
           )}
         </View>
       </View>
@@ -215,10 +223,10 @@ const ClientContractDetails = ({ route }) => {
         visible={alert}
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
-        undoText='Undo'
-        undoColor='black'
+        undoText="Undo"
+        undoColor="black"
         bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
-        messageColor='#fff'
+        messageColor="#fff"
       />
     </ScrollView>
   );
@@ -253,7 +261,7 @@ const createStyles = (theme) =>
       color: theme.colors.ternaryDark,
     },
     textColor: {
-      color: theme.colors.white,
+      color: theme.colors.ternaryLight,
     },
     contractTitle: {
       fontSize: 17,
@@ -297,7 +305,7 @@ const createStyles = (theme) =>
       marginBottom: 10,
       fontSize: 18,
       fontWeight: "regular",
-      color: theme.colors.white,
+      color: theme.colors.ternaryLight,
     },
     userContainer: {
       display: "flex",
@@ -334,7 +342,7 @@ const createStyles = (theme) =>
       marginBottom: 10,
       fontSize: 18,
       fontWeight: "regular",
-      color: theme.colors.white,
+      color: theme.colors.ternaryLight,
     },
     price: {
       color: theme.colors.ternaryDark,

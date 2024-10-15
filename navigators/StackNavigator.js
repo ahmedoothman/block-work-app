@@ -83,8 +83,8 @@ const StackNavigator = () => {
         component={JobsDetails}
         options={{
           title: "Job Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -101,7 +101,7 @@ const StackNavigator = () => {
         options={{
           title: "Contract Details",
           // headerStyle: { backgroundColor: theme.colors.secondaryGray },
-          headerStyle: { backgroundColor: "black" },
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
           headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
@@ -119,8 +119,8 @@ const StackNavigator = () => {
         component={ProposalsDetails}
         options={{
           title: "Proposal Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -136,8 +136,8 @@ const StackNavigator = () => {
         component={ProposalsForm}
         options={{
           title: "Submit Proposal",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -154,8 +154,8 @@ const StackNavigator = () => {
         component={Portofolio}
         options={{
           title: "Portofolio",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -171,8 +171,8 @@ const StackNavigator = () => {
         component={CreatePortofolio}
         options={{
           title: "Create Portofolio",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -188,8 +188,8 @@ const StackNavigator = () => {
         component={Reviews}
         options={{
           title: "Reviews",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -205,8 +205,8 @@ const StackNavigator = () => {
         component={UpdateProfile}
         options={{
           title: "Update Profile",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -223,8 +223,8 @@ const StackNavigator = () => {
         component={ClientUpdateProfile}
         options={{
           title: "Update Profile",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -240,8 +240,8 @@ const StackNavigator = () => {
         component={PortofolioItemDetails}
         options={{
           title: "Portofolio Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -264,8 +264,8 @@ const StackNavigator = () => {
         component={ClientJopDetails}
         options={{
           title: "Job Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -281,8 +281,8 @@ const StackNavigator = () => {
         component={ClientProposals}
         options={{
           title: "Job Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -298,8 +298,8 @@ const StackNavigator = () => {
         component={ClientProposalsDetails}
         options={{
           title: "Proposals Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -315,8 +315,8 @@ const StackNavigator = () => {
         component={CreateJobForm}
         options={{
           title: "Create Job",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -333,8 +333,8 @@ const StackNavigator = () => {
         component={UpdateJobForm}
         options={{
           title: "Update Job",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -351,8 +351,8 @@ const StackNavigator = () => {
         component={ClientContractDetails}
         options={{
           title: "Contracts Details",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -370,8 +370,8 @@ const StackNavigator = () => {
         component={ChatScreen}
         options={{
           title: "Chats",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -388,8 +388,8 @@ const StackNavigator = () => {
         component={Balance}
         options={{
           title: "Balance",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -406,8 +406,8 @@ const StackNavigator = () => {
         component={PasswordSettings}
         options={{
           title: "Change Password",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -423,8 +423,8 @@ const StackNavigator = () => {
         component={ChargeBalance}
         options={{
           title: "Charge Balance",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -441,9 +441,10 @@ const StackNavigator = () => {
         component={ChargeBalanceDetails}
         options={{
           title: "Charge Balance Details",
-          headerStyle: { backgroundColor: "black" },
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
           headerTitleStyle: { fontSize: 15 },
-          headerTintColor: "white",
+
           headerRight: () => (
             <MaterialCommunityIcons
               name="dots-vertical"
@@ -460,9 +461,9 @@ const StackNavigator = () => {
         component={ProfileView}
         options={{
           title: "Profile",
-          headerStyle: { backgroundColor: "black" },
           headerTitleStyle: { fontSize: 15 },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
         }}
       />
       <Stack.Screen
@@ -470,9 +471,9 @@ const StackNavigator = () => {
         component={ReviewForm}
         options={{
           title: "Review Form",
-          headerStyle: { backgroundColor: "black" },
           headerTitleStyle: { fontSize: 15 },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
         }}
       />
       <Stack.Screen
@@ -481,8 +482,8 @@ const StackNavigator = () => {
         component={Portofolio}
         options={{
           title: "Alert",
-          headerStyle: { backgroundColor: "black" },
-          headerTintColor: "white",
+          headerStyle: { backgroundColor: theme.colors.secondaryDark },
+          headerTintColor: theme.colors.white,
         }}
       />
     </Stack.Navigator>

@@ -1,29 +1,29 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
-import InputField from '../../components/inputs/auth/InputField';
+import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import InputField from "../../components/inputs/auth/InputField";
 import useTheme from "../../hooks/useTheme";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import AppButton from '../../components/btns/AppButton';
-import { createJobService } from '../../services/jobService';
-import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
-import { useNavigation } from '@react-navigation/native';
-import { Dropdown } from 'react-native-element-dropdown';
-import { categories, skillsEnum } from '../../constants/global/data';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AppButton from "../../components/btns/AppButton";
+import { createJobService } from "../../services/jobService";
+import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
+import { useNavigation } from "@react-navigation/native";
+import { Dropdown } from "react-native-element-dropdown";
+import { categories, skillsEnum } from "../../constants/global/data";
 
 const CreateJobForm = () => {
-    const theme = useTheme();
-  const styles = createStyles(theme)
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [jobCreatedInfo, setJobCreatedInfo] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     budget: 0,
     skillsRequired: [],
-    category: '',
-    duration: '',
+    category: "",
+    duration: "",
   });
 
   const [alert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const onDismissSnackBar = () => setAlert(false);
@@ -36,11 +36,11 @@ const CreateJobForm = () => {
     setLoading(true);
     const response = await createJobService(jobCreatedInfo);
     setAlert(true);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setIsSuccess(true);
-      setAlertMessage('Job created successfully.');
+      setAlertMessage("Job created successfully.");
       setTimeout(() => {
-        navigation.navigate('ClientBase');
+        navigation.navigate("ClientBase");
       }, 2000);
     } else {
       setIsSuccess(false);
@@ -51,32 +51,32 @@ const CreateJobForm = () => {
 
   const clearInputs = () => {
     setJobCreatedInfo({
-      title: '',
-      description: '',
-      budget: '0.00',
+      title: "",
+      description: "",
+      budget: "0.00",
       skillsRequired: [],
-      category: '',
-      duration: '',
+      category: "",
+      duration: "",
     });
   };
 
   const validateInputs = () => {
     setAlert(false);
-    setAlertMessage('');
+    setAlertMessage("");
 
-    if (!jobCreatedInfo.title || jobCreatedInfo.title.trim() === '') {
+    if (!jobCreatedInfo.title || jobCreatedInfo.title.trim() === "") {
       setAlert(true);
-      setAlertMessage('Title is required.');
+      setAlertMessage("Title is required.");
       setLoading(false);
       return false;
     }
 
     if (
       !jobCreatedInfo.description ||
-      jobCreatedInfo.description.trim() === ''
+      jobCreatedInfo.description.trim() === ""
     ) {
       setAlert(true);
-      setAlertMessage('Description is required.');
+      setAlertMessage("Description is required.");
       setLoading(false);
       return false;
     }
@@ -87,7 +87,7 @@ const CreateJobForm = () => {
       parseFloat(jobCreatedInfo.budget) <= 0
     ) {
       setAlert(true);
-      setAlertMessage('Budget must be a valid positive number.');
+      setAlertMessage("Budget must be a valid positive number.");
       setLoading(false);
       return false;
     }
@@ -97,14 +97,14 @@ const CreateJobForm = () => {
       jobCreatedInfo.skillsRequired.length === 0
     ) {
       setAlert(true);
-      setAlertMessage('At least one skill is required.');
+      setAlertMessage("At least one skill is required.");
       setLoading(false);
       return false;
     }
 
-    if (!jobCreatedInfo.category || jobCreatedInfo.category.trim() === '') {
+    if (!jobCreatedInfo.category || jobCreatedInfo.category.trim() === "") {
       setAlert(true);
-      setAlertMessage('Category is required.');
+      setAlertMessage("Category is required.");
       setLoading(false);
       return false;
     }
@@ -115,7 +115,7 @@ const CreateJobForm = () => {
       parseInt(jobCreatedInfo.duration) <= 0
     ) {
       setAlert(true);
-      setAlertMessage('Duration must be a valid positive number.');
+      setAlertMessage("Duration must be a valid positive number.");
       setLoading(false);
       return false;
     }
@@ -126,27 +126,22 @@ const CreateJobForm = () => {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView
-        style={{ width: '100%' }}
-        showsVerticalScrollIndicator={false}
-      >
+        style={{ width: "100%" }}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.formContainer}>
           {}
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Job Title</Text>
             <InputField
               value={jobCreatedInfo.title}
-              placeholder={'Job Title'}
+              placeholder={"Job Title"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, title: value }))
               }
               isUpload={false}
               bgColor={theme.colors.white}
-              paddingY={10}
-              paddingX={10}
-              marginY={5}
-              marginX={'auto'}
-              textColor={'black'}
+              textColor={"black"}
             />
           </View>
 
@@ -155,20 +150,16 @@ const CreateJobForm = () => {
             <Text style={styles.inputTitle}>Description</Text>
             <InputField
               value={jobCreatedInfo.description}
-              placeholder={'Description'}
+              placeholder={"Description"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, description: value }))
               }
               isUpload={false}
               bgColor={theme.colors.white}
-              paddingY={0}
-              paddingX={0}
-              marginY={5}
-              marginX={'auto'}
               isTextErea={true}
               textErealines={4}
-              textColor={'black'}
+              textColor={"black"}
             />
           </View>
 
@@ -177,10 +168,10 @@ const CreateJobForm = () => {
             <Text style={styles.inputTitle}>Budget</Text>
             <InputField
               value={`$${jobCreatedInfo.budget}`}
-              placeholder={'$0.00'}
+              placeholder={"$0.00"}
               isPassword={false}
               onChange={(value) => {
-                const numericValue = value.replace(/[^0-9.]/g, '');
+                const numericValue = value.replace(/[^0-9.]/g, "");
                 setJobCreatedInfo((prev) => ({
                   ...prev,
                   budget: parseFloat(numericValue),
@@ -188,24 +179,20 @@ const CreateJobForm = () => {
               }}
               isUpload={false}
               bgColor={theme.colors.white}
-              paddingY={10}
-              paddingX={10}
-              marginY={5}
-              marginX={'auto'}
               isNumeric={true}
-              textColor={'black'}
+              textColor={"black"}
             />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Category</Text>
             <Dropdown
               data={categories}
-              placeholder={'Select Category'}
-              labelField='label'
-              valueField='value'
+              placeholder={"Select Category"}
+              labelField="label"
+              valueField="value"
               value={jobCreatedInfo.category}
-              placeholderStyle={{ color: theme.colors.white }}
-              selectedTextStyle={{ color: theme.colors.white }}
+              placeholderStyle={{ color: theme.colors.whiteTitle }}
+              selectedTextStyle={{ color: theme.colors.whiteTitle }}
               searchPlaceholderTextColor={theme.colors.secondaryDark}
               onChange={(item) =>
                 setJobCreatedInfo((prev) => ({ ...prev, category: item.value }))
@@ -215,40 +202,21 @@ const CreateJobForm = () => {
               style={styles.dropdown}
             />
           </View>
-          {jobCreatedInfo.skillsRequired.length > 0 && (
-            <View style={styles.inputContainer}>
-              {}
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                {jobCreatedInfo.skillsRequired.map((skill, index) => (
-                  <View
-                    key={index}
-                    style={{
-                      backgroundColor: theme.colors.primaryDark,
-                      padding: 5,
-                      borderRadius: 10,
-                      margin: 5,
-                    }}
-                  >
-                    <Text style={{ color: 'white' }}>{skill}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          )}
+
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Skills Required</Text>
             <Dropdown
               data={skillsEnum}
               placeholder={
                 jobCreatedInfo.skillsRequired.length > 0
-                  ? jobCreatedInfo.skillsRequired.join(', ')
-                  : 'Select Skill'
+                  ? jobCreatedInfo.skillsRequired.join(", ")
+                  : "Select Skill"
               }
-              labelField='label'
-              valueField='value'
+              labelField="label"
+              valueField="value"
               value={jobCreatedInfo.skillsRequired[0]}
-              placeholderStyle={{ color: theme.colors.white }}
-              selectedTextStyle={{ color: theme.colors.white }}
+              placeholderStyle={{ color: theme.colors.whiteTitle }}
+              selectedTextStyle={{ color: theme.colors.whiteTitle }}
               searchPlaceholderTextColor={theme.colors.secondaryDark}
               onChange={(item) => {
                 const selectedSkill = item.value;
@@ -258,17 +226,35 @@ const CreateJobForm = () => {
                 }));
               }}
               search
-              searchPlaceholder='Type to filter skills'
+              searchPlaceholder="Type to filter skills"
               style={styles.dropdown}
               maxHeight={200}
             />
           </View>
-
+          {jobCreatedInfo.skillsRequired.length > 0 && (
+            <View style={styles.inputContainer}>
+              {}
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                {jobCreatedInfo.skillsRequired.map((skill, index) => (
+                  <View
+                    key={index}
+                    style={{
+                      backgroundColor: theme.colors.primaryDark,
+                      padding: 5,
+                      borderRadius: 10,
+                      margin: 5,
+                    }}>
+                    <Text style={{ color: "white" }}>{skill}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          )}
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Duration</Text>
             <InputField
               value={jobCreatedInfo.duration}
-              placeholder={'Duration'}
+              placeholder={"Duration"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, duration: value }))
@@ -276,18 +262,14 @@ const CreateJobForm = () => {
               isUpload={false}
               isNumeric={true}
               bgColor={theme.colors.white}
-              paddingY={10}
-              paddingX={10}
-              marginY={5}
-              marginX={'auto'}
-              textColor={'black'}
+              textColor={"black"}
             />
           </View>
 
           {}
           <View style={styles.btnContainer}>
             <AppButton
-              buttonTitle={'Create'}
+              buttonTitle={"Create"}
               onPress={handleCreate}
               loading={loading}
               bgColor={theme.colors.primaryDark}
@@ -301,10 +283,10 @@ const CreateJobForm = () => {
         visible={alert}
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
-        undoText='Undo'
-        undoColor='black'
+        undoText="Undo"
+        undoColor="black"
         bgColor={isSuccess ? theme.colors.success : theme.colors.red}
-        messageColor='#fff'
+        messageColor="#fff"
       />
     </View>
   );
@@ -324,21 +306,24 @@ const createStyles = (theme) =>
       marginHorizontal: "auto",
       marginTop: 20,
       backgroundColor: theme.colors.secondaryGray,
-      padding: 10,
+      padding: 15,
       borderRadius: 20,
     },
     inputContainer: {
-      marginBottom: 15,
+      marginBottom: 5,
+      // backgroundColor: "red",
     },
     inputTitle: {
-      color: theme.colors.white,
-      marginBottom: 5,
+      color: theme.colors.whiteTitle,
+      // marginBottom: 5,
+      // backgroundColor: "teal",
     },
     dropdown: {
       backgroundColor: theme.colors.secondaryBright,
       borderRadius: 5,
       width: "90%",
       marginHorizontal: "auto",
+      marginVertical: 10,
       padding: 10,
       color: "white",
     },

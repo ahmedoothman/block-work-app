@@ -1,15 +1,14 @@
-
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import useTheme from "../../hooks/useTheme";
-import { useSelector } from 'react-redux';
-const UserBox = ({ otherUser, isMe = false }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
-
+import { useSelector } from "react-redux";
+const UserBox = ({ otherUser, isMe = false, showAddReview }) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const navigation = useNavigation();
   const viewFreelancerProfile = () => {
     navigation.navigate("ProfileView", {
@@ -78,7 +77,6 @@ const UserBox = ({ otherUser, isMe = false }) => {
   );
 };
 
-
 const createStyles = (theme) =>
   StyleSheet.create({
     freelanceContainer: {
@@ -93,7 +91,7 @@ const createStyles = (theme) =>
     },
     userName: {
       fontSize: 15,
-      color: theme.colors.ternaryDark,
+      color: theme.colors.thirdTernary,
     },
     userImage: {
       width: 50,
@@ -102,6 +100,24 @@ const createStyles = (theme) =>
       backgroundColor: theme.colors.ternaryDark,
       overflow: "hidden",
     },
+    leaveReviewContainer: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: 5,
+    },
+    createReviews: {
+      backgroundColor: theme.colors.primaryDark,
+      width: 35,
+      height: 35,
+      borderRadius: theme.borderRadius,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    btnText: {
+      fontSize: 10,
+      color: theme.colors.white,
+    },
   });
-
 export default UserBox;

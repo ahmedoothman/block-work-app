@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const useTheme = () => {
   const mode = useSelector((state) => state.themeMode.mode);
-  //   const [themeMode, setThemeMode] = useState(mode);
 
   const darkMode = {
     ...DefaultTheme,
@@ -17,6 +16,8 @@ const useTheme = () => {
       secondaryDark: "#000000",
       secondaryGray: "#272727",
       secondaryBright: "#414141",
+      thirdBright: "#414141", //'--
+      thirdTernary: "#9f9fa0", //'--
       ternaryDark: "#9f9fa0",
       ternaryLight: "#e1e1e1",
       primary: "#dc5902",
@@ -28,33 +29,42 @@ const useTheme = () => {
       danger: "#d31212",
       success: "#019437",
       white: "#FFFFFF",
-      inputBg: "#393939",
+      inputBg: "#FFFFFF",
+      inputText: "#fff",
+      whiteTitle: "#fff",
+      paymentCardBg: "#FFFFFF",
     },
     borderRadius: 10,
   };
+
   const lightMode = {
     ...DefaultTheme,
     colors: {
       mode: "lightMode",
       ...DefaultTheme.colors,
-      primaryDark: "#dc5902",
-      primaryBright: "#FF6500",
-      colorTextBlue: "#FF6500",
-      secondaryDark: "#ffff",
-      secondaryGray: "#272725",
-      secondaryBright: "#E0E0E0",
-      ternaryDark: "#C0C0C0",
-      ternaryLight: "#0000",
-      primary: "#FF8C33",
-      secondary: "#E0E0E0",
-      background: "#FFFFFF",
-      surface: "#F2F2F2",
-      tertiary: "#C0C0C0",
-      warning: "#FFC107",
-      danger: "#E57373",
-      success: "#4CAF50",
+      primaryDark: "#dc5902", //' done {same}
+      primaryBright: "#FF6500", //' done {same}
+      colorTextBlue: "#FF6500", //' done {same}
+      secondaryDark: "#fff", //' done
+      secondaryGray: "#243642", //' done
+      secondaryBright: "#414141", //' done {same}
+      paymentCardBg: "#243642",
+      thirdBright: "#B7B7B7", //' done
+      thirdTernary: "#000", //' done
+      ternaryDark: "#9f9fa0", //' done {same}
+      ternaryLight: "#e1e1e1", //' done {same}
+      primary: "#dc5902", //' done {same}
+      secondary: "#000",
+      background: "#000",
+      surface: "#000",
+      tertiary: "#9f9fa0",
+      warning: "#FFE234", //' done {same}
+      danger: "#d31212", //' done {same}
+      success: "#019437", //' done {same}
       white: "#000",
-      inputBg: "#F0F0F0",
+      inputBg: "#B7B7B7", //' done
+      inputText: "#fff", //' done {same}
+      whiteTitle: "#fff", //' done {same}
     },
     borderRadius: 10,
   };

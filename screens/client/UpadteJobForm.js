@@ -1,28 +1,28 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import InputField from '../../components/inputs/auth/InputField';
+import { View, Text, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import InputField from "../../components/inputs/auth/InputField";
 import useTheme from "../../hooks/useTheme";
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import AppButton from '../../components/btns/AppButton';
-import { updateJobService } from '../../services/jobService'; // Only update service
-import CustomeSnackBar from '../../components/Public/CustomeSnackBar';
-import { useNavigation } from '@react-navigation/native';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AppButton from "../../components/btns/AppButton";
+import { updateJobService } from "../../services/jobService"; // Only update service
+import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
+import { useNavigation } from "@react-navigation/native";
 
 const UpdateJobForm = ({ route }) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const { job } = route.params;
   const [jobCreatedInfo, setJobCreatedInfo] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     budget: 0,
     skillsRequired: [],
-    category: '',
-    duration: '',
+    category: "",
+    duration: "",
   });
 
   const [alert, setAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
@@ -30,12 +30,12 @@ const UpdateJobForm = ({ route }) => {
   useEffect(() => {
     if (job) {
       setJobCreatedInfo({
-        title: job.title || '',
-        description: job.description || '',
+        title: job.title || "",
+        description: job.description || "",
         budget: job.budget || 0,
         skillsRequired: job.skillsRequired || [],
-        category: job.category || '',
-        duration: job.duration || '',
+        category: job.category || "",
+        duration: job.duration || "",
       });
     }
   }, [job]);
@@ -51,11 +51,11 @@ const UpdateJobForm = ({ route }) => {
     const response = await updateJobService(job._id, jobCreatedInfo); // Call update service
 
     setAlert(true);
-    if (response.status === 'success') {
+    if (response.status === "success") {
       setIsSuccess(true);
-      setAlertMessage('Updated Successfully');
+      setAlertMessage("Updated Successfully");
       setTimeout(() => {
-        navigation.navigate('ClientBase');
+        navigation.navigate("ClientBase");
       }, 2000);
     } else {
       setIsSuccess(false);
@@ -66,21 +66,21 @@ const UpdateJobForm = ({ route }) => {
 
   const validateInputs = () => {
     setAlert(false);
-    setAlertMessage('');
+    setAlertMessage("");
 
-    if (!jobCreatedInfo.title || jobCreatedInfo.title.trim() === '') {
+    if (!jobCreatedInfo.title || jobCreatedInfo.title.trim() === "") {
       setAlert(true);
-      setAlertMessage('Title is required.');
+      setAlertMessage("Title is required.");
       setLoading(false);
       return false;
     }
 
     if (
       !jobCreatedInfo.description ||
-      jobCreatedInfo.description.trim() === ''
+      jobCreatedInfo.description.trim() === ""
     ) {
       setAlert(true);
-      setAlertMessage('Description is required.');
+      setAlertMessage("Description is required.");
       setLoading(false);
       return false;
     }
@@ -91,7 +91,7 @@ const UpdateJobForm = ({ route }) => {
       parseFloat(jobCreatedInfo.budget) <= 0
     ) {
       setAlert(true);
-      setAlertMessage('Budget must be a valid positive number.');
+      setAlertMessage("Budget must be a valid positive number.");
       setLoading(false);
       return false;
     }
@@ -101,14 +101,14 @@ const UpdateJobForm = ({ route }) => {
       jobCreatedInfo.skillsRequired.length === 0
     ) {
       setAlert(true);
-      setAlertMessage('At least one skill is required.');
+      setAlertMessage("At least one skill is required.");
       setLoading(false);
       return false;
     }
 
-    if (!jobCreatedInfo.category || jobCreatedInfo.category.trim() === '') {
+    if (!jobCreatedInfo.category || jobCreatedInfo.category.trim() === "") {
       setAlert(true);
-      setAlertMessage('Category is required.');
+      setAlertMessage("Category is required.");
       setLoading(false);
       return false;
     }
@@ -119,7 +119,7 @@ const UpdateJobForm = ({ route }) => {
       parseInt(jobCreatedInfo.duration) <= 0
     ) {
       setAlert(true);
-      setAlertMessage('Duration must be a valid positive number.');
+      setAlertMessage("Duration must be a valid positive number.");
       setLoading(false);
       return false;
     }
@@ -129,16 +129,15 @@ const UpdateJobForm = ({ route }) => {
   return (
     <View style={styles.container}>
       <KeyboardAwareScrollView
-        style={{ width: '100%' }}
-        showsVerticalScrollIndicator={false}
-      >
+        style={{ width: "100%" }}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.formContainer}>
           {/* Job Title */}
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Job Title</Text>
             <InputField
               value={jobCreatedInfo.title}
-              placeholder={'Job Title'}
+              placeholder={"Job Title"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, title: value }))
@@ -148,8 +147,8 @@ const UpdateJobForm = ({ route }) => {
               paddingY={10}
               paddingX={10}
               marginY={5}
-              marginX={'auto'}
-              textColor={'black'}
+              marginX={"auto"}
+              textColor={"black"}
             />
           </View>
           {/* Description */}
@@ -157,7 +156,7 @@ const UpdateJobForm = ({ route }) => {
             <Text style={styles.inputTitle}>Description</Text>
             <InputField
               value={jobCreatedInfo.description}
-              placeholder={'Description'}
+              placeholder={"Description"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, description: value }))
@@ -167,10 +166,10 @@ const UpdateJobForm = ({ route }) => {
               paddingY={0}
               paddingX={0}
               marginY={5}
-              marginX={'auto'}
+              marginX={"auto"}
               isTextErea={true}
               textErealines={4}
-              textColor={'black'}
+              textColor={"black"}
             />
           </View>
           {/* Budget */}
@@ -178,10 +177,10 @@ const UpdateJobForm = ({ route }) => {
             <Text style={styles.inputTitle}>Budget</Text>
             <InputField
               value={`$${jobCreatedInfo.budget}`}
-              placeholder={'$0.00'}
+              placeholder={"$0.00"}
               isPassword={false}
               onChange={(value) => {
-                const numericValue = value.replace(/[^0-9.]/g, ''); // Remove non-numeric characters
+                const numericValue = value.replace(/[^0-9.]/g, ""); // Remove non-numeric characters
                 setJobCreatedInfo((prev) => ({
                   ...prev,
                   budget: parseFloat(numericValue),
@@ -192,20 +191,20 @@ const UpdateJobForm = ({ route }) => {
               paddingY={10}
               paddingX={10}
               marginY={5}
-              marginX={'auto'}
+              marginX={"auto"}
               isNumeric={true}
-              textColor={'black'}
+              textColor={"black"}
             />
           </View>
           {/* Skills Required */}
           <View style={styles.inputContainer}>
             <Text style={styles.inputTitle}>Skills Required</Text>
             <InputField
-              value={jobCreatedInfo.skillsRequired.join(' ')}
-              placeholder={'Skills Required'}
+              value={jobCreatedInfo.skillsRequired.join(" ")}
+              placeholder={"Skills Required"}
               isPassword={false}
               onChange={(value) => {
-                const skills = value.split(' ');
+                const skills = value.split(" ");
                 setJobCreatedInfo((prev) => ({
                   ...prev,
                   skillsRequired: skills,
@@ -216,8 +215,8 @@ const UpdateJobForm = ({ route }) => {
               paddingY={10}
               paddingX={10}
               marginY={5}
-              marginX={'auto'}
-              textColor={'black'}
+              marginX={"auto"}
+              textColor={"black"}
             />
           </View>
           {/* Category */}
@@ -225,7 +224,7 @@ const UpdateJobForm = ({ route }) => {
             <Text style={styles.inputTitle}>Category</Text>
             <InputField
               value={jobCreatedInfo.category}
-              placeholder={'Category'}
+              placeholder={"Category"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, category: value }))
@@ -235,8 +234,8 @@ const UpdateJobForm = ({ route }) => {
               paddingY={10}
               paddingX={10}
               marginY={5}
-              marginX={'auto'}
-              textColor={'black'}
+              marginX={"auto"}
+              textColor={"black"}
             />
           </View>
           {/* Duration */}
@@ -244,7 +243,7 @@ const UpdateJobForm = ({ route }) => {
             <Text style={styles.inputTitle}>Duration</Text>
             <InputField
               value={jobCreatedInfo.duration}
-              placeholder={'Duration'}
+              placeholder={"Duration"}
               isPassword={false}
               onChange={(value) =>
                 setJobCreatedInfo((prev) => ({ ...prev, duration: value }))
@@ -255,14 +254,14 @@ const UpdateJobForm = ({ route }) => {
               paddingY={10}
               paddingX={10}
               marginY={5}
-              marginX={'auto'}
-              textColor={'black'}
+              marginX={"auto"}
+              textColor={"black"}
             />
           </View>
           {/* Update Button */}
           <View style={styles.btnContainer}>
             <AppButton
-              buttonTitle='Update'
+              buttonTitle="Update"
               onPress={() => {
                 handleUpdate();
               }}
@@ -276,10 +275,10 @@ const UpdateJobForm = ({ route }) => {
         visible={alert}
         alertMessage={alertMessage}
         onDismissSnackBar={onDismissSnackBar}
-        undoText='Undo'
-        undoColor='black'
+        undoText="Undo"
+        undoColor="black"
         bgColor={isSuccess ? theme.colors.success : theme.colors.danger}
-        messageColor='#fff'
+        messageColor="#fff"
       />
     </View>
   );
@@ -310,6 +309,7 @@ const createStyles = (theme) =>
     },
     btnContainer: {
       marginTop: 10,
+      marginHorizontal: "auto",
     },
   });
 

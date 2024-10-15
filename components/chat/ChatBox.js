@@ -77,7 +77,7 @@ const createStyles = (theme) =>
       color: theme.colors.white, // White text color
     },
     lastMessage: {
-      color: theme.colors.ternaryLight, // Light gray text color
+      color: theme.colors.white, // Light gray text color
       fontSize: 14,
     },
     timestamp: {
