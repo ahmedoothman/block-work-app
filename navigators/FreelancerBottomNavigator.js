@@ -76,7 +76,7 @@ export default function FreelancerBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcon name='chat' color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Messages'),
+          ...screenOptionsWithHeader('Messages',false),
         }}
       />
 
@@ -88,7 +88,7 @@ export default function FreelancerBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <Icon name='settings' color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Menu'),
+          ...screenOptionsWithHeader('Settings'),
         }}
       />
 
@@ -101,14 +101,14 @@ export default function FreelancerBottomNavigator() {
           headerStyle: { backgroundColor: 'black' },
           headerTintColor: 'white',
           tabBarButton: () => null,
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name='dots-vertical'
-              size={24}
-              color='white'
-              style={{ marginRight: 10 }}
-            />
-          ),
+          // headerRight: () => (
+          //   <MaterialCommunityIcons
+          //     name='dots-vertical'
+          //     size={24}
+          //     color='white'
+          //     style={{ marginRight: 10 }}
+          //   />
+          // ),
         }}
       />
     </Tab.Navigator>

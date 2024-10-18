@@ -145,10 +145,10 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.ternaryLight,
     width: "100%",
     borderWidth: 1,
-    borderColor: theme.colors.white,
+    borderColor: theme.colors.ternaryLight,
     borderRadius: 10,
     marginBottom: 10,
   },
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: "100%",
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.ternaryLight,
     borderRadius: 10,
     height: "auto",
   },

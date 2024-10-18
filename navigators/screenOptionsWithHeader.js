@@ -3,7 +3,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import theme from '../theme';
-const screenOptionsWithHeader = (title) => {
+const screenOptionsWithHeader = (title,showIcon=true) => {
   const user = useSelector((state) => state.auth.user);
   const navigation = useNavigation();
   return {
@@ -33,9 +33,11 @@ const screenOptionsWithHeader = (title) => {
         </View>
       </TouchableOpacity>
     ),
-    headerRight: () => (
+    headerRight: showIcon? () => (
       <TouchableOpacity
-        onPress={() => {}} // Navigate to Alert screen
+        onPress={() => {
+          navigation.navigate('Messages');
+        }} // Navigate to Alert screen
         style={{ marginRight: 15 }}
       >
         <MaterialCommunityIcons
@@ -44,7 +46,7 @@ const screenOptionsWithHeader = (title) => {
           color={theme.colors.white}
         />
       </TouchableOpacity>
-    ),
+    ):null,
   };
 };
 

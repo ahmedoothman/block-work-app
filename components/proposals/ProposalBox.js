@@ -103,7 +103,7 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
             style={{
               color:
                 status === 'submitted'
-                  ? theme.colors.primaryBright
+                  ? theme.colors.warning
                   : status === 'accepted'
                   ? theme.colors.success
                   : theme.colors.danger,

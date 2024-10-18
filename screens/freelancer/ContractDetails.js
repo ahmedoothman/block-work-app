@@ -54,8 +54,17 @@ const ContractDetails = () => {
             <Text style={styles.dateText}>
               {moment(contract.job.createdAt).format("D MMMM YYYY")}
             </Text>
+            <Text style={{color: contract.status === 'completed'
+                        ? theme.colors.success
+                        : contract.status === 'pending'?
+                        theme.colors.progress:
+                        contract.status == 'cancled'?theme.colors.danger
+                        : theme.colors.tertiary
+                        ,fontSize:18}}>
+               {contract.status}
+            </Text>
             {/* //'28 august 2024' */}
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => {
                 console.log("hi");
               }}>
@@ -66,7 +75,7 @@ const ContractDetails = () => {
                 style={{ marginRight: 0 }}
                 // onPress={}
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           {/* //' contractTitle */}
           <Text style={[styles.contractTitle, styles.textColor]}>
@@ -149,9 +158,9 @@ const ContractDetails = () => {
 
           {userRole == "freelancer" ? (
             <>
-              <Text style={styles.Client_Status}>
+              {/* <Text style={styles.Client_Status}>
                 Contract Status: {contract.status}
-              </Text>
+              </Text> */}
             </>
           ) : (
             <>
