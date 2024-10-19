@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,26 +6,23 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-} from "react-native";
-import theme from "../../theme";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon from "react-native-vector-icons/Entypo";
-import ContractBtn from "../../components/btns/ContractBtn";
-import { calcDuration } from "../../utils";
-import { useRoute } from "@react-navigation/native";
-import { useSelector } from "react-redux";
-import moment from "moment";
-import UserBox from "../../components/UserBox/UserBox";
+} from 'react-native';
+import theme from '../../theme';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Entypo';
+import ContractBtn from '../../components/btns/ContractBtn';
+import { calcDuration } from '../../utils';
+import { useRoute } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
+import UserBox from '../../components/UserBox/UserBox';
 
 const ContractDetails = () => {
   const { role: userRole, _id: userId } = useSelector(
     (state) => state.auth.user
   );
-  // console.log(userId);
   const { contract } = useRoute().params;
 
-  // ' Hande date -----------------------------------------------------
-  //' - Start -> Handel Scroll Skills Container
   const scrollViewRef = useRef(null);
   const [contentWidth, setContentWidth] = useState(0);
   const [scrollViewWidth, setScrollViewWidth] = useState(0);
@@ -43,53 +40,44 @@ const ContractDetails = () => {
     }
   };
 
-  //' - End ->----------------------------------------------------------------------------
-
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <View style={styles.container}>
         <View style={styles.detailsContainer}>
-          {/* //' date_dots_Container */}
+          {}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(contract.job.createdAt).format("D MMMM YYYY")}
+              {moment(contract.job.createdAt).format('D MMMM YYYY')}
             </Text>
-            <Text style={{color: contract.status === 'completed'
-                        ? theme.colors.success
-                        : contract.status === 'pending'?
-                        theme.colors.progress:
-                        contract.status == 'cancled'?theme.colors.danger
-                        : theme.colors.tertiary
-                        ,fontSize:18}}>
-               {contract.status}
+            <Text
+              style={{
+                color:
+                  contract.status === 'completed'
+                    ? theme.colors.success
+                    : contract.status === 'pending'
+                    ? theme.colors.progress
+                    : contract.status == 'cancelled'
+                    ? theme.colors.danger
+                    : theme.colors.tertiary,
+                fontSize: 18,
+              }}
+            >
+              {contract.status}
             </Text>
-            {/* //'28 august 2024' */}
-            {/* <TouchableOpacity
-              onPress={() => {
-                console.log("hi");
-              }}>
-              <MaterialCommunityIcons
-                name="dots-vertical"
-                size={24}
-                color={theme.colors.ternaryDark}
-                style={{ marginRight: 0 }}
-                // onPress={}
-              />
-            </TouchableOpacity> */}
           </View>
-          {/* //' contractTitle */}
+          {}
           <Text style={[styles.contractTitle, styles.textColor]}>
             {contract.job.title}
           </Text>
-          {/* //' Fixed_price */}
+          {}
           <Text style={[styles.Fixed_price]}>
             Fixed-price -Entry level-Est.budget:${contract.job.budget}
           </Text>
-          {/* //' contractDescription */}
+          {}
           <Text style={[styles.contractDescription, styles.textColor]}>
             {contract.job.description}
           </Text>
-          {/* //' skillsContainer */}
+          {}
           <View style={styles.skillsContainer}>
             <ScrollView
               horizontal
@@ -99,7 +87,8 @@ const ContractDetails = () => {
               onLayout={(event) =>
                 setScrollViewWidth(event.nativeEvent.layout.width)
               }
-              style={styles.skillsBox}>
+              style={styles.skillsBox}
+            >
               {contract.job.skillsRequired.length > 0 ? (
                 contract.job.skillsRequired.map((skill, index) => {
                   return (
@@ -117,7 +106,7 @@ const ContractDetails = () => {
 
             <TouchableOpacity onPress={scrollRight}>
               <Icon
-                name="chevron-thin-right"
+                name='chevron-thin-right'
                 size={30}
                 color={theme.colors.colorTextBlue}
                 style={styles.arrowRightIcon}
@@ -131,7 +120,7 @@ const ContractDetails = () => {
             <UserBox
               otherUser={contract.client}
               isMe={userId == contract.client._id}
-              showAddReview={contract.status == "completed"}
+              showAddReview={contract.status == 'completed'}
             />
           </View>
 
@@ -156,12 +145,8 @@ const ContractDetails = () => {
             </View>
           </View>
 
-          {userRole == "freelancer" ? (
-            <>
-              {/* <Text style={styles.Client_Status}>
-                Contract Status: {contract.status}
-              </Text> */}
-            </>
+          {userRole == 'freelancer' ? (
+            <>{}</>
           ) : (
             <>
               <View style={styles.close_contract_Container}>
@@ -170,12 +155,12 @@ const ContractDetails = () => {
                   borderColor={theme.colors.primaryDark}
                   textSize={14}
                   textColor={theme.colors.white}
-                  fontWeight={"regular"}
+                  fontWeight={'regular'}
                   paddingHorizontal={5}
                   paddingVertical={0}
-                  mode={"contained"}
+                  mode={'contained'}
                   onPress={() => {}}
-                  clickText={"close contract"}
+                  clickText={'close contract'}
                 />
               </View>
             </>
@@ -194,7 +179,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   scrollViewContainer: {
-    flexGrow: 1, // Allows the ScrollView to expand
+    flexGrow: 1,
   },
   detailsContainer: {
     backgroundColor: theme.colors.secondaryGray,
@@ -204,10 +189,10 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius,
   },
   date_dots_Container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginVertical: 10,
   },
   dateText: {
@@ -218,7 +203,7 @@ const styles = StyleSheet.create({
   },
   contractTitle: {
     fontSize: 17,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     padding: 5,
     marginVertical: 10,
   },
@@ -226,22 +211,22 @@ const styles = StyleSheet.create({
     color: theme.colors.ternaryDark,
     marginVertical: 10,
     fontSize: 11,
-    fontWeight: "regular",
+    fontWeight: 'regular',
   },
   contractDescription: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     marginVertical: 10,
   },
   skillsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10,
     marginBottom: 22,
   },
   skillsBox: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   skillsItem: {
     backgroundColor: theme.colors.secondaryBright,
@@ -257,55 +242,49 @@ const styles = StyleSheet.create({
   roleTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   userContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     gap: 15,
     marginLeft: 10,
   },
-  // userImage: {
-  //   width: 40,
-  //   height: 40,
-  //   borderRadius: 20,
-  //   overflow: "hidden",
-  // },
   userImage: {
     width: 40,
     height: 40,
-    borderRadius: 20, // Half of the width/height to make it circular
-    overflow: "hidden",
-    alignItems: "center", // Center content horizontally
-    justifyContent: "center", // Center content vertically
-    display: "flex", // Ensure flexbox is applied
+    borderRadius: 20,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
   },
   userName: {
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   price_duration_Contaienr: {
     marginVertical: 10,
-    width: "95%",
+    width: '95%',
   },
   d_flex_Row: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   d_flex_Column: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   },
   mainTitle: {
     marginBottom: 10,
     fontSize: 18,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.white,
   },
   price: {
@@ -319,10 +298,10 @@ const styles = StyleSheet.create({
   },
   Client_Status: {
     fontSize: 12,
-    fontWeight: "regular",
+    fontWeight: 'regular',
     color: theme.colors.ternaryDark,
     marginVertical: 20,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });
 export default ContractDetails;

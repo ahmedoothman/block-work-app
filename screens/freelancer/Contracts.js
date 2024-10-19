@@ -26,7 +26,10 @@ const Contracts = () => {
     setLoading(true);
     const response = await getAllFreelancerContract();
     if (response.status === 'success') {
-      setContracts(response.data);
+      const sortedContracts = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setContracts(sortedContracts);
     } else {
       setError(true);
       setErrorMessage(response.message);
@@ -75,12 +78,13 @@ const Contracts = () => {
               <ClientContractBox
                 key={index}
                 onPress={() => {
-                  navigation.navigate("ContractDetails", {
+                  navigation.navigate('ContractDetails', {
                     contract: contract,
                   });
                 }}
                 contractTitle={contract.job.title}
                 status={contract.status}
+                data={contract}
               />
             );
           })}

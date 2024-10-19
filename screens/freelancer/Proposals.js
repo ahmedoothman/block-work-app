@@ -19,7 +19,7 @@ const { height } = Dimensions.get('window');
 const Proposals = () => {
   const [proposals, setProposals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false); // Added for refresh control
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
@@ -32,12 +32,14 @@ const Proposals = () => {
     navigation.navigate('Jobs');
   };
 
-  // Function to fetch proposals
   const fetchProposals = async () => {
     setIsLoading(true);
     const response = await getFreelancerProposalsService();
     if (response.status === 'success') {
-      setProposals(response.data);
+      const sortedPropsals = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setProposals(sortedPropsals);
       setCount(response.data.length);
     } else {
       setError(true);
@@ -48,17 +50,15 @@ const Proposals = () => {
     setIsLoading(false);
   };
 
-  // Use useFocusEffect to refetch proposals when the screen comes into focus
   useFocusEffect(
     useCallback(() => {
       fetchProposals();
     }, [])
   );
 
-  // Handle pull-to-refresh action
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchProposals().finally(() => setRefreshing(false)); // Ensure refreshing state is reset after fetching
+    fetchProposals().finally(() => setRefreshing(false));
   }, []);
 
   return (
@@ -70,8 +70,8 @@ const Proposals = () => {
         style={styles.scrollContainer}
         refreshControl={
           <RefreshControl
-            refreshing={refreshing} // Bind refresh state
-            onRefresh={onRefresh} // Trigger refresh action
+            refreshing={refreshing}
+            onRefresh={onRefresh}
             tintColor={theme.colors.primaryBright}
           />
         }
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: height * 0.6, // More dynamic height
+    height: height * 0.6,
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,

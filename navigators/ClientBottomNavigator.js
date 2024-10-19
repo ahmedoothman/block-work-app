@@ -57,7 +57,7 @@ export default function ClientBottomNavigator() {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcon name='chat' color={color} size={size} />
           ),
-          ...screenOptionsWithHeader('Messages'),
+          ...screenOptionsWithHeader('Messages', false),
         }}
       />
 

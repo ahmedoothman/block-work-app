@@ -12,11 +12,11 @@ export const initializeSocket = async () => {
 
   // Handle socket connection events
   socket.on('connect', () => {
-    console.log('Connected to socket');
+    // console.log('Connected to socket');
   });
 
   socket.on('disconnect', () => {
-    console.log('Disconnected from socket');
+    // console.log('Disconnected from socket');
   });
 
   return socket;

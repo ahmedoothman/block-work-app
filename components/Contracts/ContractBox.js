@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-import theme from "../../theme";
+import React from 'react';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import theme from '../../theme';
 
 const ContractBox = ({ onPress, jopTitle }) => {
   return (
@@ -8,8 +8,8 @@ const ContractBox = ({ onPress, jopTitle }) => {
       <Text style={styles.headertitle}>{jopTitle}</Text>
       <TouchableOpacity style={styles.imagecontainer} onPress={onPress}>
         <Image
-          source={require("../../assets/images/Frame.png")}
-          style={{ width: "100%", height: "100%" }}
+          source={require('../../assets/images/Frame.png')}
+          style={{ width: '100%', height: '100%' }}
         />
       </TouchableOpacity>
     </View>
@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius,
     padding: 10,
     marginBottom: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headertitle: {
     color: theme.colors.white,
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: 'regular',
   },
   imagecontainer: {
     backgroundColor: theme.colors.primaryDark,

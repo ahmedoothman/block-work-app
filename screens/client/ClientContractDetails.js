@@ -78,14 +78,20 @@ const ClientContractDetails = ({ route }) => {
             <Text style={styles.dateText}>
               {moment(contract.job.createdAt).format('D MMMM YYYY')}
             </Text>
-            <Text style={{color: contract.status === 'completed'
-                        ? theme.colors.success
-                        : contract.status === 'pending'?
-                        theme.colors.progress:
-                        contract.status == 'cancled'?theme.colors.danger
-                        : theme.colors.tertiary
-                        ,fontSize:18}}>
-               {contract.status}
+            <Text
+              style={{
+                color:
+                  contract.status === 'completed'
+                    ? theme.colors.success
+                    : contract.status === 'pending'
+                    ? theme.colors.progress
+                    : contract.status == 'cancelled'
+                    ? theme.colors.danger
+                    : theme.colors.tertiary,
+                fontSize: 18,
+              }}
+            >
+              {contract.status}
             </Text>
             {/* <TouchableOpacity onPress={() => {}}>
               <MaterialCommunityIcons

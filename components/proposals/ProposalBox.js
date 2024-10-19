@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import AppButton from '../btns/AppButton';
 
-const formatDate = (dateString) => {
+export const formatDate = (dateString) => {
   const date = new Date(dateString);
   const options = { day: 'numeric', month: 'short', year: 'numeric' };
   return date.toLocaleDateString('en-US', options);
