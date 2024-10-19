@@ -26,7 +26,7 @@ const AppButton = (props) => {
           width: btnWidth || 210,
           paddingVertical: paddingY || 10,
           paddingHorizontal: paddingX || 15,
-          backgroundColor: bgColor || theme.colors.colorTextBlue,
+          backgroundColor: bgColor || theme.colors.primaryDark,
         },
       ]}
       onPress={onPress}>

@@ -9,6 +9,9 @@ import { updateMeService } from '../../services/userService';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/auth-slice';
 import { useNavigation } from '@react-navigation/native';
+import InputField from '../../components/inputs/auth/InputField';
+import * as ImagePicker from 'expo-image-picker';
+import { uploadFile } from '../../utils/uploadFile';
 export default function UpdateProfile({ route }) {
   const navigation = useNavigation();
   const { userdata } = route.params;
@@ -22,6 +25,8 @@ export default function UpdateProfile({ route }) {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
+  const [photo, setPhoto] = useState(userdata.userPhotoUrl);
+
 
   const dispatch = useDispatch();
   const onDismissSnackBar = () => setVisible(false);
@@ -33,9 +38,28 @@ export default function UpdateProfile({ route }) {
     setName('');
     setPhone('');
     setTitle('');
+    setPhoto(null);
   };
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setPhoto(result.assets[0])
+    }
+  };
+
   const handleUpdate = async () => {
     setIsLoading(true);
+    const uploadedPhoto = await Promise.all([
+      photo && photo.uri ? uploadFile(photo.uri, 'users', 'userPhotoUrl'):userdata.userPhotoUrl,
+    
+    ]);
+    const [userphoto]=uploadedPhoto;
     const user = {
       name: uname,
       email,
@@ -43,6 +67,8 @@ export default function UpdateProfile({ route }) {
       bio: Bio,
       jobTitle: title,
       nationalId: NId,
+      userPhotoUrl: userphoto ,
+
     };
     const data = JSON.stringify(user);
     const response = await updateMeService(data);
@@ -66,6 +92,13 @@ export default function UpdateProfile({ route }) {
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.formContainer}>
+         <Text style={styles.label}>Profile Photo</Text>
+          <InputField
+          onChange={() => pickImage()}
+          value={photo?.uri}
+          placeholder='Upload Photo'
+          isUpload={true}
+          />
           <CustomInputField
             label={'Name'}
             value={uname}

@@ -84,14 +84,14 @@ const StackNavigator = () => {
           title: "Job Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          // headerRight: () => (
+          //   <MaterialCommunityIcons
+          //     name="dots-vertical"
+          //     size={24}
+          //     color="white"
+          //     style={{ marginRight: 10 }}
+          //   />
+          // ),
         }}
       />
       <Stack.Screen
@@ -102,15 +102,7 @@ const StackNavigator = () => {
           // headerStyle: { backgroundColor: theme.colors.secondaryGray },
           headerStyle: { backgroundColor: "black" },
           headerTintColor: theme.colors.white,
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-              onPress={() => {}}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -120,14 +112,7 @@ const StackNavigator = () => {
           title: "Proposal Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -137,14 +122,7 @@ const StackNavigator = () => {
           title: "Submit Proposal",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       {/*pressing on portofoilo button in profile*/}
@@ -155,14 +133,7 @@ const StackNavigator = () => {
           title: "Portofolio",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -172,14 +143,7 @@ const StackNavigator = () => {
           title: "Create Portofolio",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          
         }}
       />
       <Stack.Screen
@@ -189,14 +153,7 @@ const StackNavigator = () => {
           title: "Reviews",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          
         }}
       />
       <Stack.Screen
@@ -206,14 +163,7 @@ const StackNavigator = () => {
           title: "Update Profile",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
 
@@ -224,14 +174,7 @@ const StackNavigator = () => {
           title: "Update Profile",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -241,14 +184,7 @@ const StackNavigator = () => {
           title: "Portofolio Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          
         }}
       />
 
@@ -265,14 +201,7 @@ const StackNavigator = () => {
           title: "Job Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -282,14 +211,7 @@ const StackNavigator = () => {
           title: "Job Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -299,14 +221,7 @@ const StackNavigator = () => {
           title: "Proposals Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
       <Stack.Screen
@@ -316,14 +231,7 @@ const StackNavigator = () => {
           title: "Create Job",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
 
@@ -334,14 +242,7 @@ const StackNavigator = () => {
           title: "Update Job",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
 
@@ -352,14 +253,7 @@ const StackNavigator = () => {
           title: "Contracts Details",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          
         }}
       />
 
@@ -371,14 +265,7 @@ const StackNavigator = () => {
           title: "Chats",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          
         }}
       />
 
@@ -389,14 +276,7 @@ const StackNavigator = () => {
           title: "Balance",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
 
@@ -407,14 +287,7 @@ const StackNavigator = () => {
           title: "Change Password",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+          
         }}
       />
       <Stack.Screen
@@ -424,14 +297,7 @@ const StackNavigator = () => {
           title: "Charge Balance",
           headerStyle: { backgroundColor: "black" },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
 
@@ -443,14 +309,7 @@ const StackNavigator = () => {
           headerStyle: { backgroundColor: "black" },
           headerTitleStyle: { fontSize: 15 },
           headerTintColor: "white",
-          headerRight: () => (
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={24}
-              color="white"
-              style={{ marginRight: 10 }}
-            />
-          ),
+         
         }}
       />
 

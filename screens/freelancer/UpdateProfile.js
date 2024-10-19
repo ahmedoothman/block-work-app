@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import theme from "../../theme";
 import { ScrollView } from "react-native-gesture-handler";
 import { TextInput, Snackbar } from "react-native-paper";
+import InputField from '../../components/inputs/auth/InputField';
+import * as ImagePicker from 'expo-image-picker';
+import { uploadFile } from '../../utils/uploadFile';
 import CustomInputField from "../../components/btns/CustomInputField";
 import AppButton from "../../components/btns/AppButton";
 import { updateMeService } from "../../services/userService";
@@ -16,7 +19,7 @@ import CustomeSnackBar from "../../components/Public/CustomeSnackBar";
 export default function UpdateProfile({ route }) {
   const navigation = useNavigation();
   const { userdata } = route.params;
-  console.log("userdata.skills ", userdata.skills);
+  // console.log("userdata.skills ", userdata.skills);
   const [uname, setName] = useState(userdata.name);
   const [email, setEmail] = useState(userdata.email);
   const [NId, setNId] = useState(userdata.nationalId);
@@ -24,6 +27,8 @@ export default function UpdateProfile({ route }) {
   const [title, setTitle] = useState(userdata.jobTitle);
   const [skills, setSkills] = useState(userdata.skills);
   const [Bio, setBio] = useState(userdata.bio);
+  const [photo, setPhoto] = useState(userdata.userPhotoUrl);
+
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -40,9 +45,28 @@ export default function UpdateProfile({ route }) {
     setPhone("");
     setSkills([]);
     setTitle("");
+    setPhoto(null)
+  };
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setPhoto(result.assets[0])
+    }
   };
   const handleUpdate = async () => {
     setIsLoading(true);
+
+    const uploadedPhoto = await Promise.all([
+      photo && photo.uri ? uploadFile(photo.uri, 'users', 'userPhotoUrl'):userdata.userPhotoUrl,
+
+    ]);
+    const [userphoto]=uploadedPhoto;
     const user = {
       name: uname,
       email,
@@ -51,6 +75,7 @@ export default function UpdateProfile({ route }) {
       skills: skills,
       jobTitle: title,
       nationalId: NId,
+      userPhotoUrl: userphoto ,
     };
     const data = JSON.stringify(user);
     const response = await updateMeService(data);
@@ -77,6 +102,13 @@ export default function UpdateProfile({ route }) {
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.formContainer}>
+        <Text style={styles.label}>Profile Photo</Text>
+          <InputField
+          onChange={() => pickImage()}
+          value={photo?.uri}
+          placeholder='Upload Photo'
+          isUpload={true}
+          />
           <CustomInputField
             label={"Name"}
             value={uname}
@@ -107,6 +139,7 @@ export default function UpdateProfile({ route }) {
             setValue={setTitle}
             placeholder={"Enter your job Title"}
           />
+          
 
           {/* //'-------------------------------------- */}
           <Text style={styles.inputTitle}>Skills Required</Text>
@@ -184,6 +217,7 @@ export default function UpdateProfile({ route }) {
             placeholderTextColor={theme.colors.ternaryDark}
             textColor={theme.colors.secondaryGray}
           />
+          
           <View style={{ marginHorizontal: 30 }}>
             <AppButton
               buttonTitle={"Update"}
@@ -232,7 +266,7 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.white,
     fontSize: 14,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,
