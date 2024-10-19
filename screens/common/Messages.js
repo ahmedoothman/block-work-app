@@ -9,6 +9,7 @@ import theme from '../../theme';
 import { useQuery } from 'react-query';
 
 const Messages = () => {
+  const [searchTerm, setSearchTerm] = React.useState('');
   const [error, setError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
 
@@ -16,9 +17,15 @@ const Messages = () => {
     data,
     error: queryError,
     isLoading,
-  } = useQuery('chats', getAllChats, {
-    refetchInterval: 5000, // Refetch every 5 seconds
+    refetch,
+  } = useQuery(['chats', searchTerm], () => getAllChats(searchTerm), {
+    refetchInterval: 5000,
   });
+
+  const searchHandler = (searchText) => {
+    setSearchTerm(searchText);
+    refetch();
+  };
 
   React.useEffect(() => {
     if (queryError) {
@@ -31,7 +38,7 @@ const Messages = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <SearchBox placeholder={'Search for chats'} />
+      <SearchBox placeholder={'Search for chats'} onSearch={searchHandler} />
       {isLoading ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size='large' color={theme.colors.white} />

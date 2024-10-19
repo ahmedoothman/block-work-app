@@ -1,32 +1,30 @@
 import { StyleSheet, TouchableOpacity, TextInput, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import theme from '../../../theme';
 
-export default function SearchBox({ placeholder }) {
+export default function SearchBox({ placeholder, onSearch }) {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = () => {
+    onSearch(searchTerm);
+  };
+
   return (
-    <View style={styles.asembler}>
+    <View style={styles.assembler}>
       <View style={styles.Main}>
         <TextInput
           style={styles.searchInput}
           placeholder={placeholder}
           placeholderTextColor={theme.colors.secondaryBright}
-          placeholderStyle={{ marginLeft: 10 }}
-        ></TextInput>
-
-        <AntDesign
-          name='search1'
-          size={20}
-          style={styles.searchIconTextBox}
-        ></AntDesign>
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+        />
+        <AntDesign name='search1' size={20} style={styles.searchIconTextBox} />
       </View>
       <View style={styles.buttonP}>
-        <TouchableOpacity>
-          <AntDesign
-            name='search1'
-            size={25}
-            style={styles.iconLeft}
-          ></AntDesign>
+        <TouchableOpacity onPress={handleSearch}>
+          <AntDesign name='search1' size={25} style={styles.iconLeft} />
         </TouchableOpacity>
       </View>
     </View>
@@ -34,7 +32,7 @@ export default function SearchBox({ placeholder }) {
 }
 
 const styles = StyleSheet.create({
-  asembler: {
+  assembler: {
     flexDirection: 'row',
     marginTop: 30,
     justifyContent: 'center',
@@ -55,6 +53,7 @@ const styles = StyleSheet.create({
     paddingLeft: 34,
     fontSize: 15.5,
   },
+
   searchIconTextBox: {
     position: 'absolute',
     top: 9,
@@ -65,9 +64,9 @@ const styles = StyleSheet.create({
   buttonP: {
     height: 38,
     width: 39.2,
-    backgroundColor: theme.colors.primaryDark,
+    backgroundColor: theme.colors.primaryBright,
     borderWidth: 1,
-    borderColor: theme.colors.primaryDark,
+    borderColor: theme.colors.primaryBright,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',

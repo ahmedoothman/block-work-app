@@ -56,11 +56,11 @@ const ClientContractDetails = ({ route }) => {
       setAlert(true);
       setIsSuccess(true);
       if (status === 'cancelled') {
-        setAlertMessage('contract is canceller');
+        setAlertMessage('contract is cancelled');
         navigation.navigate('Contract');
       } else {
+        setAlertMessage('contract is completed');
         setTimeout(() => {
-          setAlertMessage('contract is completed');
           navigation.navigate('ReviewForm', {
             userId: contract.freelancer._id,
           });
@@ -98,15 +98,6 @@ const ClientContractDetails = ({ route }) => {
             >
               {contract.status}
             </Text>
-            {/* <TouchableOpacity onPress={() => {}}>
-              <MaterialCommunityIcons
-                name='dots-vertical'
-                size={24}
-                color={theme.colors.ternaryDark}
-                style={{ marginRight: 0 }}
-                // onPress={}
-              />
-            </TouchableOpacity> */}
           </View>
           {/* //' contractTitle */}
           <Text style={[styles.contractTitle, styles.textColor]}>
@@ -184,7 +175,7 @@ const ClientContractDetails = ({ route }) => {
 
           {/* //' BTNs  */}
           <View style={styles.contractBTNS_Container}>
-            <AppButton
+            {/* <AppButton
               buttonTitle={'complete contract'}
               onPress={() => {
                 handelContractStatus(
@@ -217,7 +208,47 @@ const ClientContractDetails = ({ route }) => {
               paddingX={7}
               textSize={12}
               bgColor={theme.colors.primaryDark}
-            />
+            /> */}
+
+            {/* show buttons based on status */}
+            {contract.status === 'pending' && (
+              <>
+                <AppButton
+                  buttonTitle={'complete contract'}
+                  onPress={() => {
+                    handelContractStatus(
+                      contract._id,
+                      contract.job._id,
+                      'completed'
+                    );
+                  }}
+                  marginBottom={1}
+                  marginX={0}
+                  btnWidth={'50%'}
+                  paddingY={13}
+                  paddingX={7}
+                  textSize={12}
+                  bgColor={theme.colors.primaryDark}
+                />
+                <AppButton
+                  buttonTitle={'cancel contract'}
+                  onPress={() => {
+                    handelContractStatus(
+                      contract._id,
+                      contract.job._id,
+                      'cancelled'
+                    );
+                  }}
+                  marginBottom={1}
+                  marginX={0}
+                  btnWidth={'50%'}
+                  paddingY={13}
+                  paddingX={7}
+                  textSize={12}
+                  bgColor={theme.colors.primaryDark}
+                />
+              </>
+            )}
           </View>
           <Text style={styles.Client_Status}>
             Contract Status:{'  '}

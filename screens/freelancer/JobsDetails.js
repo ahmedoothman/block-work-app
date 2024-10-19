@@ -6,7 +6,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import AppButton from '../../components/btns/AppButton';
 import { useNavigation } from '@react-navigation/native';
 import { calcDuration } from '../../utils';
-
+import UserBox from '../../components/UserBox/UserBox';
 const JobsDetails = ({ route }) => {
   const { jobDetails, postingTimeOfJob } = route.params;
   const {
@@ -89,6 +89,7 @@ const JobsDetails = ({ route }) => {
             ))}
           </View>
         </View>
+        <UserBox otherUser={jobDetails.client} isMe={true} />
         {/* Sixth Section */}
         <View style={styles.lastSection}>
           <Text style={styles.subText}>Proposals:</Text>

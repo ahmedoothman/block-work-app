@@ -5,35 +5,34 @@ import {
   StyleSheet,
   Dimensions,
   RefreshControl,
-} from "react-native";
-import React, { useEffect, useState, useCallback } from "react";
-import theme from "../../theme";
-import JobsSearchBar from "../../components/Jobs/JobsSearchBar";
-import JobsBox from "../../components/Jobs/JobsBox";
-import NoDataBox from "../../components/NoData/NoDataBox";
+} from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import theme from '../../theme';
+import JobsSearchBar from '../../components/Jobs/JobsSearchBar';
+import JobsBox from '../../components/Jobs/JobsBox';
+import NoDataBox from '../../components/NoData/NoDataBox';
 
-import { getAllJobsService } from "../../services/jobService";
-import { ActivityIndicator, Snackbar } from "react-native-paper";
-import { useFocusEffect } from "@react-navigation/native";
-const { height } = Dimensions.get("window");
+import { getAllJobsService } from '../../services/jobService';
+import { ActivityIndicator, Snackbar } from 'react-native-paper';
+import { useFocusEffect } from '@react-navigation/native';
+const { height } = Dimensions.get('window');
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  const [filteredMessage, setFilteredMessage] = useState("");
+  const [filteredMessage, setFilteredMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false); // Added for refresh control
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [visible, setVisible] = useState(false);
 
   const onDismissSnackBar = () => setVisible(false);
 
-  // Function to fetch jobs
   const fetchJobs = async () => {
     setIsLoading(true);
     const response = await getAllJobsService();
-    if (response.status === "success") {
+    if (response.status === 'success') {
       const sortedJobs = response.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -48,7 +47,6 @@ const Jobs = () => {
     setIsLoading(false);
   };
 
-  // Fetch jobs when the screen is focused
   useFocusEffect(
     useCallback(() => {
       fetchJobs();
@@ -58,18 +56,15 @@ const Jobs = () => {
     }, [])
   );
 
-  // Handle pull-to-refresh action
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchJobs().finally(() => setRefreshing(false)); // Ensure refreshing state is reset after fetching
+    fetchJobs().finally(() => setRefreshing(false));
   }, []);
 
-  //----------------Filtration ------------------
-  //' filter search by => {budget , title}
   const searchFilter = (searchText) => {
     if (searchText.length === 0) {
       setFilteredJobs(jobs);
-      setFilteredMessage("");
+      setFilteredMessage('');
       return;
     }
 
@@ -89,13 +84,13 @@ const Jobs = () => {
       );
       setFilteredJobs(filteredJobs);
     } else {
-      setFilteredMessage("");
+      setFilteredMessage('');
       setFilteredJobs(filteredJobs);
     }
   };
 
   const skillFilter = (skill) => {
-    if (skill == "All") {
+    if (skill == 'All') {
       setFilteredJobs(jobs);
       return;
     } else {
@@ -109,14 +104,14 @@ const Jobs = () => {
         );
         setFilteredJobs(jobsMatchingSkills);
       } else {
-        setFilteredMessage("");
+        setFilteredMessage('');
         setFilteredJobs(jobsMatchingSkills);
       }
     }
   };
 
   const categoryFilter = (category) => {
-    if (category == "All") {
+    if (category == 'All') {
       setFilteredJobs(jobs);
       return;
     } else {
@@ -127,12 +122,11 @@ const Jobs = () => {
           `The category "${category}" is currently not available. Please select a different category or check back later.`
         );
       } else {
-        setFilteredMessage("");
+        setFilteredMessage('');
         setFilteredJobs(selectedCategory);
       }
     }
   };
-  //----------------------------------
   return (
     <View style={styles.container}>
       <JobsSearchBar
@@ -144,11 +138,12 @@ const Jobs = () => {
         contentContainerStyle={styles.scrollContainer}
         refreshControl={
           <RefreshControl
-            refreshing={refreshing} // Bind refresh state
-            onRefresh={onRefresh} // Trigger refresh action
+            refreshing={refreshing}
+            onRefresh={onRefresh}
             tintColor={theme.colors.primaryBright}
           />
-        }>
+        }
+      >
         {isLoading ? (
           <View style={styles.loadingIndicator}>
             <ActivityIndicator
@@ -163,11 +158,11 @@ const Jobs = () => {
 
         {filteredJobs.length === 0 && !isLoading && (
           <NoDataBox
-            Title={"There Are No Jobs."}
+            Title={'There Are No Jobs.'}
             Massage={
               filteredMessage.length > 0
                 ? filteredMessage
-                : "Jobs you’re actively working on will appear here."
+                : 'Jobs you’re actively working on will appear here.'
             }
             show={false}
             textCenter={true}
@@ -178,7 +173,8 @@ const Jobs = () => {
       <Snackbar
         visible={visible}
         onDismiss={onDismissSnackBar}
-        style={styles.snackbarStyle}>
+        style={styles.snackbarStyle}
+      >
         {errorMessage}
       </Snackbar>
     </View>
@@ -198,14 +194,14 @@ const styles = StyleSheet.create({
   },
   loadingIndicator: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: height * 0.6, // More dynamic height
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height * 0.6,
   },
   snackbarStyle: {
     backgroundColor: theme.colors.danger,
     borderRadius: theme.borderRadius,
-    position: "absolute",
+    position: 'absolute',
     bottom: 10,
     left: 10,
     right: 10,

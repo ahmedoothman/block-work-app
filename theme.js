@@ -48,8 +48,8 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primaryDark: '#4fab4a',
-    primaryBright: '#1ed41e',
-    colorTextBlue: '#1ed41e',
+    primaryBright: '#24d624',
+    colorTextBlue: '#24d624',
     secondaryDark: '#000000',
     secondaryGray: '#272727',
     secondaryBright: '#414141',
