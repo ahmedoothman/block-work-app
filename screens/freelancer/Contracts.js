@@ -75,11 +75,12 @@ const Contracts = () => {
               <ClientContractBox
                 key={index}
                 onPress={() => {
-                  navigation.navigate('ContractDetails', {
+                  navigation.navigate("ContractDetails", {
                     contract: contract,
                   });
                 }}
                 contractTitle={contract.job.title}
+                status={contract.status}
               />
             );
           })}

@@ -2,10 +2,33 @@ import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import theme from "../../theme";
 
-const ClientContractBox = ({ onPress, contractTitle }) => {
+const ClientContractBox = ({ onPress, contractTitle, status }) => {
   return (
+    // <View style={styles.headertitleContainer}>
+    //   <Text style={styles.headertitle}>{contractTitle}</Text>
+    //   <TouchableOpacity style={styles.imagecontainer} onPress={onPress}>
+    //     <Image
+    //       source={require("../../assets/images/Frame.png")}
+    //       style={{ width: "100%", height: "100%" }}
+    //     />
+    //   </TouchableOpacity>
+    // </View>
     <View style={styles.headertitleContainer}>
-      <Text style={styles.headertitle}>{contractTitle}</Text>
+      <View>
+        <Text style={styles.headertitle}>{contractTitle}</Text>
+        <Text
+          style={[
+            styles.headerstatus,
+            {
+              color:
+                status == "completed"
+                  ? theme.colors.success
+                  : theme.colors.primaryBright,
+            },
+          ]}>
+          {status}
+        </Text>
+      </View>
       <TouchableOpacity style={styles.imagecontainer} onPress={onPress}>
         <Image
           source={require("../../assets/images/Frame.png")}
@@ -29,6 +52,11 @@ const styles = StyleSheet.create({
   },
   headertitle: {
     color: theme.colors.white,
+    fontSize: 15,
+    fontWeight: "regular",
+  },
+  headerstatus: {
+    paddingTop: 5,
     fontSize: 14,
     fontWeight: "regular",
   },
