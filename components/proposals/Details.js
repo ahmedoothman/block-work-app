@@ -43,65 +43,106 @@ const Details = ({ proposal, date, isClient }) => {
   return (
     <Card style={styles.card}>
       <Card.Content>
-        <Text variant='titleLarge' style={styles.title}>
-          Your proposed terms
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          Proposed Amount: ${proposal?.proposedAmount || 'N/A'}
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          Duration {calcDuration(proposal?.duration || 0)}
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          Cover letter
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          {proposal?.coverLetter || 'No cover letter provided.'}
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          You’ll receive
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          The estimated payment, after service fees.
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          ${estimatedPayment(proposal?.proposedAmount || 0)}
-        </Text>
-        <Divider style={styles.Divider} />
-        <Text variant='titleLarge' style={styles.title}>
-          Jobs details
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          {proposal?.jobPost?.title || 'Job title not available'}
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          Category: {proposal?.jobPost?.category || 'N/A'}
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          Posted {date || 'N/A'}
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          Description:
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          {proposal?.jobPost?.description || 'No description available'}
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          Required skills
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          {proposal?.jobPost?.skillsRequired
-            ? `(${proposal.jobPost.skillsRequired[0] || 'N/A'}, ${
-                proposal.jobPost.skillsRequired[1] || 'N/A'
-              })`
-            : 'No skills required listed.'}
-        </Text>
-        <Text variant='titleMedium' style={styles.title}>
-          Duration {calcDuration(proposal?.jobPost?.duration || 0)}
-        </Text>
-        <Text variant='titleMedium' style={styles.data}>
-          Client’s budget: ${proposal?.jobPost?.budget || 'N/A'}
-        </Text>
+        <View style={styles.titleHeader}>
+          <Text variant='titleLarge' style={styles.title}>
+            Your proposed terms
+          </Text>
+          <Text
+            variant='bodyMedium'
+            style={{
+              color:
+                proposal?.status === 'submitted'
+                  ? theme.colors.warning
+                  : proposal?.status === 'accepted'
+                  ? theme.colors.success
+                  : theme.colors.danger,
+            }}
+          >
+            {proposal?.status}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.data}>
+            Proposed Amount: ${proposal?.proposedAmount || 'N/A'}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.title}>
+            Duration {calcDuration(proposal?.duration || 0)}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.title}>
+            Cover letter
+          </Text>
+          <Text variant='titleMedium' style={styles.data}>
+            {proposal?.coverLetter || 'No cover letter provided.'}
+          </Text>
+        </View>
+
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.title}>
+            You’ll receive
+          </Text>
+          <Text variant='titleMedium' style={styles.data}>
+            The estimated payment, after service fees.
+          </Text>
+
+          <Text variant='titleMedium' style={styles.data}>
+            ${estimatedPayment(proposal?.proposedAmount || 0)}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Divider style={styles.Divider} />
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleLarge' style={styles.title}>
+            Jobs details
+          </Text>
+          <Text variant='titleMedium' style={styles.title}>
+            {proposal?.jobPost?.title || 'Job title not available'}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.data}>
+            Category: {proposal?.jobPost?.category || 'N/A'}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.data}>
+            Posted {date || 'N/A'}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.title}>
+            Description:
+          </Text>
+          <Text variant='titleMedium' style={styles.data}>
+            {proposal?.jobPost?.description || 'No description available'}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.title}>
+            Required skills
+          </Text>
+          <Text variant='titleMedium' style={styles.data}>
+            {proposal?.jobPost?.skillsRequired
+              ? `(${proposal.jobPost.skillsRequired[0] || 'N/A'}, ${
+                  proposal.jobPost.skillsRequired[1] || 'N/A'
+                })`
+              : 'No skills required listed.'}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.title}>
+            Duration: {calcDuration(proposal?.jobPost?.duration || 0)}
+          </Text>
+        </View>
+        <View style={styles.proposalItem}>
+          <Text variant='titleMedium' style={styles.data}>
+            Client’s budget: ${proposal?.jobPost?.budget || 'N/A'}
+          </Text>
+        </View>
       </Card.Content>
 
       {isClient && (
@@ -179,6 +220,15 @@ const Details = ({ proposal, date, isClient }) => {
 };
 
 const styles = StyleSheet.create({
+  titleHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  proposalItem: {
+    marginVertical: 6,
+  },
   card: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,

@@ -55,12 +55,17 @@ const ClientContractDetails = ({ route }) => {
     if (response.status === 'success') {
       setAlert(true);
       setIsSuccess(true);
-      setAlertMessage('work is finished successfully');
-      setTimeout(() => {
-        navigation.navigate('ReviewForm', {
-          userId: contract.freelancer._id,
-        });
-      }, 2000);
+      if (status === 'cancelled') {
+        setAlertMessage('contract is canceller');
+        navigation.navigate('Contract');
+      } else {
+        setTimeout(() => {
+          setAlertMessage('contract is completed');
+          navigation.navigate('ReviewForm', {
+            userId: contract.freelancer._id,
+          });
+        }, 2000);
+      }
     } else {
       setAlert(true);
       setIsSuccess(false);
