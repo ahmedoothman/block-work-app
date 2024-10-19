@@ -90,10 +90,13 @@ export default function ProposalBox({ PropsalData, isClient, jobDetails }) {
       <Card style={styles.card}>
         <Card.Content>
           <View style={styles.View}>
-            <Text variant='bodyMedium' style={styles.label}>
+            <Text
+              variant='bodyMedium'
+              style={{ ...styles.label, width: '70%', textAlign: 'left' }}
+            >
               {jopTitle}
             </Text>
-            <Text variant='bodySmall' style={styles.date}>
+            <Text variant='bodySmall' style={{ ...styles.date, width: '30%' }}>
               {createdAt}
             </Text>
           </View>

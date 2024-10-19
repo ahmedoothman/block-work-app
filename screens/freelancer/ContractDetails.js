@@ -47,7 +47,7 @@ const ContractDetails = () => {
           {}
           <View style={styles.date_dots_Container}>
             <Text style={styles.dateText}>
-              {moment(contract.job.createdAt).format('D MMMM YYYY')}
+              {moment(contract.contract.createdAt).format('D MMMM YYYY')}
             </Text>
             <Text
               style={{
