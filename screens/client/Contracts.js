@@ -22,13 +22,16 @@ const Contracts = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [contracts, setContracts] = useState([]);
 
-  // Fetch all client contracts
   const fetchAllClientContracts = async () => {
     setLoading(true);
     const response = await getAllClientContract();
     if (response.status === 'success') {
-      setContracts(response.data);
-      setError(false); // Reset error state on successful fetch
+      const sortedContracts = response.data.sort(
+        (a, b) =>
+          new Date(b.contract.createdDate) - new Date(a.contract.createdDate)
+      );
+      setContracts(sortedContracts);
+      setError(false);
     } else {
       setError(true);
       setErrorMessage(response.message);
@@ -36,14 +39,12 @@ const Contracts = () => {
     setLoading(false);
   };
 
-  // useFocusEffect to fetch contracts on screen focus
   useFocusEffect(
     React.useCallback(() => {
       fetchAllClientContracts();
     }, [])
   );
 
-  // Handle refresh action
   const onRefresh = async () => {
     setRefreshing(true);
     await fetchAllClientContracts();
@@ -84,7 +85,6 @@ const Contracts = () => {
             })}
           </View>
         ) : (
-          // ' in case of there are no active Contracts
           <View style={styles.noDatacontentContainer}>
             <Text style={styles.noDataTitle}>
               There Are No Active Contracts.
@@ -128,9 +128,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 40,
   },
-  contractsContainer: {
-    // marginVertical: 10,
-  },
+  contractsContainer: {},
   noDatacontentContainer: {
     backgroundColor: theme.colors.secondaryGray,
     borderRadius: theme.borderRadius,

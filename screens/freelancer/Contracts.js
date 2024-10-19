@@ -27,7 +27,8 @@ const Contracts = () => {
     const response = await getAllFreelancerContract();
     if (response.status === 'success') {
       const sortedContracts = response.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        (a, b) =>
+          new Date(b.contract.createdDate) - new Date(a.contract.createdDate)
       );
       setContracts(sortedContracts);
     } else {
