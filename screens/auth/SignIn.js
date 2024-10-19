@@ -16,7 +16,6 @@ const SignIn = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  // Main States
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,7 +41,6 @@ const SignIn = () => {
     checkToken();
   });
 
-  // SignIn Function
   const handleSignIn = async () => {
     const data = { email, password };
     setLoading(true);
@@ -79,16 +77,14 @@ const SignIn = () => {
       ]}
     >
       <View style={[styles.content]}>
-        {/* Logo Container */}
         <Logo />
 
-        {/* Email */}
         <InputField
           onChange={(value) => setEmail(value)}
           value={email}
           placeholder='Email'
         />
-        {/* Password */}
+
         <InputField
           onChange={(value) => setPassword(value)}
           value={password}
@@ -96,7 +92,6 @@ const SignIn = () => {
           isPassword={true}
         />
 
-        {/* Login Btn */}
         <AppButton
           onPress={handleSignIn}
           buttonTitle={'login'}
@@ -107,7 +102,6 @@ const SignIn = () => {
           <Text style={styles.forget}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        {/* Sign Up Link */}
         <View style={styles.signUpContainer}>
           <Text style={styles.noAccountText}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
