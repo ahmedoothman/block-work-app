@@ -18,7 +18,7 @@ const Details = ({ proposal, date, isClient }) => {
   const navigation = useNavigation();
 
   const estimatedPayment = (num) => {
-    let decrease = num * 0.1;
+    let decrease = num * 0.05;
     let results = num - decrease;
     return results;
   };
